@@ -1,0 +1,137 @@
+/* 须知样式 */
+.tp-title{
+  width:100%;
+  height:74px;
+  background:url("../images/takePictureTipBg.png") no-repeat;
+  background-size:100% 100%;
+  font-size:30px;
+  line-height:74px;
+  text-align:center;
+  color:#FFF;
+}
+.tp-tips-intro{
+  padding:0 50px;
+  width:100%;
+  height:auto;
+  word-break: break-all;
+  p{
+    font-size:24px;
+    line-height:40px;
+  }
+  .tp-two-title{
+    font-size: 26px;
+    margin: 10px 0;
+  }
+}
+.tp-red-packet{
+  padding:0 50px;
+  width:100%;
+  h3{
+    width:100%;
+    height:80px;
+    font-size:26px;
+    line-height:90px;
+  }
+  .tp-red-intro{
+    width:100%;
+    p{
+      font-size:24px;
+      line-height:36px;
+      text-indent:52px;
+    }
+    p:first-child{
+      margin-bottom:38px;
+    }
+  }
+  .tp-inform-box{
+    width:100%;
+    height:200px;
+    a{
+      display:block;
+      font-size:26px;
+      color:#24a6f8;
+      text-decoration:underline;
+    }
+    a:first-child{
+      margin-bottom:34px;
+    }
+  }
+}
+.tp-read{
+  padding:28px 50px 0;
+  width:100%;
+  height:106px;
+  .read-and-agree {
+    font-size: 26px;
+  }
+  .tp-read-checkbox{
+    float:left;
+    position:relative;
+    margin:4px 20px 0 0;
+    width:26px;
+    height:26px;
+    input[type=checkbox]{
+      visibility: hidden;
+    }
+    label{
+      position:absolute;
+      width:26px;
+      height:26px;
+      top:0;
+      left:0;
+      background:#FFF;
+      border:1px dotted #6a6a6a;
+      -webkit-border-radius:6px;
+      -moz-border-radius:6px;
+      border-radius:6px;
+      cursor:pointer;
+    }
+    label:after{
+      opacity:0.2;
+      content:'';
+      position:absolute;
+      width:24px;
+      height:8px;
+      background:transparent;
+      top:0;
+      left:3px;
+      border:4px solid #333;
+      border-top:none;
+      border-right:none;
+      -webkit-transform: rotate(-45deg);
+      -moz-transform: rotate(-45deg);
+      -o-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+    }
+    label:hover::after{
+      opacity:0.5;
+    }
+    input[type=checkbox]:checked + label:after{
+      opacity:1;
+    }
+  }
+  span{
+    display:block;
+    float:left;
+    font-size:22px;
+  }
+}
+.tp-btn-sure{
+  width:100%;
+  height:158px;
+  button{
+    margin-left:52px;
+    width:646px;
+    height:80px;
+    background:#09bb07;
+    color:#FFF;
+    font-size:36px;
+    text-align:center;
+    line-height:80px;
+    outline:none;
+    -webkit-border-radius:8px;
+    -moz-border-radius:8px;
+    border-radius:8px;
+  }
+}

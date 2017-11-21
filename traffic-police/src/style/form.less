@@ -1,0 +1,47 @@
+.m-form{
+  padding: 1rem;
+  .item{
+    display: flex; margin-bottom: 1rem; line-height: 2.2rem;
+    label{
+      width: 4.5rem; font-size: 30px;
+    }
+    .box{
+      flex: 1;
+      .tips{
+        color: red; font-size: 22px; line-height: 1; padding-top: .5rem;
+      }
+    }
+    .right{
+      width: 5.5rem; text-align: center; padding-left: .5rem; padding-top: 4px;
+    }
+    .button{
+      background: #09bb07; color: #fff; line-height: 2rem; height: 2rem; border-radius: 5px;
+    }
+    .el-input.is-disabled .el-input__inner{
+      color: #333; border-color: #bfcbd9;
+      // 修复IOS显示问题
+      opacity: 1;
+      -webkit-text-fill-color: #333;
+    }
+    .el-select{
+      width: 100%;
+      input{
+        background: #fff;
+      }
+    }
+  }
+  .item.flex{
+    .box{
+      display: flex;
+    }
+  }
+  .el-button{
+    display: block; width: 100%;
+    span{
+      color: #fff;
+    }
+  }
+  .submit{
+    text-align: center; line-height: 2.5rem;
+  }
+}
