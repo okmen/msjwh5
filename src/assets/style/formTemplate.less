@@ -1,0 +1,158 @@
+/* 表单模板样式 */
+.form-template{
+  height: auto;
+  background: white;
+  position: relative;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.form-template input{
+  border: 2px solid #e5e5e5;
+  border-radius: 8px;
+  outline: none;
+  height: 70px;
+  font-size: 30px;
+  padding-left: 20px;
+}
+.form-template>div{
+  margin: 0 40px 10px;
+}
+.form-template .no-margin-bottom{
+  margin-bottom: 0;
+}
+.form-template-item{
+  display: flex;
+  height: 85px;
+  margin-bottom: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+.form-template-item-left{
+  width: 31%;
+}
+// 省份样式
+.form-template-item-right{
+  width: 68%;
+  .form-proveice-select{
+    width: 140px;
+  }
+  .form-proveice-input{
+    width: 68%;
+    padding-left: 20px;
+    height: 70px;
+    font-size: 30px;
+  }
+}
+.form-template-submit{  // 提交按钮
+  height: 80px;
+  background: #10aeff;
+  text-align: center;
+  line-height: 80px;
+  color: white;
+  border-radius: 8px;
+  margin-top: 80px;
+  // width: 100%;
+}
+.send-code {    // 验证码样式
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 0;
+  .send-code-input {
+    width: 250px;
+  }
+  .send-code-btn {
+    background: #09bb07;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    font-size: 30px;
+    color: white;
+    width: 184px;
+    border-radius: 8px;
+  }
+}
+.self-textarea,.self-address{
+  display:flex;
+  justify-content: space-between;
+}
+.self-address .ms-address{
+  width: 100%;
+}
+.self-address .address-title{
+  height: 50%;
+  display: flex;
+  align-items: center;
+}
+.self-textarea textarea{
+  padding:10px 16px;
+  resize: none;
+  font-size: 30px;
+  height: 230px;
+  outline: none;
+  border-radius: 8px;
+  border: 1px solid #e2e2e7;
+}
+.both-ends{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.form-radio-box{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.form-radio-box-circle{
+  width: 40px;
+  height: 40px;
+  border: 2px solid #e2e2e7;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+.form-radio-pointer{
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #9c9ca1;
+}
+// 上传照片样式
+.form-picture-box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  .form-picture-box-item{
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  .picture-box-remake{
+    font-size: 28px;
+    color: #666666;
+    text-align: center;
+    text-decoration: underline;
+    margin-top: 18px;
+  }
+  .form-picture-box-img{
+    width: 300px;
+    height: 300px;
+    border: 2px solid #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    input {
+      display: none;
+    }
+    img {
+      max-height: 90%;
+      max-width: 90%;
+    }
+  }
+}

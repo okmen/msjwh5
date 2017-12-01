@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>minshengjingwu-h5</title>
+    <script>
+      (function(){
+        var ua = window.navigator.userAgent;
+        var browserCls = [];
+        if (/android/i.test(ua)) {
+          browserCls.push('android')
+        }
+        if (/os x/i.test(ua)) {
+          browserCls.push('ios')
+        }
+        if (/micromessenger/i.test(ua)) {
+          browserCls.push('wechat')
+        }
+        if (window.isMobile) {
+          browserCls.push('mobile')
+        } else {
+          browserCls.push('desktop')
+        }
+        document.documentElement.className += ' ' + browserCls.join(' ')
+      }());
+      function getMapInfoCallback (data) {
+        var setItemEvent = new Event("setItemEvent")
+        setItemEvent.mapData = data
+        window.dispatchEvent(setItemEvent)
+      }
+      function searchCallback (data) {
+        var searchCallback = new Event("searchCallback")
+        searchCallback.searchData = data
+        window.dispatchEvent(searchCallback)
+      }
+      function mapSubmit (data) {
+        var mapSubmit = new Event("mapSubmit")
+        mapSubmit.submitData = data
+        window.dispatchEvent(mapSubmit)
+      }
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
