@@ -7,6 +7,7 @@ import motorVehicleAppointment from './modules/motorVehicleAppointment'
 Vue.use(Vuex)
 
 const state = {
+  passByValue: '',
   censusRegisterList: [
     {
       'value': '1',
@@ -66,7 +67,7 @@ const state = {
       'value': '10',
       'name': '大鹏新区'
     }
-  ]
+  ],
 }
 
 const actions = {}

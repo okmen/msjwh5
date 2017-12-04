@@ -1,5 +1,6 @@
 <template>
   <div class="g-select">
+    <!--<div class="g-select-type" v-if="type">{{type}}</div>-->
     <div class="g-select-title">{{title}}</div>
     <div class="g-select-value" @click.stop="showSelectUl">
       {{currentName}}
@@ -60,7 +61,7 @@
         currentName: ''
       }
     },
-    props: ['data', 'title', 'value'],  // childInfo: 父组件传进来的值， defaultVal：默认值
+    props: ['data', 'title', 'value', 'type'],  // childInfo: 父组件传进来的值， defaultVal：默认值
     created () {
       for (let i = 0, len = this.data.length; i < len; i++) {
         if (this.data[i] instanceof Object) {
@@ -108,9 +109,6 @@
     },
     mounted () {
       document.getElementById('app').addEventListener('click', this.disappearSelectUl)
-      // if (!this.defaultVal && this.childInfo.option[0]) {       // 如果父组件没有传入默认显示值，则传入的对象中的第一项作为默认选项
-      //   this.selectedValue(this.childInfo.option[0])
-      // }
     },
     destroyed () {
       document.getElementById('app').removeEventListener('click', this.disappearSelectUl)
