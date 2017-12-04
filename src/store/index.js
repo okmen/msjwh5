@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import core from './core'
 import user from './user'
+import motorVehicleAppointment from './modules/motorVehicleAppointment'
 
 Vue.use(Vuex)
 
@@ -24,6 +25,7 @@ export default new Vuex.Store({
   actions,
   modules: {
     core,
-    user
+    user,
+    motorVehicleAppointment
   }
 })
