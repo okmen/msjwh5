@@ -4,7 +4,7 @@
     <div class="g-select-value" @click.stop="showSelectUl">
       {{currentName}}
       <ul class="g-select-list" v-show="showUl">
-        <li class="list-item" v-for="(item, index) in data" :key="index" @click.stop="selectedValue(item, index)">{{item}}</li>
+        <li class="list-item" v-for="(item, index) in data" :key="index" @click.stop="selectedValue(item, index)">{{item instanceof Object ? item.name : item}}</li>
       </ul>
     </div>
   </div>
@@ -62,12 +62,16 @@
     },
     props: ['data', 'title', 'value'],  // childInfo: 父组件传进来的值， defaultVal：默认值
     created () {
-      if (this.value instanceof Object) {
-        this.currentVal = this.value.value
-        this.currentName = this.value.name
-      } else {
-        this.currentVal = this.value
-        this.currentName = this.value
+      for (let i = 0, len = this.data.length; i < len; i++) {
+        if (this.data[i] instanceof Object) {
+          if (this.data[i].value === this.value) {
+            this.currentName = this.data[i].name
+            break
+          }
+        } else {
+          this.currentVal = this.value
+          this.currentName = this.value
+        }
       }
     },
     watch: {
