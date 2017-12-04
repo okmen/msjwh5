@@ -13,13 +13,13 @@ import './utils/utils'
 import './utils/axios'
 
 // import { InfiniteScroll, Indicator, DatetimePicker, MessageBox, Swipe, SwipeItem, Popup, Loadmore, Cell } from 'mint-ui'
-import {Toast, Indicator, MessageBox} from 'mint-ui'
+import {Toast, Indicator, MessageBox, Swipe, SwipeItem} from 'mint-ui'
 Vue.use(vueWechatTitle)
 // Vue.use(InfiniteScroll)
 // Vue.component(DatePicker.name, DatePicker)
 // Vue.component(DatetimePicker.name, DatetimePicker)
-// Vue.component(Swipe.name, Swipe)
-// Vue.component(SwipeItem.name, SwipeItem)
+Vue.component(Swipe.name, Swipe)
+Vue.component(SwipeItem.name, SwipeItem)
 // Vue.component(Popup.name, Popup)
 // Vue.component(Loadmore.name, Loadmore)
 // Vue.component(Cell.name, Cell)

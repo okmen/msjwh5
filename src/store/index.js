@@ -67,12 +67,28 @@ const state = {
       'value': '10',
       'name': '大鹏新区'
     }
+  ],
+  cityAreaS: [
+    '福田区',
+    '罗湖区',
+    '南山区',
+    '宝安区',
+    '龙岗区',
+    '盐田区',
+    '龙华新区',
+    '光明新区',
+    '坪山新区',
+    '大鹏新区'
   ]
 }
 
 const actions = {}
 
-const mutations = {}
+const mutations = {
+  savePassByValue (state, value) {
+    state.passByValue = value
+  }
+}
 
 const getters = {}
 
