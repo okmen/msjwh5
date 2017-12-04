@@ -6,5 +6,13 @@ export default [
       title: '驾驶证年审'
     },
     component: () => import('@/views//transactionClass/drivingLicence/annualExaminations')
+  },
+  {
+    path: '/changeCard',
+    name: 'changeCard',
+    meta: {
+      title: '补换证类'
+    },
+    component: () => import('@/views//transactionClass/changeCard/changeCard')
   }
 ]
