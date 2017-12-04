@@ -1,7 +1,8 @@
 <template>
   <div class="applyClass-outer">
-    <g-input class="ipt-applyClass" title="业务类型" v-model="licenseSelectMassage" disabled></g-input>
-    <i class="cut-line"></i>
+    <div class="changeCard-top">
+      <g-input class="changeCard-type" title="业务类型" v-model="licenseSelectMassage" disabled></g-input>
+    </div>
     <div class="appleyClass-from-child">
       <!-- <applyEveryMonth v-if="cur_type_id == '01'"></applyEveryMonth> -->
       <!-- <applyInterimCard v-else></applyInterimCard> -->
@@ -72,13 +73,4 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.cut-line {
-  display: block;
-  width: 100%;
-  height: 20px;
-  background-color: #f5f5f5;
-}
-.ipt-applyClass {
-  margin: 10px 0;
-}
 </style>

@@ -7,8 +7,6 @@
     <g-input title="身份证号码" v-model="identityCard" maxlength="18" placeholder="请输入身份证号码"></g-input>
     <g-input title="手机号码" v-model="mobilephone" maxlength="11" placeholder="请输入手机号码"></g-input>
     <g-input title="车辆型号" v-model="cartModels" placeholder="请输入车辆型号"></g-input>
-    <!-- 车辆类型 -->
-    <!-- <div-select :childInfo="cartype" @getSelected="getPlateType" defaultVal="小型普通客车"></div-select> -->
     <g-select title="车辆类型" :data="cartype.option" v-model="carTypeOne"></g-select>
     <g-input title="发动机号" v-model="engineNumber" placeholder="请输入发动机号"></g-input>
     <g-input title="车架号" v-model="behindTheFrame4Digits" placeholder="请输入车架号"></g-input>
@@ -24,68 +22,24 @@
     <!-- <div-select :childInfo="censusRegister3" @getSelected="getCensusRegister1" defaultVal="深户"></div-select> -->
     <g-input title="收件人姓名" v-model="recipientName" placeholder="请输入收件人姓名"></g-input>
     <g-input title="收件人手机" v-model="recipientPhone" maxlength="11" placeholder="请输入收件人手机号码"></g-input>
-    <g-input title="收件人地址" v-model="recipientAddressDetail" placeholder="请输入详细地址"></g-input>
-    <div class="upload-photo">
-      <div class="">请按示例图上传以下证件照片</div>
-      <div class="upload-all-img">
-        <div class="upload-item-img">
-          <label class="upload-item-img-one" for="file1">
-            <input id="file1" type="file" accept="image/*" >
-            <img :src="imgOne1" />
-          </label>
-          <div class="upload-item-text-one">身份证(正面)</div>
-        </div>
-        <div class="upload-item-img">
-          <label class="upload-item-img-one" for="file2">
-            <input id="file2" type="file" accept="image/*" >
-            <img :src="imgOne2" />
-          </label>
-          <div class="upload-item-text-one">身份证(反面)</div>
-        </div>
-        <div class="upload-item-img">
-          <label class="upload-item-img-one" for="file5">
-            <input id="file5" type="file" accept="image/*" >
-            <img :src="imgOne5" />
-          </label>
-          <div class="upload-item-text-one">购置发票图</div>
-        </div>
-        <div class="upload-item-img">
-          <label class="upload-item-img-one" for="file6">
-            <input id="file6" type="file" accept="image/*" >
-            <img :src="imgOne6" />
-          </label>
-          <div class="upload-item-text-one">交强险单据</div>
-        </div>
-        <div class="upload-item-img" v-show="this.censusRegister2 != 'B'">
-          <label class="upload-item-img-one" for="file3">
-            <input id="file3" type="file" accept="image/*" >
-            <img :src="imgOne3" />
-          </label>
-          <div class="upload-item-text-one">机动车合格证</div>
-        </div>
-        <div class="upload-item-img" v-show="this.censusRegister2 != 'A'">
-          <label class="upload-item-img-one" for="file7">
-            <input id="file7" type="file" accept="image/*" >
-            <img :src="imgOne7" />
-          </label>
-          <div class="upload-item-text-one">进口货物证明书</div>
-        </div>
-        <div class="upload-item-img" v-show="this.showIndex == '2'">
-          <label class="upload-item-img-one" for="file4">
-            <input id="file4" type="file" accept="image/*" >
-            <img :src="imgOne4" />
-          </label>
-          <div class="upload-item-text-one">境外人员临住表</div>
-        </div>
+    <g-select-one title="深圳市" type="收件人地址" :data="recipientInfo.option" v-model="recipientAddressRegion"></g-select-one>
+    <g-input v-model="recipientAddressDetail" placeholder="请输入详细地址"></g-input>
+    <group title="请按示例图上传以下证件照片">
+      <div class="upload-group">
+        <g-upload text="身份证（正面)" id="file1" :bg="imgOne1" v-model="IDcardFront"></g-upload>
+        <g-upload text="身份证（反面)" id="file2" :bg="imgOne2" v-model="IDcarfBack"></g-upload>
+        <g-upload text="购置发票图" id="file5" :bg="imgOne5" v-model="dealService1"></g-upload>
+        <g-upload text="交强险单据" id="file6" :bg="imgOne6" v-model="dealService2"></g-upload>
+        <g-upload text="机动车合格证" id="file3" :bg="imgOne3" v-model="dealService3"></g-upload>
+        <g-upload text="进口货物证明书" id="file7" :bg="imgOne7" v-model="dealService4"></g-upload>
+        <g-upload text="境外人员临住表" id="file4" :bg="imgOne4" v-model="outBoard"></g-upload>
       </div>
-    </div>
-    <div class="btn-confirm" @click="confirmInfo">
-      确认信息
-    </div>
+    </group>
+    <g-button text="确认信息" @click.native="confirmInfo"></g-button>
   </div>
 </template>
 <script>
-  import {GInput, GSelect, GButton} from 'form'
+  import {GInput, GSelect, GButton, GSelectOne, Group, GUpload} from 'form'
   import uploadFile from '@/utils/uploadFile.js'
   import { Toast } from 'mint-ui'
   import { isPhone } from '@/utils/regExp.js'
@@ -149,34 +103,44 @@
           title: '深圳市',
           option: [
             {
-              'str': '福田区'
+              name: '福田区',
+              value: 0
             },
             {
-              'str': '罗湖区'
+              name: '罗湖区',
+              value: 1
             },
             {
-              'str': '南山区'
+              name: '南山区',
+              value: 2
             },
             {
-              'str': '宝安区'
+              name: '宝安区',
+              value: 3
             },
             {
-              'str': '龙岗区'
+              name: '龙岗区',
+              value: 4
             },
             {
-              'str': '盐田区'
+              name: '盐田区',
+              value: 5
             },
             {
-              'str': '龙华新区'
+              name: '龙华新区',
+              value: 6
             },
             {
-              'str': '光明新区'
+              name: '光明新区',
+              value: 7
             },
             {
-              'str': '坪山新区'
+              name: '坪山新区',
+              value: 8
             },
             {
-              'str': '大鹏新区'
+              name: '大鹏新区',
+              value: 9
             }
           ]
         },
@@ -195,7 +159,7 @@
         carTypeOne: 'K31',
         recipientPhone: '',    // 收件人手机号码
         recipientName: '',    // 收件人姓名
-        recipientAddressRegion: '福田区',  // 收件人地址区域
+        recipientAddressRegion: 0,  // 收件人地址区域, 0-福田区
         recipientAddressDetail: '',  // 收件人详细地址
         homeAddress: '',  // 住所地址
         degree45: '',
@@ -223,7 +187,10 @@
       // divRadio: require('../replaceCredentials/components/divRadio.vue')
       GInput,
       GSelect,
-      GButton
+      GSelectOne,
+      GButton,
+      Group,
+      GUpload
     },
     computed: {
       certificateNumber () {
@@ -478,54 +445,12 @@
 </script>
 <style lang="less" scoped>
   .replace-plate {
-    .upload-all-img{
+    position:relative;
+    padding-bottom: 40px;
+    .upload-group{
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 10px;
       flex-wrap: wrap;
-      .upload-item-img{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-    .upload-photo{
-      margin-top: 30px;
-      padding: 0 40px;
-      display: block;
-      .upload-item-text-one{
-        margin-top: 10px;
-        margin-bottom: 30px;
-        color: #7e7e7e;
-        text-align: center;
-      }
-      .upload-item-img-one{
-        width: 300px;
-        height: 300px;
-        border: 2px solid #eee;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 10px;
-        input{
-          display: none;
-        }
-        img{
-          max-height: 90%;
-          max-width: 90%;
-        }
-      }
-    }
-    .btn-confirm{
-      margin: 40px;
-      background: #09bb07;
-      height: 80px;
-      line-height: 80px;
-      border-radius: 8px;
-      font-size: 30px;
-      color: #fff;
-      text-align: center;
+      justify-content: space-between;
     }
   }
 </style>
