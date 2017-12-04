@@ -20,6 +20,8 @@ export default {
     if (idCard && openId && source === 'M') {
       this.showpage = true
       this.$store.dispatch('updataUserM')
+    } else if (source === 'G') {
+      this.showpage = true
     }
   }
 }
