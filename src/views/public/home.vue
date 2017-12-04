@@ -77,7 +77,7 @@
           </router-link>
         </dl>
         <dl>
-          <router-link to="/dealService">
+          <router-link to="/userAgreement/jszbzhz">
             <dt><img class="top6" src="./../../assets/images/nav6.png" alt=""></dt>
             <dd>办理类服务</dd>
           </router-link>
