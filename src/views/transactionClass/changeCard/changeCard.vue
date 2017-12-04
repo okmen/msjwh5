@@ -9,13 +9,11 @@
     <g-input title="收件人号码" v-model="receiverMobilePhone" placeholder="请输入收件人号码"></g-input>
     <g-input title="" v-model="mailingAddress" placeholder="请输入详细地址"></g-input>
     <g-select-one class="changeCard-set" title="深圳市" type="邮寄地址" :data="censusTypeList" v-model="censusType"></g-select-one>
-    <userUpload :idCard1="true" :idCard2="true" :outTable="outTable" @btnSureStar="btnSureStar()" ref="getImgUrl"></userUpload>
   </div>
 </template>
 
 <script>
 import {GInput, GSelect, GButton, GSelectOne} from 'form'
-import userUpload from '@/components/userUpload'
 export default {
   name: 'changeCard',
   data () {
@@ -39,18 +37,12 @@ export default {
     }
   },
   components: {
-    userUpload,
     GInput,
     GSelect,
     GButton,
     GSelectOne
   },
   methods: {
-    // 图片上传
-    subFn: function (data, id) {
-      this.imgOne = data.imgUrl
-      this.imgTime = data.dateTime
-    }
   }
 }
 </script>
