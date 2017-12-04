@@ -9,8 +9,8 @@ if (process.env.NODE_ENV === 'development') {
   }
 }
 
-export const getUserM = `${commonUrl}convenience/getMSJWinfo.html` // 民生警务获取用户信息
+export const getUserM = `${commonUrl}msjw/getMSJWinfo.html` // 民生警务获取用户信息
 
 export const userAgreement = `${commonUrl}user/getDocumentationORMByNoticeKey.html` // 用户须知接口
 
-export const login = `${commonUrl}user/login.html` // 登录接口
+export const login = `${commonUrl}user/gdLogin.html` // 登录接口
