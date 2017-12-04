@@ -17,7 +17,7 @@
     box-sizing: border-box;
     align-items: center;
     .g-select-span{
-      width: 20%;
+      /*width: 20%;*/
     }
     .g-select-title{
       text-align: center;

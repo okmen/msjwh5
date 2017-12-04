@@ -39,8 +39,6 @@
   box-sizing: border-box;
   align-items: center;
   .g-input-title{
-    /*min-width: 20%;*/
-    /*max-width: 40%;*/
     width: 30%;
   }
   .g-input-content{
