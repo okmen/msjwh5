@@ -6,6 +6,7 @@
     <div class="g-input-content">
       <input type="text" v-model="currentValue" :maxlength="maxlength" :placeholder="placeholder" :disabled="disabled" :readonly="readonly">
     </div>
+    <slot name="right"></slot>
   </div>
 </template>
 
@@ -39,8 +40,6 @@
   box-sizing: border-box;
   align-items: center;
   .g-input-title{
-    /*min-width: 20%;*/
-    /*max-width: 40%;*/
     width: 30%;
   }
   .g-input-content{

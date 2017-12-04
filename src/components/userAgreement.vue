@@ -138,7 +138,7 @@ export default {
             this.$router.push('/motorAlteration')
             break
           case 'jszbzhz':  // 驾驶证补证换证
-            this.$router.push('/changeCard/id/1')
+            this.$router.push('/changeCard')
             break
           case 'jszyqhz':  // 驾驶证延期换证
             this.$router.push('/changeCard/id/2')

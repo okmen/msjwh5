@@ -1,6 +1,6 @@
 <template>
   <div class="g-select">
-    <!--<div class="g-select-type" v-if="type">{{type}}</div>-->
+    <div class="g-select-span">{{type}}</div>
     <div class="g-select-title">{{title}}</div>
     <div class="g-select-value" @click.stop="showSelectUl">
       {{currentName}}
@@ -16,8 +16,12 @@
     padding:10px 40px;
     box-sizing: border-box;
     align-items: center;
+    .g-select-span{
+      /*width: 20%;*/
+    }
     .g-select-title{
-      width: 30%;
+      text-align: center;
+      width: 34%;
     }
     .g-select-value{
       /*width: 70%;*/
@@ -109,6 +113,9 @@
     },
     mounted () {
       document.getElementById('app').addEventListener('click', this.disappearSelectUl)
+      // if (!this.defaultVal && this.childInfo.option[0]) {       // 如果父组件没有传入默认显示值，则传入的对象中的第一项作为默认选项
+      //   this.selectedValue(this.childInfo.option[0])
+      // }
     },
     destroyed () {
       document.getElementById('app').removeEventListener('click', this.disappearSelectUl)
