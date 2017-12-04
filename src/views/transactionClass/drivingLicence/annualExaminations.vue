@@ -6,7 +6,7 @@
   <g-select title="户籍所在地" :data="censusRegisterList" v-model="censusRegisterOne"></g-select>
   <g-input title="收件人姓名" v-model="recipientsName"></g-input>
   <g-input title="收件人号码" v-model="recipientsPhone"></g-input>
-  <g-select-one type="邮寄地址" title="深圳市" :data="censusRegisterList"></g-select-one>
+  <g-select-one type="邮寄地址" title="深圳市" :data="cityArea" v-model="cityAreaOne"></g-select-one>
   <group title="请按示例图上传以下证件照片">
     <div class="upload-group">
       <g-upload text="身份证（正面)" id="file1" :bg="require('../../../assets/images/IDcard-front.png')" v-model="IDCardFront"></g-upload>
@@ -31,10 +31,16 @@
         eduTable: '',
         recipientsName: '',
         recipientsPhone: '',
-        censusRegisterList: [
-          {name: '深圳', value: 0}, {name: '港澳台籍', value: 1}, {name: '外国籍', value: 2}, {name: '其他', value: 3}
-        ],
-        censusRegisterOne: 1
+        censusRegisterOne: '1',
+        cityAreaOne: '01'
+      }
+    },
+    computed: {
+      censusRegisterList () {
+        return this.$store.state.censusRegisterList
+      },
+      cityArea () {
+        return this.$store.state.cityArea
       }
     },
     components: {

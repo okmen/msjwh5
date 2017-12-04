@@ -6,6 +6,7 @@
     <div class="g-input-content">
       <input type="text" v-model="currentValue" :placeholder="placeholder" :disabled="disabled" :readonly="readonly">
     </div>
+    <slot name="right"></slot>
   </div>
 </template>
 
