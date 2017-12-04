@@ -34,7 +34,7 @@
         recipientsName: '',
         recipientsPhone: '',
         censusRegisterOne: '1',
-        cityAreaOne: '01',
+        cityAreaOne: '福田区',
         addressMs: ''
       }
     },
@@ -44,7 +44,7 @@
         return this.$store.state.censusRegisterList
       },
       cityArea () {
-        return this.$store.state.cityArea
+        return this.$store.state.cityAreaS
       }
     },
     components: {
@@ -69,7 +69,34 @@
           eduTable: '请上传审核教育绘制表'
         }
         if (this.$_myMinxin_beforeSubmit(obj)) return
-        console.log(this.IDCardFront)
+        let reqData = {
+          type: '驾驶证年审',
+          url: 'annualExaminations',
+          textObj: {
+            identityCard: this.IDCard,
+            userName: this.userName,
+            mobilephone: this.mobilePhone,
+            placeOfDomicile: this.censusRegisterOne,
+            receiverName: this.recipientsName,
+            receiverNumber: this.recipientsPhone,
+            receiverAddress: '深圳市' + this.cityAreaOne + this.addressMs
+          },
+          imgObj: {
+            PHOTO9: this.IDCardFront || '',
+            PHOTO10: this.IDCardBack || '',
+            PHOTO31: '',
+            SHJYPXB: this.eduTable || ''
+          },
+          invisibleObj: {
+            JZZA: this.IDCardFront || '',      // 居住证照片 页面不给居住证上传入口 直接传与身份证正反面同样的数据
+            JZZB: this.IDCardBack || '',
+            loginUser: window.localStorage.getItem('identityCard'),
+            userSource: 'C',
+            identificationNO: 'A'
+          }
+        }
+        this.$store.commit('savePassByValue', reqData)
+        this.$router.push('/affirmInfo')
       }
     }
   }

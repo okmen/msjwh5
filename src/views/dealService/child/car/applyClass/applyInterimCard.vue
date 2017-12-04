@@ -30,9 +30,9 @@
         <g-upload text="身份证（反面)" id="file2" :bg="imgOne2" v-model="IDcarfBack"></g-upload>
         <g-upload text="购置发票图" id="file5" :bg="imgOne5" v-model="dealService1"></g-upload>
         <g-upload text="交强险单据" id="file6" :bg="imgOne6" v-model="dealService2"></g-upload>
-        <g-upload text="机动车合格证" id="file3" :bg="imgOne3" v-model="dealService3"></g-upload>
-        <g-upload text="进口货物证明书" id="file7" :bg="imgOne7" v-model="dealService4"></g-upload>
-        <g-upload text="境外人员临住表" id="file4" :bg="imgOne4" v-model="outBoard"></g-upload>
+        <g-upload text="机动车合格证" v-show="this.censusRegister2 != 'B'" id="file3" :bg="imgOne3" v-model="dealService3"></g-upload>
+        <g-upload text="进口货物证明书" v-show="this.censusRegister2 != 'A'" id="file7" :bg="imgOne7" v-model="dealService4"></g-upload>
+        <g-upload text="境外人员临住表" v-show="this.showIndex == '2'" id="file4" :bg="imgOne4" v-model="outBoard"></g-upload>
       </div>
     </group>
     <g-button text="确认信息" @click.native="confirmInfo"></g-button>
@@ -431,7 +431,7 @@
             'PHOTO29': this.dealService4.split(',')[1] || ''
           }
         }
-        this.$store.commit('saveMotorVehicleHandling', dataList)
+        this.$store.commit('savePassByValue', dataList)
         console.log(dataList)
         this.$router.push(/_WeChat/g.test(this.$route.name) ? '/affirmInfo_WeChat' : '/affirmInfo')
       }

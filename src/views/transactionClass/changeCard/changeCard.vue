@@ -20,7 +20,7 @@
       <div class="upload-group">
         <g-upload text="身份证（正面)" id="file1" :bg="require('../../../assets/images/IDcard-front.png')" v-model="IDCardFront"></g-upload>
         <g-upload text="身份证（反面)" id="file2" :bg="require('../../../assets/images/IDcard-back.png')" v-model="IDCardBack"></g-upload>
-        <g-upload v-if = "censusRegisterOne === '3'" text="审核教育绘制表" id="file3" :bg="require('../../../assets/images/out-board.png')" v-model="board"></g-upload>
+        <g-upload v-if = "censusRegisterOne === '3'" text="境外人员临住表" id="file3" :bg="require('../../../assets/images/out-board.png')" v-model="board"></g-upload>
       </div>
     </group>
     <g-button text="确认信息" @click.native="confirmInfo"></g-button>
@@ -36,7 +36,9 @@
 
 <script>
 import {GInput, GSelect, GButton, GSelectOne, Group, GUpload} from 'form'
+import { cardRepair, cardReplace } from '@/config/baseURL'
 import wx from 'weixin-js-sdk'
+import beforeSubmit from '@/mixins/beforeSubmit'
 export default {
   name: 'changeCard',
   data () {
@@ -53,13 +55,13 @@ export default {
       IDCardBack: '',
       board: '',
       censusTypeList: [
-        {name: '补证', value: 0}, {name: '期满换证', value: 1}
+        {name: '补证', value: 1}, {name: '期满换证', value: 2}
       ],
-      censusType: 0,
+      censusType: 1,
       censusRegisterList: this.$store.state.censusRegisterList,
       censusRegisterOne: this.$store.state.censusRegisterList[0].value,
-      areaSelectData: this.$store.state.cityArea,
-      areaSelect: this.$store.state.cityArea[0].value,
+      areaSelectData: this.$store.state.cityAreaS,
+      areaSelect: '福田区',
       example: false                       // 示例弹窗 默认不显示
     }
   },
@@ -71,6 +73,7 @@ export default {
     Group,
     GUpload
   },
+  mixins: [beforeSubmit],
   created () {
     document.addEventListener('click', (e) => {
       if (this.example === true) {
@@ -127,7 +130,54 @@ export default {
       }
     },
     confirmInfo () {
-      if (!this.userName) {
+      let obj = {
+        userName: '请输入姓名',
+        IDCard: '请输入身份证号码',
+        mobilePhone: '请输入手机号码',
+        photoReturnNumberString: '请输入照片回执码',
+        receiverName: '请输入收件人姓名',
+        receiverMobilePhone: '请输入收件人手机号码',
+        mailingAddress: '请输入详细地址',
+        IDCardFront: '请上传身份证（正面）',
+        IDCardBack: '请上传身份证（反面）'
+      }
+      if (this.$_myMinxin_beforeSubmit(obj)) return
+      if (this.censusRegisterOne === '3' && !this.board) {
+        this.$toast({
+          message: '请上传境外人员临住表',
+          position: 'middle',
+          duration: 3000
+        })
+      } else {
+        let reqData = {
+          type: '驾驶证补证',
+          url: this.censusType === '1' ? cardRepair : cardReplace,
+          textObj: {
+            identityCard: this.IDCard,
+            userName: this.userName,
+            mobilephone: this.mobilePhone,
+            photoReturnNumberString: this.photoReturnNumberString,
+            placeOfDomicile: this.censusRegisterOne,
+            receiverName: this.receiverName,
+            receiverNumber: this.receiverMobilePhone,
+            receiverAddress: '深圳市' + this.areaSelect + this.mailingAddress
+          },
+          imgObj: {
+            PHOTO9: this.IDCardFront || '',
+            PHOTO10: this.IDCardBack || '',
+            PHOTO31: this.board || ''
+          },
+          invisibleObj: {
+            JZZA: this.IDCardFront || '',      // 居住证照片 页面不给居住证上传入口 直接传与身份证正反面同样的数据
+            JZZB: this.IDCardBack || '',
+            loginUser: this.$store.state.user.identityCard,
+            userSource: 'C',
+            identificationNO: 'A'
+          }
+        }
+        console.log(reqData)
+        this.$store.commit('savePassByValue', reqData)
+        this.$router.push('/affirmInfo')
       }
     }
   }
