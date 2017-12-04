@@ -10,3 +10,5 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 export const getUserM = `${commonUrl}convenience/getMSJWinfo.html`
+
+export const userAgreement = `${commonUrl}user/getDocumentationORMByNoticeKey.html` // 用户须知接口
