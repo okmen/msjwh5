@@ -15,6 +15,7 @@ export default {
   },
   created () {
     let { idCard, openId, source } = this.$store.state.core
+    console.log('当前来源:', source)
     // 如果来源参数正常，则显示页面。否则显示为来源错误。
     if (idCard && openId && source === 'M') {
       this.showpage = true
