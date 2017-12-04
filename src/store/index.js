@@ -67,7 +67,7 @@ const state = {
       'value': '10',
       'name': '大鹏新区'
     }
-  ],
+  ]
 }
 
 const actions = {}
