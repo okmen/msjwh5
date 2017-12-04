@@ -187,7 +187,7 @@ export default {
   },
   computed: {
     dataList: function () {
-      return this.$store.state.motorVehicleHandling
+      return this.$store.state.passByValue
     }
   },
   created () {

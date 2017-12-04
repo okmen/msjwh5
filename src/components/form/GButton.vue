@@ -19,6 +19,7 @@
 .g-button{
   padding:10px 40px;
   width: 100%;
+  margin-top: 40px;
   .button{
     height: 70px;
     border-radius: 8px;
