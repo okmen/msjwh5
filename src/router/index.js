@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import publicRouter from './public'
 import transactionClass from './transactionClass/drivingLicence'
+import dealServiceRouter from './dealService/dealService.js' // 办理类服务
 
 Vue.use(Router)
 
@@ -24,6 +25,7 @@ export default new Router({
       component: () => import('@/components/affirmInfo')
     },
     ...publicRouter,
-    ...transactionClass
+    ...transactionClass,
+    ...dealServiceRouter // 办理类服务
   ]
 })

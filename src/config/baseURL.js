@@ -14,3 +14,5 @@ export const getUserM = `${commonUrl}convenience/getMSJWinfo.html` // 民生警�
 export const userAgreement = `${commonUrl}user/getDocumentationORMByNoticeKey.html` // 用户须知接口
 
 export const login = `${commonUrl}user/login.html` // 登录接口
+
+export const applyCarTemporaryLicence = `${commonUrl}handleservice/applyCarTemporaryLicence.html` // 申请机动车临牌
