@@ -12,6 +12,7 @@
     <!-- <page-bottom v-if="isWeChat"></page-bottom> -->
   </div>
 </template>
+
 <script>
 import {GInput, GSelect, GButton} from 'form'
 import applyInterimCard from './applyInterimCard.vue'
@@ -72,5 +73,6 @@ export default {
   }
 }
 </script>
+
 <style lang="less" scoped>
 </style>
