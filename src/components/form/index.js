@@ -4,11 +4,13 @@ import GButton from './GButton'
 import GUpload from './GUpload'
 import Group from './Group'
 import GSelectOne from './GSelectOne'
+import GRadio from './GRadio'
 export {
   GInput,
   GSelect,
   GButton,
   GUpload,
   Group,
-  GSelectOne
+  GSelectOne,
+  GRadio
 }
