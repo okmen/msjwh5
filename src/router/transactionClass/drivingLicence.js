@@ -11,7 +11,8 @@ export default [
     path: '/changeCard',
     name: 'changeCard',
     meta: {
-      title: '补换证类'
+      title: '补换证类',
+      loginStatus: true
     },
     component: () => import('@/views//transactionClass/changeCard/changeCard')
   }
