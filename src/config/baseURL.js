@@ -13,6 +13,8 @@ export const getUserM = `${commonUrl}msjw/getMSJWinfo.html` // 民生警务获�
 
 export const userAgreement = `${commonUrl}user/getDocumentationORMByNoticeKey.html` // 用户须知接口
 
+export const applyCarTemporaryLicence = `${commonUrl}handleservice/applyCarTemporaryLicence.html` // 申请机动车临牌
+
 export const login = `${commonUrl}user/gdLogin.html` // 登录接口
 
 export const cardRepair = `${commonUrl}handleservice/repairDriverLicense.html` // 驾驶证补证

@@ -4,7 +4,7 @@
       {{title}}
     </div>
     <div class="g-input-content">
-      <input type="text" v-model="currentValue" :placeholder="placeholder" :disabled="disabled" :readonly="readonly">
+      <input type="text" v-model="currentValue" :maxlength="maxlength" :placeholder="placeholder" :disabled="disabled" :readonly="readonly">
     </div>
     <slot name="right"></slot>
   </div>
@@ -21,7 +21,7 @@
     created () {
       this.currentValue = this.value
     },
-    props: ['title', 'value', 'placeholder', 'disabled', 'readonly'],
+    props: ['title', 'value', 'maxlength', 'placeholder', 'disabled', 'readonly'],
     watch: {
       currentValue (val) {
         this.$emit('input', val)
