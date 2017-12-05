@@ -12,7 +12,7 @@ export default {
   data () {
     return {
       showpage: false,
-      msg: '来源错误'
+      msg: '正在加载数据中'
     }
   },
   created () {
@@ -21,12 +21,14 @@ export default {
     console.log('当前来源:', source)
     // 如果来源参数正常，则显示页面。否则显示为来源错误。
     if (idCard && openId && source === 'M') {
-      this.showpage = true
       this.$axios.post(getUserM, {
         identityCard: idCard
       }).then(data => {
         if (data.code === '0000') {
+          this.showpage = true
           this.$store.dispatch('updataUserG', data.data)
+        } else {
+          this.msg = '获取用户信息失败'
         }
       })
     } else if (source === 'G') {
@@ -43,6 +45,8 @@ export default {
         isLogin: localStorage.getItem('isLogin'),
         bindDriverLicence: localStorage.getItem('bindDriverLicence')
       })
+    } else {
+      this.msg = '来源错误'
     }
   }
 }
