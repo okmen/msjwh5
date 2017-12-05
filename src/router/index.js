@@ -52,7 +52,6 @@ router.beforeEach((to, from, next) => {
           url: to.fullPath
         }
       })
-      // next('/login?source=G')
     } else {
       next()
     }
