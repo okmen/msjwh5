@@ -47,6 +47,14 @@
         return this.$store.state.cityAreaS
       }
     },
+    created () {
+      let user = this.$store.state.user
+      this.userName = user.userName
+      this.IDCard = user.identityCard
+      this.mobilePhone = user.mobilePhone
+      this.recipientsName = user.userName
+      this.recipientsPhone = user.mobilePhone
+    },
     components: {
       GInput,
       GSelect,
