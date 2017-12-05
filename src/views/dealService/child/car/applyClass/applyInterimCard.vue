@@ -10,12 +10,8 @@
     <g-select title="车辆类型" :data="cartype.option" v-model="carTypeOne"></g-select>
     <g-input title="发动机号" v-model="engineNumber" placeholder="请输入发动机号"></g-input>
     <g-input title="车架号" v-model="behindTheFrame4Digits" placeholder="请输入车架号"></g-input>
-    <g-radio title="车辆产地" :optname="optname2" @getSelected="getCensusRegister2"></g-radio>
-    <!-- <div class="domicile-place">
-      <span class="item-title">车辆产地</span>
-      <div-radio :optname="optname2" @getSelected="getCensusRegister2"> </div-radio>
-    </div> -->
-    <g-select title="户籍所在地" :data="censusRegister3.option" v-model="censusRegister"></g-select>
+    <g-radio title="车辆产地" :optname="carOptList" @getSelected="getCensusRegister2"></g-radio>
+    <g-select title="户籍所在地" :data="censusRegister3.option" v-model="censusRegister" @getIndex="getCensusRegister1"></g-select>
     <g-input title="收件人姓名" v-model="recipientName" placeholder="请输入收件人姓名"></g-input>
     <g-input title="收件人手机" v-model="recipientPhone" maxlength="11" placeholder="请输入收件人手机号码"></g-input>
     <g-select-one title="深圳市" type="收件人地址" :data="recipientInfo.option" v-model="recipientAddressRegion"></g-select-one>
@@ -53,112 +49,52 @@
         cartype: {
           title: '车辆类型',
           option: [
-            {
-              name: '小型普通客车',
-              value: 'K31'
-            },
-            {
-              name: '小型越野客车',
-              value: 'K32'
-            },
-            {
-              name: '小型轿车',
-              value: 'K33'
-            },
-            {
-              name: '小型专用客车',
-              value: 'K34'
-            },
-            {
-              name: '微型普通客车',
-              value: 'K41'
-            },
-            {
-              name: '微型越野客车',
-              value: 'K42'
-            },
-            {
-              name: '微型轿车',
-              value: 'K43'
-            },
-            {
-              name: '小型专用校车',
-              value: 'K38'
-            }
+            {name: '小型普通客车', value: 'K31'},
+            {name: '小型越野客车', value: 'K32'},
+            {name: '小型轿车', value: 'K33'},
+            {name: '小型专用客车', value: 'K34'},
+            {name: '微型普通客车', value: 'K41'},
+            {name: '微型越野客车', value: 'K42'},
+            {name: '微型轿车', value: 'K43'},
+            {name: '小型专用校车', value: 'K38'}
           ]
         },
-        optname1: [
-          {'str': '深户', choose: true, id: '1'},
-          {'str': '外籍户口', choose: false, id: '0'}
-        ],
-        optname2: [
+        carOptList: [
           {'str': '国产', choose: true, id: 'A'},
           {'str': '进口', choose: false, id: 'B'}
         ],
         recipientInfo: {
           title: '深圳市',
           option: [
-            {
-              name: '福田区',
-              value: 0
-            },
-            {
-              name: '罗湖区',
-              value: 1
-            },
-            {
-              name: '南山区',
-              value: 2
-            },
-            {
-              name: '宝安区',
-              value: 3
-            },
-            {
-              name: '龙岗区',
-              value: 4
-            },
-            {
-              name: '盐田区',
-              value: 5
-            },
-            {
-              name: '龙华新区',
-              value: 6
-            },
-            {
-              name: '光明新区',
-              value: 7
-            },
-            {
-              name: '坪山新区',
-              value: 8
-            },
-            {
-              name: '大鹏新区',
-              value: 9
-            }
+            {name: '福田区', value: '福田区'},
+            {name: '罗湖区', value: '罗湖区'},
+            {name: '南山区', value: '南山区'},
+            {name: '宝安区', value: '宝安区'},
+            {name: '龙岗区', value: '龙岗区'},
+            {name: '盐田区', value: '盐田区'},
+            {name: '龙华新区', value: '龙华新区'},
+            {name: '光明新区', value: '光明新区'},
+            {name: '坪山新区', value: '坪山新区'},
+            {name: '大鹏新区', value: '大鹏新区'}
           ]
         },
-        censusRegister: '1',
+        censusRegister: '深户', // 户籍所在地
         showIndex: '0',
-        censusRegister2: 'A',
+        censusRegister2: 'A', // 车辆产地
         censusRegister3: {
           title: '户籍所在地',
           option: [
-            {name: '深户', value: '1'},
-            {name: '非深户', value: '0'},
-            {name: '外籍', value: '0'}
+            {name: '深户', value: '深户'},
+            {name: '非深户', value: '非深户'},
+            {name: '外籍', value: '外籍'}
           ]
         },
         plateNumberOne: '',
         carTypeOne: 'K31',
         recipientPhone: '',    // 收件人手机号码
         recipientName: '',    // 收件人姓名
-        recipientAddressRegion: 0,  // 收件人地址区域, 0-福田区
+        recipientAddressRegion: '福田区',  // 收件人地址区域
         recipientAddressDetail: '',  // 收件人详细地址
-        homeAddress: '',  // 住所地址
-        degree45: '',
         outBoard: '',
         carCertificateNumber: '',  // 车主证件号码
         plateToCarNumber: {},  // 车牌号对应车主证件号码
@@ -179,8 +115,6 @@
       }
     },
     components: {
-      // divSelect: require('../replaceCredentials/components/divSelect.vue'),
-      // divRadio: require('../replaceCredentials/components/divRadio.vue')
       GInput,
       GSelect,
       GSelectOne,
@@ -267,9 +201,8 @@
           }
         })
       },
-      getCensusRegister1 (val, index) {
-        console.log(val)
-        this.censusRegister = val
+      getCensusRegister1 (index) {
+        console.log(index)
         this.showIndex = index
       },
       getCensusRegister2 (val) {
@@ -419,17 +352,16 @@
             'receiverAddress': `深圳市,${this.recipientAddressRegion},${this.recipientAddressDetail}` // 收件人地址
           },
           imgObj: {
-            'PHOTO26': this.dealService1.split(',')[1] || '',
-            'PHOTO27': this.dealService2.split(',')[1] || '',
-            'PHOTO9': this.IDcardFront.split(',')[1] || '',
-            'PHOTO10': this.IDcarfBack.split(',')[1] || '',
-            'PHOTO28': this.dealService3.split(',')[1] || '',
-            'PHOTO31': this.outBoard.split(',')[1] || '',
-            'PHOTO29': this.dealService4.split(',')[1] || ''
+            'PHOTO26': this.dealService1 || '',
+            'PHOTO27': this.dealService2 || '',
+            'PHOTO9': this.IDcardFront || '',
+            'PHOTO10': this.IDcarfBack || '',
+            'PHOTO28': this.dealService3 || '',
+            'PHOTO31': this.outBoard || '',
+            'PHOTO29': this.dealService4 || ''
           }
         }
         this.$store.commit('savePassByValue', dataList)
-        console.log(dataList)
         this.$router.push(/_WeChat/g.test(this.$route.name) ? '/affirmInfo_WeChat' : '/affirmInfo')
       }
     },
