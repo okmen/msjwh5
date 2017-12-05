@@ -5,7 +5,7 @@ let dealServiceRouter = [
     meta: {
       title: '申请类'
     },
-    component: resolve => { require(['@/views/dealService/child/car/applyClass/applyClass.vue'], resolve) }
+    component: () => import('@/views//transactionClass/motorVehicles/applyClass/applyClass.vue')
   }
 ]
 
