@@ -75,8 +75,8 @@ export default {
   methods: {
     btnAgreeRequest: function () {
       let source = this.$store.state.core.source
-      let idcard = this.$store.state.core.idcard
-      let openid = this.$store.state.core.openid
+      let idcard = this.$store.state.core.idCard
+      let openid = this.$store.state.core.openId
       if (this.checked === true) {
         console.log(this.entryHash)
         switch (this.entryHash) {
