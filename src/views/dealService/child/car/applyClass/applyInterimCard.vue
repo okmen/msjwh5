@@ -78,15 +78,15 @@
             {name: '大鹏新区', value: '大鹏新区'}
           ]
         },
-        censusRegister: '深户', // 户籍所在地
+        censusRegister: '1', // 户籍所在地
         showIndex: '0',
         censusRegister2: 'A', // 车辆产地
         censusRegister3: {
           title: '户籍所在地',
           option: [
-            {name: '深户', value: '深户'},
-            {name: '非深户', value: '非深户'},
-            {name: '外籍', value: '外籍'}
+            {name: '深户', value: '1'},
+            {name: '非深户', value: '0'},
+            {name: '外籍', value: '0'}
           ]
         },
         plateNumberOne: '',
