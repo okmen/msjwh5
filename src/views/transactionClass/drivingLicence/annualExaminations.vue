@@ -51,14 +51,13 @@
         return Object.assign({}, this.$store.state.user)
       }
     },
-    watch: {
-      user (val) {
-        this.userName = val.userName
-        this.IDCard = val.identityCard
-        this.mobilePhone = val.mobilePhone
-        this.recipientsName = val.userName
-        this.recipientsPhone = val.mobilePhone
-      }
+    created () {
+      let val = this.$store.state.user
+      this.userName = val.userName
+      this.IDCard = val.identityCard
+      this.mobilePhone = val.mobilePhone
+      this.recipientsName = val.userName
+      this.recipientsPhone = val.mobilePhone
     },
     components: {
       GInput,
