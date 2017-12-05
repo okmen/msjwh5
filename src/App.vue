@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <template v-if="showpage"><router-view v-wechat-title="$route.meta.title" /></template>
+    <template v-if="showpage"><router-view v-wechat-title="$route.meta.title"/></template>
     <template v-else>{{ msg }}</template>
   </div>
 </template>

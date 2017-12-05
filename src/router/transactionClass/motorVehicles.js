@@ -1,4 +1,4 @@
-let dealServiceRouter = [
+export default [
   {
     name: 'applyClass',
     path: '/applyClass/:id',
@@ -8,5 +8,3 @@ let dealServiceRouter = [
     component: () => import('@/views//transactionClass/motorVehicles/applyClass/applyClass.vue')
   }
 ]
-
-export default dealServiceRouter
