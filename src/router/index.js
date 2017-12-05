@@ -24,18 +24,33 @@ let router = new Router({
       },
       component: () => import('@/components/affirmInfo')
     },
+    {
+      path: '/successSubmit',
+      name: 'successSubmit',
+      meta: {
+        title: '提交成功'
+      },
+      component: () => import('@/components/submitSuccess')
+    },
     ...publicRouter,
     ...transactionClass
   ]
 })
 
 router.beforeEach((to, from, next) => {
+  let source = getQueryString('source')
   // 如果页面需要登录，且来源是高德
-  if (to.meta.loginStatus && getQueryString('source') === 'G') {
+  if (to.meta.loginStatus && source === 'G') {
     // 未登录则跳转到
     if (!window.localStorage.getItem('isLogin')) {
       console.log('当前页面需要登录且来源是高德才能访问')
-      next('/login')
+      router.push({
+        path: '/login?source=G',
+        query: {
+          url: to.fullPath
+        }
+      })
+      // next('/login?source=G')
     } else {
       next()
     }

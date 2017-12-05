@@ -87,6 +87,9 @@ const actions = {}
 const mutations = {
   savePassByValue (state, value) {
     state.passByValue = value
+  },
+  saveSuccessInfo (state, value) {
+    state.successInfo = value
   }
 }
 

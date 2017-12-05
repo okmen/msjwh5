@@ -54,9 +54,9 @@ export default {
         loginClient: window.localStorage.getItem('sourceOfCertification')
       }
       this.$axios.post(login, reqData).then(data => {
-        console.log(data)
         if (data.code === '0000') {
           this.$store.dispatch('updataUserG', data.data)
+          this.$router.replace(this.$route.query.url)
         }
       })
     }
