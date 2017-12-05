@@ -2,13 +2,16 @@
   <!-- 办理类-驾驶证业务导航页 -->
   <div class="cardService-outer">
     <div class="query-link">
-      <router-link :to="{ path: '/changeCard/jszbzhz', query: { source: this.source, idcard: this.idcard, openid: this.openid }}">驾驶证补换证</router-link>
+      <router-link :to="{ path: '/userAgreement/jszbzhz', query: { source: this.source, idcard: this.idcard, openid: this.openid }}">驾驶证补换证</router-link>
     </div>
     <div class="query-link">
-      <router-link :to="{ path: '/annualExaminations/jszns', query: { source: this.source, idcard: this.idcard, openid: this.openid }}">驾驶证年审</router-link>
+      <router-link :to="{ path: '/userAgreement/jszns', query: { source: this.source, idcard: this.idcard, openid: this.openid }}">驾驶证年审</router-link>
     </div>
     <div class="query-link">
       <router-link :to="{ path: '/applyClass/02', query: { source: this.source, idcard: this.idcard, openid: this.openid }}">申请机动车临牌</router-link>
+    </div>
+    <div class="query-link">
+      <router-link :to="{ path: '/userAgreement/szjj_hander_rmvp', query: { source: this.source, idcard: this.idcard, openid: this.openid }}">补换机动车号牌</router-link>
     </div>
   </div>
 </template>
