@@ -64,11 +64,16 @@ export default {
       state.identityCard = value.authenticationBasicInformation.identityCard
       state.mobilePhone = value.authenticationBasicInformation.mobilephone
       state.userName = value.authenticationBasicInformation.trueName
+      state.bindDriverLicence = value.authenticationBasicInformation.bindDriverLicence
+      if (value.fileNumber) {
+        state.bindDriverLicence = '1'
+      }
       state.isLogin = true
       localStorage.setItem('fileNumber', state.fileNumber)
       localStorage.setItem('identityCard', state.identityCard)
       localStorage.setItem('mobilePhone', state.mobilePhone)
       localStorage.setItem('userName', state.userName)
+      localStorage.setItem('bindDriverLicence', state.bindDriverLicence)
       localStorage.setItem('isLogin', state.isLogin)
       console.log('233', state)
       commit('updataUser', state)
