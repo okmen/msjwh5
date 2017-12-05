@@ -73,11 +73,6 @@ export default {
     Group,
     GUpload
   },
-  computed: {
-    user () {
-      return this.$store.state.user
-    }
-  },
   mixins: [beforeSubmit],
   mounted () {
     if (this.$store.state.user.bindDriverLicence !== '1') {
