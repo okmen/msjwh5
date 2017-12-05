@@ -40,7 +40,8 @@ export default {
         identityCard: localStorage.getItem('identityCard'),
         mobilePhone: localStorage.getItem('mobilePhone'),
         userName: localStorage.getItem('userName'),
-        isLogin: localStorage.getItem('isLogin')
+        isLogin: localStorage.getItem('isLogin'),
+        bindDriverLicence: localStorage.getItem('bindDriverLicence')
       })
     }
   }
