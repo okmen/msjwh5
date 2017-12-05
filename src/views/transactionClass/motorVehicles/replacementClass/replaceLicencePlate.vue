@@ -1,100 +1,44 @@
 <template>
   <div class="replace-plate">
-    <div class="owners-name">
-      <span class="item-title">车主姓名</span>
-      <input type="text" readonly class="item-info" v-model="ownersName">
+    <div class="changeCard-top">
+      <g-input class="changeCard-type" title="业务类型" v-model="serviceType" readonly></g-input>
     </div>
-    <div class="certificate-number">
-      <span class="item-title">证件号码</span>
-      <input type="text" readonly class="item-info"  v-model="certificateNumber">
-    </div>
-    <div class="owner-certificate">
-      <span class="item-title">车主证件号码</span>
-      <input type="text" readonly class="item-info" v-model="carCertificateNumber">
-    </div>
-    <div-select :childInfo="plateNumber" @getSelected="getPlateNumber" :defaultVal="defaultPlateNumber"></div-select>
-    <div-select :childInfo="plateType" @getSelected="getPlateType" defaultVal="蓝牌"></div-select>
+    <g-input title="车主姓名" v-model="ownersName" disabled></g-input>
+    <g-input title="证件号码" v-model="certificateNumber" disabled></g-input>
+    <g-input title="车主证件号码" v-model="carCertificateNumber" disabled></g-input>
+    <!-- <div-select :childInfo="plateNumber" @getSelected="getPlateNumber" :defaultVal="defaultPlateNumber"></div-select> -->
+    <!-- <div-select :childInfo="plateType" @getSelected="getPlateType" defaultVal="蓝牌"></div-select> -->
     <!--<div class="domicile-place">
       <span class="item-title">户籍所在地</span>
       <div-radio :optname="optname" @getSelected="getCensusRegister"></div-radio>
     </div>-->
-    <div-select :childInfo="censusRegister" @getSelected="getCensusRegister" defaultVal="深户"></div-select>
-    <div class="recipient-name">
-      <span class="item-title">收件人姓名</span>
-      <input type="text" placeholder="请输入收件人姓名" class="item-info" v-model="recipientName">
-    </div>
-    <div class="recipient-phone">
-      <span class="item-title">收件人手机</span>
-      <input type="text" placeholder="请输入收件人手机号码" class="item-info" v-model="recipientPhone">
-    </div>
-    <div class="recipient-address">
+    <!-- <div-select :childInfo="censusRegister" @getSelected="getCensusRegister" defaultVal="深户"></div-select> -->
+    <g-input title="收件人姓名" v-model="recipientName" maxlength="18" placeholder="请输入收件人姓名"></g-input>
+    <g-input title="收件人手机" v-model="recipientPhone" maxlength="11" placeholder="请输入收件人手机号码"></g-input>
+    <!-- <div class="recipient-address">
       <span class="item-title">收件人地址</span>
       <div class="recipient-address-select item-info">
         <div-select :childInfo="recipientInfo" @getSelected="getRecipientAddress" defaultVal="福田区"></div-select>
         <input type="text" placeholder="请输入详细地址" v-model="recipientAddressDetail">
       </div>
-    </div>
-    <div class="domicile-address">
-      <span class="item-title">住所地址</span>
-      <input type="text" placeholder="请输入住所地址" class="item-info" v-model="homeAddress">
-    </div>
-    <div class="upload-photo">
-      <div class="">请按示例图上传以下证件照片</div>
-      <div class="upload-all-img">
-        <div class="upload-item-img">
-          <label class="upload-item-img-one" for="file1">
-            <input id="file1" type="file" accept="image/*" >
-            <img :src="imgOne1" />
-          </label>
-          <div class="upload-item-text-one">身份证(正面)</div>
-        </div>
-        <div class="upload-item-img">
-          <label class="upload-item-img-one" for="file2">
-            <input id="file2" type="file" accept="image/*" >
-            <img :src="imgOne2" />
-          </label>
-          <div class="upload-item-text-one">身份证(反面)</div>
-        </div>
-        <div class="upload-item-img">
-          <label class="upload-item-img-one" for="file3">
-            <input id="file3" type="file" accept="image/*" >
-            <img :src="imgOne3" />
-          </label>
-          <div class="upload-item-text-one">机动车登记证书</div>
-        </div>
-        <div class="upload-item-img" v-show="this.showIndex == '2'">
-          <label class="upload-item-img-one" for="file4">
-            <input id="file4" type="file" accept="image/*" >
-            <img :src="imgOne4" />
-          </label>
-          <div class="upload-item-text-one">境外人员临住表</div>
-        </div>
-        <div class="upload-item-img" v-show="this.showIndex == '1'">
-          <label class="upload-item-img-one" for="file5">
-            <input id="file5" type="file" accept="image/*" >
-            <img :src="imgOne5" />
-          </label>
-          <div class="upload-item-text-one">居住证正面</div>
-        </div>
-        <div class="upload-item-img" v-show="this.showIndex == '1'">
-          <label class="upload-item-img-one" for="file6">
-            <input id="file6" type="file" accept="image/*" >
-            <img :src="imgOne6" />
-          </label>
-          <div class="upload-item-text-one">居住证反面</div>
-        </div>
+    </div> -->
+    <g-input title="住所地址" v-model="homeAddress" placeholder="请输入住所地址"></g-input>
+    <group title="请按示例图上传以下证件照片">
+      <div class="upload-group">
+        <g-upload text="身份证（正面)" id="file1" :bg="imgOne1" v-model="IDcardFront"></g-upload>
+        <g-upload text="身份证（反面)" id="file2" :bg="imgOne2" v-model="IDcarfBack"></g-upload>
+        <g-upload text="机动车登记证书" id="file3" :bg="imgOne3" v-model="registerCredential"></g-upload>
+        <g-upload text="境外人员临住表" id="file4" :bg="imgOne4" v-model="outBoard"></g-upload>
+        <g-upload text="居住证正面" v-show="this.showIndex == '1'" id="file5" :bg="imgOne5" v-model="residencePermitF"></g-upload>
+        <g-upload text="居住证反面" v-show="this.showIndex == '1'" id="file6" :bg="imgOne6" v-model="residencePermitB"></g-upload>
       </div>
-    </div>
-    <div class="confirm-information" @click="confirmInfo" v-if="plateNumber.option.length">
-      确认信息
-    </div>
-    <div class="confirm-information" style="background: gray" v-if="!plateNumber.option.length">
-      确认信息
-    </div>
+    </group>
+    <g-button text="确认信息" @click.native="confirmInfo"></g-button>
   </div>
 </template>
 
 <script>
+  import {GInput, GSelect, GButton, GSelectOne, Group, GUpload} from 'form'
   import uploadFile from '@/utils/uploadFile.js'
   import { Toast } from 'mint-ui'
   import { isPhone, isChinese } from '@/utils/regExp.js'
@@ -186,6 +130,7 @@
             {'str': '外籍', id: '0'}
           ]
         },
+        serviceType: '补换机动车号牌',
         plateNumberOne: '',
         plateTypeOne: '02',
         recipientPhone: '',    // 收件人手机号码
@@ -200,6 +145,7 @@
         outBoard: '',
         residencePermitF: '',  // 居住证正面
         residencePermitB: '',   // 居住证反面
+        certificateNumber: '',  // 证件号码
         carCertificateNumber: '',  // 车主证件号码
         plateToCarNumber: {},  // 车牌号对应车主证件号码
         allOwnersName: {},
@@ -209,13 +155,17 @@
       }
     },
     components: {
-      // divSelect: require('./components/divSelect.vue'),
-      // divRadio: require('./components/divRadio.vue')
+      GInput,
+      GSelect,
+      GSelectOne,
+      GButton,
+      Group,
+      GUpload
     },
     computed: {
-      certificateNumber () {
-        return window.localStorage.getItem('identityCard')
-      },
+      // certificateNumber () {
+      //   return window.localStorage.getItem('identityCard')
+      // },
       plateNumber () {
         var plateInfo = {
           title: '车牌号码',
@@ -415,86 +365,13 @@
 </script>
 
 <style lang="less" scoped>
-  .recipient-address-select input{
-    width: 100%;
-    margin-top: 10px;
-  }
-  .replace-plate>div{
-    margin: 0 0 30px;
-    display: flex;
-    justify-content: space-between;
-  }
   .replace-plate {
-    height: auto;
-    .item-title{
-      width: 33%;
-      line-height: 65px;
-    }
-    .item-info{
-      width: 66%;
-    }
-    input{
-      border: 2px solid #eee;
-      border-radius: 6px;
-      height: 65px;
-      padding-left: 10px;
-      line-height: 65px;
-      font-size: 30px;
-      outline: none;
-    }
-    .exchange-license-line{
-      height: 10px;
-      background: #eeeeee;
-      margin-left: 0;
-      margin-right: 0;
-    }
-    .upload-all-img{
+    position:relative;
+    padding-bottom: 40px;
+    .upload-group{
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 10px;
       flex-wrap: wrap;
-      .upload-item-img{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-    .upload-photo{
-      margin-top: 30px;
-      display: block;
-      .upload-item-text-one{
-        margin-top: 10px;
-        margin-bottom: 30px;
-        color: #7e7e7e;
-        text-align: center;
-      }
-      .upload-item-img-one{
-        width: 300px;
-        height: 300px;
-        border: 2px solid #eee;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 10px;
-        input{
-          display: none;
-        }
-        img{
-          max-height: 90%;
-          max-width: 90%;
-        }
-      }
-    }
-    .confirm-information{
-      background: #09bb07;
-      height: 80px;
-      border-radius: 8px;
-      justify-content: center;
-      line-height: 80px;
-      font-size: 30px;
-      color: white;
-      margin-bottom: 0;
+      justify-content: space-between;
     }
   }
 </style>
