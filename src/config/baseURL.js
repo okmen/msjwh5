@@ -18,3 +18,5 @@ export const login = `${commonUrl}user/gdLogin.html` // 登录接口
 export const cardRepair = `${commonUrl}handleservice/repairDriverLicense.html` // 驾驶证补证
 
 export const cardReplace = `${commonUrl}handleservice/replaceDriverLicense.html` // 驾驶证换证
+
+export const annualExaminations = `${commonUrl}handleservice/driverLicenseAnnualVerification.html` // 驾驶证年审

@@ -22,6 +22,7 @@
 <script>
   import {GInput, GSelect, GButton, GUpload, Group, GSelectOne} from 'form'
   import beforeSubmit from '@/mixins/beforeSubmit'
+  import { annualExaminations } from '@/config/baseURL'
   export default {
     data () {
       return {
@@ -45,15 +46,19 @@
       },
       cityArea () {
         return this.$store.state.cityAreaS
+      },
+      user () {
+        return Object.assign({}, this.$store.state.user)
       }
     },
-    created () {
-      let user = this.$store.state.user
-      this.userName = user.userName
-      this.IDCard = user.identityCard
-      this.mobilePhone = user.mobilePhone
-      this.recipientsName = user.userName
-      this.recipientsPhone = user.mobilePhone
+    watch: {
+      user (val) {
+        this.userName = val.userName
+        this.IDCard = val.identityCard
+        this.mobilePhone = val.mobilePhone
+        this.recipientsName = val.userName
+        this.recipientsPhone = val.mobilePhone
+      }
     },
     components: {
       GInput,
@@ -79,7 +84,7 @@
         if (this.$_myMinxin_beforeSubmit(obj)) return
         let reqData = {
           type: '驾驶证年审',
-          url: 'annualExaminations',
+          url: annualExaminations,
           textObj: {
             identityCard: this.IDCard,
             userName: this.userName,

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import axios from 'axios'
-import { Indicator, Toast } from 'mint-ui'
+import { Indicator } from 'mint-ui'
 import qs from 'qs'
 
 // request 拦截
@@ -24,13 +24,6 @@ axios.interceptors.response.use(
   response => {
     Indicator.close()
     // 成功则直接返回数据
-    if (response.data.code !== '0000') {
-      Toast({
-        message: response.data.msg,
-        position: 'bottom',
-        duration: 2000
-      })
-    }
     return response.data
   },
   error => {
