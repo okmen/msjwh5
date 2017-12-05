@@ -26,8 +26,8 @@ let router = new Router({
       component: () => import('@/components/affirmInfo')
     },
     {
-      path: '/successSubmit',
-      name: 'successSubmit',
+      path: '/submitSuccess',
+      name: 'submitSuccess',
       meta: {
         title: '提交成功'
       },
@@ -52,7 +52,6 @@ router.beforeEach((to, from, next) => {
           url: to.fullPath
         }
       })
-      // next('/login?source=G')
     } else {
       next()
     }

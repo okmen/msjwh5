@@ -45,9 +45,9 @@ export default {
   data () {
     return {
       name: '驾驶证补换证',
-      userName: this.$store.state.user.userName,
-      IDCard: this.$store.state.user.identityCard,
-      mobilePhone: this.$store.state.user.mobilePhone,
+      userName: '',
+      IDCard: '',
+      mobilePhone: '',
       photoReturnNumberString: '',
       receiverName: '',
       receiverMobilePhone: '',
@@ -55,13 +55,14 @@ export default {
       IDCardFront: '',
       IDCardBack: '',
       board: '',
+      bindDriverLicence: '',
       censusTypeList: [
         {name: '补证', value: 1}, {name: '期满换证', value: 2}
       ],
       censusType: 1,
-      censusRegisterList: this.$store.state.censusRegisterList,
-      censusRegisterOne: this.$store.state.censusRegisterList[0].value,
-      areaSelectData: this.$store.state.cityAreaS,
+      // censusRegisterList: '',
+      censusRegisterOne: '1',
+      // areaSelectData: this.$store.state.cityAreaS,
       areaSelect: '福田区',
       example: false                       // 示例弹窗 默认不显示
     }
@@ -75,8 +76,26 @@ export default {
     GUpload
   },
   mixins: [beforeSubmit],
+  computed: {
+    censusRegisterList () {
+      return this.$store.state.censusRegisterList
+    },
+    areaSelectData () {
+      return this.$store.state.cityAreaS
+    },
+    user () {
+      return Object.assign({}, this.$store.state.user)
+    }
+  },
+  created () {
+    let val = this.$store.state.user
+    this.userName = val.userName
+    this.IDCard = val.identityCard
+    this.mobilePhone = val.mobilePhone
+    this.bindDriverLicence = val.bindDriverLicence
+  },
   mounted () {
-    if (this.$store.state.user.bindDriverLicence !== '1') {
+    if (this.bindDriverLicence !== '1') {
       this.$MessageBox('温馨提示', '您还没绑定驾驶证,请到星级用户中心绑定！')
     }
     document.addEventListener('click', (e) => {
@@ -174,7 +193,7 @@ export default {
           invisibleObj: {
             JZZA: this.IDCardFront || '',      // 居住证照片 页面不给居住证上传入口 直接传与身份证正反面同样的数据
             JZZB: this.IDCardBack || '',
-            loginUser: this.$store.state.user.identityCard,
+            loginUser: this.IDCard,
             userSource: 'M',
             identificationNO: 'A'
           }
