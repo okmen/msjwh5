@@ -24,6 +24,14 @@ let router = new Router({
       },
       component: () => import('@/components/affirmInfo')
     },
+    {
+      path: '/successSubmit',
+      name: 'successSubmit',
+      meta: {
+        title: '提交成功'
+      },
+      component: () => import('@/components/submitSuccess')
+    },
     ...publicRouter,
     ...transactionClass
   ]

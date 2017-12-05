@@ -37,6 +37,7 @@
 <script>
 import {GInput, GSelect, GButton, GSelectOne, Group, GUpload} from 'form'
 import { cardRepair, cardReplace } from '@/config/baseURL'
+import { isPhone, isPhotoNum } from '@/utils/regExp'
 import wx from 'weixin-js-sdk'
 import beforeSubmit from '@/mixins/beforeSubmit'
 export default {
@@ -145,12 +146,12 @@ export default {
         IDCardBack: '请上传身份证（反面）'
       }
       if (this.$_myMinxin_beforeSubmit(obj)) return
-      if (this.censusRegisterOne === '3' && !this.board) {
-        this.$toast({
-          message: '请上传境外人员临住表',
-          position: 'middle',
-          duration: 3000
-        })
+      if (!isPhone(this.mobilePhone)) {
+        this.$toast({message: '请输入正确的手机号码', position: 'middle', duration: 3000})
+      } else if (!isPhotoNum(this.photoReturnNumberString)) {
+        this.$toast({message: '请输入正确照片回执码', position: 'bottom', className: 'white'})
+      } else if (this.censusRegisterOne === '3' && !this.board) {
+        this.$toast({message: '请上传境外人员临住表', position: 'middle', duration: 3000})
       } else {
         let reqData = {
           type: '驾驶证补证',
