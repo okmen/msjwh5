@@ -5,6 +5,6 @@ export default [
     meta: {
       title: '申请类'
     },
-    component: () => import('@/views//transactionClass/motorVehicles/applyClass/applyClass.vue')
+    component: () => import('@/views/transactionClass/motorVehicles/applyClass/applyClass.vue')
   }
 ]
