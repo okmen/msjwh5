@@ -14,6 +14,6 @@ export default [
       title: '补换证类',
       loginStatus: true
     },
-    component: () => import('@/views//transactionClass/changeCard/changeCard')
+    component: () => import('@/views//transactionClass/drivingLicence/changeCard')
   }
 ]
