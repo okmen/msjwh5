@@ -24,6 +24,7 @@ Vue.component(SwipeItem.name, SwipeItem)
 // Vue.component(Loadmore.name, Loadmore)
 // Vue.component(Cell.name, Cell)
 Vue.prototype.$toast = Toast
+Vue.prototype.$MessageBox = MessageBox
 window.addEventListener('popstate', function (e) { // 监听手机返回按钮, 清除loading效果
   Indicator.close()
   MessageBox.close()

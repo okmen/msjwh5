@@ -5,15 +5,15 @@
     </div>
     <g-select title="业务类型" :data="censusTypeList" v-model="censusType"></g-select>
     <g-input title="姓名" v-model="userName"></g-input>
-    <g-input title="身份证号" v-model="IDCard"></g-input>
-    <g-input title="手机号码" v-model="mobilePhone" type="tel"></g-input>
-    <g-input class="changeCard-inputPhoto" title="照片回执码" v-model="photoReturnNumberString" type="tel">
+    <g-input title="身份证号" maxlength="18" v-model="IDCard"></g-input>
+    <g-input title="手机号码" maxlength="11" v-model="mobilePhone" type="tel"></g-input>
+    <g-input class="changeCard-inputPhoto" maxlength="25" title="照片回执码" v-model="photoReturnNumberString" type="tel">
       <div slot='right' class="RichScan" @click="scanQRCode()">扫一扫</div>
     </g-input>
     <span class="changeCard-examine" @click.stop="example=true">查看示例</span>
     <g-select title="户籍所在地" :data="censusRegisterList" v-model="censusRegisterOne"></g-select>
     <g-input title="收件人名字" v-model="receiverName" placeholder="请输入收件人姓名"></g-input>
-    <g-input title="收件人号码" v-model="receiverMobilePhone" placeholder="请输入收件人号码"></g-input>
+    <g-input title="收件人号码" maxlength="11" v-model="receiverMobilePhone" placeholder="请输入收件人号码"></g-input>
     <g-select-one class="changeCard-set" title="深圳市" type="邮寄地址" :data="areaSelectData" v-model="areaSelect"></g-select-one>
     <g-input title="" v-model="mailingAddress" placeholder="请输入详细地址"></g-input>
     <group title="请按示例图上传以下证件照片">
@@ -37,6 +37,7 @@
 <script>
 import {GInput, GSelect, GButton, GSelectOne, Group, GUpload} from 'form'
 import { cardRepair, cardReplace } from '@/config/baseURL'
+import { isPhone, isPhotoNum } from '@/utils/regExp'
 import wx from 'weixin-js-sdk'
 import beforeSubmit from '@/mixins/beforeSubmit'
 export default {
@@ -44,9 +45,9 @@ export default {
   data () {
     return {
       name: '驾驶证补换证',
-      userName: '',
-      IDCard: '',
-      mobilePhone: '',
+      userName: this.$store.state.user.userName,
+      IDCard: this.$store.state.user.identityCard,
+      mobilePhone: this.$store.state.user.mobilePhone,
       photoReturnNumberString: '',
       receiverName: '',
       receiverMobilePhone: '',
@@ -74,7 +75,10 @@ export default {
     GUpload
   },
   mixins: [beforeSubmit],
-  created () {
+  mounted () {
+    if (this.$store.state.user.bindDriverLicence !== '1') {
+      this.$MessageBox('温馨提示', '您还没绑定驾驶证,请到星级用户中心绑定！')
+    }
     document.addEventListener('click', (e) => {
       if (this.example === true) {
         this.example = false
@@ -142,12 +146,12 @@ export default {
         IDCardBack: '请上传身份证（反面）'
       }
       if (this.$_myMinxin_beforeSubmit(obj)) return
-      if (this.censusRegisterOne === '3' && !this.board) {
-        this.$toast({
-          message: '请上传境外人员临住表',
-          position: 'middle',
-          duration: 3000
-        })
+      if (!isPhone(this.mobilePhone)) {
+        this.$toast({message: '请输入正确的手机号码', position: 'middle', duration: 3000})
+      } else if (!isPhotoNum(this.photoReturnNumberString)) {
+        this.$toast({message: '请输入正确照片回执码', position: 'bottom', className: 'white'})
+      } else if (this.censusRegisterOne === '3' && !this.board) {
+        this.$toast({message: '请上传境外人员临住表', position: 'middle', duration: 3000})
       } else {
         let reqData = {
           type: '驾驶证补证',
@@ -171,13 +175,16 @@ export default {
             JZZA: this.IDCardFront || '',      // 居住证照片 页面不给居住证上传入口 直接传与身份证正反面同样的数据
             JZZB: this.IDCardBack || '',
             loginUser: this.$store.state.user.identityCard,
-            userSource: 'C',
+            userSource: 'M',
             identificationNO: 'A'
           }
         }
         console.log(reqData)
         this.$store.commit('savePassByValue', reqData)
-        this.$router.push('/affirmInfo')
+        let source = this.$route.query.source
+        let idcard = this.$route.query.idcard
+        let openid = this.$route.query.openid
+        this.$router.push({path: '/affirmInfo', query: {source: source, idcard: idcard, openid: openid}})
       }
     }
   }
@@ -187,6 +194,7 @@ export default {
 <style lang="less" scoped>
 .changeCard {
   position:relative;
+  padding-bottom: 40px;
   .upload-group{
     display: flex;
     flex-wrap: wrap;

@@ -74,6 +74,9 @@ export default {
   },
   methods: {
     btnAgreeRequest: function () {
+      let source = this.$store.state.core.source
+      let idcard = this.$store.state.core.idCard
+      let openid = this.$store.state.core.openId
       if (this.checked === true) {
         console.log(this.entryHash)
         switch (this.entryHash) {
@@ -138,7 +141,8 @@ export default {
             this.$router.push('/motorAlteration')
             break
           case 'jszbzhz':  // 驾驶证补证换证
-            this.$router.push('/changeCard')
+            // this.$router.push('/changeCard')
+            this.$router.push({path: '/changeCard', query: {source: source, idcard: idcard, openid: openid}})
             break
           case 'jszyqhz':  // 驾驶证延期换证
             this.$router.push('/changeCard/id/2')
