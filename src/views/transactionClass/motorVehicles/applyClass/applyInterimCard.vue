@@ -1,6 +1,3 @@
-<!--
-* 申请机动车临牌
- -->
 <template>
   <div class="replace-plate" id="temporaryLicense">
     <g-input title="姓名" v-model="userName" maxlength="18" placeholder="请输入姓名"></g-input>
@@ -30,6 +27,7 @@
     <g-button text="确认信息" @click.native="confirmInfo"></g-button>
   </div>
 </template>
+
 <script>
   import {GInput, GSelect, GButton, GSelectOne, GRadio, Group, GUpload} from 'form'
   import uploadFile from '@/utils/uploadFile.js'
@@ -209,17 +207,11 @@
         console.log(val)
         this.censusRegister2 = val
       },
-      getRecipientAddress (val) {
-        this.recipientAddressRegion = val
-      },
-      getPlateNumber (val) {
-        this.plateNumberOne = val
-        this.carCertificateNumber = this.plateToCarNumber[val]
-        this.ownersName = this.allOwnersName[val]
-      },
-      getPlateType (val) {
-        this.carTypeOne = val
-      },
+      // getPlateNumber (val) {
+      //   this.plateNumberOne = val
+      //   this.carCertificateNumber = this.plateToCarNumber[val]
+      //   this.ownersName = this.allOwnersName[val]
+      // },
       confirmInfo () {
         if (!this.userName) {
           Toast({
@@ -372,6 +364,7 @@
     }
   }
 </script>
+
 <style lang="less" scoped>
   .replace-plate {
     position:relative;
