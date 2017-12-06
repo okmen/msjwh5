@@ -1,14 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import publicRouter from './public'
-<<<<<<< HEAD
 import tDrivingLicence from './transactionClass/drivingLicence' // 办理类驾驶证业务
 import dealServiceRouter from './transactionClass/dealService.js' // 办理类服务
 import aMotorVehicles from './appointmentClass/motorVehicles' // 预约类机动车业务
-=======
 import transactionClass from './transactionClass/drivingLicence'
 import motorVehicles from './transactionClass/motorVehicles.js'
->>>>>>> 0bf150c15584e896123c41589e41d792a06b1c48
 import { getQueryString } from '@/utils/utils'
 
 Vue.use(Router)
@@ -40,14 +37,11 @@ let router = new Router({
       component: () => import('@/components/submitSuccess')
     },
     ...publicRouter,
-<<<<<<< HEAD
     ...tDrivingLicence,
     ...dealServiceRouter, // 办理类服务
-    ...aMotorVehicles
-=======
+    ...aMotorVehicles,
     ...transactionClass,
     ...motorVehicles
->>>>>>> 0bf150c15584e896123c41589e41d792a06b1c48
   ]
 })
 
