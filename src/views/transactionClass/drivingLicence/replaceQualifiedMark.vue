@@ -95,6 +95,9 @@ export default {
     },
     user () {
       return Object.assign({}, this.$store.state.user)
+    },
+    queryURL () {
+      return this.$store.getters.queryURL
     }
   },
   methods: {
@@ -155,10 +158,7 @@ export default {
         }
         console.log(dataList)
         this.$store.commit('savePassByValue', dataList)
-        let source = this.$route.query.source
-        let idcard = this.$route.query.idcard
-        let openid = this.$route.query.openid
-        this.$router.push({path: '/affirmInfo', query: {source: source, idcard: idcard, openid: openid}})
+        this.$router.push({path: '/affirmInfo', query: this.queryURL})
       }
     }
   },
