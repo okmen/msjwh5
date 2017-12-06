@@ -52,7 +52,9 @@ html,body{
     width: 100%;
     //background-color: #F5F5F5;
 }
-
+::-webkit-input-placeholder{
+  color: #868686;
+}
 input{
   border: 2px solid #e5e5e5;
   border-radius: 8px;
@@ -65,6 +67,7 @@ input{
 input[disabled]{
   background-color:  #efeff4;
 }
+
 .clear:after{
     content: '';
     display: block;
@@ -115,4 +118,22 @@ input[disabled]{
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+.form{
+    padding: 20px 0 40px;
+}
+.line-10{
+    height: 10px;
+    margin: 5px 0;
+    background-color:#eee;
+}
+.verify-code{
+    .h-center;
+    color: white;
+    background-color: #09bb07;
+    height: 56px;
+    width: 174px;
+    border-radius: 8px;
+    font-size: 30px;
+    margin-left: 30px;
 }
