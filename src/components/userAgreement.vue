@@ -132,7 +132,8 @@ export default {
             this.$router.push('/placeExamineCar')
             break
           case 'szjj_hander_rmvp':  // 补领机动车号牌
-            this.$router.push('/replaceCredentials/replaceLicencePlate')
+            // this.$router.push('/replaceCredentials/replaceLicencePlate')
+            this.$router.push({path: '/replaceLicencePlate', query: {source: source, idcard: idcard, openid: openid}})
             break
           case 'szjj_hander_icr':  // 换领机动车行驶证
             this.$router.push('/replaceCredentials/exchangeDrivingLicense')
@@ -148,7 +149,8 @@ export default {
             this.$router.push('/changeCard/id/2')
             break
           case 'jszns':  // 驾驶证年审
-            this.$router.push('/annualExaminations')
+            // this.$router.push('/annualExaminations')
+            this.$router.push({path: '/annualExaminations', query: {source: source, idcard: idcard, openid: openid}})
             break
           case 'jszzr':  // 驾驶证转入
             this.$router.push('/intoCard')

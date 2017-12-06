@@ -81,7 +81,7 @@
             <dt><img class="top6" src="./../../assets/images/nav6.png" alt=""></dt>
             <dd>办理类服务</dd>
           </router-link> -->
-          <router-link :to="{ path: '/userAgreement/jszbzhz', query: { source: this.$route.query.source, idcard: this.$route.query.idcard, openid: this.$route.query.openid }}">
+          <router-link :to="{ path: '/dealService', query: { source: this.$route.query.source, idcard: this.$route.query.idcard, openid: this.$route.query.openid }}">
             <dt><img class="top6" src="./../../assets/images/nav6.png" alt=""></dt>
             <dd>办理类服务</dd>
           </router-link>

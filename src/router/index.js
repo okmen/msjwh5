@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import publicRouter from './public'
 import transactionClass from './transactionClass/drivingLicence'
-import dealServiceRouter from './transactionClass/dealService.js' // 办理类服务
+import motorVehicles from './transactionClass/motorVehicles.js'
 import { getQueryString } from '@/utils/utils'
 
 Vue.use(Router)
@@ -35,7 +35,7 @@ let router = new Router({
     },
     ...publicRouter,
     ...transactionClass,
-    ...dealServiceRouter // 办理类服务
+    ...motorVehicles
   ]
 })
 
