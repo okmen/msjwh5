@@ -126,7 +126,8 @@ export default {
             this.$router.push('/esemptionCar')
             break
           case 'szjj_hander_rim':  // 补换检验合格标志
-            this.$router.push('/replaceCredentials/replaceQualifiedMark')
+            // this.$router.push('/replaceQualifiedMark')
+            this.$router.push({path: '/replaceQualifiedMark', query: {source: source, idcard: idcard, openid: openid}})
             break
           case 'szjj_hander_id':  // 机动车异地定期检验申报
             this.$router.push('/placeExamineCar')

@@ -84,6 +84,7 @@
         let reqData = {
           type: '驾驶证年审',
           url: annualExaminations,
+          title: 'driverLicenseAnnualVerification',
           textObj: {
             identityCard: this.IDCard,
             userName: this.userName,

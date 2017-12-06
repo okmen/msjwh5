@@ -24,3 +24,5 @@ export const cardRepair = `${commonUrl}handleservice/repairDriverLicense.html` /
 export const cardReplace = `${commonUrl}handleservice/replaceDriverLicense.html` // 驾驶证换证
 
 export const annualExaminations = `${commonUrl}handleservice/driverLicenseAnnualVerification.html` // 驾驶证年审
+
+export const replaceInspectionMark = `${commonUrl}handleservice/replaceInspectionMark.html`  // 补换检验合格标志
