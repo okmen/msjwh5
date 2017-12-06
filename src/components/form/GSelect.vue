@@ -88,7 +88,7 @@
         if (item instanceof Object) {
           this.currentVal = item.value
           this.currentName = item.name
-          this.$emit('getIndex', index)
+          this.$emit('getSelected', index)
         } else {
           this.currentVal = item
           this.currentName = item

@@ -6,29 +6,20 @@
     <g-input title="车主姓名" v-model="ownersName" disabled></g-input>
     <g-input title="证件号码" v-model="certificateNumber" disabled></g-input>
     <g-input title="车主证件号码" v-model="carCertificateNumber" disabled></g-input>
-    <!-- <div-select :childInfo="plateNumber" @getSelected="getPlateNumber" :defaultVal="defaultPlateNumber"></div-select> -->
-    <!-- <div-select :childInfo="plateType" @getSelected="getPlateType" defaultVal="蓝牌"></div-select> -->
-    <!--<div class="domicile-place">
-      <span class="item-title">户籍所在地</span>
-      <div-radio :optname="optname" @getSelected="getCensusRegister"></div-radio>
-    </div>-->
-    <!-- <div-select :childInfo="censusRegister" @getSelected="getCensusRegister" defaultVal="深户"></div-select> -->
+    <g-select title="车牌号码" :data="plateNumber" v-model="plateNumberOne" @getSelected="getPlateNumber" ref="plateNumberName"></g-select>
+    <g-select title="车牌类型" :data="plateType.option" v-model="plateTypeOne" @getSelected="getPlateType" ref="plateTypeStr"></g-select>
+    <g-select title="户籍所在地" :data="censusRegister.option" v-model="censusRegisterOne" @getSelected="getCensusRegisterIndex"></g-select>
     <g-input title="收件人姓名" v-model="recipientName" maxlength="18" placeholder="请输入收件人姓名"></g-input>
     <g-input title="收件人手机" v-model="recipientPhone" maxlength="11" placeholder="请输入收件人手机号码"></g-input>
-    <!-- <div class="recipient-address">
-      <span class="item-title">收件人地址</span>
-      <div class="recipient-address-select item-info">
-        <div-select :childInfo="recipientInfo" @getSelected="getRecipientAddress" defaultVal="福田区"></div-select>
-        <input type="text" placeholder="请输入详细地址" v-model="recipientAddressDetail">
-      </div>
-    </div> -->
+    <g-select-one title="深圳市" type="收件人地址" :data="recipientInfo.option" v-model="recipientAddressRegion"></g-select-one>
+    <g-input v-model="recipientAddressDetail" placeholder="请输入详细地址"></g-input>
     <g-input title="住所地址" v-model="homeAddress" placeholder="请输入住所地址"></g-input>
     <group title="请按示例图上传以下证件照片">
       <div class="upload-group">
         <g-upload text="身份证（正面)" id="file1" :bg="imgOne1" v-model="IDcardFront"></g-upload>
         <g-upload text="身份证（反面)" id="file2" :bg="imgOne2" v-model="IDcarfBack"></g-upload>
         <g-upload text="机动车登记证书" id="file3" :bg="imgOne3" v-model="registerCredential"></g-upload>
-        <g-upload text="境外人员临住表" id="file4" :bg="imgOne4" v-model="outBoard"></g-upload>
+        <g-upload text="境外人员临住表" v-show="this.showIndex == '2'" id="file4" :bg="imgOne4" v-model="outBoard"></g-upload>
         <g-upload text="居住证正面" v-show="this.showIndex == '1'" id="file5" :bg="imgOne5" v-model="residencePermitF"></g-upload>
         <g-upload text="居住证反面" v-show="this.showIndex == '1'" id="file6" :bg="imgOne6" v-model="residencePermitB"></g-upload>
       </div>
@@ -56,30 +47,12 @@
         plateType: {
           title: '车牌类型',
           option: [
-            {
-              'str': '蓝牌',
-              'id': '02'
-            },
-            {
-              'str': '黄牌',
-              'id': '01'
-            },
-            {
-              'str': '黑牌',
-              'id': '06'
-            },
-            {
-              'str': '个性牌',
-              'id': '02'
-            },
-            {
-              'str': '小型新能源车号牌',
-              'id': '52'
-            },
-            {
-              'str': '大型新能源车号牌',
-              'id': '51'
-            }
+            {name: '蓝牌', value: '02'},
+            {name: '黄牌', value: '01'},
+            {name: '黑牌', value: '06'},
+            {name: '个性牌', value: '02'},
+            {name: '小型新能源车号牌', value: '52'},
+            {name: '大型新能源车号牌', value: '51'}
           ]
         },
         optname: [
@@ -89,49 +62,30 @@
         recipientInfo: {
           title: '深圳市',
           option: [
-            {
-              'str': '福田区'
-            },
-            {
-              'str': '罗湖区'
-            },
-            {
-              'str': '南山区'
-            },
-            {
-              'str': '宝安区'
-            },
-            {
-              'str': '龙岗区'
-            },
-            {
-              'str': '盐田区'
-            },
-            {
-              'str': '龙华新区'
-            },
-            {
-              'str': '光明新区'
-            },
-            {
-              'str': '坪山新区'
-            },
-            {
-              'str': '大鹏新区'
-            }
+            {name: '福田区', value: '福田区'},
+            {name: '罗湖区', value: '罗湖区'},
+            {name: '南山区', value: '南山区'},
+            {name: '宝安区', value: '宝安区'},
+            {name: '龙岗区', value: '龙岗区'},
+            {name: '盐田区', value: '盐田区'},
+            {name: '龙华新区', value: '龙华新区'},
+            {name: '光明新区', value: '光明新区'},
+            {name: '坪山新区', value: '坪山新区'},
+            {name: '大鹏新区', value: '大鹏新区'}
           ]
         },
         censusRegisterOne: '1',
         censusRegister: {
           title: '户籍所在地',
           option: [
-            {'str': '深户', id: '1'},
-            {'str': '非深户', id: '0'},
-            {'str': '外籍', id: '0'}
+            {name: '深户', value: '1'},
+            {name: '非深户', value: '0'},
+            {name: '外籍', value: '0'}
           ]
         },
         serviceType: '补换机动车号牌',
-        plateNumberOne: '',
+        plateNumberOne: '0',
+        plateNumberName: '',
         plateTypeOne: '02',
         recipientPhone: '',    // 收件人手机号码
         recipientName: '',    // 收件人姓名
@@ -150,8 +104,7 @@
         plateToCarNumber: {},  // 车牌号对应车主证件号码
         allOwnersName: {},
         ownersName: '',
-        plateTypeStr: '蓝牌',
-        defaultPlateNumber: ''
+        plateTypeStr: '蓝牌'
       }
     },
     components: {
@@ -163,28 +116,21 @@
       GUpload
     },
     computed: {
-      // certificateNumber () {
-      //   return window.localStorage.getItem('identityCard')
-      // },
       plateNumber () {
         var plateInfo = {
           title: '车牌号码',
           option: []
         }
         let storage = window.localStorage.getItem('cars')
-        if (!JSON.parse(storage).length) return plateInfo
-        JSON.parse(storage).map(item => {
-          if (item.isMySelf === 0) {
-            plateInfo.option.push({'str': item.myNumberPlate})
-            this.plateToCarNumber[item.myNumberPlate] = item.identityCard
-            this.allOwnersName[item.myNumberPlate] = item.name
+        if (!JSON.parse(storage).length) return plateInfo.option
+        JSON.parse(storage).map((item, index) => {
+          if (+item.isMySelf === 0) {
+            plateInfo.option.push({'name': item.myNumberPlate, 'value': index + ''})
+            this.plateToCarNumber[index] = item.identityCard
+            this.allOwnersName[index] = item.name
           }
         })
-        if (plateInfo.option[0]) {
-          this.defaultPlateNumber = plateInfo.option[0].str
-          this.plateNumberOne = plateInfo.option[0].str
-        }
-        return plateInfo
+        return plateInfo.option
       }
     },
     methods: {
@@ -238,21 +184,17 @@
           }
         })
       },
-      getCensusRegister (val, index) {
-        this.censusRegisterOne = val
+      getCensusRegisterIndex (index) {
         this.showIndex = index
       },
-      getRecipientAddress (val) {
-        this.recipientAddressRegion = val
+      getPlateNumber () {
+        this.plateNumberName = this.$refs.plateNumberName.currentName
+        this.carCertificateNumber = this.plateToCarNumber[this.plateNumberOne]
+        this.ownersName = this.allOwnersName[this.plateNumberOne]
       },
-      getPlateNumber (val) {
-        this.plateNumberOne = val
-        this.carCertificateNumber = this.plateToCarNumber[val]
-        this.ownersName = this.allOwnersName[val]
-      },
-      getPlateType (val, index, str) {
-        this.plateTypeOne = val
-        this.plateTypeStr = str
+      getPlateType () {
+        this.plateTypeStr = this.$refs.plateTypeStr.currentName
+        console.log(this.plateTypeStr)
       },
       confirmInfo () {
         console.log(this.censusRegisterOne)
@@ -332,7 +274,7 @@
             'name': this.ownersName,
             'identityCard': this.certificateNumber,
             'carOwnerIdentityCard': this.carCertificateNumber,
-            'numberPlate': this.plateNumberOne,
+            'numberPlate': this.plateNumberName,
             'plateType': this.plateTypeOne,
             'plateTypeStr': this.plateTypeStr,
             'placeOfDomicile': this.censusRegisterOne,
@@ -343,23 +285,27 @@
             'address': this.homeAddress
           },
           imgObj: {
-            'PHOTO9': this.IDcardFront.split(',')[1] || this.IDcardFront,
-            'PHOTO10': this.IDcarfBack.split(',')[1] || this.IDcarfBack,
-            'DJZSFYJ': this.registerCredential.split(',')[1] || this.registerCredential,
-            'PHOTO31': this.outBoard.split(',')[1] || this.outBoard,
-            'JZZA': this.residencePermitF.split(',')[1] || this.residencePermitF,
-            'JZZB': this.residencePermitB.split(',')[1] || this.residencePermitB
+            'PHOTO9': this.IDcardFront || this.IDcardFront,
+            'PHOTO10': this.IDcarfBack || this.IDcarfBack,
+            'DJZSFYJ': this.registerCredential || this.registerCredential,
+            'PHOTO31': this.outBoard || this.outBoard,
+            'JZZA': this.residencePermitF || this.residencePermitF,
+            'JZZB': this.residencePermitB || this.residencePermitB
           }
         }
-        this.$store.commit('saveMotorVehicleHandling', dataList)
-        console.log(dataList)
-        this.$router.push(/_WeChat/g.test(this.$route.path) ? '/affirmInfo_WeChat' : '/affirmInfo')
+        this.$store.commit('savePassByValue', dataList)
+        let source = this.$route.query.source
+        let idcard = this.$route.query.idcard
+        let openid = this.$route.query.openid
+        this.$router.push({path: '/affirmInfo', query: {source: source, idcard: idcard, openid: openid}})
       }
     },
     mounted () {
       this.uploadImg()
       this.carCertificateNumber = this.plateToCarNumber[this.plateNumberOne]
       this.ownersName = this.allOwnersName[this.plateNumberOne]
+      this.certificateNumber = window.localStorage.getItem('identityCard')
+      this.plateNumberName = this.$refs.plateNumberName.currentName
     }
   }
 </script>
