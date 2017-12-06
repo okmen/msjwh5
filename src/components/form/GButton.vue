@@ -26,7 +26,7 @@
     height: 70px;
     border-radius: 8px;
     width: 100%;
-    background-color: #09bb07;
+    background-color: #004BD8;
     color: white;
   }
   .gray {
