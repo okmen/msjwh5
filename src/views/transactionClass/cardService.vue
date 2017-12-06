@@ -11,7 +11,7 @@
       <router-link :to="{ path: '/applyInterimCard', query: queryURL }">申请机动车临牌</router-link>
     </div>
     <div class="query-link">
-      <router-link :to="{ path: '/userAgreement/szjj_hander_rmvp', query: queryURL }">补换机动车号牌</router-link>
+      <router-link :to="{ path: '/userAgreement/szjj_hander_rmvp', query: queryURL }">补领机动车号牌</router-link>
     </div>
     <div class="query-link">
       <router-link :to="{ path: '/userAgreement/szjj_hander_rim', query: queryURL }">补换检验合格标志</router-link>

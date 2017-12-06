@@ -79,6 +79,7 @@
             {name: '大鹏新区', value: '大鹏新区'}
           ]
         },
+        licenseSelectMassage: '申请机动车临牌',
         censusRegister: '1', // 户籍所在地
         showIndex: '0',
         censusRegister2: 'A', // 车辆产地

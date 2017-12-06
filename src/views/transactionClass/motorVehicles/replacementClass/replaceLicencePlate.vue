@@ -84,7 +84,7 @@
             {name: '外籍', value: '0'}
           ]
         },
-        serviceType: '补换机动车号牌',
+        serviceType: '补领机动车号牌',
         plateNumberOne: '0',
         plateNumberName: '',
         plateTypeOne: '02',

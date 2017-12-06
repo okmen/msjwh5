@@ -11,7 +11,7 @@ export default [
     path: '/replaceLicencePlate',
     name: 'replaceLicencePlate',
     meta: {
-      title: '补换机动车号牌'
+      title: '补领机动车号牌'
     },
     component: () => import('@/views/transactionClass/motorVehicles/replacementClass/replaceLicencePlate')
   }

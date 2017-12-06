@@ -9,9 +9,7 @@
 <script>
   export default {
     data () {
-      return {
-        isGray: this.gray
-      }
+      return {}
     },
     props: ['text', 'type']
   }
