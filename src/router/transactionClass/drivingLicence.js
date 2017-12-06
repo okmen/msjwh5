@@ -1,13 +1,5 @@
 export default [
   {
-    path: '/dealService',
-    name: 'dealService',
-    meta: {
-      title: '办理业务'
-    },
-    component: () => import('@/views/transactionClass/dealService')
-  },
-  {
     path: '/carService',
     name: 'carService',
     meta: {

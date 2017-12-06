@@ -8,7 +8,7 @@
     <g-input title="发动机号" v-model="engineNumber" placeholder="请输入发动机号"></g-input>
     <g-input title="车架号" v-model="behindTheFrame4Digits" placeholder="请输入车架号"></g-input>
     <g-radio title="车辆产地" :optname="carOptList" @getSelected="getCensusRegister2"></g-radio>
-    <g-select title="户籍所在地" :data="censusRegister3.option" v-model="censusRegister" @getIndex="getCensusRegister1"></g-select>
+    <g-select title="户籍所在地" :data="censusRegister3.option" v-model="censusRegister" @getSelected="getCensusRegisterIndex"></g-select>
     <g-input title="收件人姓名" v-model="recipientName" placeholder="请输入收件人姓名"></g-input>
     <g-input title="收件人手机" v-model="recipientPhone" maxlength="11" placeholder="请输入收件人手机号码"></g-input>
     <g-select-one title="深圳市" type="收件人地址" :data="recipientInfo.option" v-model="recipientAddressRegion"></g-select-one>
@@ -199,7 +199,7 @@
           }
         })
       },
-      getCensusRegister1 (index) {
+      getCensusRegisterIndex (index) {
         console.log(index)
         this.showIndex = index
       },

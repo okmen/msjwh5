@@ -2,8 +2,8 @@
   <div class="g-select">
     <!--<div class="g-select-type" v-if="type">{{type}}</div>-->
     <div class="g-select-title">{{title}}</div>
-    <div class="g-select-value" @click.stop="showSelectUl">
-      {{currentName}}
+    <div class="g-select-value" @click.stop="showSelectUl()">
+      <span :class="{'placeholder': !currentName}">{{currentName || placeholder}}</span>
       <ul class="g-select-list" v-show="showUl">
         <li class="list-item" v-for="(item, index) in data" :key="index" @click.stop="selectedValue(item, index)">{{item instanceof Object ? item.name : item}}</li>
       </ul>
@@ -19,6 +19,9 @@
     .g-select-title{
       width: 30%;
     }
+    .placeholder{
+      color: #868686;
+    }
     .g-select-value{
       /*width: 70%;*/
       flex: 1;
@@ -26,10 +29,15 @@
       border-radius: 8px;
       height: 56px;
       font-size: 30px;
-      padding-left: 20px;
       line-height: 56px;
       position: relative;
       background: white url("../../assets/images/select1.png") 95% center/22px 13px no-repeat;
+      span{
+        display: block;
+        width: 100%;
+        height: 100%;
+        margin-left: 20px;
+      }
     }
     .g-select-list {
       position: absolute;
@@ -37,13 +45,13 @@
       right: 0;
       background: white;
       width: 100%;
-      padding-left: 20px;
       border: 2px solid #eee;
       line-height: 55px;
       z-index: 999;
       max-height: 400px;
       overflow: auto;
       .list-item {
+        padding-left: 20px;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -61,19 +69,20 @@
         currentName: ''
       }
     },
-    props: ['data', 'title', 'value', 'type'],  // childInfo: 父组件传进来的值， defaultVal：默认值
-    created () {
-      for (let i = 0, len = this.data.length; i < len; i++) {
-        if (this.data[i] instanceof Object) {
-          if (this.data[i].value === this.value) {
-            this.currentName = this.data[i].name
-            break
-          }
-        } else {
-          this.currentVal = this.value
-          this.currentName = this.value
+    props: {
+      data: {
+        type: Array,
+        default () {
+          return []
         }
-      }
+      },
+      title: String,
+      value: [String, Number],
+      type: String,
+      placeholder: String
+    },
+    created () {
+      this.init()
     },
     watch: {
       currentVal (val) {
@@ -81,14 +90,30 @@
       },
       value (val) {
         this.currentVal = val
+      },
+      data () {
+        this.init()
       }
     },
     methods: {
+      init () {
+        for (let i = 0, len = this.data.length; i < len; i++) {
+          if (this.data[i] instanceof Object) {
+            if (this.data[i].value === this.value) {
+              this.currentName = this.data[i].name
+              break
+            }
+          } else {
+            this.currentVal = this.value
+            this.currentName = this.value
+          }
+        }
+      },
       selectedValue (item, index) { // 点击下拉框的某一项
         if (item instanceof Object) {
           this.currentVal = item.value
           this.currentName = item.name
-          this.$emit('getIndex', index)
+          this.$emit('getSelected', index)
         } else {
           this.currentVal = item
           this.currentName = item
@@ -96,13 +121,11 @@
         this.showUl = false
       },
       showSelectUl () {
-        this.$nextTick(() => {
-          let selectUl = document.getElementsByClassName('g-select-list')
-          Array.prototype.slice.call(selectUl).map(item => {
-            item.style.display = 'none'
-          })
-          this.showUl = !this.showUl
+        let selectUl = document.getElementsByClassName('g-select-list')
+        Array.prototype.slice.call(selectUl).map(item => {
+          item.style.display = 'none'
         })
+        this.showUl = !this.showUl
       },
       disappearSelectUl () {
         this.showUl = false
