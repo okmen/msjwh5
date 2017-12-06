@@ -25,7 +25,7 @@
       </div>
     </group>
     <g-button text="确认信息" @click.native="confirmInfo" v-if="plateNumber.length"></g-button>
-    <g-button text="确认信息" v-if="!plateNumber.length" :gray=true></g-button>
+    <g-button text="确认信息" v-if="!plateNumber.length" type="gray"></g-button>
   </div>
 </template>
 

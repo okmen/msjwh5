@@ -1,6 +1,6 @@
 <template>
 <div class="g-button h-center">
-  <div class="h-center button" :class="{'gray': isGray}">
+  <div class="h-center button" :class="{'gray': type === 'gray'}">
     {{text || '提交'}}
   </div>
 </div>
@@ -13,7 +13,7 @@
         isGray: this.gray
       }
     },
-    props: ['text', 'gray']
+    props: ['text', 'type']
   }
 </script>
 
