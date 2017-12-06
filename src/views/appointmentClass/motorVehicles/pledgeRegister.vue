@@ -11,6 +11,7 @@
         获取验证码
       </div>
     </g-input>
+    <plate-number-full></plate-number-full>
     <g-select title="车辆类型" :data="vehicleType" v-model="vehicleTypeOne" ref="vehicleType"></g-select>
     <g-select title="使用性质" :data="useNature" v-model="useNatureOne"></g-select>
     <g-input title="车身架号" placeholder="请输入车架后四位" v-model="carriageNum"></g-input>
@@ -45,6 +46,7 @@
 </template>
 <script>
 import {GInput, GSelect, GButton} from 'form'
+import PlateNumberFull from '@/components/PlateNumberFull'
 import {getPageInit, getAppointmentDate, getAppTimes, simpleSendMessage, createVehicleInfoJD37} from '@/config/baseURL'
 import beforeSubmit from '@/mixins/beforeSubmit'
 export default {
@@ -72,7 +74,7 @@ export default {
     }
   },
   components: {
-    GInput, GSelect, GButton
+    GInput, GSelect, GButton, PlateNumberFull
   },
   computed: {
     businessTypeId () {

@@ -30,13 +30,13 @@
       height: 56px;
       font-size: 30px;
       line-height: 56px;
+      padding-left: 20px;
       position: relative;
       background: white url("../../assets/images/select1.png") 95% center/22px 13px no-repeat;
       span{
         display: block;
         width: 100%;
         height: 100%;
-        margin-left: 20px;
       }
     }
     .g-select-list {
