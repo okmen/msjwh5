@@ -3,8 +3,8 @@ import { getQueryString } from '@/utils/utils'
 export default {
   state: {
     source: getQueryString('source'),
-    idCard: getQueryString('idCard'),
-    openId: getQueryString('openId')
+    idCard: getQueryString('idCard') || getQueryString('idcard'),
+    openId: getQueryString('openId') || getQueryString('openId')
   },
   getters: {
     // URL 查询参数
