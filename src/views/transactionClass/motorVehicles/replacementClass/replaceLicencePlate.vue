@@ -295,7 +295,7 @@
             'JZZB': this.residencePermitB || this.residencePermitB
           }
         }
-        this.$store.commit('savePassByValue', reqData)
+        this.$store.commit('savePassByValue', dataList)
         this.$router.push({path: '/affirmInfo', query: this.queryURL})
       }
     },

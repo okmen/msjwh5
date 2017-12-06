@@ -1,5 +1,8 @@
 <template>
   <div class="replace-plate" id="temporaryLicense">
+    <div class="changeCard-top">
+      <g-input class="changeCard-type" title="业务类型" v-model="licenseSelectMassage" disabled></g-input>
+    </div>
     <g-input title="姓名" v-model="userName" maxlength="18" placeholder="请输入姓名"></g-input>
     <g-input title="身份证号码" v-model="identityCard" maxlength="18" placeholder="请输入身份证号码"></g-input>
     <g-input title="手机号码" v-model="mobilephone" maxlength="11" placeholder="请输入手机号码"></g-input>
@@ -354,7 +357,7 @@
             'PHOTO29': this.dealService4 || ''
           }
         }
-        this.$store.commit('savePassByValue', reqData)
+        this.$store.commit('savePassByValue', dataList)
         this.$router.push({path: '/affirmInfo', query: this.queryURL})
       }
     },
