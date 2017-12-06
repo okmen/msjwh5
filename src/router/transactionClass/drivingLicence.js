@@ -31,5 +31,14 @@ export default [
       loginStatus: true
     },
     component: () => import('@/views/transactionClass/drivingLicence/changeCard')
+  },
+  {
+    path: '/replaceQualifiedMark',
+    name: 'replaceQualifiedMark',
+    meta: {
+      title: '补换检验合格标志',
+      loginStatus: true
+    },
+    component: () => import('@/views/transactionClass/drivingLicence/replaceQualifiedMark')
   }
 ]

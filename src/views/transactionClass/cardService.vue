@@ -13,6 +13,9 @@
     <div class="query-link">
       <router-link :to="{ path: '/userAgreement/szjj_hander_rmvp', query: queryURL }">补换机动车号牌</router-link>
     </div>
+    <div class="query-link">
+      <router-link :to="{ path: '/userAgreement/szjj_hander_rim', query: { source: this.source, idcard: this.idcard, openid: this.openid }}">补换检验合格标志</router-link>
+    </div>
   </div>
 </template>
 <script>

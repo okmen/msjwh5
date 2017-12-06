@@ -175,6 +175,7 @@ export default {
         let reqData = {
           type: '驾驶证补证',
           url: this.censusType === '1' ? cardRepair : cardReplace,
+          title: 'repairDriverLicense',
           textObj: {
             identityCard: this.IDCard,
             userName: this.userName,

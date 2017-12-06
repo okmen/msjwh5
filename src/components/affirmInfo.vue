@@ -239,10 +239,16 @@ export default {
           //     }
           //   }
           // }
-          let sendData = json.data
-          if (this.dataList.noTip) {
-            sendData.noTip = true
+          // let sendData = json.data
+          // if (this.dataList.noTip) {
+          //   sendData.noTip = true
+          // }
+          let sendData = {
+            title: this.$store.state.passByValue.title,
+            type: 1,
+            waterNumber: json.data.waterNumber
           }
+          console.log(sendData)
           this.$store.commit('saveSuccessInfo', sendData)
           let source = this.$route.query.source
           let idcard = this.$route.query.idcard
