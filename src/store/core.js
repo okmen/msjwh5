@@ -4,7 +4,7 @@ export default {
   state: {
     source: getQueryString('source'),
     idCard: getQueryString('idCard') || getQueryString('idcard'),
-    openId: getQueryString('openId') || getQueryString('openId')
+    openId: getQueryString('openId') || getQueryString('openid')
   },
   getters: {
     // URL 查询参数

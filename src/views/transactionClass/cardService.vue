@@ -8,7 +8,7 @@
       <router-link :to="{ path: '/userAgreement/jszns', query: queryURL }">驾驶证年审</router-link>
     </div>
     <div class="query-link">
-      <router-link :to="{ path: '/applyClass/02', query: queryURL }">申请机动车临牌</router-link>
+      <router-link :to="{ path: '/applyInterimCard', query: queryURL }">申请机动车临牌</router-link>
     </div>
     <div class="query-link">
       <router-link :to="{ path: '/userAgreement/szjj_hander_rmvp', query: queryURL }">补换机动车号牌</router-link>
