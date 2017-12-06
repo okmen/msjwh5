@@ -1,7 +1,7 @@
 <template>
   <div class="g-select">
     <!--<div class="g-select-type" v-if="type">{{type}}</div>-->
-    <div class="g-select-title">{{title}}</div>
+    <div class="g-select-title" v-if="title">{{title}}</div>
     <div class="g-select-value" @click.stop="showSelectUl()">
       <span :class="{'placeholder': !currentName}">{{currentName || placeholder}}</span>
       <ul class="g-select-list" v-show="showUl">

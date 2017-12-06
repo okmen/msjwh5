@@ -3,6 +3,7 @@
     <div class="g-input-title">
       {{title}}
     </div>
+    <slot name="left"></slot>
     <div class="g-input-content">
       <input type="text" v-model="currentValue" :maxlength="maxlength" :placeholder="placeholder" :disabled="disabled" :readonly="readonly">
     </div>
