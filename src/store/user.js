@@ -51,7 +51,7 @@ export default {
       state.cars = value.cars || []
       localStorage.setItem('cars', JSON.stringify(state.cars))
       state.cars.forEach(item => {
-        if (item.isMySelf === '0' || item.isMySelf === '本人') {
+        if (item.isMySelf === '0' || item.isMySelf === 0 || item.isMySelf === '本人') {
           state.myNumberPlate = item.myNumberPlate
           state.behindTheFrame4Digits = item.behindTheFrame4Digits
           state.plateType = item.plateType

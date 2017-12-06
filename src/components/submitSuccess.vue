@@ -78,8 +78,8 @@
       <p>车牌号码：{{JsonDataInfo.licenseNumber}}</p>
       <p>流水号：{{JsonDataInfo.JsonData}}</p>
     </section>
-    <div class="btn-appoint-backword" @click="btnBackword" v-if="!urlJsonData && JsonDataInfo.type == 1">返回</div>
-    <div class="btn-appoint-backword mt-60" @click="btnBackword"  v-if="!urlJsonData && JsonDataInfo.type != 1">好的</div>
+<!--     <div class="btn-appoint-backword" @click="btnBackword" v-if="!urlJsonData && JsonDataInfo.type == 1">返回</div>
+    <div class="btn-appoint-backword mt-60" @click="btnBackword"  v-if="!urlJsonData && JsonDataInfo.type != 1">好的</div> -->
   </div>
 </template>
 <script>
@@ -93,7 +93,7 @@ export default {
   data () {
     return {
       JsonDataInfo: '',
-      urlJsonData: this.urlToJson(window.location.href),
+      // urlJsonData: this.urlToJson(window.location.href),
       tip: '您的信息已成功提交，我们将会在3个工作日内通过短信告知您的审核结果，您还可以凭身份证信息在深圳交警微信号中查询审核。',
       typeTitle: {
         '1': '申办',
@@ -285,13 +285,19 @@ export default {
     }
   },
   mounted () {
-    this.JsonDataInfo = this.urlJsonData ? this.urlJsonData : this.dataInfo
+    console.log(this.dataInfo)
+    // this.JsonDataInfo = this.urlJsonData ? this.urlJsonData : this.dataInfo
+    this.JsonDataInfo = this.dataInfo
   }
 }
 </script>
 <style lang="less">
 #submitSuccess{
-  height:100%;
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
   width:100%;
   background:#FFF url('../assets/images/appointBack.png') bottom no-repeat;
   background-size:100% 32%;

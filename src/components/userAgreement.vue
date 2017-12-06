@@ -53,6 +53,11 @@ export default {
       isShow: true
     }
   },
+  computed: {
+    queryURL () {
+      return this.$store.getters.queryURL
+    }
+  },
   mounted: function () {
     // let locationHref = decodeURIComponent(window.location.href)
     // this.entryHash = locationHref.split('?')[0].split('#')[2]  // 截取#后的值
@@ -74,9 +79,6 @@ export default {
   },
   methods: {
     btnAgreeRequest: function () {
-      let source = this.$store.state.core.source
-      let idcard = this.$store.state.core.idCard
-      let openid = this.$store.state.core.openId
       if (this.checked === true) {
         console.log(this.entryHash)
         switch (this.entryHash) {
@@ -132,7 +134,8 @@ export default {
             this.$router.push('/placeExamineCar')
             break
           case 'szjj_hander_rmvp':  // 补领机动车号牌
-            this.$router.push('/replaceCredentials/replaceLicencePlate')
+            // this.$router.push('/replaceCredentials/replaceLicencePlate')
+            this.$router.push({ path: '/replaceLicencePlate', query: this.queryURL })
             break
           case 'szjj_hander_icr':  // 换领机动车行驶证
             this.$router.push('/replaceCredentials/exchangeDrivingLicense')
@@ -142,13 +145,14 @@ export default {
             break
           case 'jszbzhz':  // 驾驶证补证换证
             // this.$router.push('/changeCard')
-            this.$router.push({path: '/changeCard', query: {source: source, idcard: idcard, openid: openid}})
+            this.$router.push({ path: '/changeCard', query: this.queryURL })
             break
           case 'jszyqhz':  // 驾驶证延期换证
             this.$router.push('/changeCard/id/2')
             break
           case 'jszns':  // 驾驶证年审
-            this.$router.push('/annualExaminations')
+            // this.$router.push('/annualExaminations')
+            this.$router.push({ path: '/annualExaminations', query: this.queryURL })
             break
           case 'jszzr':  // 驾驶证转入
             this.$router.push('/intoCard')

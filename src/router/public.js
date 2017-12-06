@@ -11,5 +11,14 @@ export default [
       title: '登录'
     },
     component: () => import('@/views/public/login')
+  },
+  {
+    path: '/dealService',
+    name: 'dealService',
+    meta: {
+      title: '业务列表',
+      loginStatus: true
+    },
+    component: () => import('@/views/transactionClass/dealService')
   }
 ]
