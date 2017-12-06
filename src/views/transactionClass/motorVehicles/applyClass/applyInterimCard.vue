@@ -328,6 +328,7 @@
         let dataList = {
           type: '申请机动车临牌',
           url: applyCarTemporaryLicence,
+          title: 'applyCarTemporaryLicence',
           textObj: {
             'userName': this.userName, // 姓名
             'identityCard': this.identityCard, // 身份证
@@ -353,8 +354,8 @@
             'PHOTO29': this.dealService4 || ''
           }
         }
-        this.$store.commit('savePassByValue', dataList)
-        this.$router.push(/_WeChat/g.test(this.$route.name) ? '/affirmInfo_WeChat' : '/affirmInfo')
+        this.$store.commit('savePassByValue', reqData)
+        this.$router.push({path: '/affirmInfo', query: this.queryURL})
       }
     },
     mounted () {

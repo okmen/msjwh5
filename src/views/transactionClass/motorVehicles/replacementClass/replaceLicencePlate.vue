@@ -271,6 +271,7 @@
         let dataList = {
           type: '补换机动车号牌',
           url: replaceMotorVehicleLicensePlate,
+          title: 'createVehicleInfo_JD02',
           textObj: {
             'name': this.ownersName,
             'identityCard': this.certificateNumber,
@@ -294,11 +295,8 @@
             'JZZB': this.residencePermitB || this.residencePermitB
           }
         }
-        this.$store.commit('savePassByValue', dataList)
-        let source = this.$route.query.source
-        let idcard = this.$route.query.idcard
-        let openid = this.$route.query.openid
-        this.$router.push({path: '/affirmInfo', query: {source: source, idcard: idcard, openid: openid}})
+        this.$store.commit('savePassByValue', reqData)
+        this.$router.push({path: '/affirmInfo', query: this.queryURL})
       }
     },
     mounted () {
