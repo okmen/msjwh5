@@ -1,6 +1,6 @@
 <template>
 <div class="g-button h-center">
-  <div class="h-center button">
+  <div class="h-center button" :class="{'gray': isGray}">
     {{text || '提交'}}
   </div>
 </div>
@@ -9,23 +9,28 @@
 <script>
   export default {
     data () {
-      return {}
+      return {
+        isGray: this.gray
+      }
     },
-    props: ['text']
+    props: ['text', 'gray']
   }
 </script>
 
 <style scoped lang="less">
-.g-button{
+.g-button {
   padding:10px 40px;
   width: 100%;
   margin-top: 40px;
-  .button{
+  .button {
     height: 70px;
     border-radius: 8px;
     width: 100%;
     background-color: #09bb07;
     color: white;
+  }
+  .gray {
+    background-color: gray;
   }
 }
 </style>

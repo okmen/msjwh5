@@ -24,7 +24,8 @@
         <g-upload text="居住证反面" v-show="this.showIndex == '1'" id="file6" :bg="imgOne6" v-model="residencePermitB"></g-upload>
       </div>
     </group>
-    <g-button text="确认信息" @click.native="confirmInfo"></g-button>
+    <g-button text="确认信息" @click.native="confirmInfo" v-if="plateNumber.length"></g-button>
+    <g-button text="确认信息" v-if="!plateNumber.length" :gray=true></g-button>
   </div>
 </template>
 
