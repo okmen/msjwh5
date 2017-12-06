@@ -49,6 +49,9 @@
       },
       user () {
         return Object.assign({}, this.$store.state.user)
+      },
+      queryURL () {
+        return this.$store.getters.queryURL
       }
     },
     created () {
@@ -109,7 +112,7 @@
           }
         }
         this.$store.commit('savePassByValue', reqData)
-        this.$router.push('/affirmInfo')
+        this.$router.push({path: '/affirmInfo', query: this.queryURL})
       }
     }
   }
