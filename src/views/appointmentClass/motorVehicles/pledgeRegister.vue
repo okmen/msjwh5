@@ -6,18 +6,18 @@
     <g-select title="证件名称" :data="certificateList" v-model="certificateListOne"></g-select>
     <g-input title="证件号码" placeholder="请输入证件号码" v-model="IDCard"></g-input>
     <g-input title="手机号码" placeholder="请输入手机号码" v-model="mobilePhone"></g-input>
-    <g-input title="验证码" placeholder="请输入验证码">
-      <div slot="right" class="verify-code">
+    <g-input title="验证码" placeholder="请输入验证码" v-model="verificationCode">
+      <div slot="right" class="verify-code" @click="getCode">
         获取验证码
       </div>
     </g-input>
     <g-select title="车辆类型" :data="vehicleType" v-model="vehicleTypeOne" ref="vehicleType"></g-select>
     <g-select title="使用性质" :data="useNature" v-model="useNatureOne"></g-select>
-    <g-input title="车身架号" placeholder="请输入车架后四位" v-model="carName"></g-input>
+    <g-input title="车身架号" placeholder="请输入车架后四位" v-model="carriageNum"></g-input>
     <g-select title="预约地点" :data="appointmentLocation" v-model="appointmentLocationOne"></g-select>
    <div class="select">
       <span class="g-select-title">预约日期</span>
-      <div class="g-select-value" @click="getDateList">
+      <div class="g-select-value" @click.stop="getDateList">
         <input type="text" placeholder="请选择预约日期" disabled  v-model="dateListOne" >
         <ul class="select-list" v-if="showDateList">
           <li class="list-item" v-for="item in dateList" @click.stop="chooseDate(item)">
@@ -28,7 +28,7 @@
     </div>
     <div class="select">
       <span class="g-select-title">预约时间</span>
-      <div class="g-select-value" @click="getTimeList">
+      <div class="g-select-value" @click.stop="getTimeList">
         <input type="text" placeholder="请选择预约时间" disabled  v-model="timeListOne" >
         <ul class="select-list" v-if="showTimeList">
           <li class="list-item" v-for="item in timeList" @click.stop="chooseTime(item)" :class="{'bg-gray': item.num == 0}">
@@ -40,18 +40,21 @@
         </ul>
       </div>
     </div>
-    <g-button text="预约"></g-button>
+    <g-button text="预约" @click.native="submit"></g-button>
   </div>
 </template>
 <script>
 import {GInput, GSelect, GButton} from 'form'
-import {getPageInit, getAppointmentDate, getAppTimes} from '@/config/baseURL'
+import {getPageInit, getAppointmentDate, getAppTimes, simpleSendMessage, createVehicleInfoJD37} from '@/config/baseURL'
+import beforeSubmit from '@/mixins/beforeSubmit'
 export default {
   data () {
     return {
       carName: '',
+      verificationCode: '',
       IDCard: '',
       mobilePhone: '',
+      carriageNum: '',
       certificateListOne: '',
       certificateList: [],
       vehicleType: [],
@@ -74,8 +77,12 @@ export default {
   computed: {
     businessTypeId () {
       return '4028823f4fabb851014fabc3f28a00b1'
+    },
+    code () {
+      return 'JD37'
     }
   },
+  mixins: [beforeSubmit],
   created () {
     this.$axios.post(getPageInit, {
       businessTypeId: this.businessTypeId,
@@ -138,13 +145,38 @@ export default {
     }
   },
   methods: {
+    // 获取验证码
+    getCode () {
+      let obj = {
+        carName: '请输入车主姓名',
+        IDCard: '请输入证件号码',
+        mobilePhone: '请输入手机号码'
+      }
+      if (this.$_myMinxin_beforeSubmit(obj)) return
+      let requesData = {
+        mobile: this.mobilePhone,
+        idType: this.certificateListOne,
+        lx: 2,
+        bookerType: this.$store.state.user.userName === this.carName ? 0 : 1,
+        bookerName: this.carName,
+        bookerIdNumber: this.$store.state.user.identityCard || this.IDCard,
+        idNumber: this.IDCard,
+        codes: this.code
+      }
+      this.$axios.post(simpleSendMessage, requesData).then(data => {
+        this.$MessageBox('提示', data.msg)
+      })
+    },
     // 获取日期列表
     getDateList () {
+      if (this.dateList.length > 0) {
+        this.showDateList = !this.showDateList
+        return
+      }
       this.$axios.post(getAppointmentDate, {
         businessTypeId: this.businessTypeId,
         orgId: this.appointmentLocationOne
       }).then(data => {
-        this.dateList = []
         data.data.map(item => {
           this.dateList.push(item)
         })
@@ -153,8 +185,10 @@ export default {
     },
     // 获取时间列表
     getTimeList () {
-      this.showTimeList = true
-      if (this.timeList.length > 0) return
+      if (this.timeList.length > 0) {
+        this.showTimeList = !this.showTimeList
+        return
+      }
       this.$axios.post(getAppTimes, {
         businessTypeId: this.businessTypeId,
         orgId: this.appointmentLocationOne,
@@ -168,17 +202,61 @@ export default {
             apptime: item.apptime
           })
         })
+        this.showTimeList = true
       })
     },
     // 选择时间
     chooseTime (item) {
+      if (item.num === 0) {
+        return
+      }
       this.timeListOne = item.apptime
       this.showTimeList = false
     },
     // 选择日期
     chooseDate (item) {
       this.dateListOne = item
-     this.showDateList = false
+      this.showDateList = false
+    },
+    // 预约
+    submit () {
+      let obj = {
+        carName: '请输入车主姓名',
+        IDCard: '请输入证件号码',
+        mobilePhone: '请输入手机号码',
+        verificationCode: '请输入验证码',
+        carriageNum: '请输入车架号后四位',
+        dateListOne: '请选择预约日期',
+        timeListOne: '请选择预约时间'
+      }
+      if (this.$_myMinxin_beforeSubmit(obj)) return
+      let requestData = {
+        name: this.carName,
+        businessTypeId: this.businessTypeId,
+        idTypeId: this.credentialsNameOne, // 证件名称
+        idNumber: this.IDcard,
+        mobile: this.mobilePhone,
+        msgNumber: this.verificationCode,
+        platNumber: this.provinceCodeOne + this.plateNum.toUpperCase(),
+        carTypeId: this.carSelectDataOne, // 车辆类型ID
+        useCharater: this.useNatureOne,
+        carFrame: this.vehicleNum,  // 车身架号
+        orgId: this.appointmentLocationOne, // 预约地点ID
+        carTypeName: this.carSelectDataStr, // 车辆类型名称
+        orgName: this.appointmentLocationStr, // 预约地点
+        orgAddr: this.appointmentLocationDes, // 预约地点详细地址
+        sourceOfCertification: window.localStorage.getItem('sourceOfCertification'), // 请求来源
+        openId: window.localStorage.getItem('openId'), // openID
+        appointmentDate: this.yearMonthDay,
+        appointmentTime: this.appointmentTime,
+        bookerName: window.localStorage.getItem('userName') || this.ownerName,
+        bookerIdNumber: window.localStorage.getItem('identityCard') || this.IDcard,
+        bookerType: this.bookerType,
+        bookerMobile: this.mobilePhone
+      }
+      this.$axios.post(createVehicleInfoJD37, requestData).then(data => {
+        console.log(data)
+      })
     },
     disappearSelectUl () {
       this.showTimeList = false
