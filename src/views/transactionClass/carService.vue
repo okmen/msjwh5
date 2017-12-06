@@ -1,30 +1,17 @@
 <template>
   <div class="carService-outer">
     <div class="query-link">
-      <router-link :to="{ path: '/userAgreement/jszbzhz', query: { source: this.source, idcard: this.idcard, openid: this.openid }}">驾驶证补换证</router-link>
+      <router-link :to="{ path: '/userAgreement/jszbzhz', query: queryURL }">驾驶证补换证</router-link>
     </div>
   </div>
 </template>
 <script>
   export default {
     name: 'carService',
-    data () {
-      return {
-        source: '',
-        idcard: '',
-        openId: ''
-      }
-    },
     computed: {
-      user () {
-        return Object.assign({}, this.$store.state.core)
+      queryURL () {
+        return this.$store.getters.queryURL
       }
-    },
-    created () {
-      let val = this.$store.state.core
-      this.source = val.source
-      this.idcard = val.idCard
-      this.openid = val.openId
     }
   }
 </script>
