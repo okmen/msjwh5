@@ -98,44 +98,47 @@
         businessTypeId: this.businessTypeId,
         type: '1'
       }).then(data => {
-        console.log(data)
-        data.data.idTypeVOs.map((item, index) => {
-          if (index === 0) {
-            this.certificateListOne = item.id
-          }
-          this.certificateList.push({
-            name: item.name,
-            value: item.id
+        if (data.code === '0000') {
+          data.data.idTypeVOs.map((item, index) => {
+            if (index === 0) {
+              this.certificateListOne = item.id
+            }
+            this.certificateList.push({
+              name: item.name,
+              value: item.id
+            })
           })
-        })
-        data.data.carTypeVOs.map((item, index) => {
-          if (index === 0) {
-            this.vehicleTypeOne = item.id
-          }
-          this.vehicleType.push({
-            name: item.name,
-            value: item.id
+          data.data.carTypeVOs.map((item, index) => {
+            if (index === 0) {
+              this.vehicleTypeOne = item.id
+            }
+            this.vehicleType.push({
+              name: item.name,
+              value: item.id
+            })
           })
-        })
-        data.data.useCharaters.map((item, index) => {
-          if (index === 0) {
-            this.useNatureOne = item.id
-          }
-          this.useNature.push({
-            name: item.name,
-            value: item.id
+          data.data.useCharaters.map((item, index) => {
+            if (index === 0) {
+              this.useNatureOne = item.id
+            }
+            this.useNature.push({
+              name: item.name,
+              value: item.id
+            })
           })
-        })
-        data.data.orgVOs.map((item, index) => {
-          if (index === 0) {
-            this.appointmentLocationOne = item.id
-          }
-          this.appointmentLocation.push({
-            name: item.name,
-            value: item.id,
-            orgAddr: item.description
+          data.data.orgVOs.map((item, index) => {
+            if (index === 0) {
+              this.appointmentLocationOne = item.id
+            }
+            this.appointmentLocation.push({
+              name: item.name,
+              value: item.id,
+              orgAddr: item.description
+            })
           })
-        })
+        } else {
+          this.$MessageBox('提示', data.msg)
+        }
       })
     },
     watch: {
@@ -188,10 +191,14 @@
           businessTypeId: this.businessTypeId,
           orgId: this.appointmentLocationOne
         }).then(data => {
-          data.data.map(item => {
-            this.dateList.push(item)
-          })
-          this.showDateList = true
+          if (data.code === '0000') {
+            data.data.map(item => {
+              this.dateList.push(item)
+            })
+            this.showDateList = true
+          } else {
+            this.$MessageBox('提示', data.msg)
+          }
         })
       },
       // 获取时间列表
@@ -206,14 +213,18 @@
           date: this.dateListOne,
           carTypeId: this.vehicleTypeOne
         }).then(data => {
-          this.timeList = []
-          data.data.map(item => {
-            this.timeList.push({
-              num: item.maxnumber - item.yetnumber,
-              apptime: item.apptime
+          if (data.code === '0000') {
+            data.data.map(item => {
+              this.timeList.push({
+                num: item.maxnumber - item.yetnumber,
+                apptime: item.apptime
+              })
             })
-          })
-          this.showTimeList = true
+            this.showTimeList = true
+          } else {
+            this.$MessageBox('提示', data.msg)
+          }
+          this.timeList = []
         })
       },
       // 选择时间
