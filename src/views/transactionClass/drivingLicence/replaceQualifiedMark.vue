@@ -94,9 +94,6 @@ export default {
     areaSelectData () {
       return this.$store.state.cityAreaS
     },
-    user () {
-      return Object.assign({}, this.$store.state.user)
-    },
     queryURL () {
       return this.$store.getters.queryURL
     }

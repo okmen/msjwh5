@@ -15,7 +15,7 @@
     }
   }
 </script>
-<style lang="less" scopsd>
+<style lang="less">
   .carService-outer {
     position: relative;
     background-color: white;
@@ -73,5 +73,4 @@
       }
     }
   }
-
 </style>
