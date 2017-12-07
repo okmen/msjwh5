@@ -114,6 +114,21 @@ const state = {
     '藏',
     '新'
   ],
+  cartype: [
+    {name: '小型普通客车', value: 'K31'},
+    {name: '小型越野客车', value: 'K32'},
+    {name: '小型轿车', value: 'K33'},
+    {name: '小型专用客车', value: 'K34'},
+    {name: '微型普通客车', value: 'K41'},
+    {name: '微型越野客车', value: 'K42'},
+    {name: '微型轿车', value: 'K43'},
+    {name: '小型专用校车', value: 'K38'}
+  ],
+  censusRegister: [
+    {name: '深户', value: '1'},
+    {name: '非深户', value: '0'},
+    {name: '外籍', value: '0'}
+  ],
   carSelectData: {
     '01': '大型汽车',
     '02': '小型汽车',

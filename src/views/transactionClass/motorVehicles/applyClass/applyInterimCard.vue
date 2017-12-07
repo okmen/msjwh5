@@ -7,24 +7,24 @@
     <g-input title="身份证号码" v-model="identityCard" maxlength="18" placeholder="请输入身份证号码"></g-input>
     <g-input title="手机号码" v-model="mobilephone" maxlength="11" placeholder="请输入手机号码"></g-input>
     <g-input title="车辆型号" v-model="cartModels" placeholder="请输入车辆型号"></g-input>
-    <g-select title="车辆类型" :data="cartype.option" v-model="carTypeOne"></g-select>
+    <g-select title="车辆类型" :data="selectCarType" v-model="carTypeOne"></g-select>
     <g-input title="发动机号" v-model="engineNumber" placeholder="请输入发动机号"></g-input>
     <g-input title="车架号" v-model="behindTheFrame4Digits" placeholder="请输入车架号"></g-input>
-    <g-radio title="车辆产地" :optname="carOptList" @getSelected="getCensusRegister2"></g-radio>
-    <g-select title="户籍所在地" :data="censusRegister3.option" v-model="censusRegister" @getSelected="getCensusRegisterIndex"></g-select>
+    <g-radio title="车辆产地" :data="carOptList" v-model="carOrigin"></g-radio>
+    <g-select title="户籍所在地" :data="selectCensusRegister" v-model="censusRegister" @getSelected="getCensusRegisterIndex"></g-select>
     <g-input title="收件人姓名" v-model="recipientName" placeholder="请输入收件人姓名"></g-input>
     <g-input title="收件人手机" v-model="recipientPhone" maxlength="11" placeholder="请输入收件人手机号码"></g-input>
-    <g-select-one title="深圳市" type="收件人地址" :data="recipientInfo.option" v-model="recipientAddressRegion"></g-select-one>
+    <g-select-one title="深圳市" type="收件人地址" :data="areaSelectData" v-model="recipientAddressRegion"></g-select-one>
     <g-input v-model="recipientAddressDetail" placeholder="请输入详细地址"></g-input>
     <group title="请按示例图上传以下证件照片">
       <div class="upload-group">
-        <g-upload text="身份证（正面)" id="file1" :bg="imgOne1" v-model="IDcardFront"></g-upload>
-        <g-upload text="身份证（反面)" id="file2" :bg="imgOne2" v-model="IDcarfBack"></g-upload>
-        <g-upload text="购置发票图" id="file5" :bg="imgOne5" v-model="dealService1"></g-upload>
-        <g-upload text="交强险单据" id="file6" :bg="imgOne6" v-model="dealService2"></g-upload>
-        <g-upload text="机动车合格证" v-show="this.censusRegister2 != 'B'" id="file3" :bg="imgOne3" v-model="dealService3"></g-upload>
-        <g-upload text="进口货物证明书" v-show="this.censusRegister2 != 'A'" id="file7" :bg="imgOne7" v-model="dealService4"></g-upload>
-        <g-upload text="境外人员临住表" v-show="this.showIndex == '2'" id="file4" :bg="imgOne4" v-model="outBoard"></g-upload>
+        <g-upload text="身份证（正面)" id="file1" :bg="require('@/assets/images/IDcard-front.png')" v-model="IDcardFront"></g-upload>
+        <g-upload text="身份证（反面)" id="file2" :bg="require('@/assets/images/IDcard-back.png')" v-model="IDcarfBack"></g-upload>
+        <g-upload text="购置发票图" id="file5" :bg="require('@/assets/images/dealService-1.png')" v-model="dealService1"></g-upload>
+        <g-upload text="交强险单据" id="file6" :bg="require('@/assets/images/dealService-2.png')" v-model="dealService2"></g-upload>
+        <g-upload text="机动车合格证" v-show="this.carOrigin != 'B'" id="file3" :bg="require('@/assets/images/dealService-3.png')" v-model="dealService3"></g-upload>
+        <g-upload text="进口货物证明书" v-show="this.carOrigin != 'A'" id="file7" :bg="require('@/assets/images/dealService-4.png')" v-model="dealService4"></g-upload>
+        <g-upload text="境外人员临住表" v-show="showIndex == '2'" id="file4" :bg="require('@/assets/images/out-board.png')" v-model="outBoard"></g-upload>
       </div>
     </group>
     <g-button text="确认信息" @click.native="confirmInfo"></g-button>
@@ -33,64 +33,19 @@
 
 <script>
   import {GInput, GSelect, GButton, GSelectOne, GRadio, Group, GUpload} from 'form'
-  import uploadFile from '@/utils/uploadFile.js'
-  import { Toast } from 'mint-ui'
-  import { isPhone } from '@/utils/regExp.js'
-  import { applyCarTemporaryLicence } from '@/config/baseURL.js'
+  import beforeSubmit from '@/mixins/beforeSubmit'
+  import { applyCarTemporaryLicence } from '@/config/baseURL'
   export default {
     data () {
       return {
-        imgOne1: require('@/assets/images/IDcard-front.png'),
-        imgOne2: require('@/assets/images/IDcard-back.png'),
-        imgOne3: require('@/assets/images/dealService-3.png'),
-        imgOne4: require('@/assets/images/out-board.png'),
-        imgOne5: require('@/assets/images/dealService-1.png'),
-        imgOne6: require('@/assets/images/dealService-2.png'),
-        imgOne7: require('@/assets/images/dealService-4.png'),
-        cartype: {
-          title: '车辆类型',
-          option: [
-            {name: '小型普通客车', value: 'K31'},
-            {name: '小型越野客车', value: 'K32'},
-            {name: '小型轿车', value: 'K33'},
-            {name: '小型专用客车', value: 'K34'},
-            {name: '微型普通客车', value: 'K41'},
-            {name: '微型越野客车', value: 'K42'},
-            {name: '微型轿车', value: 'K43'},
-            {name: '小型专用校车', value: 'K38'}
-          ]
-        },
         carOptList: [
-          {'str': '国产', choose: true, id: 'A'},
-          {'str': '进口', choose: false, id: 'B'}
+          {name: '国产', choose: true, value: 'A'},
+          {name: '进口', choose: false, value: 'B'}
         ],
-        recipientInfo: {
-          title: '深圳市',
-          option: [
-            {name: '福田区', value: '福田区'},
-            {name: '罗湖区', value: '罗湖区'},
-            {name: '南山区', value: '南山区'},
-            {name: '宝安区', value: '宝安区'},
-            {name: '龙岗区', value: '龙岗区'},
-            {name: '盐田区', value: '盐田区'},
-            {name: '龙华新区', value: '龙华新区'},
-            {name: '光明新区', value: '光明新区'},
-            {name: '坪山新区', value: '坪山新区'},
-            {name: '大鹏新区', value: '大鹏新区'}
-          ]
-        },
         licenseSelectMassage: '申请机动车临牌',
         censusRegister: '1', // 户籍所在地
         showIndex: '0',
-        censusRegister2: 'A', // 车辆产地
-        censusRegister3: {
-          title: '户籍所在地',
-          option: [
-            {name: '深户', value: '1'},
-            {name: '非深户', value: '0'},
-            {name: '外籍', value: '0'}
-          ]
-        },
+        carOrigin: 'A', // 车辆产地
         plateNumberOne: '',
         carTypeOne: 'K31',
         recipientPhone: '',    // 收件人手机号码
@@ -125,6 +80,7 @@
       Group,
       GUpload
     },
+    mixins: [beforeSubmit],
     computed: {
       certificateNumber () {
         return window.localStorage.getItem('identityCard')
@@ -142,74 +98,21 @@
         this.plateNumberOne = plateInfo.option[0].str
         this.defaultPlateNumber = plateInfo.option[0].str
         return plateInfo
+      },
+      areaSelectData () {
+        return this.$store.state.cityAreaS
+      },
+      selectCarType () {
+        return this.$store.state.cartype
+      },
+      selectCensusRegister () {
+        return this.$store.state.censusRegister
       }
     },
     methods: {
-      uploadImg () {
-        uploadFile.upload({
-          id: 'file1',
-          callback: (res) => {
-            console.log(res)
-            this.imgOne1 = res.imgUrl
-            this.IDcardFront = res.imgUrl
-          }
-        })
-        uploadFile.upload({
-          id: 'file2',
-          callback: (res) => {
-            console.log(res)
-            this.imgOne2 = res.imgUrl
-            this.IDcarfBack = res.imgUrl
-          }
-        })
-        uploadFile.upload({
-          id: 'file3',
-          callback: (res) => {
-            console.log(res)
-            this.imgOne3 = res.imgUrl
-            this.dealService3 = res.imgUrl
-          }
-        })
-        uploadFile.upload({
-          id: 'file4',
-          callback: (res) => {
-            console.log(res)
-            this.imgOne4 = res.imgUrl
-            this.outBoard = res.imgUrl
-          }
-        })
-        uploadFile.upload({
-          id: 'file5',
-          callback: (res) => {
-            console.log(res)
-            this.imgOne5 = res.imgUrl
-            this.dealService1 = res.imgUrl
-          }
-        })
-        uploadFile.upload({
-          id: 'file6',
-          callback: (res) => {
-            console.log(res)
-            this.imgOne6 = res.imgUrl
-            this.dealService2 = res.imgUrl
-          }
-        })
-        uploadFile.upload({
-          id: 'file7',
-          callback: (res) => {
-            console.log(res)
-            this.imgOne7 = res.imgUrl
-            this.dealService4 = res.imgUrl
-          }
-        })
-      },
       getCensusRegisterIndex (index) {
         console.log(index)
         this.showIndex = index
-      },
-      getCensusRegister2 (val) {
-        console.log(val)
-        this.censusRegister2 = val
       },
       // getPlateNumber (val) {
       //   this.plateNumberOne = val
@@ -217,116 +120,34 @@
       //   this.ownersName = this.allOwnersName[val]
       // },
       confirmInfo () {
-        if (!this.userName) {
-          Toast({
-            message: '请输入姓名',
-            duration: 2000
-          })
+        let obj = {
+          userName: '请输入姓名',
+          mobilephone: '手机号码格式不正确',
+          recipientPhone: '收件人手机号码格式不正确',
+          identityCard: '请输入身份证号码',
+          cartModels: '请输入车辆型号',
+          engineNumber: '请输入发动机型号',
+          behindTheFrame4Digits: '请输入车架号',
+          recipientName: '请输入收件人姓名',
+          recipientAddressDetail: '请输入收件人详细地址',
+          IDcardFront: '请上传身份证正面',
+          IDcarfBack: '请上传身份证反面',
+          dealService1: '请上传购置发票图',
+          dealService2: '请上传交强险单据'
+        }
+        if (this.$_myMinxin_beforeSubmit(obj)) return
+        if (this.$verification.isPhone(this.mobilephone)) return
+        if (this.$verification.isPhone(this.recipientPhone)) return
+        if ((!this.dealService3) && (this.carOrigin !== 'B')) {
+          this.$toast({message: '请上传机动车合格证'})
           return
         }
-        if (!isPhone(this.mobilephone)) {
-          Toast({
-            message: '手机号码格式不正确',
-            duration: 2000
-          })
-          return
-        }
-        if (!isPhone(this.recipientPhone)) {
-          Toast({
-            message: '收件人手机号码格式不正确',
-            duration: 2000
-          })
-          return
-        }
-        if (!this.identityCard) {
-          Toast({
-            message: '请输入身份证号码',
-            duration: 2000
-          })
-          return
-        }
-        if (!this.cartModels) {
-          Toast({
-            message: '请输入车辆型号',
-            duration: 2000
-          })
-          return
-        }
-        if (!this.engineNumber) {
-          Toast({
-            message: '请输入发动机型号',
-            duration: 2000
-          })
-          return
-        }
-        if (!this.behindTheFrame4Digits) {
-          Toast({
-            message: '请输入车架号',
-            duration: 2000
-          })
-          return
-        }
-        if (!this.recipientName) {
-          Toast({
-            message: '请输入收件人姓名',
-            duration: 2000
-          })
-          return
-        }
-        if (!this.recipientAddressDetail) {
-          Toast({
-            message: '请输入收件人详细地址',
-            duration: 2000
-          })
-          return
-        }
-        if (!this.IDcardFront) {
-          Toast({
-            message: '请上传身份证正面',
-            duration: 2000
-          })
-          return
-        }
-        if (!this.IDcarfBack) {
-          Toast({
-            message: '请上传身份证反面',
-            duration: 2000
-          })
-          return
-        }
-        if (!this.dealService1) {
-          Toast({
-            message: '请上传购置发票图',
-            duration: 2000
-          })
-          return
-        }
-        if (!this.dealService2) {
-          Toast({
-            message: '请上传交强险单据',
-            duration: 2000
-          })
-          return
-        }
-        if ((!this.dealService3) && (this.censusRegister2 !== 'B')) {
-          Toast({
-            message: '请上传机动车合格证',
-            duration: 2000
-          })
-          return
-        }
-        if ((!this.dealService4) && (this.censusRegister2 !== 'A')) {
-          Toast({
-            message: '请上传进口货物证明书',
-            duration: 2000
-          })
+        if ((!this.dealService4) && (this.carOrigin !== 'A')) {
+          this.$toast({message: '请上传进口货物证明书'})
           return
         }
         if ((!this.outBoard) && (this.showIndex === '2')) {
-          Toast({
-            message: '请上传境外人员临住表',
-            duration: 2000
-          })
+          this.$toast({message: '请上传境外人员临住表'})
           return
         }
         let dataList = {
@@ -341,7 +162,7 @@
             'cartype': this.carTypeOne, // 车辆类型
             'engineNumber': this.engineNumber, // 发动机号
             'behindTheFrame4Digits': this.behindTheFrame4Digits, // 车架号
-            'carOrigin': this.censusRegister2, // 车辆产地
+            'carOrigin': this.carOrigin, // 车辆产地
             'placeOfDomicile': this.censusRegister, // 户籍所在地
             'showIndex': this.showIndex,
             'receiverName': this.recipientName, // 收件人姓名
@@ -363,7 +184,6 @@
       }
     },
     mounted () {
-      this.uploadImg()
       this.carCertificateNumber = this.plateToCarNumber[this.plateNumberOne]
       this.ownersName = this.allOwnersName[this.plateNumberOne]
     }
