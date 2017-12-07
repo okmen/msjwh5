@@ -84,6 +84,7 @@
           eduTable: '请上传审核教育绘制表'
         }
         if (this.$_myMinxin_beforeSubmit(obj)) return
+        if (this.$verification.isPhone(this.mobilePhone)) return
         let reqData = {
           type: '驾驶证年审',
           url: annualExaminations,
