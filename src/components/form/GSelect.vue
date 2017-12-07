@@ -23,8 +23,7 @@
       color: #868686;
     }
     .g-select-value{
-      /*width: 70%;*/
-      flex: 1;
+      width: 70%;
       border: 2px solid #e5e5e5;
       border-radius: 8px;
       height: 56px;
@@ -35,8 +34,11 @@
       background: white url("../../assets/images/select1.png") 95% center/22px 13px no-repeat;
       span{
         display: block;
-        width: 100%;
+        width: 90%;
         height: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
     .g-select-list {
