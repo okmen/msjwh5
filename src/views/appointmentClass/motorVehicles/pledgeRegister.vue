@@ -166,6 +166,7 @@
           mobilePhone: '请输入手机号码'
         }
         if (this.$_myMinxin_beforeSubmit(obj)) return
+        if (this.$verification.specialCharacters(this.carName)) return
         let requesData = {
           mobile: this.mobilePhone,
           idType: this.certificateListOne,

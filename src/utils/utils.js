@@ -1,5 +1,3 @@
-
-
 export function getQueryString (name) {
   let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
   let href = window.location.href
