@@ -11,7 +11,7 @@
     <g-select title="车辆类型" :data="vehicleType" v-model="vehicleTypeOne" ref="vehicleType"></g-select>
     <g-select title="使用性质" :data="useNature" v-model="useNatureOne"></g-select>
     <g-input title="车身架号" placeholder="请输入车架后四位" v-model="carriageNum" maxlength="4"></g-input>
-    <g-select title="预约地点" :data="appointmentLocation" v-model="appointmentLocationOne" ref="appointmentLocation"></g-select>
+    <g-select title="预约地点" :data="appointmentLocation"  v-model="appointmentLocationOne" ref="appointmentLocation"></g-select>
     <div class="select">
       <span class="g-select-title">预约日期</span>
       <div class="g-select-value" @click.stop="getDateList">
@@ -250,7 +250,8 @@
           verificationCode: '请输入验证码',
           carriageNum: '请输入车架号后四位',
           dateListOne: '请选择预约日期',
-          timeListOne: '请选择预约时间'
+          timeListOne: '请选择预约时间',
+          plateNumber: '请输入车牌号'
         }
         if (this.$_myMinxin_beforeSubmit(obj)) return
         if (this.$verification.specialCharacters(this.carName)) return
@@ -289,7 +290,27 @@
           bookerMobile: this.mobilePhone
         }
         this.$axios.post(createVehicleInfoJD37, requestData).then(data => {
-          console.log(data)
+          if (data.code === '0000') {
+            let dataInfo = {
+              type: 2,
+              reserveNo: data.msg.split('预约成功：您的预约号为：')[1].split(',')[0], // 预约编号
+              businessType: '抵押/解押登记现场办理', // 预约业务名称
+              numberPlate: this.plateNumber.toUpperCase(), // 车牌号
+              vehicleType: this.$refs.vehicleType.currentName, // 车辆类型
+              reserveAddress: this.$refs.appointmentLocation.currentName,  // 预约地点
+              appointmentAddress: orgAddr, // 预约详细地址
+              reserveTime: `${this.dateListOne} ${this.timeListOne}`, // 预约日期
+              mobilephone: this.mobilePhone, // 手机号
+              appointmentPerson: this.carName // 预约人
+            }
+            this.$store.commit('saveSuccessInfo', dataInfo)
+            let source = this.$route.query.source
+            let idcard = this.$route.query.idcard
+            let openid = this.$route.query.openid
+            this.$router.push({path: '/submitSuccess', query: {source: source, idcard: idcard, openid: openid}})
+          } else {
+            this.$MessageBox('提示', data.msg)
+          }
         })
       },
       disappearSelectUl () {
@@ -318,6 +339,9 @@
       padding: 10px 40px;
       box-sizing: border-box;
       align-items: center;
+      input{
+        color: #000;
+      }
       .g-select-title {
         width: 30%;
       }

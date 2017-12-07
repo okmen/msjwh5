@@ -1,3 +1,14 @@
+<!--
+  props
+    title: 左边的标题
+    value: input的值，使用v-model绑定
+    placeholder：提示语
+    maxlength：限制的最大长度
+    disabled： 是否可编辑
+  slot
+  left： input的左侧
+  right：input的右侧
+-->
 <template>
   <div class="g-input">
     <div class="g-input-title">

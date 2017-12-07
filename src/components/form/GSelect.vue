@@ -1,3 +1,9 @@
+<!--
+  props
+  value：使用v-model绑定
+  title: 左边的标题
+  data：为数组，下拉的选项，数组的每一项为字符串或者对象 ,[{name: 'hello', value: '01'}]
+-->
 <template>
   <div class="g-select">
     <!--<div class="g-select-type" v-if="type">{{type}}</div>-->
