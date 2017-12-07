@@ -31,7 +31,6 @@
 
 <script>
   import {GInput, GSelect, GButton, GSelectOne, Group, GUpload} from 'form'
-  import uploadFile from '@/utils/uploadFile.js'
   import { replaceMotorVehicleLicensePlate } from '@/config/baseURL.js'
   import beforeSubmit from '@/mixins/beforeSubmit'
   export default {
@@ -135,56 +134,6 @@
       }
     },
     methods: {
-      uploadImg () {
-        uploadFile.upload({
-          id: 'file1',
-          callback: (res) => {
-            console.log(res)
-            this.imgOne1 = res.imgUrl
-            this.IDcardFront = res.imgUrl
-          }
-        })
-        uploadFile.upload({
-          id: 'file2',
-          callback: (res) => {
-            console.log(res)
-            this.imgOne2 = res.imgUrl
-            this.IDcarfBack = res.imgUrl
-          }
-        })
-        uploadFile.upload({
-          id: 'file3',
-          callback: (res) => {
-            console.log(res)
-            this.imgOne3 = res.imgUrl
-            this.registerCredential = res.imgUrl
-          }
-        })
-        uploadFile.upload({
-          id: 'file4',
-          callback: (res) => {
-            console.log(res)
-            this.imgOne4 = res.imgUrl
-            this.outBoard = res.imgUrl
-          }
-        })
-        uploadFile.upload({
-          id: 'file5',
-          callback: (res) => {
-            console.log(res)
-            this.imgOne5 = res.imgUrl
-            this.residencePermitF = res.imgUrl
-          }
-        })
-        uploadFile.upload({
-          id: 'file6',
-          callback: (res) => {
-            console.log(res)
-            this.imgOne6 = res.imgUrl
-            this.residencePermitB = res.imgUrl
-          }
-        })
-      },
       getCensusRegisterIndex (index) {
         this.showIndex = index + ''
       },
@@ -253,7 +202,6 @@
       }
     },
     mounted () {
-      this.uploadImg()
       this.carCertificateNumber = this.plateToCarNumber[this.plateNumberOne]
       this.ownersName = this.allOwnersName[this.plateNumberOne]
       this.certificateNumber = window.localStorage.getItem('identityCard')
