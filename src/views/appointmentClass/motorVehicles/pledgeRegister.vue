@@ -6,11 +6,11 @@
     <g-select title="证件名称" :data="certificateList" v-model="certificateListOne"></g-select>
     <g-input title="证件号码" placeholder="请输入证件号码" v-model="IDCard"></g-input>
     <g-input title="手机号码" placeholder="请输入手机号码" v-model="mobilePhone"></g-input>
-    <get-verification-code :method="getCode"></get-verification-code>
+    <get-verification-code :method="getCode" v-model="verificationCode"></get-verification-code>
     <plate-number-full v-model="plateNumber"></plate-number-full>
     <g-select title="车辆类型" :data="vehicleType" v-model="vehicleTypeOne" ref="vehicleType"></g-select>
     <g-select title="使用性质" :data="useNature" v-model="useNatureOne"></g-select>
-    <g-input title="车身架号" placeholder="请输入车架后四位" v-model="carriageNum"></g-input>
+    <g-input title="车身架号" placeholder="请输入车架后四位" v-model="carriageNum" maxlength="4"></g-input>
     <g-select title="预约地点" :data="appointmentLocation" v-model="appointmentLocationOne" ref="appointmentLocation"></g-select>
     <div class="select">
       <span class="g-select-title">预约日期</span>
@@ -167,6 +167,7 @@
         }
         if (this.$_myMinxin_beforeSubmit(obj)) return
         if (this.$verification.specialCharacters(this.carName)) return
+        if (this.$verification.isPhone(this.mobilePhone)) return
         let requesData = {
           mobile: this.mobilePhone,
           idType: this.certificateListOne,
@@ -225,7 +226,6 @@
           } else {
             this.$MessageBox('提示', data.msg)
           }
-          this.timeList = []
         })
       },
       // 选择时间
@@ -253,6 +253,9 @@
           timeListOne: '请选择预约时间'
         }
         if (this.$_myMinxin_beforeSubmit(obj)) return
+        if (this.$verification.specialCharacters(this.carName)) return
+        if (this.$verification.isPhone(this.mobilePhone)) return
+        if (this.$verification.plateVerification(this.plateNumber)) return
         let orgAddr
         console.log(this.appointmentLocation)
         for (let i = 0, len = this.appointmentLocation.length; i < len; i++) {
