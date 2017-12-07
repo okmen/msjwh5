@@ -14,17 +14,17 @@
     <g-select title="户籍所在地" :data="censusRegister3.option" v-model="censusRegister" @getSelected="getCensusRegisterIndex"></g-select>
     <g-input title="收件人姓名" v-model="recipientName" placeholder="请输入收件人姓名"></g-input>
     <g-input title="收件人手机" v-model="recipientPhone" maxlength="11" placeholder="请输入收件人手机号码"></g-input>
-    <g-select-one title="深圳市" type="收件人地址" :data="recipientInfo.option" v-model="recipientAddressRegion"></g-select-one>
+    <g-select-one title="深圳市" type="收件人地址" :data="areaSelectData" v-model="areaSelect"></g-select-one>
     <g-input v-model="recipientAddressDetail" placeholder="请输入详细地址"></g-input>
     <group title="请按示例图上传以下证件照片">
       <div class="upload-group">
-        <g-upload text="身份证（正面)" id="file1" :bg="imgOne1" v-model="IDcardFront"></g-upload>
-        <g-upload text="身份证（反面)" id="file2" :bg="imgOne2" v-model="IDcarfBack"></g-upload>
-        <g-upload text="购置发票图" id="file5" :bg="imgOne5" v-model="dealService1"></g-upload>
-        <g-upload text="交强险单据" id="file6" :bg="imgOne6" v-model="dealService2"></g-upload>
-        <g-upload text="机动车合格证" v-show="this.censusRegister2 != 'B'" id="file3" :bg="imgOne3" v-model="dealService3"></g-upload>
-        <g-upload text="进口货物证明书" v-show="this.censusRegister2 != 'A'" id="file7" :bg="imgOne7" v-model="dealService4"></g-upload>
-        <g-upload text="境外人员临住表" v-show="this.showIndex == '2'" id="file4" :bg="imgOne4" v-model="outBoard"></g-upload>
+        <g-upload text="身份证（正面)" id="file1" :bg="require('@/assets/images/IDcard-front.png')" v-model="IDcardFront"></g-upload>
+        <g-upload text="身份证（反面)" id="file2" :bg="require('@/assets/images/IDcard-back.png')" v-model="IDcarfBack"></g-upload>
+        <g-upload text="购置发票图" id="file5" :bg="require('@/assets/images/dealService-1.png')" v-model="dealService1"></g-upload>
+        <g-upload text="交强险单据" id="file6" :bg="require('@/assets/images/dealService-2.png')" v-model="dealService2"></g-upload>
+        <g-upload text="机动车合格证" v-show="this.censusRegister2 != 'B'" id="file3" :bg="require('@/assets/images/dealService-3.png')" v-model="dealService3"></g-upload>
+        <g-upload text="进口货物证明书" v-show="this.censusRegister2 != 'A'" id="file7" :bg="require('@/assets/images/dealService-4.png')" v-model="dealService4"></g-upload>
+        <g-upload text="境外人员临住表" v-show="this.showIndex == '2'" id="file4" :bg="require('@/assets/images/out-board.png')" v-model="outBoard"></g-upload>
       </div>
     </group>
     <g-button text="确认信息" @click.native="confirmInfo"></g-button>
@@ -33,20 +33,12 @@
 
 <script>
   import {GInput, GSelect, GButton, GSelectOne, GRadio, Group, GUpload} from 'form'
-  import uploadFile from '@/utils/uploadFile.js'
   import { Toast } from 'mint-ui'
-  import { isPhone } from '@/utils/regExp.js'
-  import { applyCarTemporaryLicence } from '@/config/baseURL.js'
+  import { isPhone } from '@/utils/regExp'
+  import { applyCarTemporaryLicence } from '@/config/baseURL'
   export default {
     data () {
       return {
-        imgOne1: require('@/assets/images/IDcard-front.png'),
-        imgOne2: require('@/assets/images/IDcard-back.png'),
-        imgOne3: require('@/assets/images/dealService-3.png'),
-        imgOne4: require('@/assets/images/out-board.png'),
-        imgOne5: require('@/assets/images/dealService-1.png'),
-        imgOne6: require('@/assets/images/dealService-2.png'),
-        imgOne7: require('@/assets/images/dealService-4.png'),
         cartype: {
           title: '车辆类型',
           option: [
@@ -64,21 +56,6 @@
           {'str': '国产', choose: true, id: 'A'},
           {'str': '进口', choose: false, id: 'B'}
         ],
-        recipientInfo: {
-          title: '深圳市',
-          option: [
-            {name: '福田区', value: '福田区'},
-            {name: '罗湖区', value: '罗湖区'},
-            {name: '南山区', value: '南山区'},
-            {name: '宝安区', value: '宝安区'},
-            {name: '龙岗区', value: '龙岗区'},
-            {name: '盐田区', value: '盐田区'},
-            {name: '龙华新区', value: '龙华新区'},
-            {name: '光明新区', value: '光明新区'},
-            {name: '坪山新区', value: '坪山新区'},
-            {name: '大鹏新区', value: '大鹏新区'}
-          ]
-        },
         licenseSelectMassage: '申请机动车临牌',
         censusRegister: '1', // 户籍所在地
         showIndex: '0',
@@ -113,7 +90,8 @@
         dealService1: '', // 购置发票
         dealService2: '', // 交强险单据
         dealService3: '', // 机动车合格证
-        dealService4: '' // 进口货物证明书
+        dealService4: '', // 进口货物证明书
+        areaSelect: '福田区'
       }
     },
     components: {
@@ -142,67 +120,12 @@
         this.plateNumberOne = plateInfo.option[0].str
         this.defaultPlateNumber = plateInfo.option[0].str
         return plateInfo
+      },
+      areaSelectData () {
+        return this.$store.state.cityAreaS
       }
     },
     methods: {
-      uploadImg () {
-        uploadFile.upload({
-          id: 'file1',
-          callback: (res) => {
-            console.log(res)
-            this.imgOne1 = res.imgUrl
-            this.IDcardFront = res.imgUrl
-          }
-        })
-        uploadFile.upload({
-          id: 'file2',
-          callback: (res) => {
-            console.log(res)
-            this.imgOne2 = res.imgUrl
-            this.IDcarfBack = res.imgUrl
-          }
-        })
-        uploadFile.upload({
-          id: 'file3',
-          callback: (res) => {
-            console.log(res)
-            this.imgOne3 = res.imgUrl
-            this.dealService3 = res.imgUrl
-          }
-        })
-        uploadFile.upload({
-          id: 'file4',
-          callback: (res) => {
-            console.log(res)
-            this.imgOne4 = res.imgUrl
-            this.outBoard = res.imgUrl
-          }
-        })
-        uploadFile.upload({
-          id: 'file5',
-          callback: (res) => {
-            console.log(res)
-            this.imgOne5 = res.imgUrl
-            this.dealService1 = res.imgUrl
-          }
-        })
-        uploadFile.upload({
-          id: 'file6',
-          callback: (res) => {
-            console.log(res)
-            this.imgOne6 = res.imgUrl
-            this.dealService2 = res.imgUrl
-          }
-        })
-        uploadFile.upload({
-          id: 'file7',
-          callback: (res) => {
-            console.log(res)
-            this.imgOne7 = res.imgUrl
-            this.dealService4 = res.imgUrl
-          }
-        })
-      },
       getCensusRegisterIndex (index) {
         console.log(index)
         this.showIndex = index
@@ -363,7 +286,6 @@
       }
     },
     mounted () {
-      this.uploadImg()
       this.carCertificateNumber = this.plateToCarNumber[this.plateNumberOne]
       this.ownersName = this.allOwnersName[this.plateNumberOne]
     }

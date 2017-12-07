@@ -11,6 +11,7 @@
       </div>
     </div>
 </template>
+
 <script>
   export default {
     name: 'g-radio',
@@ -52,6 +53,7 @@
     }
   }
 </script>
+
 <style lang="less" scoped>
   .g-radio{
     display: flex;
