@@ -3,18 +3,28 @@
       <div class="g-radio-title">
         {{title}}
       </div>
-      <div class="g-radio-item" v-for="(item, index) in thisOpt" @click="selectRadio(index)">
+      <div class="g-radio-item" v-for="(item, index) in data" @click="selectRadio(index)">
         <div class="g-radio-circle">
           <div class="g-radio-point" v-if="item.choose"></div>
         </div>
-        <div class="g-radio-name">{{item.str}}</div>
+        <div class="g-radio-name">{{item.name}}</div>
       </div>
     </div>
 </template>
+
 <script>
   export default {
     name: 'g-radio',
-    props: ['title', 'optname'],
+    props: {
+      data: {
+        type: Array,
+        default () {
+          return []
+        }
+      },
+      title: String,
+      value: [String, Number]
+    },
     data () {
       return {
         selectedVal: ''
@@ -22,22 +32,20 @@
     },
     computed: {
       thisOpt () {
-        return this.optname
+        return this.data
       }
     },
     watch: {
+      selectedVal (val) {
+        this.$emit('input', val)
+      },
       thisOpt: {
         handler (val) {
           val.map(item => {
             if (item.choose === true) {
-              if (item.id) {
-                this.selectedVal = item.id
-              } else {
-                this.selectedVal = item.str
-              }
+              this.selectedVal = item.value
             }
           })
-          this.$emit('getSelected', this.selectedVal)
         },
         deep: true
       }
@@ -52,6 +60,7 @@
     }
   }
 </script>
+
 <style lang="less" scoped>
   .g-radio{
     display: flex;

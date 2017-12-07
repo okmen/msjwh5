@@ -15,34 +15,25 @@
         我已认真阅读以上内容，并愿意承担相关法律责任。
       </span>
     </div>
-    <div class="tp-btn-sure" v-if="isShow">
+<!--     <div class="tp-btn-sure" v-if="isShow">
       <button @click="btnAgreeRequest">确认</button>
-    </div>
-    <div class="tp-btn-sure" v-else>
+    </div> -->
+<!--     <div class="tp-btn-sure" v-else>
       <button @click="btnReturn">返回</button>
-    </div>
+    </div> -->
+    <g-button @click.native="btnAgreeRequest" text="确认信息" v-if="isShow"></g-button>
+    <g-button @click.native="btnReturn" text="返回" v-else></g-button>
   </template>
    <div v-wechat-title="$route.meta.title"></div>
-   <!-- <page-bottom v-if="isWeChat"></page-bottom> -->
  </div>
 </template>
 <script>
-// import PopUpG from './popUp_G/popUp_G.vue'
-// import { resultPost } from '../service/getData'
+import { GButton } from 'form'
 import axios from '../utils/axios'
 import { userAgreement } from '../config/baseURL'
 import { Toast } from 'mint-ui'
 export default {
   name: 'userAgreement',
-  // computed: {
-  //   isWeChat: function () {
-  //     return /_WeChat/g.test(this.$route.name)
-  //   }
-  // },
-  // components: {
-  //   'pageBottom': require('../components/pageBottom.vue'),
-  //   PopUpG
-  // },
   data () {
     return {
       showPopUpG: false,
@@ -52,6 +43,9 @@ export default {
       entryHash: '',
       isShow: true
     }
+  },
+  components: {
+    GButton
   },
   computed: {
     queryURL () {
@@ -132,7 +126,8 @@ export default {
             this.$router.push({ path: '/replaceQualifiedMark', query: this.queryURL })
             break
           case 'szjj_hander_id':  // 机动车异地定期检验申报
-            this.$router.push('/placeExamineCar')
+            // this.$router.push('/placeExamineCar')
+            this.$router.push({ path: '/placeExamineCar', query: this.queryURL })
             break
           case 'szjj_hander_rmvp':  // 补领机动车号牌
             // this.$router.push('/replaceCredentials/replaceLicencePlate')

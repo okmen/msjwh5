@@ -23,15 +23,14 @@
         <g-upload text="境外人员临住表" id="file6" :bg="require('../../../assets/images/out-board.png')" v-model="board" v-show="censusIndex === 2"></g-upload>
       </div>
     </group>
-    <g-button text="确认信息" @click.native="confirmInfo" v-if ="cars.length !== 0"></g-button>
-    <g-button text="确认信息" class="replaceQualifiedMark-button" v-if ="cars.length === 0"></g-button>
+    <g-button text="确认信息" @click.native="confirmInfo" v-if="cars.length"></g-button>
+    <g-button text="确认信息" v-if="!cars.length" type="gray"></g-button>
   </div>
 </template>
 
 <script>
 import {GInput, GSelect, GButton, GSelectOne, Group, GUpload} from 'form'
 import { replaceInspectionMark } from '@/config/baseURL'
-import { isPhone } from '@/utils/regExp'
 import beforeSubmit from '@/mixins/beforeSubmit'
 export default {
 
@@ -76,7 +75,9 @@ export default {
       carSelectData: {
         '01': '黄牌',
         '06': '黑牌',
-        '02': '蓝牌'
+        '02': '蓝牌',
+        '52': '小型新能源车号牌',
+        '51': '大型新能源车号牌'
       }
     }
   },
@@ -120,11 +121,9 @@ export default {
         registerCredential: '请上传机动车登记证书'
       }
       if (this.$_myMinxin_beforeSubmit(obj)) return
-      if (!isPhone(this.mobilePhone)) {
-        this.$toast({message: '请输入正确的手机号码', position: 'middle', duration: 3000})
-      } else if (!isPhone(this.receiverMobilePhone)) {
-        this.$toast({message: '请输入正确的手机号码', position: 'middle', duration: 3000})
-      } else if (this.censusIndex === 2 && !this.board) {
+      if (this.$verification.isPhone(this.mobilePhone)) return
+      if (this.$verification.isPhone(this.receiverMobilePhone)) return
+      if (this.censusIndex === 2 && !this.board) {
         this.$toast({message: '请上传境外人员临住表', position: 'middle', duration: 3000})
       } else if (this.censusIndex === 1 && !this.residencePermitF) {
         this.$toast({message: '请上传居住证正面', position: 'middle', duration: 3000})
@@ -164,6 +163,7 @@ export default {
   },
   created () {
     let val = this.$store.state.user
+    console.log(val)
     this.cars = val.cars
     if (this.cars.length !== 0) {
       let PlateData = []
@@ -209,12 +209,4 @@ export default {
     text-decoration: underline;
   }
 }
-</style>
-
-<style lang="less">
-  .replaceQualifiedMark-button {
-    .button {
-      background-color: gray !important;
-    }
-  }
 </style>

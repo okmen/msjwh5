@@ -36,3 +36,13 @@ export const getAppTimes = `${commonUrl}bookingbusiness/getAppTimes.html` // 根
 export const simpleSendMessage = `${commonUrl}bookingbusiness/simpleSendMessage.html`  // 验证码接口
 
 export const createVehicleInfoJD37 = `${commonUrl}bookingbusiness/createVehicleInfo_JD37.html` // 抵押/解押登记现场办理
+
+export const getIssuing = `${commonUrl}user/getIssuingLicenceAuthorityArray.html` // 发证地列表
+
+export const sendSMS = `${commonUrl}user/sendSMSVerificatioCode.html` // 发送验证码接口
+
+export const verificatioCode = `${commonUrl}user/verificatioCode.html` // 验证码校验接口
+
+export const inspectionDeclaration = `${commonUrl}handleservice/inspectionDeclaration.html` // 机动车委托异地定期检验申报
+
+export const inspectionDeclarationQuery = `${commonUrl}handleservice/inspectionDeclarationQuery.html` // 机动车委托异地定期检验申报查询

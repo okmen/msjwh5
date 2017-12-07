@@ -8,7 +8,7 @@
     <g-input title="身份证号" maxlength="18" v-model="IDCard"></g-input>
     <g-input title="手机号码" maxlength="11" v-model="mobilePhone" type="tel"></g-input>
     <g-input class="changeCard-inputPhoto" maxlength="25" title="照片回执码" v-model="photoReturnNumberString" type="tel">
-      <div slot='right' class="RichScan" @click="scanQRCode()">扫一扫</div>
+      <div slot='right' v-if="source === 'M'" class="RichScan" @click="scanQRCode()">扫一扫</div>
     </g-input>
     <span class="changeCard-examine" @click.stop="example=true">查看示例</span>
     <g-select title="户籍所在地" :data="censusRegisterList" v-model="censusRegisterOne"></g-select>
@@ -23,7 +23,8 @@
         <g-upload v-if = "censusRegisterOne === '3'" text="境外人员临住表" id="file3" :bg="require('../../../assets/images/out-board.png')" v-model="board"></g-upload>
       </div>
     </group>
-    <g-button text="确认信息" @click.native="confirmInfo"></g-button>
+    <g-button text="确认信息" @click.native="confirmInfo" v-if="bindDriverLicence === '1'"></g-button>
+    <g-button text="确认信息" v-if="bindDriverLicence !== '1'" type="gray"></g-button>
     <!-- 查看示例-弹窗 -->
     <div class="example" v-if="example">
       <div class="example-box" @click.stop="example=true">
@@ -37,7 +38,7 @@
 <script>
 import {GInput, GSelect, GButton, GSelectOne, Group, GUpload} from 'form'
 import { cardRepair, cardReplace } from '@/config/baseURL'
-import { isPhone, isPhotoNum } from '@/utils/regExp'
+// import { isPhone, isPhotoNum } from '@/utils/regExp'
 import wx from 'weixin-js-sdk'
 import beforeSubmit from '@/mixins/beforeSubmit'
 export default {
@@ -45,6 +46,7 @@ export default {
   data () {
     return {
       name: '驾驶证补换证',
+      source: '',
       userName: '',
       IDCard: '',
       mobilePhone: '',
@@ -88,6 +90,9 @@ export default {
     },
     queryURL () {
       return this.$store.getters.queryURL
+    },
+    core () {
+      return this.$store.state.core
     }
   },
   created () {
@@ -96,6 +101,7 @@ export default {
     this.IDCard = val.identityCard
     this.mobilePhone = val.mobilePhone
     this.bindDriverLicence = val.bindDriverLicence
+    this.source = this.$store.state.core.source
   },
   mounted () {
     if (this.bindDriverLicence !== '1') {
@@ -168,11 +174,9 @@ export default {
         IDCardBack: '请上传身份证（反面）'
       }
       if (this.$_myMinxin_beforeSubmit(obj)) return
-      if (!isPhone(this.mobilePhone)) {
-        this.$toast({message: '请输入正确的手机号码', position: 'middle', duration: 3000})
-      } else if (!isPhotoNum(this.photoReturnNumberString)) {
-        this.$toast({message: '请输入正确照片回执码', position: 'bottom', className: 'white'})
-      } else if (this.censusRegisterOne === '3' && !this.board) {
+      if (this.$verification.isPhone(this.mobilePhone)) return
+      if (this.$verification.isPhotoNum(this.photoReturnNumberString)) return
+      if (this.censusRegisterOne === '3' && !this.board) {
         this.$toast({message: '请上传境外人员临住表', position: 'middle', duration: 3000})
       } else {
         let reqData = {
@@ -187,7 +191,7 @@ export default {
             placeOfDomicile: this.censusRegisterOne,
             receiverName: this.receiverName,
             receiverNumber: this.receiverMobilePhone,
-            receiverAddress: '深圳市' + this.areaSelect + this.mailingAddress
+            receiverAddress: `深圳市,${this.areaSelect},${this.mailingAddress}`
           },
           imgObj: {
             PHOTO9: this.IDCardFront || '',

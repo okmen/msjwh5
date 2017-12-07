@@ -14,5 +14,32 @@ export default [
       title: '补领机动车号牌'
     },
     component: () => import('@/views/transactionClass/motorVehicles/replacementClass/replaceLicencePlate')
+  },
+  {
+    path: '/placeExamineCar',
+    name: 'placeExamineCar',
+    meta: {
+      title: '机动车委托异地定期检验申报',
+      loginStatus: true
+    },
+    component: () => import('@/views/transactionClass/motorVehicles/placeExamine/placeExamineCar')
+  },
+  {
+    path: '/placeExamine',
+    name: 'placeExamine',
+    meta: {
+      title: '机动车委托异地定期检验申报',
+      loginStatus: true
+    },
+    component: () => import('@/views/transactionClass/motorVehicles/placeExamine/placeExamine')
+  },
+  {
+    path: '/placeExamineDemand',
+    name: 'placeExamineDemand',
+    meta: {
+      title: '机动车委托异地定期检验申报',
+      loginStatus: true
+    },
+    component: () => import('@/views/transactionClass/motorVehicles/placeExamine/placeExamineDemand')
   }
 ]
