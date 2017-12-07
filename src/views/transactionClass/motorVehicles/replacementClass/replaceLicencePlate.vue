@@ -19,9 +19,9 @@
         <g-upload text="身份证（正面)" id="file1" :bg="imgOne1" v-model="IDcardFront"></g-upload>
         <g-upload text="身份证（反面)" id="file2" :bg="imgOne2" v-model="IDcarfBack"></g-upload>
         <g-upload text="机动车登记证书" id="file3" :bg="imgOne3" v-model="registerCredential"></g-upload>
-        <g-upload text="境外人员临住表" v-show="this.showIndex == '2'" id="file4" :bg="imgOne4" v-model="outBoard"></g-upload>
-        <g-upload text="居住证正面" v-show="this.showIndex == '1'" id="file5" :bg="imgOne5" v-model="residencePermitF"></g-upload>
-        <g-upload text="居住证反面" v-show="this.showIndex == '1'" id="file6" :bg="imgOne6" v-model="residencePermitB"></g-upload>
+        <g-upload text="境外人员临住表" v-show="showIndex == '2'" id="file4" :bg="imgOne4" v-model="outBoard"></g-upload>
+        <g-upload text="居住证正面" v-show="showIndex == '1'" id="file5" :bg="imgOne5" v-model="residencePermitF"></g-upload>
+        <g-upload text="居住证反面" v-show="showIndex == '1'" id="file6" :bg="imgOne6" v-model="residencePermitB"></g-upload>
       </div>
     </group>
     <g-button text="确认信息" @click.native="confirmInfo" v-if="plateNumber.length"></g-button>

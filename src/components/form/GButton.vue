@@ -16,19 +16,19 @@
 </script>
 
 <style scoped lang="less">
+  @import "../../assets/style/var.less";
 .g-button {
   padding:10px 40px;
   width: 100%;
-  margin-top: 40px;
   .button {
     height: 70px;
     border-radius: 8px;
     width: 100%;
-    background-color: #004BD8;
+    background-color: @buttonColor;
     color: white;
   }
   .gray {
-    background-color: gray;
+    background-color: @gray;
   }
 }
 </style>

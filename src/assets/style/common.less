@@ -1,3 +1,4 @@
+@import "./var.less";
 body, a {
     color: #000;
 }
@@ -130,10 +131,13 @@ input[disabled]{
 .verify-code{
     .h-center;
     color: white;
-    background-color: #004BD8;
+    background-color:@buttonColor;
     height: 56px;
     width: 174px;
     border-radius: 8px;
     font-size: 30px;
     margin-left: 30px;
+}
+.verify-code-gray{
+  background-color: @gray;
 }
