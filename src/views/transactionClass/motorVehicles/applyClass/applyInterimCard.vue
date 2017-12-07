@@ -7,14 +7,14 @@
     <g-input title="身份证号码" v-model="identityCard" maxlength="18" placeholder="请输入身份证号码"></g-input>
     <g-input title="手机号码" v-model="mobilephone" maxlength="11" placeholder="请输入手机号码"></g-input>
     <g-input title="车辆型号" v-model="cartModels" placeholder="请输入车辆型号"></g-input>
-    <g-select title="车辆类型" :data="cartype.option" v-model="carTypeOne"></g-select>
+    <g-select title="车辆类型" :data="selectCarType" v-model="carTypeOne"></g-select>
     <g-input title="发动机号" v-model="engineNumber" placeholder="请输入发动机号"></g-input>
     <g-input title="车架号" v-model="behindTheFrame4Digits" placeholder="请输入车架号"></g-input>
-    <g-radio title="车辆产地" :optname="carOptList" @getSelected="getCensusRegister2"></g-radio>
-    <g-select title="户籍所在地" :data="censusRegister3.option" v-model="censusRegister" @getSelected="getCensusRegisterIndex"></g-select>
+    <g-radio title="车辆产地" :data="carOptList" v-model="carOrigin"></g-radio>
+    <g-select title="户籍所在地" :data="selectCensusRegister" v-model="censusRegister" @getSelected="getCensusRegisterIndex"></g-select>
     <g-input title="收件人姓名" v-model="recipientName" placeholder="请输入收件人姓名"></g-input>
     <g-input title="收件人手机" v-model="recipientPhone" maxlength="11" placeholder="请输入收件人手机号码"></g-input>
-    <g-select-one title="深圳市" type="收件人地址" :data="areaSelectData" v-model="areaSelect"></g-select-one>
+    <g-select-one title="深圳市" type="收件人地址" :data="areaSelectData" v-model="recipientAddressRegion"></g-select-one>
     <g-input v-model="recipientAddressDetail" placeholder="请输入详细地址"></g-input>
     <group title="请按示例图上传以下证件照片">
       <div class="upload-group">
@@ -22,8 +22,8 @@
         <g-upload text="身份证（反面)" id="file2" :bg="require('@/assets/images/IDcard-back.png')" v-model="IDcarfBack"></g-upload>
         <g-upload text="购置发票图" id="file5" :bg="require('@/assets/images/dealService-1.png')" v-model="dealService1"></g-upload>
         <g-upload text="交强险单据" id="file6" :bg="require('@/assets/images/dealService-2.png')" v-model="dealService2"></g-upload>
-        <g-upload text="机动车合格证" v-show="this.censusRegister2 != 'B'" id="file3" :bg="require('@/assets/images/dealService-3.png')" v-model="dealService3"></g-upload>
-        <g-upload text="进口货物证明书" v-show="this.censusRegister2 != 'A'" id="file7" :bg="require('@/assets/images/dealService-4.png')" v-model="dealService4"></g-upload>
+        <g-upload text="机动车合格证" v-show="this.carOrigin != 'B'" id="file3" :bg="require('@/assets/images/dealService-3.png')" v-model="dealService3"></g-upload>
+        <g-upload text="进口货物证明书" v-show="this.carOrigin != 'A'" id="file7" :bg="require('@/assets/images/dealService-4.png')" v-model="dealService4"></g-upload>
         <g-upload text="境外人员临住表" v-show="this.showIndex == '2'" id="file4" :bg="require('@/assets/images/out-board.png')" v-model="outBoard"></g-upload>
       </div>
     </group>
@@ -39,35 +39,14 @@
   export default {
     data () {
       return {
-        cartype: {
-          title: '车辆类型',
-          option: [
-            {name: '小型普通客车', value: 'K31'},
-            {name: '小型越野客车', value: 'K32'},
-            {name: '小型轿车', value: 'K33'},
-            {name: '小型专用客车', value: 'K34'},
-            {name: '微型普通客车', value: 'K41'},
-            {name: '微型越野客车', value: 'K42'},
-            {name: '微型轿车', value: 'K43'},
-            {name: '小型专用校车', value: 'K38'}
-          ]
-        },
         carOptList: [
-          {'str': '国产', choose: true, id: 'A'},
-          {'str': '进口', choose: false, id: 'B'}
+          {name: '国产', choose: true, value: 'A'},
+          {name: '进口', choose: false, value: 'B'}
         ],
         licenseSelectMassage: '申请机动车临牌',
         censusRegister: '1', // 户籍所在地
         showIndex: '0',
-        censusRegister2: 'A', // 车辆产地
-        censusRegister3: {
-          title: '户籍所在地',
-          option: [
-            {name: '深户', value: '1'},
-            {name: '非深户', value: '0'},
-            {name: '外籍', value: '0'}
-          ]
-        },
+        carOrigin: 'A', // 车辆产地
         plateNumberOne: '',
         carTypeOne: 'K31',
         recipientPhone: '',    // 收件人手机号码
@@ -90,8 +69,7 @@
         dealService1: '', // 购置发票
         dealService2: '', // 交强险单据
         dealService3: '', // 机动车合格证
-        dealService4: '', // 进口货物证明书
-        areaSelect: '福田区'
+        dealService4: '' // 进口货物证明书
       }
     },
     components: {
@@ -123,16 +101,18 @@
       },
       areaSelectData () {
         return this.$store.state.cityAreaS
+      },
+      selectCarType () {
+        return this.$store.state.cartype
+      },
+      selectCensusRegister () {
+        return this.$store.state.censusRegister
       }
     },
     methods: {
       getCensusRegisterIndex (index) {
         console.log(index)
         this.showIndex = index
-      },
-      getCensusRegister2 (val) {
-        console.log(val)
-        this.censusRegister2 = val
       },
       // getPlateNumber (val) {
       //   this.plateNumberOne = val
@@ -231,14 +211,14 @@
           })
           return
         }
-        if ((!this.dealService3) && (this.censusRegister2 !== 'B')) {
+        if ((!this.dealService3) && (this.carOrigin !== 'B')) {
           Toast({
             message: '请上传机动车合格证',
             duration: 2000
           })
           return
         }
-        if ((!this.dealService4) && (this.censusRegister2 !== 'A')) {
+        if ((!this.dealService4) && (this.carOrigin !== 'A')) {
           Toast({
             message: '请上传进口货物证明书',
             duration: 2000
@@ -264,7 +244,7 @@
             'cartype': this.carTypeOne, // 车辆类型
             'engineNumber': this.engineNumber, // 发动机号
             'behindTheFrame4Digits': this.behindTheFrame4Digits, // 车架号
-            'carOrigin': this.censusRegister2, // 车辆产地
+            'carOrigin': this.carOrigin, // 车辆产地
             'placeOfDomicile': this.censusRegister, // 户籍所在地
             'showIndex': this.showIndex,
             'receiverName': this.recipientName, // 收件人姓名
