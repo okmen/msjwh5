@@ -1,6 +1,6 @@
 <template>
 <div class="g-button h-center">
-  <div class="h-center button" :class="{'gray': type === 'gray'}">
+  <div class="h-center button" :class="{'gray': type === 'gray', 'margin': !noMargin}">
     {{text || '提交'}}
   </div>
 </div>
@@ -11,7 +11,7 @@
     data () {
       return {}
     },
-    props: ['text', 'type']
+    props: ['text', 'type', 'noMargin']
   }
 </script>
 
@@ -26,6 +26,9 @@
     width: 100%;
     background-color: @buttonColor;
     color: white;
+  }
+  .margin{
+    margin-top: 40px;
   }
   .gray {
     background-color: @gray;

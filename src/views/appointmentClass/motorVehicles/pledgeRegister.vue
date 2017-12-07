@@ -6,11 +6,11 @@
     <g-select title="证件名称" :data="certificateList" v-model="certificateListOne"></g-select>
     <g-input title="证件号码" placeholder="请输入证件号码" v-model="IDCard"></g-input>
     <g-input title="手机号码" placeholder="请输入手机号码" v-model="mobilePhone"></g-input>
-    <get-verification-code :method="getCode"></get-verification-code>
+    <get-verification-code :method="getCode" v-model="verificationCode"></get-verification-code>
     <plate-number-full v-model="plateNumber"></plate-number-full>
     <g-select title="车辆类型" :data="vehicleType" v-model="vehicleTypeOne" ref="vehicleType"></g-select>
     <g-select title="使用性质" :data="useNature" v-model="useNatureOne"></g-select>
-    <g-input title="车身架号" placeholder="请输入车架后四位" v-model="carriageNum"></g-input>
+    <g-input title="车身架号" placeholder="请输入车架后四位" v-model="carriageNum" maxlength="4"></g-input>
     <g-select title="预约地点" :data="appointmentLocation" v-model="appointmentLocationOne" ref="appointmentLocation"></g-select>
     <div class="select">
       <span class="g-select-title">预约日期</span>
@@ -98,44 +98,47 @@
         businessTypeId: this.businessTypeId,
         type: '1'
       }).then(data => {
-        console.log(data)
-        data.data.idTypeVOs.map((item, index) => {
-          if (index === 0) {
-            this.certificateListOne = item.id
-          }
-          this.certificateList.push({
-            name: item.name,
-            value: item.id
+        if (data.code === '0000') {
+          data.data.idTypeVOs.map((item, index) => {
+            if (index === 0) {
+              this.certificateListOne = item.id
+            }
+            this.certificateList.push({
+              name: item.name,
+              value: item.id
+            })
           })
-        })
-        data.data.carTypeVOs.map((item, index) => {
-          if (index === 0) {
-            this.vehicleTypeOne = item.id
-          }
-          this.vehicleType.push({
-            name: item.name,
-            value: item.id
+          data.data.carTypeVOs.map((item, index) => {
+            if (index === 0) {
+              this.vehicleTypeOne = item.id
+            }
+            this.vehicleType.push({
+              name: item.name,
+              value: item.id
+            })
           })
-        })
-        data.data.useCharaters.map((item, index) => {
-          if (index === 0) {
-            this.useNatureOne = item.id
-          }
-          this.useNature.push({
-            name: item.name,
-            value: item.id
+          data.data.useCharaters.map((item, index) => {
+            if (index === 0) {
+              this.useNatureOne = item.id
+            }
+            this.useNature.push({
+              name: item.name,
+              value: item.id
+            })
           })
-        })
-        data.data.orgVOs.map((item, index) => {
-          if (index === 0) {
-            this.appointmentLocationOne = item.id
-          }
-          this.appointmentLocation.push({
-            name: item.name,
-            value: item.id,
-            orgAddr: item.description
+          data.data.orgVOs.map((item, index) => {
+            if (index === 0) {
+              this.appointmentLocationOne = item.id
+            }
+            this.appointmentLocation.push({
+              name: item.name,
+              value: item.id,
+              orgAddr: item.description
+            })
           })
-        })
+        } else {
+          this.$MessageBox('提示', data.msg)
+        }
       })
     },
     watch: {
@@ -163,6 +166,8 @@
           mobilePhone: '请输入手机号码'
         }
         if (this.$_myMinxin_beforeSubmit(obj)) return
+        if (this.$verification.specialCharacters(this.carName)) return
+        if (this.$verification.isPhone(this.mobilePhone)) return
         let requesData = {
           mobile: this.mobilePhone,
           idType: this.certificateListOne,
@@ -188,10 +193,14 @@
           businessTypeId: this.businessTypeId,
           orgId: this.appointmentLocationOne
         }).then(data => {
-          data.data.map(item => {
-            this.dateList.push(item)
-          })
-          this.showDateList = true
+          if (data.code === '0000') {
+            data.data.map(item => {
+              this.dateList.push(item)
+            })
+            this.showDateList = true
+          } else {
+            this.$MessageBox('提示', data.msg)
+          }
         })
       },
       // 获取时间列表
@@ -206,14 +215,17 @@
           date: this.dateListOne,
           carTypeId: this.vehicleTypeOne
         }).then(data => {
-          this.timeList = []
-          data.data.map(item => {
-            this.timeList.push({
-              num: item.maxnumber - item.yetnumber,
-              apptime: item.apptime
+          if (data.code === '0000') {
+            data.data.map(item => {
+              this.timeList.push({
+                num: item.maxnumber - item.yetnumber,
+                apptime: item.apptime
+              })
             })
-          })
-          this.showTimeList = true
+            this.showTimeList = true
+          } else {
+            this.$MessageBox('提示', data.msg)
+          }
         })
       },
       // 选择时间
@@ -241,6 +253,9 @@
           timeListOne: '请选择预约时间'
         }
         if (this.$_myMinxin_beforeSubmit(obj)) return
+        if (this.$verification.specialCharacters(this.carName)) return
+        if (this.$verification.isPhone(this.mobilePhone)) return
+        if (this.$verification.plateVerification(this.plateNumber)) return
         let orgAddr
         console.log(this.appointmentLocation)
         for (let i = 0, len = this.appointmentLocation.length; i < len; i++) {

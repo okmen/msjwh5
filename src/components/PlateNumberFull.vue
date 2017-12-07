@@ -1,6 +1,6 @@
 <template>
     <div class="plate-number-full">
-      <g-input title="车牌号码" v-model="plateNumber">
+      <g-input title="车牌号码" v-model="plateNumber" placeholder="请输入车牌号码">
         <template slot="left">
           <g-select v-model="province" :data="provinceCodeAll" class="province"></g-select>
         </template>

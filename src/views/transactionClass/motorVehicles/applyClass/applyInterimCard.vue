@@ -24,7 +24,7 @@
         <g-upload text="交强险单据" id="file6" :bg="require('@/assets/images/dealService-2.png')" v-model="dealService2"></g-upload>
         <g-upload text="机动车合格证" v-show="this.carOrigin != 'B'" id="file3" :bg="require('@/assets/images/dealService-3.png')" v-model="dealService3"></g-upload>
         <g-upload text="进口货物证明书" v-show="this.carOrigin != 'A'" id="file7" :bg="require('@/assets/images/dealService-4.png')" v-model="dealService4"></g-upload>
-        <g-upload text="境外人员临住表" v-show="this.showIndex == '2'" id="file4" :bg="require('@/assets/images/out-board.png')" v-model="outBoard"></g-upload>
+        <g-upload text="境外人员临住表" v-show="showIndex == '2'" id="file4" :bg="require('@/assets/images/out-board.png')" v-model="outBoard"></g-upload>
       </div>
     </group>
     <g-button text="确认信息" @click.native="confirmInfo"></g-button>
@@ -33,8 +33,7 @@
 
 <script>
   import {GInput, GSelect, GButton, GSelectOne, GRadio, Group, GUpload} from 'form'
-  import { Toast } from 'mint-ui'
-  import { isPhone } from '@/utils/regExp'
+  import beforeSubmit from '@/mixins/beforeSubmit'
   import { applyCarTemporaryLicence } from '@/config/baseURL'
   export default {
     data () {
@@ -81,6 +80,7 @@
       Group,
       GUpload
     },
+    mixins: [beforeSubmit],
     computed: {
       certificateNumber () {
         return window.localStorage.getItem('identityCard')
@@ -120,116 +120,34 @@
       //   this.ownersName = this.allOwnersName[val]
       // },
       confirmInfo () {
-        if (!this.userName) {
-          Toast({
-            message: '请输入姓名',
-            duration: 2000
-          })
-          return
+        let obj = {
+          userName: '请输入姓名',
+          mobilephone: '手机号码格式不正确',
+          recipientPhone: '收件人手机号码格式不正确',
+          identityCard: '请输入身份证号码',
+          cartModels: '请输入车辆型号',
+          engineNumber: '请输入发动机型号',
+          behindTheFrame4Digits: '请输入车架号',
+          recipientName: '请输入收件人姓名',
+          recipientAddressDetail: '请输入收件人详细地址',
+          IDcardFront: '请上传身份证正面',
+          IDcarfBack: '请上传身份证反面',
+          dealService1: '请上传购置发票图',
+          dealService2: '请上传交强险单据'
         }
-        if (!isPhone(this.mobilephone)) {
-          Toast({
-            message: '手机号码格式不正确',
-            duration: 2000
-          })
-          return
-        }
-        if (!isPhone(this.recipientPhone)) {
-          Toast({
-            message: '收件人手机号码格式不正确',
-            duration: 2000
-          })
-          return
-        }
-        if (!this.identityCard) {
-          Toast({
-            message: '请输入身份证号码',
-            duration: 2000
-          })
-          return
-        }
-        if (!this.cartModels) {
-          Toast({
-            message: '请输入车辆型号',
-            duration: 2000
-          })
-          return
-        }
-        if (!this.engineNumber) {
-          Toast({
-            message: '请输入发动机型号',
-            duration: 2000
-          })
-          return
-        }
-        if (!this.behindTheFrame4Digits) {
-          Toast({
-            message: '请输入车架号',
-            duration: 2000
-          })
-          return
-        }
-        if (!this.recipientName) {
-          Toast({
-            message: '请输入收件人姓名',
-            duration: 2000
-          })
-          return
-        }
-        if (!this.recipientAddressDetail) {
-          Toast({
-            message: '请输入收件人详细地址',
-            duration: 2000
-          })
-          return
-        }
-        if (!this.IDcardFront) {
-          Toast({
-            message: '请上传身份证正面',
-            duration: 2000
-          })
-          return
-        }
-        if (!this.IDcarfBack) {
-          Toast({
-            message: '请上传身份证反面',
-            duration: 2000
-          })
-          return
-        }
-        if (!this.dealService1) {
-          Toast({
-            message: '请上传购置发票图',
-            duration: 2000
-          })
-          return
-        }
-        if (!this.dealService2) {
-          Toast({
-            message: '请上传交强险单据',
-            duration: 2000
-          })
-          return
-        }
+        if (this.$_myMinxin_beforeSubmit(obj)) return
+        if (this.$verification.isPhone(this.mobilephone)) return
+        if (this.$verification.isPhone(this.recipientPhone)) return
         if ((!this.dealService3) && (this.carOrigin !== 'B')) {
-          Toast({
-            message: '请上传机动车合格证',
-            duration: 2000
-          })
+          this.$toast({message: '请上传机动车合格证'})
           return
         }
         if ((!this.dealService4) && (this.carOrigin !== 'A')) {
-          Toast({
-            message: '请上传进口货物证明书',
-            duration: 2000
-          })
+          this.$toast({message: '请上传进口货物证明书'})
           return
         }
         if ((!this.outBoard) && (this.showIndex === '2')) {
-          Toast({
-            message: '请上传境外人员临住表',
-            duration: 2000
-          })
+          this.$toast({message: '请上传境外人员临住表'})
           return
         }
         let dataList = {

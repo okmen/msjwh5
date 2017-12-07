@@ -32,9 +32,8 @@
 <script>
   import {GInput, GSelect, GButton, GSelectOne, Group, GUpload} from 'form'
   import uploadFile from '@/utils/uploadFile.js'
-  import { Toast } from 'mint-ui'
-  import { isPhone, isChinese } from '@/utils/regExp.js'
   import { replaceMotorVehicleLicensePlate } from '@/config/baseURL.js'
+  import beforeSubmit from '@/mixins/beforeSubmit'
   export default {
     data () {
       return {
@@ -116,6 +115,7 @@
       Group,
       GUpload
     },
+    mixins: [beforeSubmit],
     computed: {
       plateNumber () {
         var plateInfo = {
@@ -186,7 +186,7 @@
         })
       },
       getCensusRegisterIndex (index) {
-        this.showIndex = index
+        this.showIndex = index + ''
       },
       getPlateNumber () {
         this.plateNumberName = this.$refs.plateNumberName.currentName
@@ -198,76 +198,29 @@
         console.log(this.plateTypeStr)
       },
       confirmInfo () {
-        console.log(this.censusRegisterOne)
-        if (!this.recipientName) {
-          Toast({
-            message: '请输入收件人姓名',
-            duration: 2000
-          })
-          return
-        } else if (!isChinese(this.recipientName)) {
-          Toast({
-            message: '收件人姓名只能输入汉字',
-            duration: 2000
-          })
+        let obj = {
+          recipientName: '请输入收件人姓名',
+          recipientPhone: '收件人手机号码格式不正确',
+          recipientAddressDetail: '请输入收件人详细地址',
+          IDcardFront: '请上传身份证正面',
+          IDcarfBack: '请上传身份证反面',
+          registerCredential: '请上传机动车登记证书'
+        }
+        if (this.$_myMinxin_beforeSubmit(obj)) return
+        if (this.$verification.isChinese(this.recipientName)) return
+        if (this.$verification.isPhone(this.recipientPhone)) return
+        if ((!this.residencePermitF) && (this.censusRegister !== '1') && (this.showIndex === '1')) {
+          this.$toast({message: '请上传居住证正面'})
           return
         }
-        if (!isPhone(this.recipientPhone)) {
-          Toast({
-            message: '收件人手机号码格式不正确',
-            duration: 2000
-          })
+        if ((!this.residencePermitB) && (this.censusRegister !== '1') && (this.showIndex === '1')) {
+          this.$toast({message: '请上传居住证反面'})
           return
         }
-        if (!this.recipientAddressDetail) {
-          Toast({
-            message: '请输入收件人详细地址',
-            duration: 2000
-          })
+        if ((!this.outBoard) && (this.censusRegister !== '1') && (this.showIndex === '2')) {
+          this.$toast({message: '请上传境外人员临住表'})
           return
         }
-        if (!this.IDcardFront) {
-          Toast({
-            message: '请上传身份证正面',
-            duration: 2000
-          })
-          return
-        }
-        if (!this.IDcarfBack) {
-          Toast({
-            message: '请上传身份证反面',
-            duration: 2000
-          })
-          return
-        }
-        if (!this.registerCredential) {
-          Toast({
-            message: '请上传机动车登记证书',
-            duration: 2000
-          })
-          return
-        }
-        if ((!this.outBoard) && (this.showIndex === '2')) {
-          Toast({
-            message: '请上传境外人员临住表',
-            duration: 2000
-          })
-          return
-        }
-       /*  if ((!this.residencePermitF) && (this.censusRegister !== '1')) {
-          Toast({
-            message: '请上传居住证正面',
-            duration: 2000
-          })
-          return
-        }
-        if ((!this.residencePermitB) && (this.censusRegister !== '1')) {
-          Toast({
-            message: '请上传居住证反面',
-            duration: 2000
-          })
-          return
-        } */
         let dataList = {
           type: '补换机动车号牌',
           url: replaceMotorVehicleLicensePlate,

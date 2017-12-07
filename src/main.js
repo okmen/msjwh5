@@ -8,7 +8,7 @@ import vueWechatTitle from 'vue-wechat-title'
 
 import './config/detect-browser'
 import './config/rem'
-
+import './utils/regExp'
 import './utils/utils'
 import './utils/axios'
 
