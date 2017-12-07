@@ -1,5 +1,5 @@
 <template>
-  <g-input title="验证码" placeholder="请输入验证码" v-model="verificationCode">
+  <g-input title="验证码" placeholder="请输入验证码" v-model.lazy="verificationCode" maxlength="6">
     <div slot="right" class="verify-code" @click="method(getCode)" v-if="!showTime">
       获取验证码
     </div>
@@ -37,6 +37,11 @@
           }
           this.countDown--
         }, 1000)
+      }
+    },
+    watch: {
+      verificationCode (val) {
+        this.$emit('input', val)
       }
     }
   }
