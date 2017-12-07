@@ -41,7 +41,7 @@ export const getIssuing = `${commonUrl}user/getIssuingLicenceAuthorityArray.html
 
 export const sendSMS = `${commonUrl}user/sendSMSVerificatioCode.html` // 发送验证码接口
 
-export const sendSMSVerificatioCode = `${commonUrl}activity/sendSMSVerificatioCode.html`  // 东部预约验证码
+export const verificatioCode = `${commonUrl}user/verificatioCode.html` // 验证码校验接口
 
 export const inspectionDeclaration = `${commonUrl}handleservice/inspectionDeclaration.html` // 机动车委托异地定期检验申报
 

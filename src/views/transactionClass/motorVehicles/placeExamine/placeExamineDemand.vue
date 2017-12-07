@@ -12,7 +12,7 @@
 
 <script>
   import axios from '@/utils/axios'
-  import { inspectionDeclarationQuery } from '@/config/baseUrl'
+  import { inspectionDeclarationQuery } from '@/config/baseURL'
   export default {
     name: 'placeExamineDemand',
     // 获取数据
