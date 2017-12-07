@@ -6,10 +6,10 @@
     <g-input title="车架号" v-model="carriageNumber" readonly></g-input>
     <g-input title="车主身份证" v-model="identityCard" placeholder="请输入收件人姓名"></g-input>
     <g-input title="车主姓名" v-model="name" placeholder="请输入收件人姓名"></g-input>
-    <g-select title="受托机构" :data="trusteeData" v-model="trusteeTimeMsg"></g-select>
+    <g-select title="受托机构" ref="trusteeName" :data="trusteeData" v-model="trusteeTimeMsg"></g-select>
     <g-input title="收件人姓名" v-model="addresseeName" placeholder="请输入收件人姓名" readonly></g-input>
     <g-input title="联系电话" v-model="mobile" placeholder="请输入收件人姓名" readonly></g-input>
-    <get-verification-code :method="getCode"></get-verification-code>
+    <get-verification-code :method="getCode" v-model="identifying"></get-verification-code>
     <g-input title="邮政编码" v-model="postalcode" placeholder="请输入邮政编码"></g-input>
     <g-select-one class="changeCard-set" title="深圳市" type="邮寄地址" :data="areaSelectData" v-model="areaSelect"></g-select-one>
     <g-input title="" v-model="mailingAddress" placeholder="请输入详细地址"></g-input>
@@ -21,7 +21,8 @@
 import {GInput, GSelect, GButton, GSelectOne, Group, GUpload} from 'form'
 import GetVerificationCode from '@/components/GetVerificationCode'
 import axios from '@/utils/axios'
-import { getIssuing, sendSMS } from '@/config/baseURL'
+import { getIssuing, sendSMS, inspectionDeclaration, verificatioCode } from '@/config/baseURL'
+import beforeSubmit from '@/mixins/beforeSubmit'
 export default {
 
   name: 'placeExamine',
@@ -31,8 +32,6 @@ export default {
       vehicleData: [],
       vehicle: '',
       plateType: '',
-      // ownerData: [],
-      // owner: '',
       owner: '1',
       ownerData: [
         {
@@ -90,6 +89,7 @@ export default {
       }
     }
   },
+  mixins: [beforeSubmit],
   created () {
     let val = this.$store.state.user
     console.log(val)
@@ -128,6 +128,8 @@ export default {
     // 发送验证码
     getCode (count) {
       let phonedata = {
+        mobilephone: '',
+        // mobilephone: this.mobile,
         businessType: 'szjj'
       }
       axios.post(sendSMS, phonedata).then(data => {
@@ -139,8 +141,60 @@ export default {
         }
       })
     },
+    // 验证验证码接口
+    verificationFn () {
+      let verificationData = {
+        mobilephone: this.mobile,
+        validateCode: this.identifying
+      }
+      axios.posh(verificatioCode, verificationData).then(json => {
+        if (json.code === '0000') {
+          this.subFn()
+        } else {
+          this.$toast({message: json.msg, position: 'middle', duration: 3000})
+        }
+      })
+    },
     confirmInfo () {
-      console.log(this.$refs.officeName.currentName)
+      let obj = {
+        name: '请输入车主姓名',
+        identityCard: '请输入车主身份证',
+        identifying: '请输入验证码',
+        postalcode: '请输入邮政编码',
+        mailingAddress: '请输入详细地址'
+      }
+      if (this.$_myMinxin_beforeSubmit(obj)) return
+      // this.verificationFn()
+      this.subFn()
+    },
+    subFn () {
+      let officeName = this.$refs.officeName.currentName
+      let trusteeName = this.$refs.trusteeName.currentName
+      let dataList = {
+        type: '机动车委托异地定期检验申报',
+        url: inspectionDeclaration,
+        title: 'inspectionDeclaration',
+        textObj: {
+          'numberPlate': officeName,                       // 车牌号码
+          'cartype': this.plateType,                           // 车辆类型
+          'proprietorship': this.owner,                    // 所有权
+          'behindTheFrame4Digits': this.carriageNumber,      // 车架号
+          'carOwnerIdentityCard': this.identityCard,         // 车主身份证
+          'name': this.name,                                 // 车主名字
+          'associatedAgencyMsg': trusteeName,        // 受托机构全称
+          'receiverName': this.addresseeName,                // 收件人名字
+          'receiverNumber': this.mobile,                     // 联系电话
+          'postCode': this.postalcode,                       // 邮政编码
+          'receiverAddress': `深圳市,${this.areaSelect},${this.mailingAddress}`    // 收件人地址
+        },
+        invisibleObj: {
+          'associatedAgency': this.trusteeTimeMsg,            // 受托机构
+          'identityCard': this.identityCard  //  登录用户的身份证号码
+        }
+      }
+      console.log(dataList)
+      this.$store.commit('savePassByValue', dataList)
+      this.$router.push({path: '/affirmInfo', query: this.queryURL})
     }
   }
 }

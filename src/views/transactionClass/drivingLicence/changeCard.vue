@@ -191,7 +191,7 @@ export default {
             placeOfDomicile: this.censusRegisterOne,
             receiverName: this.receiverName,
             receiverNumber: this.receiverMobilePhone,
-            receiverAddress: '深圳市' + this.areaSelect + this.mailingAddress
+            receiverAddress: `深圳市,${this.areaSelect},${this.mailingAddress}`
           },
           imgObj: {
             PHOTO9: this.IDCardFront || '',
