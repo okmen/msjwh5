@@ -124,6 +124,14 @@ const state = {
     {name: '微型轿车', value: 'K43'},
     {name: '小型专用校车', value: 'K38'}
   ],
+  plateType: [
+    {name: '蓝牌', value: '02'},
+    {name: '黄牌', value: '01'},
+    {name: '黑牌', value: '06'},
+    {name: '个性牌', value: '02'},
+    {name: '小型新能源车号牌', value: '52'},
+    {name: '大型新能源车号牌', value: '51'}
+  ],
   censusRegister: [
     {name: '深户', value: '1'},
     {name: '非深户', value: '0'},

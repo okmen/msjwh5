@@ -74,9 +74,6 @@ export default {
     },
     queryURL () {
       return this.$store.getters.queryURL
-    },
-    user () {
-      return Object.assign({}, this.$store.state.user)
     }
   },
   watch: {
