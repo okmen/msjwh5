@@ -24,6 +24,7 @@ export default {
       this.$axios.post(getUserM, {
         identityCard: idCard
       }).then(data => {
+        console.log(data)
         if (data.code === '0000') {
           this.showpage = true
           this.$store.dispatch('updataUserG', data.data)

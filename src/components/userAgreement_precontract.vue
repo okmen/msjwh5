@@ -13,15 +13,18 @@
        我已认真阅读以上内容，并愿意承担相关法律责任。
      </span>
    </div>
-   <div class="tp-btn-sure" v-if="isShow">
+<!--    <div class="tp-btn-sure" v-if="isShow">
      <button @click="btnAgreeRequest">确认</button>
    </div>
    <div class="tp-btn-sure" v-else>
      <button @click="btnReturn">返回</button>
-   </div>
+   </div> -->
+    <g-button @click.native="btnAgreeRequest" text="确认信息" v-if="isShow"></g-button>
+    <g-button @click.native="btnReturn" text="返回" v-else></g-button>
  </div>
 </template>
 <script>
+import { GButton } from 'form'
 import { getBusinessTypes } from '../config/baseURL'
 import { Toast } from 'mint-ui'
 export default {
@@ -43,6 +46,9 @@ export default {
       positionBottom: false
     }
   },
+  components: {
+    GButton
+  },
   mounted: function () {
     if (JSON.stringify(this.$route.query) !== '{}') {
       this.routerQuery = this.$route.query
@@ -54,7 +60,8 @@ export default {
   },
   methods: {
     getData: function (type) {
-      let code = this.routerQuery.code
+      let code = this.routerQuery.codeName
+      console.log(code)
       if (type === 0 && window.sessionStorage.card) {
         let cards = JSON.parse(window.sessionStorage.card)
         for (let i = 0; i < cards.length; i++) {
@@ -101,7 +108,7 @@ export default {
     },
     btnAgreeRequest: function () {
       if (this.checked === true) {
-        let queryJson = { code: this.menuJson.code, id: this.menuJson.id, name: this.menuJson.name }
+        let queryJson = { codeName: this.menuJson.code, id: this.menuJson.id, name: this.menuJson.name }
         switch (this.menuJson.code) {
           case 'JD06':  // 换领机动车登记证书
             this.$router.push({name: 'renewingCollarCredential', query: queryJson})

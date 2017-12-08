@@ -1,6 +1,6 @@
 <template>
   <div class="pledge-register form">
-    <g-input title="业务类型" value="抵押/解押登记现场办理"></g-input>
+    <g-input title="业务类型" v-model="typeName"></g-input>
     <div class="line-10"></div>
     <g-input title="车主姓名" placeholder="请输入车主姓名" v-model="carName"></g-input>
     <g-select title="证件名称" :data="certificateList" v-model="certificateListOne"></g-select>
@@ -85,11 +85,16 @@
       GInput, GSelect, GButton, PlateNumberFull, GetVerificationCode
     },
     computed: {
+      typeName () {
+        return this.$route.query.name
+      },
       businessTypeId () {
-        return '4028823f4fabb851014fabc3f28a00b1'
+        // return '4028823f4fabb851014fabc3f28a00b1'
+        return this.$route.query.id
       },
       code () {
-        return 'JD37'
+        // return 'JD37'
+        return this.$route.query.codeName
       }
     },
     mixins: [beforeSubmit],
