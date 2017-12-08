@@ -13,7 +13,8 @@
     <g-input title="邮政编码" v-model="postalcode" placeholder="请输入邮政编码"></g-input>
     <g-select-one class="changeCard-set" title="深圳市" type="邮寄地址" :data="areaSelectData" v-model="areaSelect"></g-select-one>
     <g-input title="" v-model="mailingAddress" placeholder="请输入详细地址"></g-input>
-    <g-button text="确认信息" @click.native="confirmInfo"></g-button>
+    <g-button text="确认信息" @click.native="confirmInfo" v-if="cars.length"></g-button>
+    <g-button text="确认信息" v-if="!cars.length" type="gray"></g-button>
   </div>
 </template>
 verificatioCode
