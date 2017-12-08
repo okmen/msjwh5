@@ -59,6 +59,7 @@
   export default {
     data () {
       return {
+        typeName: '',
         carName: '',
         verificationCode: '',
         IDCard: '',
@@ -85,9 +86,6 @@
       GInput, GSelect, GButton, PlateNumberFull, GetVerificationCode
     },
     computed: {
-      typeName () {
-        return this.$route.query.name
-      },
       businessTypeId () {
         // return '4028823f4fabb851014fabc3f28a00b1'
         return this.$route.query.id
@@ -99,6 +97,7 @@
     },
     mixins: [beforeSubmit],
     created () {
+      this.typeName = this.$route.query.name
       this.$axios.post(getPageInit, {
         businessTypeId: this.businessTypeId,
         type: '1'
