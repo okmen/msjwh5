@@ -37,8 +37,10 @@
     methods: {
       uploadImg () {
         /* eslint-disable */
+        console.log('我点击了')
         let _this = this
         if(_this.$route.query.source === 'M') return
+        console.log('我要进去AmapApp')
         AmapApp.Bridge.ready(function (res) {
           /**
            * 获取用户id.
@@ -48,6 +50,7 @@
            * @param {Boolean} [默认onlyGetId=false] 可选，是否只获取id，false的话用户未登录时就会自动跳转登录面板
            * @param {Boolean} [默认needRelogin=false] 可选，是否强制重新登录
            */
+          console.log('我进去AmapApp')
           AmapApp.Bridge.send({
             "action": "addPhoto",
             "businessName": "测试",
