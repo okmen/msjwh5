@@ -1,5 +1,5 @@
 <template>
-<div class="g-upload v-center">
+<div class="g-upload v-center" @click="uploadImg">
   <label class="g-upload-img h-center" :for="id">
     <input :id="id" type="file" accept="image/*">
     <img :src="bg" v-if="!imgSrc">
@@ -32,9 +32,13 @@
             }
           })
         })
-      } else if (this.$route.query.source === 'G') {
+      } else if (this.$route.query.source === 'G') {}
+    },
+    methods: {
+      uploadImg () {
         /* eslint-disable */
         let _this = this
+        if(_this.$route.query.source === 'M') return
         AmapApp.Bridge.ready(function (res) {
           /**
            * 获取用户id.
