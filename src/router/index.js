@@ -5,9 +5,21 @@ import tDrivingLicence from './transactionClass/drivingLicence' // 办理类驾�
 import aMotorVehicles from './appointmentClass/motorVehicles' // 预约类机动车业务
 import motorVehicles from './transactionClass/motorVehicles.js'
 import { getQueryString } from '@/utils/utils'
+import qs from 'qs'
 
 Vue.use(Router)
-
+Router.prototype.selfPush = function (...rest) {
+  let queryURL = window.VM.$store.getters.queryURL
+  if (rest[0] instanceof Object) {
+    router.push({path: rest[0].path, query: {...queryURL, ...rest[0].query}})
+  } else if (typeof rest[0] === 'string') {
+    if (rest[0].indexOf('?') >= 0) {
+      router.push(`${rest[0]}&${qs.stringify(queryURL)}`)
+    } else {
+      router.push(`${rest[0]}?${qs.stringify(queryURL)}`)
+    }
+  }
+}
 let router = new Router({
   routes: [
     {
