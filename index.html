@@ -54,4 +54,25 @@
 <div id="app"></div>
 <!-- built files will be auto injected -->
 </body>
+<script>
+  AmapApp.Bridge.ready(function (res) {
+    /**
+     * 获取用户id.
+     * 获取用户id.
+     * @param {Function} handler 回调函数。
+     *    参数为对象，如果其属性 userid 为空则登录失败||未登录，否则登录成功||已登录
+     * @param {Boolean} [默认onlyGetId=false] 可选，是否只获取id，false的话用户未登录时就会自动跳转登录面板
+     * @param {Boolean} [默认needRelogin=false] 可选，是否强制重新登录
+     */
+    AmapApp.Bridge.send({
+      "action": "addPhoto",
+      "businessName": "测试",
+      "titleText": "测试",
+      "maxLength": "300",
+      "onlyCamera": false//(是否直接调起摄像头拍照 （7.7.8+支持）),
+    },function (base64) {
+      document.write('<div>base64 = ' + base64 + '</div>');
+    },false,true)
+  });
+</script>
 </html>
