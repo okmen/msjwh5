@@ -20,10 +20,10 @@
       <router-link :to="{ path: '/userAgreement/szjj_hander_id', query: queryURL }">机动车委托异地定期检验申报</router-link>
     </div>
     <div class="query-link">
-      <router-link :to="{ path: '/subscribeServiceMsjw', query: queryURL }">民生警务办理类服务</router-link>
+      <router-link :to="{ path: '/transactionServiceMsjw', query: queryURL }">民生警务办理类服务</router-link>
     </div>
     <div class="query-link">
-      <router-link :to="{ path: '/transactionServiceMsjw', query: queryURL }">民生警务预约类服务</router-link>
+      <router-link :to="{ path: '/subscribeServiceMsjw', query: queryURL }">民生警务预约类服务</router-link>
     </div>
   </div>
 </template>
