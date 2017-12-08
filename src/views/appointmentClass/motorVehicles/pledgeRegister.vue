@@ -209,6 +209,7 @@
           this.showTimeList = !this.showTimeList
           return
         }
+        if (this.$_myMinxin_beforeSubmit({dateListOne: '请选择预约日期'})) return
         this.$axios.post(getAppTimes, {
           businessTypeId: this.businessTypeId,
           orgId: this.appointmentLocationOne,

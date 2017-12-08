@@ -8,7 +8,6 @@ if (process.env.NODE_ENV === 'development') {
     commonUrl = 'http://gzh.stc.gov.cn/api/' // 正式环境
   }
 }
-
 export const getUserM = `${commonUrl}msjw/getMSJWinfo.html` // 民生警务获取用户信息
 
 export const userAgreement = `${commonUrl}user/getDocumentationORMByNoticeKey.html` // 用户须知接口
@@ -46,3 +45,5 @@ export const verificatioCode = `${commonUrl}user/verificatioCode.html` // 验证
 export const inspectionDeclaration = `${commonUrl}handleservice/inspectionDeclaration.html` // 机动车委托异地定期检验申报
 
 export const inspectionDeclarationQuery = `${commonUrl}handleservice/inspectionDeclarationQuery.html` // 机动车委托异地定期检验申报查询
+
+export const getBusinessTypes = `${commonUrl}bookingbusiness/getBusinessTypes.html` // 获取菜单

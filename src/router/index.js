@@ -23,12 +23,20 @@ Router.prototype.selfPush = function (...rest) {
 let router = new Router({
   routes: [
     {
-      path: '/userAgreement/:id',
+      path: '/userAgreement/:id', // 办理类
       name: 'userAgreement',
       meta: {
         title: '用户须知'
       },
       component: () => import('@/components/userAgreement')
+    },
+    {
+      name: 'userAgreement_precontract', // 预约类
+      path: '/userAgreement_precontract',
+      meta: {
+        title: '用户须知'
+      },
+      component: () => import('@/components/userAgreement_precontract.vue')
     },
     {
       path: '/affirmInfo',
