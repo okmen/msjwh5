@@ -3,7 +3,7 @@ export default [
     path: '/subscribeService',
     name: 'subscribeService',
     meta: {
-      title: '办理业务'
+      title: '办理类服务'
     },
     component: () => import('@/views/transactionClass/subscribeService')
   },
@@ -11,7 +11,7 @@ export default [
     path: '/transactionService',
     name: 'transactionService',
     meta: {
-      title: '办理业务'
+      title: '办理类服务'
     },
     component: () => import('@/views/transactionClass/transactionService')
   },
@@ -19,7 +19,7 @@ export default [
     path: '/subscribeServiceMsjw',
     name: 'subscribeServiceMsjw',
     meta: {
-      title: '办理业务'
+      title: '办理类服务'
     },
     component: () => import('@/views/transactionClass/subscribeServiceMsjw')
   },
@@ -27,7 +27,7 @@ export default [
     path: '/transactionServiceMsjw',
     name: 'transactionServiceMsjw',
     meta: {
-      title: '预约业务'
+      title: '预约类服务'
     },
     component: () => import('@/views/transactionClass/transactionServiceMsjw')
   },
@@ -47,14 +47,5 @@ export default [
       loginStatus: true
     },
     component: () => import('@/views/transactionClass/drivingLicence/changeCard')
-  },
-  {
-    path: '/replaceQualifiedMark',
-    name: 'replaceQualifiedMark',
-    meta: {
-      title: '补换检验合格标志',
-      loginStatus: true
-    },
-    component: () => import('@/views/transactionClass/drivingLicence/replaceQualifiedMark')
   }
 ]

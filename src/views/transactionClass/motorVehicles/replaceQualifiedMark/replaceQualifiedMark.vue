@@ -15,12 +15,12 @@
     <g-input title="" v-model="mailingAddress" placeholder="请输入详细地址"></g-input>
     <group title="请按示例图上传以下证件照片">
       <div class="upload-group">
-        <g-upload text="身份证（正面)" id="file1" :bg="require('../../../assets/images/IDcard-front.png')" v-model="IDCardFront"></g-upload>
-        <g-upload text="身份证（反面)" id="file2" :bg="require('../../../assets/images/IDcard-back.png')" v-model="IDCardBack"></g-upload>
-        <g-upload text="机动车登记证书" id="file3" :bg="require('../../../assets/images/register-credential.png')" v-model="registerCredential"></g-upload>
-        <g-upload text="居住证正面" id="file4" :bg="require('../../../assets/images/residence-permit-f.png')" v-model="residencePermitF" v-show="censusIndex === 1"></g-upload>
-        <g-upload text="居住证反面" id="file5" :bg="require('../../../assets/images/residence-permit-b.png')" v-model="residencePermitB" v-show="censusIndex === 1"></g-upload>
-        <g-upload text="境外人员临住表" id="file6" :bg="require('../../../assets/images/out-board.png')" v-model="board" v-show="censusIndex === 2"></g-upload>
+        <g-upload text="身份证（正面)" id="file1" :bg="require('@/assets/images/IDcard-front.png')" v-model="IDCardFront"></g-upload>
+        <g-upload text="身份证（反面)" id="file2" :bg="require('@/assets/images/IDcard-back.png')" v-model="IDCardBack"></g-upload>
+        <g-upload text="机动车登记证书" id="file3" :bg="require('@/assets/images/register-credential.png')" v-model="registerCredential"></g-upload>
+        <g-upload text="居住证正面" id="file4" :bg="require('@/assets/images/residence-permit-f.png')" v-model="residencePermitF" v-show="censusIndex === 1"></g-upload>
+        <g-upload text="居住证反面" id="file5" :bg="require('@/assets/images/residence-permit-b.png')" v-model="residencePermitB" v-show="censusIndex === 1"></g-upload>
+        <g-upload text="境外人员临住表" id="file6" :bg="require('@/assets/images/out-board.png')" v-model="board" v-show="censusIndex === 2"></g-upload>
       </div>
     </group>
     <g-button text="确认信息" @click.native="confirmInfo" v-if="cars.length"></g-button>
