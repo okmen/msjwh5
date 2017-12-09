@@ -33,6 +33,7 @@ export default {
         }
       })
     } else if (source === 'G') {
+      window.AmapApp.ready(function () {})
       this.showpage = true
       this.$store.commit('updataUser', {
         cars: JSON.parse(localStorage.getItem('cars')),
