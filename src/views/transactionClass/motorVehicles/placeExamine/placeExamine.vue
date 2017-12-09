@@ -13,7 +13,8 @@
     <g-input title="邮政编码" v-model="postalcode" placeholder="请输入邮政编码"></g-input>
     <g-select-one class="changeCard-set" title="深圳市" type="邮寄地址" :data="areaSelectData" v-model="areaSelect"></g-select-one>
     <g-input title="" v-model="mailingAddress" placeholder="请输入详细地址"></g-input>
-    <g-button text="确认信息" @click.native="confirmInfo"></g-button>
+    <g-button text="确认信息" @click.native="confirmInfo" v-if="cars.length"></g-button>
+    <g-button text="确认信息" v-if="!cars.length" type="gray"></g-button>
   </div>
 </template>
 verificatioCode
@@ -74,9 +75,6 @@ export default {
     },
     queryURL () {
       return this.$store.getters.queryURL
-    },
-    user () {
-      return Object.assign({}, this.$store.state.user)
     }
   },
   watch: {
@@ -102,7 +100,6 @@ export default {
         }
       })
       this.vehicleData = PlateData
-      console.log(this.vehicleData)
       this.carriageNumber = this.vehicleData[0].value
       this.vehicle = this.vehicleData[0].value
       this.plateType = this.vehicleData[0].str
@@ -115,6 +112,7 @@ export default {
     this.mobile = val.mobilePhone
   },
   mounted: function () {
+    // 获取受托机构
     axios.get(getIssuing).then(josn => {
       let trusData = []
       josn.data.map(item => {
@@ -128,8 +126,7 @@ export default {
     // 发送验证码
     getCode (count) {
       let phonedata = {
-        mobilephone: '',
-        // mobilephone: this.mobile,
+        mobilephone: this.mobile,
         businessType: 'szjj'
       }
       axios.post(sendSMS, phonedata).then(data => {
@@ -164,8 +161,8 @@ export default {
         mailingAddress: '请输入详细地址'
       }
       if (this.$_myMinxin_beforeSubmit(obj)) return
-      // this.verificationFn()
-      this.subFn()
+      this.verificationFn()
+      // this.subFn()
     },
     subFn () {
       let officeName = this.$refs.officeName.currentName
@@ -201,4 +198,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+  .placeExamine {
+    padding-top: 20px;
+  }
 </style>

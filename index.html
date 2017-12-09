@@ -1,49 +1,62 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>minshengjingwu-h5</title>
-    <script src="./static/exif.min.js"></script>
-    <script>
-      (function(){
-        var ua = window.navigator.userAgent;
-        var browserCls = [];
-        if (/android/i.test(ua)) {
-          browserCls.push('android')
-        }
-        if (/os x/i.test(ua)) {
-          browserCls.push('ios')
-        }
-        if (/micromessenger/i.test(ua)) {
-          browserCls.push('wechat')
-        }
-        if (window.isMobile) {
-          browserCls.push('mobile')
-        } else {
-          browserCls.push('desktop')
-        }
-        document.documentElement.className += ' ' + browserCls.join(' ')
-      }());
-      function getMapInfoCallback (data) {
-        var setItemEvent = new Event("setItemEvent")
-        setItemEvent.mapData = data
-        window.dispatchEvent(setItemEvent)
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>minshengjingwu-h5</title>
+  <script src="./static/exif.min.js"></script>
+  <script src="./static/GDUploadImg.js"></script>
+  <script src="http://shualian.rxshc.com/vconsole.js"></script>
+  <script>
+    var vConsole = new VConsole()
+  </script>
+  <script>
+    (function () {
+      var ua = window.navigator.userAgent
+      var browserCls = []
+      if (/android/i.test(ua)) {
+        browserCls.push('android')
       }
-      function searchCallback (data) {
-        var searchCallback = new Event("searchCallback")
-        searchCallback.searchData = data
-        window.dispatchEvent(searchCallback)
+      if (/os x/i.test(ua)) {
+        browserCls.push('ios')
       }
-      function mapSubmit (data) {
-        var mapSubmit = new Event("mapSubmit")
-        mapSubmit.submitData = data
-        window.dispatchEvent(mapSubmit)
+      if (/micromessenger/i.test(ua)) {
+        browserCls.push('wechat')
       }
-    </script>
-  </head>
-  <body>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+      if (window.isMobile) {
+        browserCls.push('mobile')
+      } else {
+        browserCls.push('desktop')
+      }
+      document.documentElement.className += ' ' + browserCls.join(' ')
+    }())
+
+    function getMapInfoCallback (data) {
+      var setItemEvent = new Event('setItemEvent')
+      setItemEvent.mapData = data
+      window.dispatchEvent(setItemEvent)
+    }
+
+    function searchCallback (data) {
+      var searchCallback = new Event('searchCallback')
+      searchCallback.searchData = data
+      window.dispatchEvent(searchCallback)
+    }
+
+    function mapSubmit (data) {
+      var mapSubmit = new Event('mapSubmit')
+      mapSubmit.submitData = data
+      window.dispatchEvent(mapSubmit)
+    }
+  </script>
+</head>
+<body>
+<div id="app"></div>
+<!-- built files will be auto injected -->
+</body>
+<script>
+  AmapApp.Bridge.ready(function (res) {
+    console.log('我进去AmapApp.Bridge')
+  });
+</script>
 </html>

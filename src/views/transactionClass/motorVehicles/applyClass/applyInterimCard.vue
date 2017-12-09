@@ -38,13 +38,13 @@
   export default {
     data () {
       return {
+        licenseSelectMassage: '申请机动车临牌',
+        showIndex: '0',
         carOptList: [
           {name: '国产', choose: true, value: 'A'},
           {name: '进口', choose: false, value: 'B'}
         ],
-        licenseSelectMassage: '申请机动车临牌',
         censusRegister: '1', // 户籍所在地
-        showIndex: '0',
         carOrigin: 'A', // 车辆产地
         plateNumberOne: '',
         carTypeOne: 'K31',
@@ -55,14 +55,12 @@
         outBoard: '',
         carCertificateNumber: '',  // 车主证件号码
         plateToCarNumber: {},  // 车牌号对应车主证件号码
-        allOwnersName: {},
-        ownersName: '',
         behindTheFrame4Digits: '', // 车架号
         engineNumber: '', // 发动机号
         cartModels: '', // 车辆型号
-        mobilephone: window.localStorage.getItem('mobilePhone'), // 手机号码
-        identityCard: window.localStorage.getItem('identityCard'), // 身份证号码
-        userName: window.localStorage.getItem('userName'), // 姓名
+        mobilephone: '', // 手机号码
+        identityCard: '', // 身份证号码
+        userName: '', // 姓名
         IDcardFront: '', // 身份证正面
         IDcarfBack: '', // 身份证反面
         dealService1: '', // 购置发票
@@ -82,23 +80,6 @@
     },
     mixins: [beforeSubmit],
     computed: {
-      certificateNumber () {
-        return window.localStorage.getItem('identityCard')
-      },
-      plateNumber () {
-        var plateInfo = {
-          title: '车牌号码',
-          option: []
-        }
-        JSON.parse(window.localStorage.getItem('cars')).map(item => {
-          plateInfo.option.push({'str': item.myNumberPlate})
-          this.plateToCarNumber[item.myNumberPlate] = item.identityCard
-          this.allOwnersName[item.myNumberPlate] = item.name
-        })
-        this.plateNumberOne = plateInfo.option[0].str
-        this.defaultPlateNumber = plateInfo.option[0].str
-        return plateInfo
-      },
       areaSelectData () {
         return this.$store.state.cityAreaS
       },
@@ -107,18 +88,15 @@
       },
       selectCensusRegister () {
         return this.$store.state.censusRegister
+      },
+      getUser () {
+        return this.$store.state.user
       }
     },
     methods: {
       getCensusRegisterIndex (index) {
-        console.log(index)
         this.showIndex = index
       },
-      // getPlateNumber (val) {
-      //   this.plateNumberOne = val
-      //   this.carCertificateNumber = this.plateToCarNumber[val]
-      //   this.ownersName = this.allOwnersName[val]
-      // },
       confirmInfo () {
         let obj = {
           userName: '请输入姓名',
@@ -185,7 +163,9 @@
     },
     mounted () {
       this.carCertificateNumber = this.plateToCarNumber[this.plateNumberOne]
-      this.ownersName = this.allOwnersName[this.plateNumberOne]
+      this.userName = this.getUser.userName
+      this.mobilephone = this.getUser.mobilePhone
+      this.identityCard = this.getUser.identityCard
     }
   }
 </script>

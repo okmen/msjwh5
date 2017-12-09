@@ -1,6 +1,6 @@
 <template>
   <div class="pledge-register form">
-    <g-input title="业务类型" value="抵押/解押登记现场办理"></g-input>
+    <g-input title="业务类型" v-model="typeName"></g-input>
     <div class="line-10"></div>
     <g-input title="车主姓名" placeholder="请输入车主姓名" v-model="carName"></g-input>
     <g-select title="证件名称" :data="certificateList" v-model="certificateListOne"></g-select>
@@ -59,6 +59,7 @@
   export default {
     data () {
       return {
+        typeName: '',
         carName: '',
         verificationCode: '',
         IDCard: '',
@@ -86,14 +87,17 @@
     },
     computed: {
       businessTypeId () {
-        return '4028823f4fabb851014fabc3f28a00b1'
+        // return '4028823f4fabb851014fabc3f28a00b1'
+        return this.$route.query.id
       },
       code () {
-        return 'JD37'
+        // return 'JD37'
+        return this.$route.query.codeName
       }
     },
     mixins: [beforeSubmit],
     created () {
+      this.typeName = this.$route.query.name
       this.$axios.post(getPageInit, {
         businessTypeId: this.businessTypeId,
         type: '1'
@@ -209,6 +213,7 @@
           this.showTimeList = !this.showTimeList
           return
         }
+        if (this.$_myMinxin_beforeSubmit({dateListOne: '请选择预约日期'})) return
         this.$axios.post(getAppTimes, {
           businessTypeId: this.businessTypeId,
           orgId: this.appointmentLocationOne,

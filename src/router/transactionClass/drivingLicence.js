@@ -1,19 +1,35 @@
 export default [
   {
-    path: '/carService',
-    name: 'carService',
+    path: '/subscribeService',
+    name: 'subscribeService',
     meta: {
-      title: '办理业务'
+      title: '办理类服务'
     },
-    component: () => import('@/views/transactionClass/carService')
+    component: () => import('@/views/transactionClass/subscribeService')
   },
   {
-    path: '/cardService',
-    name: 'cardService',
+    path: '/transactionService',
+    name: 'transactionService',
     meta: {
-      title: '办理业务'
+      title: '办理类服务'
     },
-    component: () => import('@/views/transactionClass/cardService')
+    component: () => import('@/views/transactionClass/transactionService')
+  },
+  {
+    path: '/subscribeServiceMsjw',
+    name: 'subscribeServiceMsjw',
+    meta: {
+      title: '预约类服务'
+    },
+    component: () => import('@/views/transactionClass/subscribeServiceMsjw')
+  },
+  {
+    path: '/transactionServiceMsjw',
+    name: 'transactionServiceMsjw',
+    meta: {
+      title: '办理类服务'
+    },
+    component: () => import('@/views/transactionClass/transactionServiceMsjw')
   },
   {
     path: '/annualExaminations',
@@ -31,14 +47,5 @@ export default [
       loginStatus: true
     },
     component: () => import('@/views/transactionClass/drivingLicence/changeCard')
-  },
-  {
-    path: '/replaceQualifiedMark',
-    name: 'replaceQualifiedMark',
-    meta: {
-      title: '补换检验合格标志',
-      loginStatus: true
-    },
-    component: () => import('@/views/transactionClass/drivingLicence/replaceQualifiedMark')
   }
 ]

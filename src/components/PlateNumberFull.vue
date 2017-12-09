@@ -44,5 +44,6 @@
   padding-left: 0;
   padding-top: 0;
   padding-bottom: 0;
+  padding-right: 0;
 }
 </style>

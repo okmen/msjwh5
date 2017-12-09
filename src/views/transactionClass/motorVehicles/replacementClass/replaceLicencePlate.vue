@@ -7,11 +7,11 @@
     <g-input title="证件号码" v-model="certificateNumber" disabled></g-input>
     <g-input title="车主证件号码" v-model="carCertificateNumber" disabled></g-input>
     <g-select title="车牌号码" :data="plateNumber" v-model="plateNumberOne" @getSelected="getPlateNumber" ref="plateNumberName"></g-select>
-    <g-select title="车牌类型" :data="plateType.option" v-model="plateTypeOne" @getSelected="getPlateType" ref="plateTypeStr"></g-select>
-    <g-select title="户籍所在地" :data="censusRegister.option" v-model="censusRegisterOne" @getSelected="getCensusRegisterIndex"></g-select>
+    <g-select title="车牌类型" :data="selectPlateType" v-model="plateTypeOne" @getSelected="getPlateType" ref="plateTypeStr"></g-select>
+    <g-select title="户籍所在地" :data="selectCensusRegister" v-model="censusRegisterOne" @getSelected="getCensusRegisterIndex"></g-select>
     <g-input title="收件人姓名" v-model="recipientName" maxlength="18" placeholder="请输入收件人姓名"></g-input>
     <g-input title="收件人手机" v-model="recipientPhone" maxlength="11" placeholder="请输入收件人手机号码"></g-input>
-    <g-select-one title="深圳市" type="收件人地址" :data="recipientInfo.option" v-model="recipientAddressRegion"></g-select-one>
+    <g-select-one title="深圳市" type="收件人地址" :data="areaSelectData" v-model="recipientAddressRegion"></g-select-one>
     <g-input v-model="recipientAddressDetail" placeholder="请输入详细地址"></g-input>
     <g-input title="住所地址" v-model="homeAddress" placeholder="请输入住所地址"></g-input>
     <group title="请按示例图上传以下证件照片">
@@ -36,6 +36,7 @@
   export default {
     data () {
       return {
+        serviceType: '补领机动车号牌',
         showIndex: 0,
         imgOne1: require('@/assets/images/IDcard-front.png'),
         imgOne2: require('@/assets/images/IDcard-back.png'),
@@ -43,46 +44,7 @@
         imgOne4: require('@/assets/images/out-board.png'),
         imgOne5: require('@/assets/images/residence-permit-f.png'),
         imgOne6: require('@/assets/images/residence-permit-b.png'),
-        plateType: {
-          title: '车牌类型',
-          option: [
-            {name: '蓝牌', value: '02'},
-            {name: '黄牌', value: '01'},
-            {name: '黑牌', value: '06'},
-            {name: '个性牌', value: '02'},
-            {name: '小型新能源车号牌', value: '52'},
-            {name: '大型新能源车号牌', value: '51'}
-          ]
-        },
-        optname: [
-          {'str': '深户', choose: true, id: '1'},
-          {'str': '外籍户口', choose: false, id: '0'}
-        ],
-        recipientInfo: {
-          title: '深圳市',
-          option: [
-            {name: '福田区', value: '福田区'},
-            {name: '罗湖区', value: '罗湖区'},
-            {name: '南山区', value: '南山区'},
-            {name: '宝安区', value: '宝安区'},
-            {name: '龙岗区', value: '龙岗区'},
-            {name: '盐田区', value: '盐田区'},
-            {name: '龙华新区', value: '龙华新区'},
-            {name: '光明新区', value: '光明新区'},
-            {name: '坪山新区', value: '坪山新区'},
-            {name: '大鹏新区', value: '大鹏新区'}
-          ]
-        },
         censusRegisterOne: '1',
-        censusRegister: {
-          title: '户籍所在地',
-          option: [
-            {name: '深户', value: '1'},
-            {name: '非深户', value: '0'},
-            {name: '外籍', value: '0'}
-          ]
-        },
-        serviceType: '补领机动车号牌',
         plateNumberOne: '0',
         plateNumberName: '',
         plateTypeOne: '02',
@@ -93,7 +55,6 @@
         homeAddress: '',  // 住所地址
         IDcardFront: '',
         IDcarfBack: '',
-        degree45: '',
         registerCredential: '',
         outBoard: '',
         residencePermitF: '',  // 居住证正面
@@ -121,9 +82,9 @@
           title: '车牌号码',
           option: []
         }
-        let storage = window.localStorage.getItem('cars')
-        if (!JSON.parse(storage).length) return plateInfo.option
-        JSON.parse(storage).map((item, index) => {
+        let cars = this.$store.state.user.cars
+        if (!cars.length) return plateInfo.option
+        cars.map((item, index) => {
           if (+item.isMySelf === 0) {
             plateInfo.option.push({'name': item.myNumberPlate, 'value': index + ''})
             this.plateToCarNumber[index] = item.identityCard
@@ -131,6 +92,15 @@
           }
         })
         return plateInfo.option
+      },
+      areaSelectData () {
+        return this.$store.state.cityAreaS
+      },
+      selectPlateType () {
+        return this.$store.state.plateType
+      },
+      selectCensusRegister () {
+        return this.$store.state.censusRegister
       }
     },
     methods: {
@@ -144,7 +114,6 @@
       },
       getPlateType () {
         this.plateTypeStr = this.$refs.plateTypeStr.currentName
-        console.log(this.plateTypeStr)
       },
       confirmInfo () {
         let obj = {
@@ -156,7 +125,6 @@
           registerCredential: '请上传机动车登记证书'
         }
         if (this.$_myMinxin_beforeSubmit(obj)) return
-        if (this.$verification.isChinese(this.recipientName)) return
         if (this.$verification.isPhone(this.recipientPhone)) return
         if ((!this.residencePermitF) && (this.censusRegister !== '1') && (this.showIndex === '1')) {
           this.$toast({message: '请上传居住证正面'})
@@ -204,7 +172,7 @@
     mounted () {
       this.carCertificateNumber = this.plateToCarNumber[this.plateNumberOne]
       this.ownersName = this.allOwnersName[this.plateNumberOne]
-      this.certificateNumber = window.localStorage.getItem('identityCard')
+      this.certificateNumber = this.$store.state.user.identityCard
       this.plateNumberName = this.$refs.plateNumberName.currentName
     }
   }

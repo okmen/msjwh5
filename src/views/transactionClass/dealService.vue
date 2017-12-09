@@ -2,21 +2,21 @@
   <div class="dealService-outer">
     <!--Tab切换栏-->
     <div class="nav">
-      <div class="nav-tab" :class="{ 'active': cur_tab == 'cardService'}" @click="curTab('cardService')">办理类</div>
-      <div class="nav-tab" :class="{ 'active': cur_tab == 'carService'}" @click="curTab('carService')">预约类</div>
+      <div class="nav-tab" :class="{ 'active': cur_tab == 'transactionService'}" @click="curTab('transactionService')">办理类</div>
+      <div class="nav-tab" :class="{ 'active': cur_tab == 'subscribeService'}" @click="curTab('subscribeService')">预约类</div>
     </div>
     <component :is="currentView"></component>
   </div>
 </template>
 <script>
-  import carService from './carService'
-  import cardService from './cardService'
+  import subscribeService from './subscribeService'
+  import transactionService from './transactionService'
   export default {
     name: 'serviceTab',
     data () {
       return {
-        currentView: 'cardService',
-        cur_tab: 'cardService'
+        currentView: 'transactionService',
+        cur_tab: 'transactionService'
       }
     },
     methods: {
@@ -26,8 +26,8 @@
       }
     },
     components: {
-      carService,
-      cardService
+      subscribeService,
+      transactionService
     }
   }
 </script>
