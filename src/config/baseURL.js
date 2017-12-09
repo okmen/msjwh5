@@ -8,6 +8,10 @@ if (process.env.NODE_ENV === 'development') {
     commonUrl = 'http://gzh.stc.gov.cn/api/' // 正式环境
   }
 }
+
+// 民生警务获取登录状态接口
+export const MSJWloginStatus = `https://msjwt.szga.gov.cn/govnetUserAuthProvider/services/userCenter/userSession`
+
 export const getUserM = `${commonUrl}msjw/getMSJWinfo.html` // 民生警务获取用户信息
 
 export const userAgreement = `${commonUrl}user/getDocumentationORMByNoticeKey.html` // 用户须知接口

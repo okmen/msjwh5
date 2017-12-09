@@ -10,6 +10,7 @@ import './config/detect-browser'
 import './config/rem'
 import './utils/regExp'
 import './utils/utils'
+import './utils/M-wx'
 import './utils/axios'
 
 // import { InfiniteScroll, Indicator, DatetimePicker, MessageBox, Swipe, SwipeItem, Popup, Loadmore, Cell } from 'mint-ui'
