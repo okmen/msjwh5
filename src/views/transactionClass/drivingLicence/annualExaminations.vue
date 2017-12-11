@@ -108,7 +108,7 @@
             JZZA: this.IDCardFront || '',      // 居住证照片 页面不给居住证上传入口 直接传与身份证正反面同样的数据
             JZZB: this.IDCardBack || '',
             loginUser: window.localStorage.getItem('identityCard'),
-            userSource: 'C',
+            userSource: 'M',
             identificationNO: 'A'
           }
         }
