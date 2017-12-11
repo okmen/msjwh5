@@ -6,9 +6,6 @@ let ua = window.navigator.userAgent; //浏览器版本
 let url = window.location.href;
 let data = {
   hostUrl: encodeURIComponent(url.split('#')[0]),
-  hostUrl1: url.split('#')[1],
-  url: encodeURIComponent(url),
-  openIdURL: encodeURIComponent(url.split('?openId')[0])
 }
 
 if (/MicroMessenger/i.test(ua)) {
