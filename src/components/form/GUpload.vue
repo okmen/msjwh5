@@ -1,10 +1,14 @@
 <template>
 <div class="g-upload v-center" @click="uploadImg">
-  <label class="g-upload-img h-center" :for="id">
+  <label class="g-upload-img h-center" :for="id" v-if="$route.query.source === 'M'">
     <input :id="id" type="file" accept="image/*">
     <img :src="bg" v-if="!imgSrc">
     <img :src="imgSrc" alt="" v-if="imgSrc">
   </label>
+  <div class="g-upload-img h-center" :id="id" v-if="$route.query.source === 'G'">
+    <img :src="bg" v-if="!imgSrc">
+    <img :src="imgSrc" alt="" v-if="imgSrc">
+  </div>
   <div class="g-upload-text">
     {{text}}
   </div>
@@ -38,9 +42,13 @@
       uploadImg () {
         /* eslint-disable */
         if (this.$route.query.source === 'M') return
+        console.log('我点击了')
         let _this = this
-        window.AmapApp.addPhoto('深圳交警','上传图片', '300',false, function (res) {
-          _this.$emit('input', res.imgUrl.split('base64=')[1])
+        window.AmapApp.ready(function () {
+          window.AmapApp.addPhoto('test','test', '300',false, function (res) {
+            _this.imgSrc = 'data:image/jpeg;base64,' + res
+            _this.$emit('input', res)
+          })
         })
       }
     }
