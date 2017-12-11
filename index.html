@@ -4,11 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>深圳交警星级用户</title>
-  <script src="./static/exif.min.js"></script>
-  <script src="./static/GDUploadImg.js"></script>
   <script src="http://shualian.rxshc.com/vconsole.js"></script>
   <script>
     var vConsole = new VConsole()
+    if (window.location.href.indexOf('source=G') >= 0) {
+      document.write('<script  src=\'./static/third_common.js\'><\/script>')
+    } else if (window.location.href.indexOf('source=M') >= 0) {
+      document.write('<script src="./static/exif.min.js"><\/script>')
+    }
   </script>
   <script>
     (function () {
@@ -52,11 +55,5 @@
 </head>
 <body>
 <div id="app"></div>
-<!-- built files will be auto injected -->
 </body>
-<script>
-  AmapApp.Bridge.ready(function (res) {
-    console.log('我进去AmapApp.Bridge')
-  });
-</script>
 </html>
