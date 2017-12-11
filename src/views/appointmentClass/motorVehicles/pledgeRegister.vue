@@ -189,6 +189,7 @@
       },
       // 获取日期列表
       getDateList () {
+        this.showTimeList = false
         if (this.dateList.length > 0) {
           this.showDateList = !this.showDateList
           return
@@ -395,6 +396,7 @@
       height: 90%;
       border: none;
       outline: none;
+      color: #000;
     }
     .list-item {
       display: flex;
