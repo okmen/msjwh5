@@ -228,7 +228,7 @@ export default {
     line-height: 56px;
     border-radius: 8px;
     text-align: center;
-    background-color: #09bb07;
+    background-color: #174ed0;
     color: #fff;
     margin-left: 16px;
   }
