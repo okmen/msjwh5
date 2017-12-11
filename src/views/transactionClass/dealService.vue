@@ -3,7 +3,7 @@
     <!--Tab切换栏-->
     <div class="nav">
       <div class="nav-tab" :class="{ 'active': cur_tab == 'subscribeService'}" @click="curTab('subscribeService')">预约类服务</div>
-      <div class="nav-tab" :class="{ 'active': cur_tab == 'transactionService'}" @click="curTab('transactionService')">办理类服务</div>
+      <div class="nav-tab"  :class="{ 'active': cur_tab == 'transactionService'}" @click="curTab('transactionService')">办理类服务</div>
     </div>
     <component :is="currentView"></component>
   </div>

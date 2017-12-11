@@ -16,22 +16,6 @@ export default [
     component: () => import('@/views/transactionClass/transactionService')
   },
   {
-    path: '/subscribeServiceMsjw',
-    name: 'subscribeServiceMsjw',
-    meta: {
-      title: '预约类服务'
-    },
-    component: () => import('@/views/transactionClass/subscribeServiceMsjw')
-  },
-  {
-    path: '/transactionServiceMsjw',
-    name: 'transactionServiceMsjw',
-    meta: {
-      title: '办理类服务'
-    },
-    component: () => import('@/views/transactionClass/transactionServiceMsjw')
-  },
-  {
     path: '/annualExaminations',
     name: 'annualExaminations',
     meta: {

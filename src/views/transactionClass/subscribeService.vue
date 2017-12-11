@@ -1,7 +1,6 @@
 <template>
   <div class="carService-outer">
-    <div class="query-link" v-for="(item, index) in menuArr" v-if="item.name === '抵押/解押登记现场办理'">
-      <!-- <router-link :to="{ path: '/userAgreement/jszbzhz', query: queryURL }">驾驶证补换证</router-link> -->
+    <div class="query-link" :class="{ 'subscribeService': source === 'M'}" v-for="(item, index) in menuArr" v-if="item.name === '抵押/解押登记现场办理'">
       <a href="javascript:;" @click="routerLink(index)">{{ item.name }}</a>
     </div>
   </div>
@@ -13,6 +12,7 @@
     name: 'carService',
     data () {
       return {
+        source: '',
         menuArr: []
       }
     },
@@ -47,10 +47,14 @@
       }
     },
     mounted () {
+      this.source = this.$store.state.core.source
       this.initiate()
     }
   }
 </script>
 <style lang="less" scopsd>
   @import '../../assets/style/subscribeService';
+  .subscribeService {
+    margin-left: 30px;
+  }
 </style>

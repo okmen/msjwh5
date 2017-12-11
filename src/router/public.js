@@ -16,7 +16,7 @@ export default [
     path: '/dealService',
     name: 'dealService',
     meta: {
-      title: '业务列表',
+      title: '机动车业务',
       loginStatus: true
     },
     component: () => import('@/views/transactionClass/dealService')

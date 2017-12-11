@@ -1,61 +1,35 @@
 <template>
-  <div class="dealService-outer">
-    <!--Tab切换栏-->
-    <div class="nav">
-      <div class="nav-tab" :class="{ 'active': cur_tab == 'subscribeServiceMsjw'}" @click="curTab('subscribeServiceMsjw')">预约类服务</div>
-      <div class="nav-tab" :class="{ 'active': cur_tab == 'transactionServiceMsjw'}" @click="curTab('transactionServiceMsjw')">办理类服务</div>
+  <!-- 驾驶证类-驾驶证业务导航页 -->
+  <div class="carService-outer">
+    <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
+      <router-link :to="{ path: '/userAgreement/jszbzhz', query: queryURL }">驾驶证补换证</router-link>
     </div>
-    <component :is="currentView"></component>
+    <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
+      <router-link :to="{ path: '/userAgreement/jszns', query: queryURL }">驾驶证年审</router-link>
+    </div>
   </div>
 </template>
 <script>
-  import subscribeServiceMsjw from './subscribeServiceMsjw'
-  import transactionServiceMsjw from './transactionServiceMsjw'
   export default {
-    name: 'serviceTab',
+    name: 'cardService',
     data () {
       return {
-        currentView: 'subscribeServiceMsjw',
-        cur_tab: 'subscribeServiceMsjw'
+        source: ''
       }
     },
-    methods: {
-      curTab (str) {
-        this.currentView = str
-        this.cur_tab = str
+    computed: {
+      queryURL () {
+        return this.$store.getters.queryURL
       }
     },
-    components: {
-      subscribeServiceMsjw,
-      transactionServiceMsjw
+    mounted () {
+      this.source = this.$store.state.core.source
     }
   }
 </script>
 <style lang="less" scopsd>
-  .dealService-outer {
-    position: absolute;
-    left: 0;
-    right:0;
-    top:0;
-    background-color: #fff;
-    .nav{
-      font-size: 0;
-      background-color:#fff;
-      border-bottom:1px solid #dbdbdb;
-      .nav-tab {
-        font-size: 1rem;
-        display: inline-block;
-        width: 50%;
-        text-align: center;
-        height: 100px;
-        line-height: 100px;
-        &.active {
-          color: #174ed0;
-          border-bottom: 6px solid #174ed0;
-        }
-      }
-    }
+  @import '../../assets/style/subscribeService';
+  .subscribeService {
+    margin-left: 30px;
   }
-
-
 </style>
