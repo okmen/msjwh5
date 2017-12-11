@@ -20,5 +20,14 @@ export default [
       loginStatus: true
     },
     component: () => import('@/views/transactionClass/dealService')
+  },
+  {
+    path: '/dealServiceMsjw',
+    name: 'dealServiceMsjw',
+    meta: {
+      title: '业务列表',
+      loginStatus: true
+    },
+    component: () => import('@/views/transactionClass/dealServiceMsjw')
   }
 ]
