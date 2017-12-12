@@ -95,7 +95,7 @@ export default {
     if (this.cars.length) {
       let PlateData = []
       this.cars.map(item => {
-        if (item.isMySelf === '0') {
+        if (+item.isMySelf === 0) {
           PlateData.push({name: item.myNumberPlate, value: item.behindTheFrame4Digits, str: item.plateType})
         }
       })
