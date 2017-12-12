@@ -159,7 +159,7 @@ export default {
   created () {
     let val = this.$store.state.user
     this.cars = val.cars
-    if (this.cars.length !== 0) {
+    if (this.cars.length) {
       let PlateData = []
       this.cars.map(item => {
         if (item.isMySelf === '0') {
