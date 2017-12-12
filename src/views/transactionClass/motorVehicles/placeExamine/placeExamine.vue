@@ -4,11 +4,11 @@
     <g-input title="车牌类型" v-model="carSelectData[plateType]" readonly></g-input>
     <g-select title="所有权" :data="ownerData" v-model="owner"></g-select>
     <g-input title="车架号" v-model="carriageNumber" readonly></g-input>
-    <g-input title="车主身份证" v-model="identityCard" placeholder="请输入收件人姓名"></g-input>
-    <g-input title="车主姓名" v-model="name" placeholder="请输入收件人姓名"></g-input>
+    <g-input title="车主身份证" v-model="identityCard" placeholder="请输入车主身份证"></g-input>
+    <g-input title="车主姓名" v-model="name" placeholder="请输入车主姓名"></g-input>
     <g-select title="受托机构" ref="trusteeName" :data="trusteeData" v-model="trusteeTimeMsg"></g-select>
     <g-input title="收件人姓名" v-model="addresseeName" placeholder="请输入收件人姓名" readonly></g-input>
-    <g-input title="联系电话" v-model="mobile" placeholder="请输入收件人姓名" readonly></g-input>
+    <g-input title="联系电话" v-model="mobile" placeholder="请输入联系电话" readonly></g-input>
     <get-verification-code :method="getCode" v-model="identifying"></get-verification-code>
     <g-input title="邮政编码" v-model="postalcode" placeholder="请输入邮政编码"></g-input>
     <g-select-one class="changeCard-set" title="深圳市" type="邮寄地址" :data="areaSelectData" v-model="areaSelect"></g-select-one>
@@ -91,7 +91,8 @@ export default {
   created () {
     let val = this.$store.state.user
     this.cars = val.cars
-    if (this.cars.length !== 0) {
+    console.log(this.cars, '77777777777777')
+    if (this.cars.length) {
       let PlateData = []
       this.cars.map(item => {
         if (item.isMySelf === '0') {
