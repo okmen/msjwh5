@@ -50,7 +50,7 @@ const verification = {
         duration: 3000
       })
     }
-    return reg.test(str)
+    return !reg.test(str)
   },
   plateVerification (str) {
    if (!/(^(粤B|苏A|苏B|鲁A|沪[a-zA-z]{1})[A-Za-z0-9]{5,6}$|^[\u4e00-\u9fa5]{1}[A-Za-z0-9]{6}$|^粤Z[A-Za-z0-9\u4e00-\u9fa5]{4,5}(港|澳)$)/.test(str)) {

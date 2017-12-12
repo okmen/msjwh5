@@ -27,7 +27,7 @@ export default [
     path: '/changeCard',
     name: 'changeCard',
     meta: {
-      title: '补换证类',
+      title: '驾驶证补换证',
       loginStatus: true
     },
     component: () => import('@/views/transactionClass/drivingLicence/changeCard')
