@@ -29,7 +29,4 @@
 </script>
 <style lang="less" scopsd>
   @import '../../assets/style/subscribeService';
-  .subscribeService {
-    margin-left: 30px;
-  }
 </style>

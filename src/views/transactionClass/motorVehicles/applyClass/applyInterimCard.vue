@@ -86,6 +86,9 @@
       selectCarType () {
         return this.$store.state.cartype
       },
+      queryURL () {
+        return this.$store.getters.queryURL
+      },
       selectCensusRegister () {
         return this.$store.state.censusRegister
       },

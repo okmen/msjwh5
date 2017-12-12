@@ -93,6 +93,9 @@
         })
         return plateInfo.option
       },
+      queryURL () {
+        return this.$store.getters.queryURL
+      },
       areaSelectData () {
         return this.$store.state.cityAreaS
       },
