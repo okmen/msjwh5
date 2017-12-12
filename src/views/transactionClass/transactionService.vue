@@ -13,6 +13,12 @@
     <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
       <router-link :to="{ path: '/userAgreement/szjj_hander_rmvp', query: queryURL }">补领机动车号牌</router-link>
     </div>
+    <div class="query-link" v-if="source === 'G'">
+      <router-link :to="{ path: '/userAgreement/jszns', query: queryURL }">驾驶证年审</router-link>
+    </div>
+    <div class="query-link" v-if="source === 'G'">
+      <router-link :to="{ path: '/userAgreement/jszbzhz', query: queryURL }">驾驶证补换证</router-link>
+    </div>
   </div>
 </template>
 <script>
