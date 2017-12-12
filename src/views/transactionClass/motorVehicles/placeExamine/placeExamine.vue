@@ -148,7 +148,7 @@ export default {
         if (json.code === '0000') {
           this.subFn()
         } else {
-          this.$toast({message: json.msg, position: 'middle', duration: 3000})
+          this.$toast({message: json.data, position: 'middle', duration: 3000})
         }
       })
     },
