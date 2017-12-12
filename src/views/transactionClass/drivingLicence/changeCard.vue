@@ -7,7 +7,7 @@
     <g-input title="姓名" v-model="userName"></g-input>
     <g-input title="身份证号" maxlength="18" v-model="IDCard"></g-input>
     <g-input title="手机号码" maxlength="11" v-model="mobilePhone" type="tel"></g-input>
-    <g-input class="changeCard-inputPhoto" maxlength="25" title="照片回执码" v-model="photoReturnNumberString" type="tel">
+    <g-input class="changeCard-inputPhoto" maxlength="25" title="照片回执码" placeholder="请输入照片回执码" v-model="photoReturnNumberString" type="tel">
       <div slot='right' v-if="source === 'M'" class="RichScan" @click="scanQRCode()">扫一扫</div>
     </g-input>
     <span class="changeCard-examine" @click.stop="example=true">查看示例</span>
