@@ -1,10 +1,10 @@
 <template>
   <div class="dealService-outer">
     <!--Tab切换栏-->
-    <div class="nav">
+    <!-- <div class="nav">
       <div class="nav-tab" :class="{ 'active': cur_tab == 'placeExamine'}" @click="curTab('placeExamine')">机动车委托异地定期检验申报</div>
       <div class="nav-tab" :class="{ 'active': cur_tab == 'placeExamineDemand'}" @click="curTab('placeExamineDemand')">查询</div>
-    </div>
+    </div> -->
     <component :is="currentView"></component>
   </div>
 </template>
