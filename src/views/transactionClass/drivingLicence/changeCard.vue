@@ -236,7 +236,7 @@ export default {
     text-decoration: underline;
   }
   .example {
-    position: absolute;
+    position: fixed;
     top:0;
     left: 0;
     right: 0;
@@ -249,7 +249,7 @@ export default {
       height: 500px;
       background-color: #fff;
       position: absolute;
-      margin-top: -480px;
+      margin-top: -300px;
       border-radius: 10px;
       text-align: center;
       padding: 60px;
