@@ -311,9 +311,7 @@
             }
             this.$store.commit('saveSuccessInfo', dataInfo)
             let source = this.$route.query.source
-            let idcard = this.$route.query.idcard
-            let openid = this.$route.query.openid
-            this.$router.push({path: '/submitSuccess', query: {source: source, idcard: idcard, openid: openid}})
+            this.$router.push({path: '/submitSuccess', query: {source: source}})
           } else {
             this.$MessageBox('提示', data.msg)
           }
