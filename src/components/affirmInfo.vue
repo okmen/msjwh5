@@ -17,12 +17,14 @@
       </dl>
     </div>
   </div>
-  <div class="affirmInfo-btn">
+<!--   <div class="affirmInfo-btn">
     <button id="affirmInfo-btn" @click="affirmInfoBtn">提 交</button>
-  </div>
+  </div> -->
+  <g-button text="提交" @click.native="affirmInfoBtn"></g-button>
 </div>
 </template>
 <script>
+import { GButton } from 'form'
 // import { resultPost } from '../service/getData'
 import axios from '../utils/axios'
 import { MessageBox } from 'mint-ui'
@@ -185,6 +187,9 @@ export default {
       }
     }
   },
+  components: {
+    GButton
+  },
   computed: {
     dataList: function () {
       return this.$store.state.passByValue
@@ -269,6 +274,7 @@ export default {
 </script>
 <style lang="less">
   #affirmInfo-body{
+    padding-bottom: 40px;
     position: relative;
     font-size: 30px;
     color: #333;
@@ -301,7 +307,8 @@ export default {
     }
     .affirmInfo-img{
       position: relative;
-      padding: 50px;
+      /*padding: 50px;*/
+      padding: 0 50px;
       padding-top: 0;
       p{
         line-height: 75px;
@@ -336,7 +343,7 @@ export default {
       }
     }
     .affirmInfo-btn{
-      padding: 0 50px 60px;
+      padding: 0 60px;
       width: 100%;
       box-sizing: border-box;
       button{
