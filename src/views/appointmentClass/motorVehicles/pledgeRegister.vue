@@ -1,6 +1,6 @@
 <template>
   <div class="pledge-register form">
-    <g-input title="业务类型" v-model="typeName"></g-input>
+    <g-input title="业务类型" v-model="typeName" disabled></g-input>
     <div class="line-10"></div>
     <g-input title="车主姓名" placeholder="请输入车主姓名" v-model="carName"></g-input>
     <g-select title="证件名称" :data="certificateList" v-model="certificateListOne"></g-select>

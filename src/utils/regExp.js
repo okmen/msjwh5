@@ -43,7 +43,7 @@ const verification = {
   // 检测照片回执码
   isPhotoNum (str, message) {
     var reg = /^[a-zA-Z0-9]{10,25}$/
-    if (reg.test(str)) {
+    if (!reg.test(str)) {
       window.VM.$toast({
         message: message || '请输入正确的照片回执码',
         position: 'middle',
