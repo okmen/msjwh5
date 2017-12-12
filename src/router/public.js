@@ -25,7 +25,7 @@ export default [
     path: '/dealServiceMsjw',
     name: 'dealServiceMsjw',
     meta: {
-      title: '业务列表',
+      title: '驾驶证业务',
       loginStatus: true
     },
     component: () => import('@/views/transactionClass/dealServiceMsjw')
