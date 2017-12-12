@@ -8,7 +8,7 @@
     <g-input title="手机号码" maxlength="11" v-model="mobilePhone" type="tel"></g-input>
     <g-select title="名下车辆" ref="officeName" :data="myNumberPlateData" v-model="myNumberPlate"></g-select>
     <g-input title="车牌类型" v-model="carSelectData[myNumberPlate]" readonly></g-input>
-    <g-select title="户籍所在地" @getIndex = "getIndex" :data="censusRegisterList" v-model="censusRegisterOne"></g-select>
+    <g-select title="户籍所在地" @getSelected = "getIndex" :data="censusRegisterList" v-model="censusRegisterOne"></g-select>
     <g-input title="收件人名字" v-model="receiverName" placeholder="请输入收件人姓名"></g-input>
     <g-input title="收件人号码" maxlength="11" v-model="receiverMobilePhone" placeholder="请输入收件人号码"></g-input>
     <g-select-one class="changeCard-set" title="深圳市" type="邮寄地址" :data="areaSelectData" v-model="areaSelect"></g-select-one>

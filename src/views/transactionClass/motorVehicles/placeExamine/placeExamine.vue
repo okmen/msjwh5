@@ -199,6 +199,6 @@ export default {
 
 <style lang="less" scoped>
   .placeExamine {
-    padding-top: 20px;
+    padding: 20px 0 40px;
   }
 </style>
