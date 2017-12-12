@@ -144,7 +144,7 @@ export default {
         mobilephone: this.mobile,
         validateCode: this.identifying
       }
-      axios.posh(verificatioCode, verificationData).then(json => {
+      axios.post(verificatioCode, verificationData).then(json => {
         if (json.code === '0000') {
           this.subFn()
         } else {
