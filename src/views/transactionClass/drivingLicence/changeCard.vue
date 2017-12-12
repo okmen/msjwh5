@@ -112,7 +112,6 @@ export default {
   },
   methods: {
     scanQRCode: function () {
-      console.log('1233')
       let that = this
       let ua = window.navigator.userAgent // 浏览器版本
       if (/MicroMessenger/i.test(ua)) {
@@ -122,7 +121,6 @@ export default {
           success: function (res) {
             var result = res.resultStr // 当needResult 为 1 时，扫码返回的结果
             that.photoReturnNumberString = result.split(',')[1]
-            console.log(that.photoReturnNumberString, '结果')
           }
         })
       } else {
@@ -205,7 +203,6 @@ export default {
             identificationNO: 'A'
           }
         }
-        console.log(reqData)
         this.$store.commit('savePassByValue', reqData)
         this.$router.push({path: '/affirmInfo', query: this.queryURL})
       }

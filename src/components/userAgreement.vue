@@ -63,10 +63,8 @@ export default {
     let userAgreementData = {
       noticeKey: this.entryHash
     }
-    console.log(userAgreementData)
 //    let userAgreement = 'http://192.168.1.243:8080/web/user/getDocumentationORMByNoticeKey.html'
     axios.post(userAgreement, userAgreementData).then(json => { // 调取随手拍举报接口
-      console.log(json)
       this.getNoticeTitle = json.data.title
       this.userAgreementCon = json.data.content
     })
@@ -74,7 +72,6 @@ export default {
   methods: {
     btnAgreeRequest: function () {
       if (this.checked === true) {
-        console.log(this.entryHash)
         switch (this.entryHash) {
           case 'wfsspjbzy':  // 随手拍举报范围说明
             this.$router.push('/takePicturesInform')

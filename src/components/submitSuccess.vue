@@ -285,7 +285,6 @@ export default {
     }
   },
   mounted () {
-    console.log(this.dataInfo)
     // this.JsonDataInfo = this.urlJsonData ? this.urlJsonData : this.dataInfo
     this.JsonDataInfo = this.dataInfo
   }

@@ -90,7 +90,6 @@ export default {
   mixins: [beforeSubmit],
   created () {
     let val = this.$store.state.user
-    console.log(val)
     this.cars = val.cars
     if (this.cars.length !== 0) {
       let PlateData = []
@@ -189,7 +188,6 @@ export default {
           'identityCard': this.identityCard  //  登录用户的身份证号码
         }
       }
-      console.log(dataList)
       this.$store.commit('savePassByValue', dataList)
       this.$router.push({path: '/affirmInfo', query: this.queryURL})
     }

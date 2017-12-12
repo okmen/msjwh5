@@ -80,7 +80,6 @@
           if (json.code === '0000') {
             // this.dataInfo = JSON.parse(json.data).ROW
             this.dataInfo = JSON.parse(json.data)
-            console.log(this.dataInfo)
           } else {
             this.$toast({message: json.msg, position: 'bottom', className: 'white'})
           }

@@ -15,7 +15,6 @@ if (getQueryString('source') === 'M' || getQueryString('code')) {
   // 如果有code，重定向URL
   if (getQueryString('code')) {
     axios.get(`https://msjwt.szga.gov.cn/bmswx/mobile/common/openid?account=${accountId}&code=${getQueryString('code')}`).then(data => {
-      console.log(data)
       if (data.code === '200') {
         window.localStorage.setItem('openid', data.openid)
       } else {

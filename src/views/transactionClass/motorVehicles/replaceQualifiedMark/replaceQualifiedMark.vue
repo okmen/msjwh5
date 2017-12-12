@@ -101,7 +101,6 @@ export default {
   methods: {
     // 获取户籍所在地的下标
     getIndex: function (index) {
-      console.log(index)
       this.censusIndex = index
     },
     confirmInfo: function () {
@@ -152,7 +151,6 @@ export default {
             'JZZB': this.censusIndex === 1 ? this.residencePermitB : ''
           }
         }
-        console.log(dataList)
         this.$store.commit('savePassByValue', dataList)
         this.$router.push({path: '/affirmInfo', query: this.queryURL})
       }
@@ -160,7 +158,6 @@ export default {
   },
   created () {
     let val = this.$store.state.user
-    console.log(val)
     this.cars = val.cars
     if (this.cars.length !== 0) {
       let PlateData = []

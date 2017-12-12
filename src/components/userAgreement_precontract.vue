@@ -61,7 +61,6 @@ export default {
   methods: {
     getData: function (type) {
       let code = this.routerQuery.codeName
-      console.log(code)
       if (type === 0 && window.sessionStorage.card) {
         let cards = JSON.parse(window.sessionStorage.card)
         for (let i = 0; i < cards.length; i++) {
@@ -129,7 +128,6 @@ export default {
             this.$router.push({name: 'armyLicence', query: queryJson})
             break
           case 'ZJ16':  // 换领机动车登记证书
-            console.log('222222222222')
             // this.$router.push('/appClass/temporaryLicence')
             this.$router.push({name: 'temporaryLicence', query: queryJson})
             break

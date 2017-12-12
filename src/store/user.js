@@ -75,7 +75,6 @@ export default {
       localStorage.setItem('userName', state.userName)
       localStorage.setItem('bindDriverLicence', state.bindDriverLicence)
       localStorage.setItem('isLogin', state.isLogin)
-      console.log('233', state)
       commit('updataUser', state)
     }
   }

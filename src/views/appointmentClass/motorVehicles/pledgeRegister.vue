@@ -264,7 +264,6 @@
         if (this.$verification.isPhone(this.mobilePhone)) return
         if (this.$verification.plateVerification(this.plateNumber)) return
         let orgAddr
-        console.log(this.appointmentLocation)
         for (let i = 0, len = this.appointmentLocation.length; i < len; i++) {
           if (this.appointmentLocationOne === this.appointmentLocation[i].value) {
             orgAddr = this.appointmentLocation[i].orgAddr

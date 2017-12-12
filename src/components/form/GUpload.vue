@@ -42,10 +42,8 @@
       uploadImg () {
         /* eslint-disable */
         if (this.$route.query.source === 'M') return
-        console.log('我点击了')
         let _this = this
         window.AmapApp.ready(function () {
-          console.log('进入 ready 了。')
           window.AmapApp.addPhoto('深圳交警','上传图片', '300',false, function (res) {
             _this.imgSrc = 'data:image/jpeg;base64,' + res
             _this.$emit('input', res)

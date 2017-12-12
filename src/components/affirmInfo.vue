@@ -210,9 +210,7 @@ export default {
   methods: {
     affirmInfoBtn: function () {
       let reqData = Object.assign({}, this.dataList.textObj, this.dataList.imgObj, this.dataList.invisibleObj)
-      console.log(reqData)
       axios.post(this.dataList.url, reqData).then(json => {
-        console.log(json)
         if (json.code === '0000') {
           // let successData = {
           //   type: 1, // type为1 申办成功, 为2 预约成功
@@ -253,7 +251,6 @@ export default {
             type: 1,
             waterNumber: json.data.waterNumber
           }
-          console.log(sendData)
           this.$store.commit('saveSuccessInfo', sendData)
           let source = this.$route.query.source
           let idcard = this.$route.query.idcard

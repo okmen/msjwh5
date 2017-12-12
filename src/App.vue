@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <template v-if="showpage"><router-view v-wechat-title="$route.meta.title"/></template>
-    <template v-else>{{ msg }}</template>
+    <template v-else>
+      <div class="m-noLoadingPage">{{ msg }}</div>
+    </template>
     <div @click="handleLogout" style="position: fixed; bottom: 0px; right: 0;">退出登录</div>
   </div>
 </template>
@@ -16,7 +18,7 @@ export default {
       showpage: false,
       token: 'f7ffc8ad-03a0-4ec0-9e5d-9da3500e4fbe',
       openid: window.localStorage.getItem('openid'),
-      msg: '正在加载数据中'
+      msg: '正在加载数据中 ...'
     }
   },
   created () {
@@ -28,7 +30,6 @@ export default {
       this.$axios.post(getUserM, {
         openId: this.openid
       }).then(data => {
-        console.log(data)
         if (data.code === '0000') {
           this.showpage = true
           this.$store.dispatch('updataUserG', data.data)
@@ -64,6 +65,7 @@ export default {
     }
     // 如果存在 identityId 则跳转路径
     if (getQueryString('identityId')) {
+      this.msg = '授权成功，正在跳转 ...'
       window.location.href = window.localStorage.getItem('entranceURL')
     }
   },
@@ -78,7 +80,6 @@ export default {
         openid: this.openid,
         token: this.token
       }).then(data => {
-        console.log(data)
         if (data.data.code === '200') {
           window.location.reload()
         }
