@@ -3,16 +3,17 @@
   <g-input title="姓名" v-model="userName"></g-input>
   <g-input title="身份证号码" v-model="IDCard"></g-input>
   <g-input title="手机号码" v-model="mobilePhone"></g-input>
-  <g-select title="户籍所在地" :data="censusRegisterList" v-model="censusRegisterOne"></g-select>
+  <g-select title="户籍所在地" :data="censusRegisterList" v-model="censusRegisterOne" @getSelected="getCensusRegisterIndex"></g-select>
   <g-input title="收件人姓名" v-model="recipientsName"></g-input>
   <g-input title="收件人号码" v-model="recipientsPhone"></g-input>
   <g-select-one type="邮寄地址" title="深圳市" :data="cityArea" v-model="cityAreaOne"></g-select-one>
   <g-input placeholder="请输入详细地址" v-model="addressMs"></g-input>
   <group title="请按示例图上传以下证件照片">
     <div class="upload-group">
-      <g-upload text="身份证（正面)" id="file1" :bg="require('../../../assets/images/IDcard-front.png')" v-model="IDCardFront"></g-upload>
-      <g-upload text="身份证（反面)" id="file2" :bg="require('../../../assets/images/IDcard-back.png')" v-model="IDCardBack"></g-upload>
-      <g-upload text="审核教育绘制表" id="file3" :bg="require('../../../assets/images/edu-table.png')" v-model="eduTable"></g-upload>
+      <g-upload text="身份证（正面)" id="file1" :bg="require('@/assets/images/IDcard-front.png')" v-model="IDCardFront"></g-upload>
+      <g-upload text="身份证（反面)" id="file2" :bg="require('@/assets/images/IDcard-back.png')" v-model="IDCardBack"></g-upload>
+      <g-upload text="审核教育绘制表" id="file4" :bg="require('@/assets/images/edu-table.png')" v-model="eduTable"></g-upload>
+      <g-upload text="境外人员临住表" id="file5" :bg="require('@/assets/images/out-board.png')" v-model="outTable" v-show="showIndex == '2'"></g-upload>
     </div>
   </group>
  <g-button text="确认信息" @click.native="confirmInfo"></g-button>
@@ -26,12 +27,14 @@
   export default {
     data () {
       return {
+        showIndex: 0,
         userName: '',
         IDCard: '',
         mobilePhone: '',
         IDCardFront: '',
         IDCardBack: '',
         eduTable: '',
+        outTable: '',
         recipientsName: '',
         recipientsPhone: '',
         censusRegisterOne: '1',
@@ -71,6 +74,9 @@
       GSelectOne
     },
     methods: {
+      getCensusRegisterIndex (index) {
+        this.showIndex = index + ''
+      },
       confirmInfo () {
         let obj = {
           userName: '请输入姓名',
@@ -81,7 +87,8 @@
           addressMs: '请输入详细地址',
           IDCardFront: '请上传身份证（正面）',
           IDCardBack: '请上传身份证（反面）',
-          eduTable: '请上传审核教育绘制表'
+          eduTable: '请上传审核教育绘制表',
+          outTable: '请上传境外人员临住表'
         }
         if (this.$_myMinxin_beforeSubmit(obj)) return
         if (this.$verification.isPhone(this.mobilePhone)) return
@@ -101,7 +108,7 @@
           imgObj: {
             PHOTO9: this.IDCardFront || '',
             PHOTO10: this.IDCardBack || '',
-            PHOTO31: '',
+            PHOTO31: this.outTable || '',
             SHJYPXB: this.eduTable || ''
           },
           invisibleObj: {
