@@ -160,12 +160,12 @@
             'address': this.homeAddress
           },
           imgObj: {
-            'PHOTO9': this.IDcardFront || this.IDcardFront,
-            'PHOTO10': this.IDcarfBack || this.IDcarfBack,
-            'DJZSFYJ': this.registerCredential || this.registerCredential,
-            'PHOTO31': this.outBoard || this.outBoard,
-            'JZZA': this.residencePermitF || this.residencePermitF,
-            'JZZB': this.residencePermitB || this.residencePermitB
+            'PHOTO9': this.IDcardFront || '',
+            'PHOTO10': this.IDcarfBack || '',
+            'DJZSFYJ': this.registerCredential || '',
+            'PHOTO31': this.outBoard || '',
+            'JZZA': this.residencePermitF || '',
+            'JZZB': this.residencePermitB || ''
           }
         }
         this.$store.commit('savePassByValue', dataList)

@@ -88,22 +88,25 @@
           IDCardFront: '请上传身份证（正面）',
           IDCardBack: '请上传身份证（反面）',
           eduTable: '请上传审核教育绘制表',
-          outTable: '请上传境外人员临住表'
         }
         if (this.$_myMinxin_beforeSubmit(obj)) return
         if (this.$verification.isPhone(this.mobilePhone)) return
+        if ((!this.outTable) && (this.showIndex === '2')) {
+          this.$toast({message: '请上传境外人员临住表'})
+          return
+        }
         let reqData = {
           type: '驾驶证年审',
           url: annualExaminations,
           title: 'driverLicenseAnnualVerification',
           textObj: {
-            identityCard: this.IDCard,
-            userName: this.userName,
-            mobilephone: this.mobilePhone,
-            placeOfDomicile: this.censusRegisterOne,
-            receiverName: this.recipientsName,
-            receiverNumber: this.recipientsPhone,
-            receiverAddress: '深圳市' + this.cityAreaOne + this.addressMs
+            'identityCard': this.IDCard,
+            'userName': this.userName,
+            'mobilephone': this.mobilePhone,
+            'placeOfDomicile': this.censusRegisterOne,
+            'receiverName': this.recipientsName,
+            'receiverNumber': this.recipientsPhone,
+            'receiverAddress': `深圳市${this.cityAreaOne}${this.addressMs}`
           },
           imgObj: {
             PHOTO9: this.IDCardFront || '',
