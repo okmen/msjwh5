@@ -1,9 +1,9 @@
 <template>
   <div class="changeCard">
     <div class="changeCard-top">
-      <g-input class="changeCard-type" title="业务类型" v-model="name" readonly></g-input>
+      <g-input class="changeCard-type" title="业务" v-model="name" readonly></g-input>
     </div>
-    <g-select title="业务类型" :data="censusTypeList" v-model="censusType"></g-select>
+    <g-select title="业务类型" :data="censusTypeList" v-model="censusType" disabled></g-select>
     <g-input title="姓名" v-model="userName"></g-input>
     <g-input title="身份证号" maxlength="18" v-model="IDCard"></g-input>
     <g-input title="手机号码" maxlength="11" v-model="mobilePhone" type="tel"></g-input>
@@ -59,7 +59,7 @@ export default {
       board: '',
       bindDriverLicence: '',
       censusTypeList: [
-        {name: '补证', value: 1}, {name: '期满换证', value: 2}
+        {name: ['补证', '换证'][this.$route.params.id], value: 1}, {name: '期满换证', value: 2}
       ],
       censusType: 1,
       // censusRegisterList: '',

@@ -5,7 +5,10 @@
       <router-link :to="{ path: '/userAgreement/jszns', query: queryURL }">驾驶证年审</router-link>
     </div>
     <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
-      <router-link :to="{ path: '/userAgreement/jszbzhz', query: queryURL }">驾驶证补换证</router-link>
+      <router-link :to="{ path: '/userAgreement/jszbz', query: queryURL }">驾驶证补证</router-link>
+    </div>
+    <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
+      <router-link :to="{ path: '/userAgreement/jszhz', query: queryURL }">驾驶证换证</router-link>
     </div>
   </div>
 </template>
