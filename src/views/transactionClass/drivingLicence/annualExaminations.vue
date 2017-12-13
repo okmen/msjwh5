@@ -87,7 +87,7 @@
           addressMs: '请输入详细地址',
           IDCardFront: '请上传身份证（正面）',
           IDCardBack: '请上传身份证（反面）',
-          eduTable: '请上传审核教育绘制表',
+          eduTable: '请上传审核教育绘制表'
         }
         if (this.$_myMinxin_beforeSubmit(obj)) return
         if (this.$verification.isPhone(this.mobilePhone)) return
