@@ -93,7 +93,7 @@ export default {
   data () {
     return {
       JsonDataInfo: '',
-      // urlJsonData: this.urlToJson(window.location.href),
+      urlJsonData: this.urlToJson(window.location.href),
       tip: '您的信息已成功提交，我们将会在3个工作日内通过短信告知您的审核结果，您还可以凭身份证信息在深圳交警微信号中查询审核。',
       typeTitle: {
         '1': '申办',
@@ -285,8 +285,7 @@ export default {
     }
   },
   mounted () {
-    // this.JsonDataInfo = this.urlJsonData ? this.urlJsonData : this.dataInfo
-    this.JsonDataInfo = this.dataInfo
+    this.JsonDataInfo = this.urlJsonData ? this.urlJsonData : this.dataInfo
   }
 }
 </script>
