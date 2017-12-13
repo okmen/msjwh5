@@ -90,7 +90,7 @@ export default {
       this.$MessageBox.confirm('确定退出登录吗?').then(action => {
         console.log(action)
         window.localStorage.clear()
-        this.$router.replace({ path: '/login?source=G' })
+        this.$router.push({ path: '/login?source=G', query: { url: this.$route.fullPath } })
       }).catch(() => {})
     }
   }
