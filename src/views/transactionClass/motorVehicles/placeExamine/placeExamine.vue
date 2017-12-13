@@ -17,7 +17,7 @@
     <g-button text="确认信息" v-if="!cars.length" type="gray"></g-button>
   </div>
 </template>
-verificatioCode
+
 <script>
 import {GInput, GSelect, GButton, GSelectOne, Group, GUpload} from 'form'
 import GetVerificationCode from '@/components/GetVerificationCode'
