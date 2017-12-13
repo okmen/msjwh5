@@ -57,6 +57,12 @@ export default {
         if (data.code === '0000') {
           this.$store.dispatch('updataUserG', data.data)
           this.$router.replace(this.$route.query.url)
+        } else if (data.code === '0002') {
+          Toast({
+            message: data.msg,
+            position: 'bottom',
+            duration: 2000
+          })
         }
       })
     }

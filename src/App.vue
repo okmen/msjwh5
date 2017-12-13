@@ -5,6 +5,7 @@
       <div class="m-noLoadingPage">{{ msg }}</div>
     </template>
     <div @click="handleLogout" style="position: fixed; bottom: 0px; right: 0;">退出登录</div>
+    <div @click="handleLogoutG" style="position: fixed; bottom: 0px; left: 0;">退出</div>
   </div>
 </template>
 
@@ -84,6 +85,13 @@ export default {
           window.location.reload()
         }
       })
+    },
+    handleLogoutG () {
+      this.$MessageBox.confirm('确定退出登录吗?').then(action => {
+        console.log(action)
+        window.localStorage.clear()
+        this.$router.replace({ path: '/login?source=G' })
+      }).catch(() => {})
     }
   }
 }
