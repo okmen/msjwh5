@@ -60,6 +60,9 @@ export default {
     if (this.entryHash === 'wfsspjbzy' || this.entryHash === 'sspjbzysx' || this.entryHash === 'wtmf') {
       this.isShow = false
     }
+    if (this.entryHash === 'jszbz' || this.entryHash === 'jszhz') {
+      this.entryHash = 'jszbzhz'
+    }
     let userAgreementData = {
       noticeKey: this.entryHash
     }
@@ -137,8 +140,14 @@ export default {
             this.$router.push('/motorAlteration')
             break
           case 'jszbzhz':  // 驾驶证补证换证
-            // this.$router.push('/changeCard')
-            this.$router.push({ path: '/changeCard', query: this.queryURL })
+            let urlId
+            if (this.$route.params.id === 'jszbz') {
+              urlId = '0'
+            }
+            if (this.$route.params.id === 'jszhz') {
+              urlId = '1'
+            }
+            this.$router.push({ path: `/changeCard/${urlId}`, query: this.queryURL })
             break
           case 'jszyqhz':  // 驾驶证延期换证
             this.$router.push('/changeCard/id/2')

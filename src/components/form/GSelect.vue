@@ -5,7 +5,7 @@
   data：为数组，下拉的选项，数组的每一项为字符串或者对象 ,[{name: 'hello', value: '01'}]
 -->
 <template>
-  <div class="g-select">
+  <div class="g-select" :class="{ disabled: disabled }">
     <!--<div class="g-select-type" v-if="type">{{type}}</div>-->
     <div class="g-select-title" v-if="title">{{title}}</div>
     <div class="g-select-value" @click.stop="showSelectUl()">
@@ -67,6 +67,11 @@
       }
     }
   }
+  .g-select.disabled {
+    .g-select-value {
+      background: #efeff4;
+    }
+  }
 </style>
 
 <script>
@@ -89,7 +94,8 @@
       title: String,
       value: [String, Number],
       type: String,
-      placeholder: String
+      placeholder: String,
+      disabled: Boolean
     },
     created () {
       this.init()
@@ -131,6 +137,9 @@
         this.showUl = false
       },
       showSelectUl () {
+        if (this.disabled) {
+          return false
+        }
         let selectUl = document.getElementsByClassName('g-select-list')
         Array.prototype.slice.call(selectUl).map(item => {
           item.style.display = 'none'
