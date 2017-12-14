@@ -285,7 +285,11 @@ export default {
     }
   },
   mounted () {
-    this.JsonDataInfo = this.urlJsonData ? this.urlJsonData : this.dataInfo
+    if (this.$route.query.title) {
+      this.JsonDataInfo = this.urlJsonData
+    } else {
+      this.JsonDataInfo = this.dataInfo
+    }
   }
 }
 </script>

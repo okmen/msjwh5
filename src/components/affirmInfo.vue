@@ -212,50 +212,13 @@ export default {
       let reqData = Object.assign({}, this.dataList.textObj, this.dataList.imgObj, this.dataList.invisibleObj)
       axios.post(this.dataList.url, reqData).then(json => {
         if (json.code === '0000') {
-          // let successData = {
-          //   type: 1, // type为1 申办成功, 为2 预约成功
-          //   appoinType: this.dataList.type,
-          //   appoinNum: json.data.waterNumber,
-          //   appoinMsg: json.msg
-          // }
-          // this.$store.commit('appoinSuccess', successData)
-          // this.$router.push('/appointSuccess')
-          // let dataInfo = {}
-          // if (+json.data.type === 1) { // 办理类
-          //   dataInfo = {
-          //     type: 1,
-          //     textObj: {
-          //       businessType: this.dataList.type, // 具体业务名称
-          //       subscribeNo: json.data.waterNumber // 流水号
-          //     }
-          //   }
-          // } else if (+json.data.type === 2) { // 预约类
-          //   // TODO: 接口返回的字段还未确定
-          //   dataInfo = {
-          //     type: 2,
-          //     textObj: {
-          //       reserveNo: '预约编号',
-          //       numberPlate: '车牌号码',
-          //       mobilephone: '手机号码',
-          //       reserveAddress: '服务点',
-          //       reserveTime: '预约时间'
-          //     }
-          //   }
-          // }
-          // let sendData = json.data
-          // if (this.dataList.noTip) {
-          //   sendData.noTip = true
-          // }
           let sendData = {
             title: this.$store.state.passByValue.title,
             type: 1,
             waterNumber: json.data.waterNumber
           }
           this.$store.commit('saveSuccessInfo', sendData)
-          let source = this.$route.query.source
-          let idcard = this.$route.query.idcard
-          let openid = this.$route.query.openid
-          this.$router.push({path: '/submitSuccess', query: {source: source, idcard: idcard, openid: openid}})
+          this.$router.push({path: '/submitSuccess', query: this.$store.getters.queryURL})
         } else {
           MessageBox('提示', json.msg).then(action => {
             // this.$router.push('/')

@@ -142,10 +142,10 @@ export default {
           case 'jszbzhz':  // 驾驶证补证换证
             let urlId
             if (this.$route.params.id === 'jszbz') {
-              urlId = '0'
+              urlId = '1'
             }
             if (this.$route.params.id === 'jszhz') {
-              urlId = '1'
+              urlId = '2'
             }
             this.$router.push({ path: `/changeCard/${urlId}`, query: this.queryURL })
             break

@@ -59,9 +59,9 @@ export default {
       board: '',
       bindDriverLicence: '',
       censusTypeList: [
-        {name: ['补证', '换证'][this.$route.params.id], value: 1}, {name: '期满换证', value: 2}
+        {name: '补证', value: 1}, {name: '期满换证', value: 2}
       ],
-      censusType: 1,
+      censusType: +this.$route.params.id,
       // censusRegisterList: '',
       censusRegisterOne: '1',
       // areaSelectData: this.$store.state.cityAreaS,
@@ -178,7 +178,7 @@ export default {
       } else {
         let reqData = {
           type: '驾驶证补证',
-          url: this.censusType === '1' ? cardRepair : cardReplace,
+          url: this.censusType === 1 ? cardRepair : cardReplace,
           title: 'repairDriverLicense',
           textObj: {
             identityCard: this.IDCard,
@@ -203,6 +203,7 @@ export default {
             identificationNO: 'A'
           }
         }
+        console.log(reqData)
         this.$store.commit('savePassByValue', reqData)
         this.$router.push({path: '/affirmInfo', query: this.queryURL})
       }
