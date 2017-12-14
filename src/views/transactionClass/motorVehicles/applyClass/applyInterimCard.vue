@@ -18,8 +18,8 @@
     <g-input v-model="recipientAddressDetail" placeholder="请输入详细地址"></g-input>
     <group title="请按示例图上传以下证件照片">
       <div class="upload-group">
-        <g-upload text="身份证（正面)" id="file1" :bg="require('@/assets/images/IDcard-front.png')" v-model="IDcardFront"></g-upload>
-        <g-upload text="身份证（反面)" id="file2" :bg="require('@/assets/images/IDcard-back.png')" v-model="IDcarfBack"></g-upload>
+        <g-upload text="身份证(正面)" id="file1" :bg="require('@/assets/images/IDcard-front.png')" v-model="IDcardFront"></g-upload>
+        <g-upload text="身份证(反面)" id="file2" :bg="require('@/assets/images/IDcard-back.png')" v-model="IDcarfBack"></g-upload>
         <g-upload text="购置发票图" id="file5" :bg="require('@/assets/images/dealService-1.png')" v-model="dealService1"></g-upload>
         <g-upload text="交强险单据" id="file6" :bg="require('@/assets/images/dealService-2.png')" v-model="dealService2"></g-upload>
         <g-upload text="机动车合格证" v-show="this.carOrigin != 'B'" id="file3" :bg="require('@/assets/images/dealService-3.png')" v-model="dealService3"></g-upload>
