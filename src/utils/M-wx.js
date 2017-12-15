@@ -1,8 +1,7 @@
 import { getQueryString } from './utils'
+import { msjwURL } from '@/config/msjw.config'
 import axios from './axios'
 if (getQueryString('source') === 'M' || getQueryString('code')) {
-  // 民生警务接口地址
-  const WXSITEURL = 'https://msjwt.szga.gov.cn/wxsite'
   // 民生警务 appid
   const appid = 'wx43154456b4c489e3'
   const URL = window.location.href
@@ -10,11 +9,11 @@ if (getQueryString('source') === 'M' || getQueryString('code')) {
   // 如果没有 code 且没有 openid 跳转到民生警务获取 code
   if (!getQueryString('code') && !window.localStorage.getItem('openid')) {
     window.localStorage.setItem('entranceURL', URL)
-    window.location.href = `${WXSITEURL}/weixin/cms/getWeixinCode?appid=${appid}&redirect_uri=${encodeURIComponent(URL)}`
+    window.location.href = `${msjwURL}/wxsite/weixin/cms/getWeixinCode?appid=${appid}&redirect_uri=${encodeURIComponent(URL)}`
   }
   // 如果有code，重定向URL
   if (getQueryString('code')) {
-    axios.get(`https://msjwt.szga.gov.cn/bmswx/mobile/common/openid?account=${accountId}&code=${getQueryString('code')}`).then(data => {
+    axios.get(`${msjwURL}/bmswx/mobile/common/openid?account=${accountId}&code=${getQueryString('code')}`).then(data => {
       if (data.code === '200') {
         window.localStorage.setItem('openid', data.openid)
       } else {

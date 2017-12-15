@@ -4,20 +4,21 @@
     <template v-else>
       <div class="m-noLoadingPage">{{ msg }}</div>
     </template>
-    <div @click="handleLogout" style="position: fixed; bottom: 0px; right: 0;">民生警务退出</div>
+    <div @click="handleLogout" style="position: fixed; bottom: 0px; right: 0;">民生警务退出登录</div>
     <div @click="handleLogoutG" style="position: fixed; bottom: 0px; left: 0;">高德退出</div>
   </div>
 </template>
 
 <script>
 import { getUserM } from '@/config/baseURL'
+import { token, msjwURL } from '@/config/msjw.config'
 import { getQueryString } from '@/utils/utils'
 export default {
   name: 'app',
   data () {
     return {
       showpage: false,
-      token: 'f7ffc8ad-03a0-4ec0-9e5d-9da3500e4fbe',
+      token: token,
       openid: window.localStorage.getItem('openid'),
       msg: '正在加载数据中 ...'
     }
@@ -37,7 +38,7 @@ export default {
         }
         if (data.code === '400') {
           let entranceURL = window.location.href
-          let URL = `https://msjwt.szga.gov.cn/yhtx/html/login.html?resbind=ssjj&openid=${this.openid}&token=${this.token}&redirect=${entranceURL}`
+          let URL = `${msjwURL}/yhtx/html/login.html?resbind=ssjj&openid=${this.openid}&token=${this.token}&redirect=${entranceURL}`
           localStorage.setItem('entranceURL', entranceURL)
           window.location.href = URL
         }
@@ -77,7 +78,7 @@ export default {
           'Content-Type': 'application/json'
         }
       })
-      nAxios.post('https://msjwt.szga.gov.cn/govnetUserAuthProvider/services/userCenter/logout', {
+      nAxios.post(`${msjwURL}/govnetUserAuthProvider/services/userCenter/logout`, {
         openid: this.openid,
         token: this.token
       }).then(data => {
