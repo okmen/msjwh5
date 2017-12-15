@@ -48,7 +48,7 @@ export default [
     path: '/replaceQualifiedMark',
     name: 'replaceQualifiedMark',
     meta: {
-      title: '核发机动车检验合格标志',
+      title: '补换检验合格标志',
       loginStatus: true
     },
     component: () => import('@/views/transactionClass/motorVehicles/replaceQualifiedMark/replaceQualifiedMark')

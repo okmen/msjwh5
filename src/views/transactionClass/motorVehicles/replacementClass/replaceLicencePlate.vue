@@ -36,7 +36,7 @@
   export default {
     data () {
       return {
-        serviceType: '补领机动车号牌',
+        serviceType: '办理补证、换领机动车号牌',
         showIndex: 0,
         imgOne1: require('@/assets/images/IDcard-front.png'),
         imgOne2: require('@/assets/images/IDcard-back.png'),
@@ -178,7 +178,7 @@
       this.certificateNumber = this.$store.state.user.identityCard
       this.plateNumberName = this.$refs.plateNumberName.currentName
       if (!this.$store.state.user.cars.length) {
-        this.$MessageBox('温馨提示', '暂无车辆,你可以通过深圳交警微信号的“个人中心”绑定车辆')
+        this.$MessageBox('温馨提示', '暂无车辆，您的车辆未绑定或者审核中')
       }
     }
   }
