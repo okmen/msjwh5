@@ -1,8 +1,8 @@
 <template>
   <div class="changeCard">
-    <div class="changeCard-top">
+    <!-- <div class="changeCard-top">
       <g-input class="changeCard-type" title="业务" v-model="name" readonly></g-input>
-    </div>
+    </div> -->
     <g-select title="业务类型" :data="censusTypeList" v-model="censusType" disabled></g-select>
     <g-input title="姓名" v-model="userName"></g-input>
     <g-input title="身份证号" maxlength="18" v-model="IDCard"></g-input>
@@ -18,8 +18,8 @@
     <g-input title="" v-model="mailingAddress" placeholder="请输入详细地址"></g-input>
     <group title="请按示例图上传以下证件照片">
       <div class="upload-group">
-        <g-upload text="身份证（正面)" id="file1" :bg="require('../../../assets/images/IDcard-front.png')" v-model="IDCardFront"></g-upload>
-        <g-upload text="身份证（反面)" id="file2" :bg="require('../../../assets/images/IDcard-back.png')" v-model="IDCardBack"></g-upload>
+        <g-upload text="身份证(正面)" id="file1" :bg="require('../../../assets/images/IDcard-front.png')" v-model="IDCardFront"></g-upload>
+        <g-upload text="身份证(反面)" id="file2" :bg="require('../../../assets/images/IDcard-back.png')" v-model="IDCardBack"></g-upload>
         <g-upload v-if = "censusRegisterOne === '3'" text="境外人员临住表" id="file3" :bg="require('../../../assets/images/out-board.png')" v-model="board"></g-upload>
       </div>
     </group>
@@ -32,6 +32,7 @@
         <button class="btn btn-blue" type="button" name="button" @click.stop="example=!example">关闭</button>
       </div>
     </div>
+    <div v-wechat-title="metaTitle"></div>
   </div>
 </template>
 
@@ -59,14 +60,15 @@ export default {
       board: '',
       bindDriverLicence: '',
       censusTypeList: [
-        {name: '补证', value: 1}, {name: '期满换证', value: 2}
+        {name: '机动车驾驶证补办', value: 1}, {name: '机动车驾驶证期满换证', value: 2}
       ],
       censusType: +this.$route.params.id,
       // censusRegisterList: '',
       censusRegisterOne: '1',
       // areaSelectData: this.$store.state.cityAreaS,
       areaSelect: '福田区',
-      example: false                       // 示例弹窗 默认不显示
+      example: false,                       // 示例弹窗 默认不显示
+      metaTitle: ''
     }
   },
   components: {
@@ -109,6 +111,7 @@ export default {
         this.example = false
       }
     })
+    this.metaTitle = (this.censusType === 1) ? '机动车驾驶证补办' : '机动车驾驶证期满换证'
   },
   methods: {
     scanQRCode: function () {
@@ -215,6 +218,7 @@ export default {
 <style lang="less" scoped>
 .changeCard {
   position:relative;
+  padding-top: 20px;
   padding-bottom: 40px;
   .upload-group{
     display: flex;
