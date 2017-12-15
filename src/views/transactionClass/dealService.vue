@@ -15,8 +15,8 @@
     name: 'serviceTab',
     data () {
       return {
-        currentView: 'subscribeService',
-        cur_tab: 'subscribeService'
+        currentView: 'transactionService',
+        cur_tab: 'transactionService'
       }
     },
     methods: {
