@@ -41,7 +41,7 @@ export default {
         },
         {
           value: '1',
-          name: '单位'
+          name: '单位(法人)'
         }
       ],
       carriageNumber: '',

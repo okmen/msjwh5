@@ -107,6 +107,9 @@
             if (index === 0) {
               this.certificateListOne = item.id
             }
+            if ((index === 0) || (index === 11) || (index === 12)) {
+              item.name += '(法人)'
+            }
             this.certificateList.push({
               name: item.name,
               value: item.id

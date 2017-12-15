@@ -3,9 +3,9 @@
     <div class="changeCard-top">
       <g-input class="changeCard-type" title="业务类型" v-model="licenseSelectMassage" disabled></g-input>
     </div>
-    <g-input title="姓名" v-model="userName" maxlength="18" placeholder="请输入姓名"></g-input>
-    <g-input title="身份证号码" v-model="identityCard" maxlength="18" placeholder="请输入身份证号码"></g-input>
-    <g-input title="手机号码" v-model="mobilephone" maxlength="11" placeholder="请输入手机号码"></g-input>
+    <g-input title="姓名" v-model="userName" maxlength="18" placeholder="请输入姓名" disabled></g-input>
+    <g-input title="身份证号码" v-model="identityCard" maxlength="18" placeholder="请输入身份证号码" disabled></g-input>
+    <g-input title="手机号码" v-model="mobilephone" maxlength="11" placeholder="请输入手机号码" disabled></g-input>
     <g-input title="车辆型号" v-model="cartModels" placeholder="请输入车辆型号"></g-input>
     <g-select title="车辆类型" :data="selectCarType" v-model="carTypeOne"></g-select>
     <g-input title="发动机号" v-model="engineNumber" placeholder="请输入发动机号"></g-input>
