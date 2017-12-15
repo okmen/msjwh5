@@ -17,7 +17,7 @@
       <div class="g-select-value" @click.stop="getDateList">
         <input type="text" placeholder="请选择预约日期" disabled v-model="dateListOne">
         <ul class="select-list" v-if="showDateList">
-          <li class="list-item" v-for="item in dateList" @click.stop="chooseDate(item)">
+          <li class="list-item" v-for="(item, index) in dateList" :key="index" @click.stop="chooseDate(item)">
             <div class="list-item-time">{{item}}</div>
           </li>
         </ul>
@@ -28,7 +28,7 @@
       <div class="g-select-value" @click.stop="getTimeList">
         <input type="text" placeholder="请选择预约时间" disabled v-model="timeListOne">
         <ul class="select-list" v-if="showTimeList">
-          <li class="list-item" v-for="item in timeList" @click.stop="chooseTime(item)"
+          <li class="list-item" v-for="(item, index) in timeList" :key="index" @click.stop="chooseTime(item)"
               :class="{'bg-gray': item.num == 0}">
             <div class="list-item-time">{{item.apptime}}</div>
             <div class="list-item-num h-center" v-if="item.num!=0">剩余名额

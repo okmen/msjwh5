@@ -1,8 +1,9 @@
 <template>
   <div class="carService-outer">
     <template v-if="source === 'M'">
-      <div class="query-link" :class="{ 'subscribeService': source === 'M'}" v-for="(item, index) in menuArr" v-if="item.name === '机动车抵押/解除抵押登记'">
-        <a href="javascript:;" @click="routerLink(index)">{{ item.name }}</a>
+      <div class="query-link" :class="{ 'subscribeService': source === 'M'}" v-for="(item, index) in menuArr" :key="index" v-if="item.name === '抵押/解押登记现场办理'">
+        <a href="javascript:;" @click="routerLink(index)">机动车抵押/解除抵押登记</a>
+        <!-- <a href="javascript:;" @click="routerLink(index)">{{ item.name }}</a> -->
       </div>
     </template>
     <template v-else>
@@ -10,7 +11,6 @@
     </template>
   </div>
 </template>
-
 <script>
   import { getBusinessTypes } from '@/config/baseURL.js'
   import axios from '@/utils/axios'
@@ -57,7 +57,6 @@
     }
   }
 </script>
-
 <style lang="less" scopsd>
   @import '../../assets/style/subscribeService';
 </style>

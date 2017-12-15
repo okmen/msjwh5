@@ -41,7 +41,7 @@
       <h3>申办结果</h3>
       <p v-if="!JsonDataInfo.noTip">{{ tip }}</p>
       <ul class="bid-ul appoint-margin">
-        <li class="bid-item" v-for="(value, key) in JsonDataInfo" v-if="keyListObj[key] && value">
+        <li class="bid-item" v-for="(value, key) in JsonDataInfo" :key="key" v-if="keyListObj[key] && value">
           <span class="bid-item-key">{{ keyListObj[key] }}</span>
           ：<span :class="{red: key === 'subscribeNo' || key === 'waterNumber'}">{{ valListObj[key] ? valListObj[key][value] : value }}</span>
         </li>
@@ -52,7 +52,7 @@
       <h3>预约结果</h3>
       <p>{{ tip }}</p>
       <ul class="submitSuccess-ul">
-        <li v-for="(value, key) in JsonDataInfo" class="submitSuccess-item"  v-if="keyListObj[key]">
+        <li v-for="(value, key) in JsonDataInfo" :key="key" class="submitSuccess-item"  v-if="keyListObj[key]">
           <span class="submitSuccess-item-key">{{ keyListObj[key] }}</span>
           ：<span class="submitSuccess-item-value">{{ valListObj[key] ? valListObj[key][value] : value }}</span>
         </li>
@@ -63,7 +63,7 @@
       <h3>{{typeTitle[JsonDataInfo.type]}}结果</h3>
       <p>感谢您的参与，提交成功！<br>您在{{ (new Date()).getFullYear() }}年度申报绿色出行行动中，累计申报停驶了{{ JsonDataInfo.cryearNo }}天。</p>
       <ul class="bid-ul appoint-margin">
-        <li class="bid-item" v-for="(value, key) in JsonDataInfo" v-if="keyListObj[key] && key !== 'cryearNo'">
+        <li class="bid-item" v-for="(value, key) in JsonDataInfo" :key="key" v-if="keyListObj[key] && key !== 'cryearNo'">
           <span class="bid-item-key">{{ keyListObj[key] }}</span>
           ：<span :class="{red: key === 'subscribeNo' || key === 'waterNumber'}">{{ valListObj[key] ? valListObj[key][value] : value }}</span>
         </li>
