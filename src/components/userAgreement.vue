@@ -78,7 +78,6 @@ export default {
         this.userAgreementCon = json.data.content
       })
     }
-    
   },
   methods: {
     btnAgreeRequest: function () {
