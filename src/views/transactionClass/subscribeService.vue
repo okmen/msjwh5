@@ -1,8 +1,13 @@
 <template>
   <div class="carService-outer">
-    <div class="query-link" :class="{ 'subscribeService': source === 'M'}" v-for="(item, index) in menuArr" v-if="item.name === '抵押/解押登记现场办理'">
-      <a href="javascript:;" @click="routerLink(index)">{{ item.name }}</a>
-    </div>
+    <template v-if="source === 'M'">
+      <div class="query-link" :class="{ 'subscribeService': source === 'M'}" v-for="(item, index) in menuArr" v-if="item.name === '抵押/解押登记现场办理'">
+        <a href="javascript:;" @click="routerLink(index)">{{ item.name }}</a>
+      </div>
+    </template>
+    <template v-else>
+      <div class="m-noLoadingPage">暂无预约类业务</div>
+    </template>
   </div>
 </template>
 <script>
