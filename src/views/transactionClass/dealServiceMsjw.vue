@@ -2,13 +2,13 @@
   <!-- 驾驶证类-驾驶证业务导航页 -->
   <div class="carService-outer">
     <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
-      <router-link :to="{ path: '/userAgreement/jszns', query: queryURL }">驾驶证年审</router-link>
+      <router-link :to="{ path: '/userAgreement/jszns', query: queryURL }">机动车驾驶证年度审验</router-link>
     </div>
     <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
-      <router-link :to="{ path: '/userAgreement/jszbz', query: queryURL }">驾驶证补证</router-link>
+      <router-link :to="{ path: '/userAgreement/jszbz', query: queryURL }">机动车驾驶证补办</router-link>
     </div>
     <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
-      <router-link :to="{ path: '/userAgreement/jszhz', query: queryURL }">驾驶证换证</router-link>
+      <router-link :to="{ path: '/userAgreement/jszhz', query: queryURL }">机动车驾驶证换证</router-link>
     </div>
   </div>
 </template>

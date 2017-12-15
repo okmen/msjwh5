@@ -3,7 +3,8 @@ export default [
     path: '/applyInterimCard',
     name: 'applyInterimCard',
     meta: {
-      title: '申请机动车临牌'
+      title: '办理临时行驶车号牌',
+      loginStatus: true
     },
     component: () => import('@/views/transactionClass/motorVehicles/applyClass/applyInterimCard')
   },
@@ -11,7 +12,8 @@ export default [
     path: '/replaceLicencePlate',
     name: 'replaceLicencePlate',
     meta: {
-      title: '补领机动车号牌'
+      title: '办理补证、换领机动车号牌',
+      loginStatus: true
     },
     component: () => import('@/views/transactionClass/motorVehicles/replacementClass/replaceLicencePlate')
   },
@@ -28,7 +30,7 @@ export default [
     path: '/placeExamine',
     name: 'placeExamine',
     meta: {
-      title: '机动车委托异地定期检验申报',
+      title: '委托核发机动车检验合格标志',
       loginStatus: true
     },
     component: () => import('@/views/transactionClass/motorVehicles/placeExamine/placeExamine')
@@ -37,7 +39,7 @@ export default [
     path: '/placeExamineDemand',
     name: 'placeExamineDemand',
     meta: {
-      title: '机动车委托异地定期检验申报',
+      title: '委托核发机动车检验合格标志',
       loginStatus: true
     },
     component: () => import('@/views/transactionClass/motorVehicles/placeExamine/placeExamineDemand')
@@ -46,7 +48,7 @@ export default [
     path: '/replaceQualifiedMark',
     name: 'replaceQualifiedMark',
     meta: {
-      title: '补换检验合格标志',
+      title: '核发机动车检验合格标志',
       loginStatus: true
     },
     component: () => import('@/views/transactionClass/motorVehicles/replaceQualifiedMark/replaceQualifiedMark')

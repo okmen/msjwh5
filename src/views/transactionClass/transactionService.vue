@@ -2,28 +2,29 @@
   <!-- 办理类-驾驶证业务导航页 -->
   <div class="carService-outer">
     <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
-      <router-link :to="{ path: '/applyInterimCard', query: queryURL }">申请机动车临牌</router-link>
+      <router-link :to="{ path: '/applyInterimCard', query: queryURL }">办理临时行驶车号牌</router-link>
     </div>
     <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
-      <router-link :to="{ path: '/userAgreement/szjj_hander_id', query: queryURL }">机动车委托异地定期检验申报</router-link>
+      <router-link :to="{ path: '/userAgreement/szjj_hander_id', query: queryURL }">委托核发机动车检验合格标志</router-link>
     </div>
     <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
-      <router-link :to="{ path: '/userAgreement/szjj_hander_rim', query: queryURL }">补换检验合格标志</router-link>
+      <router-link :to="{ path: '/userAgreement/szjj_hander_rim', query: queryURL }">核发机动车检验合格标志</router-link>
     </div>
     <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
-      <router-link :to="{ path: '/userAgreement/szjj_hander_rmvp', query: queryURL }">补领机动车号牌</router-link>
+      <router-link :to="{ path: '/userAgreement/szjj_hander_rmvp', query: queryURL }">办理补证、换领机动车号牌</router-link>
     </div>
     <div class="query-link" v-if="source === 'G'">
-      <router-link :to="{ path: '/userAgreement/jszns', query: queryURL }">驾驶证年审</router-link>
+      <router-link :to="{ path: '/userAgreement/jszns', query: queryURL }">机动车驾驶证年度审验</router-link>
     </div>
     <!-- <div class="query-link" v-if="source === 'G'">
-      <router-link :to="{ path: '/userAgreement/jszbz', query: queryURL }">驾驶证补证</router-link>
+      <router-link :to="{ path: '/userAgreement/jszbz', query: queryURL }">机动车驾驶证补办</router-link>
     </div>
     <div class="query-link" v-if="source === 'G'">
-      <router-link :to="{ path: '/userAgreement/jszhz', query: queryURL }">驾驶证换证</router-link>
+      <router-link :to="{ path: '/userAgreement/jszhz', query: queryURL }">机动车驾驶证换证</router-link>
     </div> -->
   </div>
 </template>
+
 <script>
   export default {
     name: 'cardService',
@@ -42,6 +43,7 @@
     }
   }
 </script>
+
 <style lang="less" scopsd>
   @import '../../assets/style/subscribeService';
 </style>

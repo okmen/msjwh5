@@ -19,7 +19,8 @@ export default [
     path: '/annualExaminations',
     name: 'annualExaminations',
     meta: {
-      title: '驾驶证年审'
+      title: '机动车驾驶证年度审验',
+      loginStatus: true
     },
     component: () => import('@/views/transactionClass/drivingLicence/annualExaminations')
   },
@@ -27,7 +28,7 @@ export default [
     path: '/changeCard/:id',
     name: 'changeCard',
     meta: {
-      title: '驾驶证补换证',
+      title: '机动车驾驶证换证',
       loginStatus: true
     },
     component: () => import('@/views/transactionClass/drivingLicence/changeCard')
