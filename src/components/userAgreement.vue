@@ -58,6 +58,7 @@ export default {
     if (this.entryHash === 'wfsspjbzy' || this.entryHash === 'sspjbzysx' || this.entryHash === 'wtmf') {
       this.isShow = false
     }
+    // 如果是民生警务平台，则使用本地须知
     if (this.$store.state.core.source === 'M') {
       let agreenentData = getUserAgreement(this.entryHash)
       this.getNoticeTitle = agreenentData.title

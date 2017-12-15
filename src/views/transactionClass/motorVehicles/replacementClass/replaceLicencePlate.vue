@@ -177,6 +177,9 @@
       this.ownersName = this.allOwnersName[this.plateNumberOne]
       this.certificateNumber = this.$store.state.user.identityCard
       this.plateNumberName = this.$refs.plateNumberName.currentName
+      if (!this.$store.state.user.cars.length) {
+        this.$MessageBox('温馨提示', '暂无车辆,你可以通过深圳交警微信号的“个人中心”绑定车辆')
+      }
     }
   }
 </script>
