@@ -32,6 +32,7 @@ import { GButton } from 'form'
 import axios from '../utils/axios'
 import { userAgreement } from '../config/baseURL'
 import { Toast } from 'mint-ui'
+import { getUserAgreement } from './../utils/utils'
 export default {
   name: 'userAgreement',
   data () {
@@ -53,24 +54,31 @@ export default {
     }
   },
   mounted: function () {
-    // let locationHref = decodeURIComponent(window.location.href)
-    // this.entryHash = locationHref.split('?')[0].split('#')[2]  // 截取#后的值
-    // this.$root.$router.isWeChat = this.isWeChat
     this.entryHash = this.$route.params.id
     if (this.entryHash === 'wfsspjbzy' || this.entryHash === 'sspjbzysx' || this.entryHash === 'wtmf') {
       this.isShow = false
     }
-    if (this.entryHash === 'jszbz' || this.entryHash === 'jszhz') {
-      this.entryHash = 'jszbzhz'
+    if (this.$store.state.core.source === 'M') {
+      let agreenentData = getUserAgreement(this.entryHash)
+      this.getNoticeTitle = agreenentData.title
+      this.userAgreementCon = agreenentData.text
+      if (this.entryHash === 'jszbz' || this.entryHash === 'jszhz') {
+        this.entryHash = 'jszbzhz'
+      }
+    } else {
+      if (this.entryHash === 'jszbz' || this.entryHash === 'jszhz') {
+        this.entryHash = 'jszbzhz'
+      }
+      let userAgreementData = {
+        noticeKey: this.entryHash
+      }
+      console.log(userAgreement, userAgreementData)
+      axios.post(userAgreement, userAgreementData).then(json => {
+        this.getNoticeTitle = json.data.title
+        this.userAgreementCon = json.data.content
+      })
     }
-    let userAgreementData = {
-      noticeKey: this.entryHash
-    }
-//    let userAgreement = 'http://192.168.1.243:8080/web/user/getDocumentationORMByNoticeKey.html'
-    axios.post(userAgreement, userAgreementData).then(json => { // 调取随手拍举报接口
-      this.getNoticeTitle = json.data.title
-      this.userAgreementCon = json.data.content
-    })
+    
   },
   methods: {
     btnAgreeRequest: function () {
