@@ -52,5 +52,15 @@ export default [
       loginStatus: true
     },
     component: () => import('@/views/transactionClass/motorVehicles/replaceQualifiedMark/replaceQualifiedMark')
+  },
+  // esemptionCar-六年免检申请-核发机动车检验合格标志
+  {
+    path: '/esemptionCar',
+    name: 'esemptionCar',
+    meta: {
+      title: '核发机动车检验合格标志'
+      // loginStatus: true
+    },
+    component: () => import('@/views/transactionClass/motorVehicles/exemption/esemptionCar')
   }
 ]

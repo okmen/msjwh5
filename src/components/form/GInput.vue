@@ -10,7 +10,7 @@
   right：input的右侧
 -->
 <template>
-  <div class="g-input">
+  <div class="g-input" :class="{ 'filled': classType === 'filled' }">
     <div class="g-input-title">
       {{title}}
     </div>
@@ -33,7 +33,7 @@
     created () {
       this.currentValue = this.value
     },
-    props: ['title', 'value', 'maxlength', 'placeholder', 'disabled', 'readonly'],
+    props: ['title', 'value', 'maxlength', 'placeholder', 'disabled', 'readonly', 'classType'],
     watch: {
       currentValue (val) {
         this.$emit('input', val)
@@ -60,6 +60,13 @@
     input{
       width: 100%;
     }
+  }
+}
+.filled {
+  flex-wrap: wrap;
+  .g-input-title{
+    width: 100%;
+    margin-bottom: 20px;
   }
 }
 </style>

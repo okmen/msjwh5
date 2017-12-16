@@ -3,9 +3,9 @@
     <div class="changeCard-top">
       <g-input class="changeCard-type" title="业务类型" v-model="serviceType" readonly></g-input>
     </div>
-    <g-input title="车主姓名" v-model="ownersName" disabled></g-input>
-    <g-input title="证件号码" v-model="certificateNumber" disabled></g-input>
-    <g-input title="车主证件号码" v-model="carCertificateNumber" disabled></g-input>
+    <g-input title="车主姓名" v-model="ownersName" readonly></g-input>
+    <g-input title="证件号码" v-model="certificateNumber" readonly></g-input>
+    <g-input title="车主证件号码" v-model="carCertificateNumber" readonly></g-input>
     <g-select title="车牌号码" :data="plateNumber" v-model="plateNumberOne" @getSelected="getPlateNumber" ref="plateNumberName"></g-select>
     <g-select title="车牌类型" :data="selectPlateType" v-model="plateTypeOne" @getSelected="getPlateType" ref="plateTypeStr"></g-select>
     <g-select title="户籍所在地" :data="selectCensusRegister" v-model="censusRegisterOne" @getSelected="getCensusRegisterIndex"></g-select>

@@ -5,6 +5,7 @@ import GUpload from './GUpload'
 import Group from './Group'
 import GSelectOne from './GSelectOne'
 import GRadio from './GRadio'
+import GDatePicker from './GDatePicker'
 export {
   GInput,
   GSelect,
@@ -12,5 +13,6 @@ export {
   GUpload,
   Group,
   GSelectOne,
-  GRadio
+  GRadio,
+  GDatePicker
 }

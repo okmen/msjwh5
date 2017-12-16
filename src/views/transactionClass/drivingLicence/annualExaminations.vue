@@ -1,8 +1,8 @@
 <template>
 <div class="annual-examinations">
-  <g-input title="姓名" v-model="userName" disabled></g-input>
-  <g-input title="身份证号码" v-model="IDCard" disabled></g-input>
-  <g-input title="手机号码" v-model="mobilePhone" disabled></g-input>
+  <g-input title="姓名" v-model="userName" readonly></g-input>
+  <g-input title="身份证号码" v-model="IDCard" readonly></g-input>
+  <g-input title="手机号码" v-model="mobilePhone" readonly></g-input>
   <g-select title="户籍所在地" :data="censusRegisterList" v-model="censusRegisterOne" @getSelected="getCensusRegisterIndex"></g-select>
   <g-input title="收件人姓名" v-model="recipientsName"></g-input>
   <g-input title="收件人号码" v-model="recipientsPhone"></g-input>

@@ -51,3 +51,7 @@ export const inspectionDeclaration = `${commonUrl}handleservice/inspectionDeclar
 export const inspectionDeclarationQuery = `${commonUrl}handleservice/inspectionDeclarationQuery.html` // 机动车委托异地定期检验申报查询
 
 export const getBusinessTypes = `${commonUrl}bookingbusiness/getBusinessTypes.html` // 获取菜单
+
+export const createVehicleInspection = `${commonUrl}handleservice/createVehicleInspection.html` // 六年免检
+
+export const getCarTypeId = `${commonUrl}handleservice/getCarTypeId.html` // 获取车辆类型Id

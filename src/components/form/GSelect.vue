@@ -5,7 +5,7 @@
   data：为数组，下拉的选项，数组的每一项为字符串或者对象 ,[{name: 'hello', value: '01'}]
 -->
 <template>
-  <div class="g-select" :class="{ disabled: disabled }">
+  <div class="g-select" :class="{ disabled: disabled, 'filled': classType === 'filled' }">
     <!--<div class="g-select-type" v-if="type">{{type}}</div>-->
     <div class="g-select-title" v-if="title">{{title}}</div>
     <div class="g-select-value" @click.stop="showSelectUl()">
@@ -16,63 +16,6 @@
     </div>
   </div>
 </template>
-
-<style lang="less" scoped>
-  .g-select{
-    display: flex;
-    padding:10px 40px;
-    box-sizing: border-box;
-    align-items: center;
-    .g-select-title{
-      width: 30%;
-    }
-    .placeholder{
-      color: #868686;
-    }
-    .g-select-value{
-      width: 70%;
-      border: 2px solid #e5e5e5;
-      border-radius: 8px;
-      height: 56px;
-      font-size: 30px;
-      line-height: 56px;
-      padding-left: 20px;
-      position: relative;
-      background: white url("../../assets/images/select1.png") 95% center/22px 13px no-repeat;
-      span{
-        display: block;
-        width: 90%;
-        height: 100%;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    }
-    .g-select-list {
-      position: absolute;
-      top: 60px;
-      right: 0;
-      background: white;
-      width: 100%;
-      border: 2px solid #eee;
-      line-height: 55px;
-      z-index: 999;
-      max-height: 400px;
-      overflow: auto;
-      .list-item {
-        padding-left: 20px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-      }
-    }
-  }
-  .g-select.disabled {
-    .g-select-value {
-      background: #efeff4;
-    }
-  }
-</style>
 
 <script>
   export default {
@@ -95,7 +38,8 @@
       value: [String, Number],
       type: String,
       placeholder: String,
-      disabled: Boolean
+      disabled: Boolean,
+      classType: String
     },
     created () {
       this.init()
@@ -159,3 +103,69 @@
   }
 </script>
 
+<style lang="less" scoped>
+  .g-select{
+    display: flex;
+    padding:10px 40px;
+    box-sizing: border-box;
+    align-items: center;
+    .g-select-title{
+      width: 30%;
+    }
+    .placeholder{
+      color: #868686;
+    }
+    .g-select-value{
+      width: 70%;
+      border: 2px solid #e5e5e5;
+      border-radius: 8px;
+      height: 56px;
+      font-size: 30px;
+      line-height: 56px;
+      padding-left: 20px;
+      position: relative;
+      background: white url("../../assets/images/select1.png") 95% center/22px 13px no-repeat;
+      span{
+        display: block;
+        width: 90%;
+        height: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+    .g-select-list {
+      position: absolute;
+      top: 60px;
+      right: 0;
+      background: white;
+      width: 100%;
+      border: 2px solid #eee;
+      line-height: 55px;
+      z-index: 999;
+      max-height: 400px;
+      overflow: auto;
+      .list-item {
+        padding-left: 20px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+  .g-select.disabled {
+    .g-select-value {
+      background: #efeff4;
+    }
+  }
+  .filled {
+    flex-wrap: wrap;
+    .g-select-title{
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    .g-select-value {
+      width: 100%;
+    }
+  }
+</style>
