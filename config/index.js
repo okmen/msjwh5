@@ -55,7 +55,8 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: '/msjw/', // 正式环境
+    // assetsPublicPath: '/', // 测试环境
 
     /**
      * Source Maps

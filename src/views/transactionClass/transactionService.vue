@@ -7,9 +7,9 @@
     <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
       <router-link :to="{ path: '/userAgreement/szjj_hander_id', query: queryURL }">委托核发机动车检验合格标志</router-link>
     </div>
-    <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
+    <!-- <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
       <router-link :to="{ path: '/userAgreement/szjj_hander_rim', query: queryURL }">核发机动车检验合格标志</router-link>
-    </div>
+    </div> -->
     <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
       <router-link :to="{ path: '/userAgreement/szjj_hander_rmvp', query: queryURL }">办理补证、换领机动车号牌</router-link>
     </div>

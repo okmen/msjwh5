@@ -1,11 +1,8 @@
 import { getQueryString } from './utils'
-import { msjwURL } from '@/config/msjw.config'
+import { msjwURL, appid, accountId } from '@/config/msjw.config'
 import axios from './axios'
 if (getQueryString('source') === 'M' || getQueryString('code')) {
-  // 民生警务 appid
-  const appid = 'wx43154456b4c489e3'
   const URL = window.location.href
-  let accountId = 7
   // 如果没有 code 且没有 openid 跳转到民生警务获取 code
   if (!getQueryString('code') && !window.localStorage.getItem('openid')) {
     window.localStorage.setItem('entranceURL', URL)

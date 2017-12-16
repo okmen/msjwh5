@@ -58,7 +58,7 @@
       }
     },
     created () {
-      if (this.bindDriverLicence !== '1') {
+      if (this.$store.state.user.bindDriverLicence !== '1') {
         this.$MessageBox('温馨提示', '您还没有绑定驾驶证或者正在审核中')
       }
       let val = this.$store.state.user
