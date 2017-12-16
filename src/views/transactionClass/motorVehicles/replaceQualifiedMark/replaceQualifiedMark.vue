@@ -169,7 +169,7 @@ export default {
       this.myNumberPlateData = PlateData
       this.myNumberPlate = this.myNumberPlateData[0].value
     } else {
-      this.$MessageBox('温馨提示', '暂无车辆,你可以通过深圳交警微信号的“个人中心”绑定车辆')
+      this.$MessageBox('温馨提示', '暂无车辆，您的车辆未绑定或者审核中')
     }
     this.userName = val.userName
     this.IDCard = val.identityCard

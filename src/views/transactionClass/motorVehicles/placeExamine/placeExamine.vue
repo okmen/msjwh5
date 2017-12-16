@@ -104,7 +104,7 @@ export default {
       this.vehicle = this.vehicleData[0].value
       this.plateType = this.vehicleData[0].str
     } else {
-      this.$MessageBox('温馨提示', '暂无车辆,你可以通过深圳交警微信号的“个人中心”绑定车辆')
+      this.$MessageBox('温馨提示', '暂无车辆，您的车辆未绑定或者审核中')
     }
     this.name = val.userName
     this.addresseeName = val.userName

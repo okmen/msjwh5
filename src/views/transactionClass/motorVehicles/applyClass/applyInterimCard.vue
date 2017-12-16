@@ -38,7 +38,7 @@
   export default {
     data () {
       return {
-        licenseSelectMassage: '申请机动车临牌',
+        licenseSelectMassage: '办理临时行驶车号牌',
         showIndex: '0',
         carOptList: [
           {name: '国产', choose: true, value: 'A'},

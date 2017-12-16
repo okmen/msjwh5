@@ -104,7 +104,7 @@ export default {
   },
   mounted () {
     if (this.bindDriverLicence !== '1') {
-      this.$MessageBox('温馨提示', '您还没绑定驾驶证,请到星级用户中心绑定！')
+      this.$MessageBox('温馨提示', '您还没有绑定驾驶证或者正在审核中')
     }
     document.addEventListener('click', (e) => {
       if (this.example === true) {
