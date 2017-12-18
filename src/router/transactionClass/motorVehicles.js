@@ -58,8 +58,8 @@ export default [
     path: '/esemptionCar',
     name: 'esemptionCar',
     meta: {
-      title: '核发机动车检验合格标志'
-      // loginStatus: true
+      title: '核发机动车检验合格标志',
+      loginStatus: true
     },
     component: () => import('@/views/transactionClass/motorVehicles/exemption/esemptionCar')
   }
