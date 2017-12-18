@@ -55,7 +55,6 @@
     width: 30%;
   }
   .g-input-content{
-    /*width: 80%;*/
     flex:1;
     input{
       width: 100%;
@@ -64,6 +63,7 @@
 }
 .filled {
   flex-wrap: wrap;
+  display: block;
   .g-input-title{
     width: 100%;
     margin-bottom: 20px;
