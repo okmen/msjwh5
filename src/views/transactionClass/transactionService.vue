@@ -8,7 +8,6 @@
       <router-link :to="{ path: '/userAgreement/szjj_hander_id', query: queryURL }">委托核发机动车检验合格标志</router-link>
     </div>
     <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
-      <!-- <router-link :to="{ path: '/userAgreement/szjj_hander_rim', query: queryURL }">核发机动车检验合格标志</router-link> -->
       <router-link :to="{ path: '/userAgreement/szjj_hander_cvi', query: queryURL }">核发机动车检验合格标志</router-link>
     </div>
     <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
@@ -17,12 +16,6 @@
     <div class="query-link" v-if="source === 'G'">
       <router-link :to="{ path: '/userAgreement/jszns', query: queryURL }">机动车驾驶证年度审验</router-link>
     </div>
-    <!-- <div class="query-link" v-if="source === 'G'">
-      <router-link :to="{ path: '/userAgreement/jszbz', query: queryURL }">机动车驾驶证补办</router-link>
-    </div>
-    <div class="query-link" v-if="source === 'G'">
-      <router-link :to="{ path: '/userAgreement/jszhz', query: queryURL }">机动车驾驶证换证</router-link>
-    </div> -->
   </div>
 </template>
 
