@@ -3,7 +3,7 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
-
+console.log('当前编译环境：', process.env.type)
 module.exports = {
   dev: {
 
@@ -55,7 +55,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/msjw/', // 正式环境
+    assetsPublicPath: process.env.type === '"test"' ? '/' : '/msjw/', // 正式环境
     // assetsPublicPath: '/', // 测试环境
 
     /**

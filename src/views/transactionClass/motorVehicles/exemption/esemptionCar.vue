@@ -15,7 +15,7 @@
     <g-date-picker title="保险生效日期" v-model="effectiveDate"></g-date-picker>
     <g-date-picker title="保险终止日期" v-model="terminationDate"></g-date-picker>
     <g-select title="保险结果告知方式" :data="placeSelectData" v-model="placeSelectMassage" classType='filled'></g-select>
-    <g-input title="预约人" v-model="bookerName" placeholder="请输入预约人"></g-input>
+    <g-input title="预约人" v-model="bookerName" placeholder="请输入预约人姓名"></g-input>
     <g-input title="预约人身份证号" v-model="bookerIdentityCard" placeholder="请输入预约人身份证号" classType='filled'></g-input>
     <g-input title="预约方式" value="本人" classType='filled' readonly></g-input>
     <span class="form-annotation">注:只能申请本人名下车辆</span>
@@ -224,13 +224,16 @@ export default {
     }
   },
   mounted () {
-    this.ownersName = this.allOwnersName[this.plateNumberOne]
-    this.receiverName = this.$store.state.user.userName
-    this.recipientPhone = this.$store.state.user.mobilePhone
-    this.plateNumberName = this.$refs.plateNumberName.currentName
-    this.plateType = this.$store.state.user.cars[0].plateType
-    if (this.$store.state.user.cars.length === 0) {
-      this.$MessageBox('温馨提示', '暂无车辆,你可以通过深圳交警微信号的“个人中心”绑定车辆')
+    let cars = this.$store.state.user.cars
+    if (cars.length) {
+      this.ownersName = this.allOwnersName[this.plateNumberOne]
+      this.receiverName = this.$store.state.user.userName
+      this.recipientPhone = this.$store.state.user.mobilePhone
+      this.plateNumberName = this.$refs.plateNumberName.currentName
+      this.plateType = this.$store.state.user.cars[0].plateType
+      console.log('当前车辆信息', this.$store.state.user.cars.length)
+    } else {
+      this.$MessageBox('温馨提示', '暂无车辆，您的车辆未绑定或者审核中')
     }
   }
 }

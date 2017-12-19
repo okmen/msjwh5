@@ -11,7 +11,7 @@
 
 <script>
 import { getUserM } from '@/config/baseURL'
-import { token, msjwURL } from '@/config/msjw.config'
+import { token, msjwURL, authURL } from '@/config/msjw.config'
 import { getQueryString } from '@/utils/utils'
 export default {
   name: 'app',
@@ -20,7 +20,14 @@ export default {
       showpage: false,
       token: token,
       openid: window.localStorage.getItem('openid'),
-      msg: '正在加载数据中 ...'
+      msg: '正在加载数据中 ...',
+      authStatusTag: {
+        '1': '无效用户',
+        '2': '未认证',
+        '3': '已认证',
+        '4': '认证中',
+        '5': '认证失败'
+      }
     }
   },
   created () {
@@ -30,6 +37,7 @@ export default {
     // 如果来源参数正常，则显示页面。否则显示为来源错误。
     if (source === 'M') {
       this.$axios.post(getUserM, {
+      // this.$axios.post('http://192.168.1.99:8080/web/msjw/getMSJWinfo.html', {
         openId: this.openid
       }).then(data => {
         if (data.code === '0000') {
@@ -41,6 +49,17 @@ export default {
           let URL = `${msjwURL}/yhtx/html/login.html?resbind=ssjj&openid=${this.openid}&token=${this.token}&redirect=${entranceURL}`
           localStorage.setItem('entranceURL', entranceURL)
           window.location.href = URL
+        }
+        if (data.code === '0002') {
+          this.msg = '正在跳转实名认证页面 ...'
+          this.$MessageBox({
+            title: '实名认证状态错误',
+            message: `当前：${this.authStatusTag[data.data.authStatus]}`,
+            confirmButtonText: '前往实名认证',
+            closeOnClickModal: false
+          }).then(() => {
+            window.location.href = authURL
+          })
         }
       })
     // 高德来源
