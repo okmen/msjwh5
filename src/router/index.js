@@ -63,6 +63,14 @@ let router = new Router({
 
 router.beforeEach((to, from, next) => {
   let source = getQueryString('source')
+  // 如果来源是高德，且未IOS系统
+  if (source === 'G' && window.AmapApp.util.os.ios) {
+    console.log('高德来源，设置标题', to.meta.title)
+    window.AmapApp.Bridge.send({
+      action: 'setWebViewTitle',
+      title: to.meta.title
+    })
+  }
   // 如果页面需要登录，且来源是高德
   if (to.meta.loginStatus && source === 'G') {
     // 未登录则跳转到

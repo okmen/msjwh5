@@ -4,8 +4,8 @@
     <template v-else>
       <div class="m-noLoadingPage">{{ msg }}</div>
     </template>
-    <!-- <div @click="handleLogout" style="position: fixed; bottom: 0px; right: 0;">民生警务退出登录</div>
-    <div @click="handleLogoutG" style="position: fixed; bottom: 0px; left: 0;">高德退出</div> -->
+    <div @click="handleLogout" style="position: fixed; bottom: 0px; right: 0;">民生警务退出登录</div>
+    <div @click="handleLogoutG" style="position: fixed; bottom: 0px; left: 0;">高德退出</div>
   </div>
 </template>
 
@@ -84,8 +84,8 @@ export default {
     if (getQueryString('code')) {
       this.msg = '正在获取授权，请稍候 ...'
     }
-    // 如果存在 identityId 则跳转路径
-    if (getQueryString('identityId')) {
+    // 如果存在 username 则跳转路径
+    if (getQueryString('username')) {
       this.msg = '授权成功，正在跳转 ...'
       window.location.href = window.localStorage.getItem('entranceURL')
     }

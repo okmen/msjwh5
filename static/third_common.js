@@ -1,3 +1,5073 @@
-!function e(t,n,i){function o(a,s){if(!n[a]){if(!t[a]){var c="function"==typeof require&&require;if(!s&&c)return c(a,!0);if(r)return r(a,!0);throw new Error("Cannot find module '"+a+"'")}var u=n[a]={exports:{}};t[a][0].call(u.exports,function(e){var n=t[a][1][e];return o(n?n:e)},u,u.exports,e,t,n,i)}return n[a].exports}for(var r="function"==typeof require&&require,a=0;a<i.length;a++)o(i[a]);return o}({1:[function(e,t,n){(function(t,i,o,r,a,s,c,u,l){function o(e,t,n){if(!(this instanceof o))return new o(e,t,n);var i=typeof e;if("base64"===t&&"string"===i)for(e=U(e);e.length%4!==0;)e+="=";var r;if("number"===i)r=O(e);else if("string"===i)r=o.byteLength(e,t);else{if("object"!==i)throw new Error("First argument needs to be a number, array or string.");r=O(e.length)}var a;o._useTypedArrays?a=o._augment(new Uint8Array(r)):(a=this,a.length=r,a._isBuffer=!0);var s;if(o._useTypedArrays&&"number"==typeof e.byteLength)a._set(e);else if(M(e))for(s=0;r>s;s++)o.isBuffer(e)?a[s]=e.readUInt8(s):a[s]=e[s];else if("string"===i)a.write(e,0,t);else if("number"===i&&!o._useTypedArrays&&!n)for(s=0;r>s;s++)a[s]=0;return a}function f(e,t,n,i){n=Number(n)||0;var r=e.length-n;i?(i=Number(i),i>r&&(i=r)):i=r;var a=t.length;Z(a%2===0,"Invalid hex string"),i>a/2&&(i=a/2);for(var s=0;i>s;s++){var c=parseInt(t.substr(2*s,2),16);Z(!isNaN(c),"Invalid hex string"),e[n+s]=c}return o._charsWritten=2*s,s}function d(e,t,n,i){var r=o._charsWritten=G($(t),e,n,i);return r}function p(e,t,n,i){var r=o._charsWritten=G(F(t),e,n,i);return r}function h(e,t,n,i){return p(e,t,n,i)}function g(e,t,n,i){var r=o._charsWritten=G(H(t),e,n,i);return r}function m(e,t,n,i){var r=o._charsWritten=G(J(t),e,n,i);return r}function v(e,t,n){return 0===t&&n===e.length?X.fromByteArray(e):X.fromByteArray(e.slice(t,n))}function y(e,t,n){var i="",o="";n=Math.min(e.length,n);for(var r=t;n>r;r++)e[r]<=127?(i+=z(o)+String.fromCharCode(e[r]),o=""):o+="%"+e[r].toString(16);return i+z(o)}function w(e,t,n){var i="";n=Math.min(e.length,n);for(var o=t;n>o;o++)i+=String.fromCharCode(e[o]);return i}function b(e,t,n){return w(e,t,n)}function x(e,t,n){var i=e.length;(!t||0>t)&&(t=0),(!n||0>n||n>i)&&(n=i);for(var o="",r=t;n>r;r++)o+=q(e[r]);return o}function E(e,t,n){for(var i=e.slice(t,n),o="",r=0;r<i.length;r+=2)o+=String.fromCharCode(i[r]+256*i[r+1]);return o}function _(e,t,n,i){i||(Z("boolean"==typeof n,"missing or invalid endian"),Z(void 0!==t&&null!==t,"missing offset"),Z(t+1<e.length,"Trying to read beyond buffer length"));var o=e.length;if(!(t>=o)){var r;return n?(r=e[t],o>t+1&&(r|=e[t+1]<<8)):(r=e[t]<<8,o>t+1&&(r|=e[t+1])),r}}function A(e,t,n,i){i||(Z("boolean"==typeof n,"missing or invalid endian"),Z(void 0!==t&&null!==t,"missing offset"),Z(t+3<e.length,"Trying to read beyond buffer length"));var o=e.length;if(!(t>=o)){var r;return n?(o>t+2&&(r=e[t+2]<<16),o>t+1&&(r|=e[t+1]<<8),r|=e[t],o>t+3&&(r+=e[t+3]<<24>>>0)):(o>t+1&&(r=e[t+1]<<16),o>t+2&&(r|=e[t+2]<<8),o>t+3&&(r|=e[t+3]),r+=e[t]<<24>>>0),r}}function I(e,t,n,i){i||(Z("boolean"==typeof n,"missing or invalid endian"),Z(void 0!==t&&null!==t,"missing offset"),Z(t+1<e.length,"Trying to read beyond buffer length"));var o=e.length;if(!(t>=o)){var r=_(e,t,n,!0),a=32768&r;return a?-1*(65535-r+1):r}}function S(e,t,n,i){i||(Z("boolean"==typeof n,"missing or invalid endian"),Z(void 0!==t&&null!==t,"missing offset"),Z(t+3<e.length,"Trying to read beyond buffer length"));var o=e.length;if(!(t>=o)){var r=A(e,t,n,!0),a=2147483648&r;return a?-1*(4294967295-r+1):r}}function L(e,t,n,i){return i||(Z("boolean"==typeof n,"missing or invalid endian"),Z(t+3<e.length,"Trying to read beyond buffer length")),K.read(e,t,n,23,4)}function C(e,t,n,i){return i||(Z("boolean"==typeof n,"missing or invalid endian"),Z(t+7<e.length,"Trying to read beyond buffer length")),K.read(e,t,n,52,8)}function B(e,t,n,i,o){o||(Z(void 0!==t&&null!==t,"missing value"),Z("boolean"==typeof i,"missing or invalid endian"),Z(void 0!==n&&null!==n,"missing offset"),Z(n+1<e.length,"trying to write beyond buffer length"),W(t,65535));var r=e.length;if(!(n>=r))for(var a=0,s=Math.min(r-n,2);s>a;a++)e[n+a]=(t&255<<8*(i?a:1-a))>>>8*(i?a:1-a)}function T(e,t,n,i,o){o||(Z(void 0!==t&&null!==t,"missing value"),Z("boolean"==typeof i,"missing or invalid endian"),Z(void 0!==n&&null!==n,"missing offset"),Z(n+3<e.length,"trying to write beyond buffer length"),W(t,4294967295));var r=e.length;if(!(n>=r))for(var a=0,s=Math.min(r-n,4);s>a;a++)e[n+a]=t>>>8*(i?a:3-a)&255}function N(e,t,n,i,o){o||(Z(void 0!==t&&null!==t,"missing value"),Z("boolean"==typeof i,"missing or invalid endian"),Z(void 0!==n&&null!==n,"missing offset"),Z(n+1<e.length,"Trying to write beyond buffer length"),V(t,32767,-32768));var r=e.length;n>=r||(t>=0?B(e,t,n,i,o):B(e,65535+t+1,n,i,o))}function k(e,t,n,i,o){o||(Z(void 0!==t&&null!==t,"missing value"),Z("boolean"==typeof i,"missing or invalid endian"),Z(void 0!==n&&null!==n,"missing offset"),Z(n+3<e.length,"Trying to write beyond buffer length"),V(t,2147483647,-2147483648));var r=e.length;n>=r||(t>=0?T(e,t,n,i,o):T(e,4294967295+t+1,n,i,o))}function R(e,t,n,i,o){o||(Z(void 0!==t&&null!==t,"missing value"),Z("boolean"==typeof i,"missing or invalid endian"),Z(void 0!==n&&null!==n,"missing offset"),Z(n+3<e.length,"Trying to write beyond buffer length"),Y(t,3.4028234663852886e38,-3.4028234663852886e38));var r=e.length;n>=r||K.write(e,t,n,i,23,4)}function j(e,t,n,i,o){o||(Z(void 0!==t&&null!==t,"missing value"),Z("boolean"==typeof i,"missing or invalid endian"),Z(void 0!==n&&null!==n,"missing offset"),Z(n+7<e.length,"Trying to write beyond buffer length"),Y(t,1.7976931348623157e308,-1.7976931348623157e308));var r=e.length;n>=r||K.write(e,t,n,i,52,8)}function U(e){return e.trim?e.trim():e.replace(/^\s+|\s+$/g,"")}function D(e,t,n){return"number"!=typeof e?n:(e=~~e,e>=t?t:e>=0?e:(e+=t,e>=0?e:0))}function O(e){return e=~~Math.ceil(+e),0>e?0:e}function P(e){return(Array.isArray||function(e){return"[object Array]"===Object.prototype.toString.call(e)})(e)}function M(e){return P(e)||o.isBuffer(e)||e&&"object"==typeof e&&"number"==typeof e.length}function q(e){return 16>e?"0"+e.toString(16):e.toString(16)}function $(e){for(var t=[],n=0;n<e.length;n++){var i=e.charCodeAt(n);if(127>=i)t.push(e.charCodeAt(n));else{var o=n;i>=55296&&57343>=i&&n++;for(var r=encodeURIComponent(e.slice(o,n+1)).substr(1).split("%"),a=0;a<r.length;a++)t.push(parseInt(r[a],16))}}return t}function F(e){for(var t=[],n=0;n<e.length;n++)t.push(255&e.charCodeAt(n));return t}function J(e){for(var t,n,i,o=[],r=0;r<e.length;r++)t=e.charCodeAt(r),n=t>>8,i=t%256,o.push(i),o.push(n);return o}function H(e){return X.toByteArray(e)}function G(e,t,n,i){for(var o=0;i>o&&!(o+n>=t.length||o>=e.length);o++)t[o+n]=e[o];return o}function z(e){try{return decodeURIComponent(e)}catch(t){return String.fromCharCode(65533)}}function W(e,t){Z("number"==typeof e,"cannot write a non-number as a number"),Z(e>=0,"specified a negative value for writing an unsigned value"),Z(t>=e,"value is larger than maximum value for type"),Z(Math.floor(e)===e,"value has a fractional component")}function V(e,t,n){Z("number"==typeof e,"cannot write a non-number as a number"),Z(t>=e,"value larger than maximum allowed value"),Z(e>=n,"value smaller than minimum allowed value"),Z(Math.floor(e)===e,"value has a fractional component")}function Y(e,t,n){Z("number"==typeof e,"cannot write a non-number as a number"),Z(t>=e,"value larger than maximum allowed value"),Z(e>=n,"value smaller than minimum allowed value")}function Z(e,t){if(!e)throw new Error(t||"Failed assertion")}var X=e("base64-js"),K=e("ieee754");n.Buffer=o,n.SlowBuffer=o,n.INSPECT_MAX_BYTES=50,o.poolSize=8192,o._useTypedArrays=function(){try{var e=new ArrayBuffer(0),t=new Uint8Array(e);return t.foo=function(){return 42},42===t.foo()&&"function"==typeof t.subarray}catch(n){return!1}}(),o.isEncoding=function(e){switch(String(e).toLowerCase()){case"hex":case"utf8":case"utf-8":case"ascii":case"binary":case"base64":case"raw":case"ucs2":case"ucs-2":case"utf16le":case"utf-16le":return!0;default:return!1}},o.isBuffer=function(e){return!(null===e||void 0===e||!e._isBuffer)},o.byteLength=function(e,t){var n;switch(e+="",t||"utf8"){case"hex":n=e.length/2;break;case"utf8":case"utf-8":n=$(e).length;break;case"ascii":case"binary":case"raw":n=e.length;break;case"base64":n=H(e).length;break;case"ucs2":case"ucs-2":case"utf16le":case"utf-16le":n=2*e.length;break;default:throw new Error("Unknown encoding")}return n},o.concat=function(e,t){if(Z(P(e),"Usage: Buffer.concat(list, [totalLength])\nlist should be an Array."),0===e.length)return new o(0);if(1===e.length)return e[0];var n;if("number"!=typeof t)for(t=0,n=0;n<e.length;n++)t+=e[n].length;var i=new o(t),r=0;for(n=0;n<e.length;n++){var a=e[n];a.copy(i,r),r+=a.length}return i},o.prototype.write=function(e,t,n,i){if(isFinite(t))isFinite(n)||(i=n,n=void 0);else{var o=i;i=t,t=n,n=o}t=Number(t)||0;var r=this.length-t;n?(n=Number(n),n>r&&(n=r)):n=r,i=String(i||"utf8").toLowerCase();var a;switch(i){case"hex":a=f(this,e,t,n);break;case"utf8":case"utf-8":a=d(this,e,t,n);break;case"ascii":a=p(this,e,t,n);break;case"binary":a=h(this,e,t,n);break;case"base64":a=g(this,e,t,n);break;case"ucs2":case"ucs-2":case"utf16le":case"utf-16le":a=m(this,e,t,n);break;default:throw new Error("Unknown encoding")}return a},o.prototype.toString=function(e,t,n){var i=this;if(e=String(e||"utf8").toLowerCase(),t=Number(t)||0,n=void 0!==n?Number(n):n=i.length,n===t)return"";var o;switch(e){case"hex":o=x(i,t,n);break;case"utf8":case"utf-8":o=y(i,t,n);break;case"ascii":o=w(i,t,n);break;case"binary":o=b(i,t,n);break;case"base64":o=v(i,t,n);break;case"ucs2":case"ucs-2":case"utf16le":case"utf-16le":o=E(i,t,n);break;default:throw new Error("Unknown encoding")}return o},o.prototype.toJSON=function(){return{type:"Buffer",data:Array.prototype.slice.call(this._arr||this,0)}},o.prototype.copy=function(e,t,n,i){var r=this;if(n||(n=0),i||0===i||(i=this.length),t||(t=0),i!==n&&0!==e.length&&0!==r.length){Z(i>=n,"sourceEnd < sourceStart"),Z(t>=0&&t<e.length,"targetStart out of bounds"),Z(n>=0&&n<r.length,"sourceStart out of bounds"),Z(i>=0&&i<=r.length,"sourceEnd out of bounds"),i>this.length&&(i=this.length),e.length-t<i-n&&(i=e.length-t+n);var a=i-n;if(100>a||!o._useTypedArrays)for(var s=0;a>s;s++)e[s+t]=this[s+n];else e._set(this.subarray(n,n+a),t)}},o.prototype.slice=function(e,t){var n=this.length;if(e=D(e,n,0),t=D(t,n,n),o._useTypedArrays)return o._augment(this.subarray(e,t));for(var i=t-e,r=new o(i,void 0,!0),a=0;i>a;a++)r[a]=this[a+e];return r},o.prototype.get=function(e){return console.log(".get() is deprecated. Access using array indexes instead."),this.readUInt8(e)},o.prototype.set=function(e,t){return console.log(".set() is deprecated. Access using array indexes instead."),this.writeUInt8(e,t)},o.prototype.readUInt8=function(e,t){return t||(Z(void 0!==e&&null!==e,"missing offset"),Z(e<this.length,"Trying to read beyond buffer length")),e>=this.length?void 0:this[e]},o.prototype.readUInt16LE=function(e,t){return _(this,e,!0,t)},o.prototype.readUInt16BE=function(e,t){return _(this,e,!1,t)},o.prototype.readUInt32LE=function(e,t){return A(this,e,!0,t)},o.prototype.readUInt32BE=function(e,t){return A(this,e,!1,t)},o.prototype.readInt8=function(e,t){if(t||(Z(void 0!==e&&null!==e,"missing offset"),Z(e<this.length,"Trying to read beyond buffer length")),!(e>=this.length)){var n=128&this[e];return n?-1*(255-this[e]+1):this[e]}},o.prototype.readInt16LE=function(e,t){return I(this,e,!0,t)},o.prototype.readInt16BE=function(e,t){return I(this,e,!1,t)},o.prototype.readInt32LE=function(e,t){return S(this,e,!0,t)},o.prototype.readInt32BE=function(e,t){return S(this,e,!1,t)},o.prototype.readFloatLE=function(e,t){return L(this,e,!0,t)},o.prototype.readFloatBE=function(e,t){return L(this,e,!1,t)},o.prototype.readDoubleLE=function(e,t){return C(this,e,!0,t)},o.prototype.readDoubleBE=function(e,t){return C(this,e,!1,t)},o.prototype.writeUInt8=function(e,t,n){n||(Z(void 0!==e&&null!==e,"missing value"),Z(void 0!==t&&null!==t,"missing offset"),Z(t<this.length,"trying to write beyond buffer length"),W(e,255)),t>=this.length||(this[t]=e)},o.prototype.writeUInt16LE=function(e,t,n){B(this,e,t,!0,n)},o.prototype.writeUInt16BE=function(e,t,n){B(this,e,t,!1,n)},o.prototype.writeUInt32LE=function(e,t,n){T(this,e,t,!0,n)},o.prototype.writeUInt32BE=function(e,t,n){T(this,e,t,!1,n)},o.prototype.writeInt8=function(e,t,n){n||(Z(void 0!==e&&null!==e,"missing value"),Z(void 0!==t&&null!==t,"missing offset"),Z(t<this.length,"Trying to write beyond buffer length"),V(e,127,-128)),t>=this.length||(e>=0?this.writeUInt8(e,t,n):this.writeUInt8(255+e+1,t,n))},o.prototype.writeInt16LE=function(e,t,n){N(this,e,t,!0,n)},o.prototype.writeInt16BE=function(e,t,n){N(this,e,t,!1,n)},o.prototype.writeInt32LE=function(e,t,n){k(this,e,t,!0,n)},o.prototype.writeInt32BE=function(e,t,n){k(this,e,t,!1,n)},o.prototype.writeFloatLE=function(e,t,n){R(this,e,t,!0,n)},o.prototype.writeFloatBE=function(e,t,n){R(this,e,t,!1,n)},o.prototype.writeDoubleLE=function(e,t,n){j(this,e,t,!0,n)},o.prototype.writeDoubleBE=function(e,t,n){j(this,e,t,!1,n)},o.prototype.fill=function(e,t,n){if(e||(e=0),t||(t=0),n||(n=this.length),"string"==typeof e&&(e=e.charCodeAt(0)),Z("number"==typeof e&&!isNaN(e),"value is not a number"),Z(n>=t,"end < start"),n!==t&&0!==this.length){Z(t>=0&&t<this.length,"start out of bounds"),Z(n>=0&&n<=this.length,"end out of bounds");for(var i=t;n>i;i++)this[i]=e}},o.prototype.inspect=function(){for(var e=[],t=this.length,i=0;t>i;i++)if(e[i]=q(this[i]),i===n.INSPECT_MAX_BYTES){e[i+1]="...";break}return"<Buffer "+e.join(" ")+">"},o.prototype.toArrayBuffer=function(){if("undefined"!=typeof Uint8Array){if(o._useTypedArrays)return new o(this).buffer;for(var e=new Uint8Array(this.length),t=0,n=e.length;n>t;t+=1)e[t]=this[t];return e.buffer}throw new Error("Buffer.toArrayBuffer not supported in this browser")};var Q=o.prototype;o._augment=function(e){return e._isBuffer=!0,e._get=e.get,e._set=e.set,e.get=Q.get,e.set=Q.set,e.write=Q.write,e.toString=Q.toString,e.toLocaleString=Q.toString,e.toJSON=Q.toJSON,e.copy=Q.copy,e.slice=Q.slice,e.readUInt8=Q.readUInt8,e.readUInt16LE=Q.readUInt16LE,e.readUInt16BE=Q.readUInt16BE,e.readUInt32LE=Q.readUInt32LE,e.readUInt32BE=Q.readUInt32BE,e.readInt8=Q.readInt8,e.readInt16LE=Q.readInt16LE,e.readInt16BE=Q.readInt16BE,e.readInt32LE=Q.readInt32LE,e.readInt32BE=Q.readInt32BE,e.readFloatLE=Q.readFloatLE,e.readFloatBE=Q.readFloatBE,e.readDoubleLE=Q.readDoubleLE,e.readDoubleBE=Q.readDoubleBE,e.writeUInt8=Q.writeUInt8,e.writeUInt16LE=Q.writeUInt16LE,e.writeUInt16BE=Q.writeUInt16BE,e.writeUInt32LE=Q.writeUInt32LE,e.writeUInt32BE=Q.writeUInt32BE,e.writeInt8=Q.writeInt8,e.writeInt16LE=Q.writeInt16LE,e.writeInt16BE=Q.writeInt16BE,e.writeInt32LE=Q.writeInt32LE,e.writeInt32BE=Q.writeInt32BE,e.writeFloatLE=Q.writeFloatLE,e.writeFloatBE=Q.writeFloatBE,e.writeDoubleLE=Q.writeDoubleLE,e.writeDoubleBE=Q.writeDoubleBE,e.fill=Q.fill,e.inspect=Q.inspect,e.toArrayBuffer=Q.toArrayBuffer,e}}).call(this,e("o7fRyq"),"undefined"!=typeof self?self:"undefined"!=typeof window?window:{},e("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../aflow/node_modules/_buffer@2.1.13@buffer/index.js","/../../../aflow/node_modules/_buffer@2.1.13@buffer")},{"base64-js":2,buffer:1,ieee754:3,o7fRyq:4}],2:[function(e,t,n){(function(e,t,i,o,r,a,s,c,u){var l="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";!function(e){"use strict";function t(e){var t=e.charCodeAt(0);return t===r||t===f?62:t===a||t===d?63:s>t?-1:s+10>t?t-s+26+26:u+26>t?t-u:c+26>t?t-c+26:void 0}function n(e){function n(e){u[f++]=e}var i,r,a,s,c,u;if(e.length%4>0)throw new Error("Invalid string. Length must be a multiple of 4");var l=e.length;c="="===e.charAt(l-2)?2:"="===e.charAt(l-1)?1:0,u=new o(3*e.length/4-c),a=c>0?e.length-4:e.length;var f=0;for(i=0,r=0;a>i;i+=4,r+=3)s=t(e.charAt(i))<<18|t(e.charAt(i+1))<<12|t(e.charAt(i+2))<<6|t(e.charAt(i+3)),n((16711680&s)>>16),n((65280&s)>>8),n(255&s);return 2===c?(s=t(e.charAt(i))<<2|t(e.charAt(i+1))>>4,n(255&s)):1===c&&(s=t(e.charAt(i))<<10|t(e.charAt(i+1))<<4|t(e.charAt(i+2))>>2,n(s>>8&255),n(255&s)),u}function i(e){function t(e){return l.charAt(e)}function n(e){return t(e>>18&63)+t(e>>12&63)+t(e>>6&63)+t(63&e)}var i,o,r,a=e.length%3,s="";for(i=0,r=e.length-a;r>i;i+=3)o=(e[i]<<16)+(e[i+1]<<8)+e[i+2],s+=n(o);switch(a){case 1:o=e[e.length-1],s+=t(o>>2),s+=t(o<<4&63),s+="==";break;case 2:o=(e[e.length-2]<<8)+e[e.length-1],s+=t(o>>10),s+=t(o>>4&63),s+=t(o<<2&63),s+="="}return s}var o="undefined"!=typeof Uint8Array?Uint8Array:Array,r="+".charCodeAt(0),a="/".charCodeAt(0),s="0".charCodeAt(0),c="a".charCodeAt(0),u="A".charCodeAt(0),f="-".charCodeAt(0),d="_".charCodeAt(0);e.toByteArray=n,e.fromByteArray=i}("undefined"==typeof n?this.base64js={}:n)}).call(this,e("o7fRyq"),"undefined"!=typeof self?self:"undefined"!=typeof window?window:{},e("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../aflow/node_modules/_buffer@2.1.13@buffer/node_modules/base64-js/lib/b64.js","/../../../aflow/node_modules/_buffer@2.1.13@buffer/node_modules/base64-js/lib")},{buffer:1,o7fRyq:4}],3:[function(e,t,n){(function(e,t,i,o,r,a,s,c,u){n.read=function(e,t,n,i,o){var r,a,s=8*o-i-1,c=(1<<s)-1,u=c>>1,l=-7,f=n?o-1:0,d=n?-1:1,p=e[t+f];for(f+=d,r=p&(1<<-l)-1,p>>=-l,l+=s;l>0;r=256*r+e[t+f],f+=d,l-=8);for(a=r&(1<<-l)-1,r>>=-l,l+=i;l>0;a=256*a+e[t+f],f+=d,l-=8);if(0===r)r=1-u;else{if(r===c)return a?NaN:(p?-1:1)*(1/0);a+=Math.pow(2,i),r-=u}return(p?-1:1)*a*Math.pow(2,r-i)},n.write=function(e,t,n,i,o,r){var a,s,c,u=8*r-o-1,l=(1<<u)-1,f=l>>1,d=23===o?Math.pow(2,-24)-Math.pow(2,-77):0,p=i?0:r-1,h=i?1:-1,g=0>t||0===t&&0>1/t?1:0;for(t=Math.abs(t),isNaN(t)||t===1/0?(s=isNaN(t)?1:0,a=l):(a=Math.floor(Math.log(t)/Math.LN2),t*(c=Math.pow(2,-a))<1&&(a--,c*=2),t+=a+f>=1?d/c:d*Math.pow(2,1-f),t*c>=2&&(a++,c/=2),a+f>=l?(s=0,a=l):a+f>=1?(s=(t*c-1)*Math.pow(2,o),a+=f):(s=t*Math.pow(2,f-1)*Math.pow(2,o),a=0));o>=8;e[n+p]=255&s,p+=h,s/=256,o-=8);for(a=a<<o|s,u+=o;u>0;e[n+p]=255&a,p+=h,a/=256,u-=8);e[n+p-h]|=128*g}}).call(this,e("o7fRyq"),"undefined"!=typeof self?self:"undefined"!=typeof window?window:{},e("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../aflow/node_modules/_buffer@2.1.13@buffer/node_modules/ieee754/index.js","/../../../aflow/node_modules/_buffer@2.1.13@buffer/node_modules/ieee754")},{buffer:1,o7fRyq:4}],4:[function(e,t,n){(function(e,n,i,o,r,a,s,c,u){function l(){}var e=t.exports={};e.nextTick=function(){var e="undefined"!=typeof window&&window.setImmediate,t="undefined"!=typeof window&&window.postMessage&&window.addEventListener;if(e)return function(e){return window.setImmediate(e)};if(t){var n=[];return window.addEventListener("message",function(e){var t=e.source;if((t===window||null===t)&&"process-tick"===e.data&&(e.stopPropagation(),n.length>0)){var i=n.shift();i()}},!0),function(e){n.push(e),window.postMessage("process-tick","*")}}return function(e){setTimeout(e,0)}}(),e.title="browser",e.browser=!0,e.env={},e.argv=[],e.on=l,e.addListener=l,e.once=l,e.off=l,e.removeListener=l,e.removeAllListeners=l,e.emit=l,e.binding=function(e){throw new Error("process.binding is not supported")},e.cwd=function(){return"/"},e.chdir=function(e){throw new Error("process.chdir is not supported")}}).call(this,e("o7fRyq"),"undefined"!=typeof self?self:"undefined"!=typeof window?window:{},e("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../aflow/node_modules/_process@0.7.0@process/browser.js","/../../../aflow/node_modules/_process@0.7.0@process")},{buffer:1,o7fRyq:4}],5:[function(e,t,n){(function(n,i,o,r,a,s,c,u,l){function f(){return window.amapJsBridge?void(y=window.amapJsBridge):void(w.ios?window.WebViewJavascriptBridge?d({bridge:window.WebViewJavascriptBridge}):document.addEventListener("WebViewJavascriptBridgeReady",d,!1):w.android&&(window.jsInterface?d():document.addEventListener("DOMContentLoaded",d,!1)))}function d(e){w.ios?(document.removeEventListener("WebViewJavascriptBridgeReady",d,!1),y=e.bridge,y.init(),y.registerHandler("amapCallWebViewHandler",window[I])):w.android&&(document.removeEventListener("DOMContentLoaded",d,!1),y={send:function(e){e=[JSON.stringify(e)],arguments[1]&&(e[1]=arguments[1]),window.jsInterface&&window.jsInterface.invokeMethod("send",e)}},y.send({action:"registerCallback"},I)),window.amapJsBridge=y,p()}function p(){for(S=!0,L=!0,x.setIsInAmap(!0),b.addClass(window.document.documentElement,"amap"),v();A.length;)y.send(A.shift())}function h(e){"string"==typeof e&&(e=JSON.parse(e));var t=e._action;return"function"==typeof _[t]?void _[t](e):("[object Function]"===Object.prototype.toString.call(E[t])&&(E[t](e),e.content&&1!=e.content.code&&(E[t]=void 0)),void(t&&0!==t.indexOf("_HOLD_")&&(E[t]=void 0)))}function g(e,t){if(t)if(e._action)E[e._action]=t;else{var n="_ACTION_TO_NATIVEAPI_"+Math.random();if(e.hasOwnProperty("function")?(n="_HOLD"+n,e["function"]._action=n):e._action=n,"needHold"in e){n="_HOLD"+n,e._action=n;try{delete e.needHold}catch(i){}}E[n]=t}y?y.send(e):A.push(e)}function m(e,t){_[e]=t}function v(){C.forEach(function(e){e()})}var y,w=e("../util/os"),b=e("../util/util"),x=e("../util/webview_info"),E={},_={},A=[],I="callback",S=!1,L=!1,C=[];window[I]=h;var B=!1;t.exports={send:g,registerCallback:m,ready:function(e){L?S&&e():(C.push(e),B||(f(),B=!0,setTimeout(function(){x.isInAmap()||S||(L=!0,console.warn("page not in amap!"),v())},800)))}}}).call(this,e("o7fRyq"),"undefined"!=typeof self?self:"undefined"!=typeof window?window:{},e("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/amap/bridge.js","/amap")},{"../util/os":22,"../util/util":23,"../util/webview_info":24,buffer:1,o7fRyq:4}],6:[function(e,t,n){(function(n,i,o,r,a,s,c,u,l){function f(e,t){d.send({action:"promptMessage",message:e,type:t||0})}var d=e("./bridge");t.exports={toast:f}}).call(this,e("o7fRyq"),"undefined"!=typeof self?self:"undefined"!=typeof window?window:{},e("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/amap/dialog.js","/amap")},{"./bridge":5,buffer:1,o7fRyq:4}],7:[function(e,t,n){(function(n,i,o,r,a,s,c,u,l){function f(e,t,n,i,o,r){if(e){var a;"object"==typeof e?(a=e,n=t,o=a.showNetErr,delete a.showNetErr):a={urlPrefix:e,method:r,progress:i,params:t},a.action="aosrequest",a.method="string"==typeof a.method&&"GET"===a.method.toUpperCase()?"GET":"POST",a.headers={"content-type":"application/x-www-form-urlencoded"},a.progress?a.progress=1===a.progress?"正在加载":a.progress:delete a.progress,p.send(a,function(e){var t=JSON.parse(e.content);t&&void 0!==t.code?!o||-1!=t.code&&-2!=t.code||h.toast("请检查网络后重试"):t={code:-10},n.call(this,t)})}}function d(e,t,n,i){function o(e){e.remove(),window[r]=void 0}var r=y+ ++v;i=i||"get",window[r]=function(e){n(e)};var a=m.isPublic()?"//wb.amap.com/channel.php":"//wb.testing.amap.com/channel.php",s=location.protocol+a+"?aoscommon=1&callback="+r+"&urlname="+encodeURIComponent(e)+"&param="+encodeURIComponent(JSON.stringify(t))+"&method="+i;g.addScript(s,o,function(e){window[r]({content:{code:-2}}),o(e)})}var p=e("./bridge"),h=e("./dialog"),g=e("../util/util"),m=e("../util/webview_info"),v=0,y="_aosJsonpRequest";t.exports={load:function(){f.apply(this,arguments)},aosJsonp:function(){d.apply(this,arguments)},jsonp:function(e,t,n){d.call(this,e,t,n,"get")},get:function(e,t,n,i){f.call(this,e,t,n,i,!0,"get")},post:function(e,t,n,i){f.call(this,e,t,n,i,!0,"post")}}}).call(this,e("o7fRyq"),"undefined"!=typeof self?self:"undefined"!=typeof window?window:{},e("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/amap/loader.js","/amap")},{"../util/util":23,"../util/webview_info":24,"./bridge":5,"./dialog":6,buffer:1,o7fRyq:4}],8:[function(e,t,n){(function(n,i,o,r,a,s,c,u,l){var f=e("./bridge"),d=e("../util/os"),p=e("../util/webview_info"),h=e("./loader"),g=e("../util/util"),m=p.isPublic()?location.protocol+"//oss.amap.com/ws/h5_log":location.protocol+"//oss.testing.amap.com/ws/h5_log",v={PAGE_SOURCE_KEY:"gd_from",LOG_TYPE_ONLINE_AND_OFFLINE:0,LOG_TYPE_ONLINE_CHART:1,type:0,_commonParam:{source:g.getUrlParam("gd_from")||"-"},addCommonParam:function(e){p.isInAmap()||(this._commonParam.os=d.ios?"ios":"and",this._commonParam.plat=p.isInWeixin()?"wx":p.isInWeibo()?"wb":"-"),g.extend(this._commonParam,e)},initLog:function(e,t){this.type=t||this.LOG_TYPE_ONLINE_AND_OFFLINE,this.addCommonParam({page:e})},log:function(e,t){if(p.isInAmap()){var n=this._formatLogParam(e,t);f.send({action:"logUserAction",pageid:"1000",buttonid:1,para:JSON.stringify(n)})}else this.browserLog(e,t);this.type==this.LOG_TYPE_ONLINE_CHART&&"pv"==e&&this.nativeOnlineLog(e+"_online",t)},browserLog:function(e,t){(new Image).src=this._formatLogUrl(e,t)},nativeOnlineLog:function(e,t){var n=this._formatLogUrl(e,t);h.get(n,[{id:this._commonParam.page,sign:1},{timestamp:(new Date).getTime()/1e3,sign:1}],function(){},0,0,"get")},_formatLogParam:function(e,t){var n={};return g.extend(n,this._commonParam),"string"==typeof e?(t&&g.extend(n,t),n.click=e):g.extend(n,e),n},_formatLogUrl:function(e,t){var n=this._formatLogParam(e,t);return m+"?t="+Math.random()+"&"+this._serializeParam(n)},_serializeParam:function(e){var t="";for(var n in e){var i=e[n];void 0!==i&&(t+="&"+n+"="+(null==i?"":encodeURIComponent(i)))}return t.substr(1)},logJump:function(e,t,n){this.log(t,n),setTimeout(function(){"function"==typeof e?e():Tools.locationRedirect(e)},200)}};t.exports={initLog:v.initLog.bind(v),log:v.log.bind(v),logJump:v.logJump.bind(v),nativeOnlineLog:v.nativeOnlineLog.bind(v)}}).call(this,e("o7fRyq"),"undefined"!=typeof self?self:"undefined"!=typeof window?window:{},e("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/amap/log.js","/amap")},{"../util/os":22,"../util/util":23,"../util/webview_info":24,"./bridge":5,"./loader":7,buffer:1,o7fRyq:4}],9:[function(e,t,n){(function(n,i,o,r,a,s,c,u,l){var f=e("./bridge"),d=e("../util/os"),p={getAppInfo:function(e){f.send({action:"getExtraUrl"},function(t){t&&t.div&&(t._div=t.div.match(/\d+/),t._div=t._div&&1*t._div.toString().replace(/^0+/,"")),e(t)})},compareDiv:function(e,t){this.getAppInfo(function(n){var i=!1;n&&n.div&&(i=Math.floor(n.div.substr(5,5))-Math.floor(e)>=0),t(i)})},getUserId:function(e,t,n){var i={action:"getAmapUserId"};i.onlyGetId=t?"1":"0",i.needRelogin=n?"1":"0",f.send(i,e)},loginBind:function(e,t){t=t?t:0;var n={action:"loginBind",type:t?"taobao":"phone"};f.send(n,e)},userUnbundling:function(e,t){if(e&&0!=e.length){var n={action:"userUnbundling",unbundling:e};f.send(n,t)}},getMapLocation:function(e){var t={action:"getMapLocation",forceReturnValue:"1"};f.send(t,e)},openPoi:function(e,t,n){var i={action:"openPoi",poiInfo:e};t&&(i.status=t+""),n&&(i.module=n),f.send(i)},searchRoute:function(e,t){var n={action:"searchRoute"};e&&(n.startPoi=e),t&&(n.endPoi=t),f.send(n)},setWebViewTitle:function(e){d.ios&&f.send({action:"setWebViewTitle",title:e}),document.title=e},loadSchema:function(e,t){if(e){try{var n=document.getElementsByTagName("audio")[0];n.pause()}catch(i){}if(d.ios){var o=document,r=o.getElementById("loadSchemaIframe");r||(r=o.createElement("iframe"),r.id="loadSchemaIframe",r.style.cssText="display:none;width:0px;height:0px",o.body.appendChild(r)),r.src=e}else t=t?t:e,f.send({action:"loadSchema",url:t})}},share:function(e,t,n){var i={action:"share",urlType:1,useCustomUrl:"1",content:e,loadDirectly:1===e.length?"1":"0"};n&&(i.hideLinkCopyBtn=1,i.hideMoreBtn=1),this.compareDiv("070800",function(e){e?(i.callbackcase=1,f.send(i,function(e){setTimeout(function(){t&&t(e)},600)})):(f.send(i),setTimeout(function(){t&&t(null)},600))})},closeCurretnWebview:function(e){f.send({action:"closeCurrentWebview"},e)},openAppUrl:function(e,t,n,i){f.send({action:"openAppUrl",wapUrl:e,appName:t,loadingTime:n?n:"1500"},i)},registRightButton:function(e,t,n){var i=d.ios?"registRightButton":"registRightButtonNew";f.send({action:i,type:e,buttonText:t,"function":{action:"jsCallBack"}},n)},destroyRightButton:function(e){var t=d.ios?"registRightButton":"registRightButtonNew";f.send({action:t,type:"",buttonText:"","function":{action:"jsCallBack"}},e)},xxEncode:function(e,t){f.send({action:"xxEncode",text:e?e:""},function(e){t&&t(e.result["in"])})},xxDecode:function(e,t){f.send({action:"xxDecode",text:e?e:""},function(e){t&&t(e.result.de)})},setWebViewCloseBtn:function(e){f.send({action:"setWebViewCloseBtn",hidden:!!e})},webviewGoBack:function(e){f.send({action:"webviewGoBack",step:e},function(e){})},getDeviceParamString:function(e,t,n,i){f.send({action:"getDeviceParamString",params:e,delimiting:t,encypt:n},function(e){i(e)})}};t.exports=p}).call(this,e("o7fRyq"),"undefined"!=typeof self?self:"undefined"!=typeof window?window:{},e("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/amap/native.js","/amap")},{"../util/os":22,"./bridge":5,buffer:1,o7fRyq:4}],10:[function(e,t,n){(function(n,i,o,r,a,s,c,u,l){var f=e("./native"),d=e("./loader"),p=e("../util/util"),h=e("../config/config.aos"),g=e("./log"),m=e("../config/config.act").activity,v="https://"+location.href.split("page/")[0].split("://")[1],y="http://cache.amap.com/h5/static/2017summer/",w={shareData:{index:0,wbTopic:"",lists:[{desc:"预热6个分支活动分享",title:"十一出行节，快乐不添堵； ",message:"十一出行节，快乐不添堵； ",shareIMG:y+"share_wx.png",shareIMGi:y+"share_wb.png",url:v+"page/index_wx.html"},{desc:"正式活动的普通分享、任务列表的分享",title:"十一出行节，快乐不添堵； ",message:"十一出行节，快乐不添堵； ",shareIMG:y+"share_wx.png",shareIMGi:y+"share_wb.png",url:v+"page/index_wx.html"},{desc:"4个小游戏的战绩分享",title:"十一出行节，快乐不添堵； ",message:"十一出行节，快乐不添堵； ",shareIMG:y+"share_wx.png",shareIMGi:y+"share_wb.png",url:v+"page/index_wx.html"},{desc:"共享红包分享",title:"友谊们，我获得了XX元红包，快来帮我拆开！",message:"友谊们，我获得了XX元红包，快来帮我拆开！",shareIMG:y+"share_wx.png",shareIMGi:y+"share_wb.png",url:v+"page/index_wx.html"}],hasPY:!0,weixin:{},pengyou:{},dingding:{},weibo:{},qq:{},qzone:{}},appInfo:null,allowShare:!0,ctime:null,init:function(e){var t=this;t.shareData.index=e?e:0,window.navigator.userAgent.search(/MicroMessenger/i)>=0?(console.log("分享lists:"+t.shareData.index),t.setShareData(function(){t.weixinShare([t.shareData.weixin,t.shareData.pengyou],function(){t.shareSuccess(null)})})):this.getAppInfo()},getAppInfo:function(){var e=this;f.getAppInfo(function(t){t.tid&&t.div?(e.appInfo=t,e.appInfo.div=e.appInfo.div.substr(5,5)):e.getAppInfo()})},getShareData:function(e){var t=this,n=[{tid:t.appInfo.tid,sign:1},{activity:m}];d.get(h.share_share_conf,n,function(n){t.shareData.hasPY=!0,1!=n.code||n.data.pengyou||(t.shareData.hasPY=!1),t.setShareData(e)},"加载中")},setShareData:function(e){var t=this,n=t.shareData.index,i=["weixin","pengyou","dingding","weibo","qq","qzone"];t.hide=!1,t.appInfo&&t.appInfo.div<"080102"&&!AmapApp.util.os.ios&&(i=["weixin","pengyou","dingding","qq","qzone"],t.hide=!0);for(var o=0;o<i.length;o++)t.shareData[i[o]].type=i[o],t.shareData[i[o]].message=t.shareData.lists[n].message,t.shareData[i[o]].title=t.shareData.lists[n].title,t.shareData[i[o]].url=p.urlAddParam(t.shareData.lists[n].url,"gd_from",i[o]),"weibo"==i[o]?(0==n&&(t.shareData.wbTopic?t.shareData[i[o]].message="#"+t.shareData.wbTopic+"#"+t.shareData.lists[n].message:t.shareData[i[o]].message=t.shareData.lists[n].message),t.shareData[i[o]].imgUrl=t.shareData.lists[n].shareIMGi):t.shareData[i[o]].imgUrl=t.shareData.lists[n].shareIMG,t.shareData[i[o]].shareType=0;e&&e()},weixinShare:function(e,t){var n=this;p.addScript(location.protocol+"//res.wx.qq.com/open/js/jweixin-1.0.0.js",function(){p.addScript(location.protocol+"//wb.amap.com/sign.php?r="+Math.random(),function(){n.weixinShareConfig(e,t)})})},weixinShareConfig:function(e,t){wx.ready(function(){wx.checkJsApi({jsApiList:["onMenuShareTimeline","onMenuShareAppMessage"],success:function(n){function i(e,n){return function(){t&&t({result:n,type:e})}}var o={};o[p.IN_AMAP_KEY]="0";for(var r=e.length-1;r>=0;r--){var a=e[r];"weixin"===a.type&&n.checkResult.onMenuShareAppMessage?(o[p.PAGE_SOURCE_KEY]="weixin",
-wx.onMenuShareAppMessage({title:a.title,desc:a.message,link:p.urlAddParam(a.url,o),imgUrl:a.imgUrl,success:i("weixin","ok"),cancel:i("weixin","cancel"),fail:i("weixin","fail")})):"pengyou"===a.type&&n.checkResult.onMenuShareTimeline&&(o[p.PAGE_SOURCE_KEY]="pengyou",wx.onMenuShareTimeline({title:a.title,link:p.urlAddParam(a.url,o),imgUrl:a.imgUrl,success:i("pengyou","ok"),cancel:i("pengyou","cancel"),fail:i("pengyou","fail")}))}}})})},shareModule:function(){var e=this;e.allowShare&&(e.allowShare=!1,e._shareModule.apply(e,arguments)),clearTimeout(e.ctime),e.ctime=setTimeout(function(){e.allowShare=!0},1e3)},_shareModule:function(e,t){var n=this;n.shareData.index=t,n.getShareData(function(){var i=[n.shareData.weixin,n.shareData.dingding,n.shareData.weibo,n.shareData.qq,n.shareData.qzone];n.shareData.hasPY&&i.splice(1,0,n.shareData.pengyou),console.log("shareContent",i),g.log("share"),f.share(i,function(i){e&&e(i),n.shareSuccess(i,t)},n.hide)})},shareSuccess:function(e,t){e?g.log("share",{type:t,status:e.type}):g.log("share",{type:t,status:"lessthan780"})},shareTask:function(e,t){var n=this,i=[{tid:n.appInfo.tid,sign:1},{task_id:1,sign:1}];d.get(h.finish_task,i,function(n){console.log("finish_task",n),1==n.code?e&&e(t):102==n.code?$.toast&&$.toast("活动未开始哦～"):103==n.code?$.toast&&$.toast("活动已结束哦～"):104==n.code?$.toast&&$.toast("活动已下线哦～"):119==n.code||120==n.code||p.pageError(h.finish_task,n.code)})}};t.exports={init:w.init.bind(w),shareModule:function(e,t){w.shareModule(e,t)}}}).call(this,e("o7fRyq"),"undefined"!=typeof self?self:"undefined"!=typeof window?window:{},e("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/amap/share.js","/amap")},{"../config/config.act":13,"../config/config.aos":14,"../util/util":23,"./loader":7,"./log":8,"./native":9,buffer:1,o7fRyq:4}],11:[function(e,t,n){(function(n,i,o,r,a,s,c,u,l){var f=e("../amap/bridge"),d=e("../amap/native"),p=e("../amap/loader"),h=e("../amap/log"),g=e("../amap/share"),m=e("../util/os"),v=e("../util/util"),y=e("../util/webview_info"),w=e("../util/locat"),b=e("../util/openAmap"),x=e("../util/needBind");v.extend(v,b),v.extend(v,w),v.extend(v,y),v.extend(v,x),v.os=m;var E={Bridge:f,Native:d,Loader:p,Log:h,Share:g,util:v};"true"===E.util.getUrlParam("__debug__")&&E.util.addScript(location.protocol+"//cache.amap.com/h5/static/common/vconsole.min.js",function(){}),window.AmapApp=E,t.exports=E}).call(this,e("o7fRyq"),"undefined"!=typeof self?self:"undefined"!=typeof window?window:{},e("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/common/base.js","/common")},{"../amap/bridge":5,"../amap/loader":7,"../amap/log":8,"../amap/native":9,"../amap/share":10,"../util/locat":19,"../util/needBind":20,"../util/openAmap":21,"../util/os":22,"../util/util":23,"../util/webview_info":24,buffer:1,o7fRyq:4}],12:[function(e,t,n){(function(e,n,i,o,r,a,s,c,u){var l=!0;t.exports={debug:l}}).call(this,e("o7fRyq"),"undefined"!=typeof self?self:"undefined"!=typeof window?window:{},e("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/config/_ini.js","/config")},{buffer:1,o7fRyq:4}],13:[function(e,t,n){(function(e,n,i,o,r,a,s,c,u){t.exports={logname:"2017golf",aosname:"volkswagen",activity:"volkswagen"}}).call(this,e("o7fRyq"),"undefined"!=typeof self?self:"undefined"!=typeof window?window:{},e("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/config/config.act.js","/config")},{buffer:1,o7fRyq:4}],14:[function(e,t,n){(function(n,i,o,r,a,s,c,u,l){var f=e("./_ini");"undefined"!=typeof t&&t.exports&&"undefined"==typeof window&&(location={protocol:"http:"});var d=e("./config.act").aosname,p=Object.create(Object.create(null,{aosName:{value:d}})),h="sns",g={aosname:"/owner/address-edit",index:"index",nearby:"nearby",reserve:"reserve",notify_info:{test:"//sns.testing.amap.com/ws/oss/activity_base/notify/info","public":"//sns.amap.com/ws/oss/activity_base/notify/info"},notify_update:{test:"//sns.testing.amap.com/ws/oss/activity_base/notify/update","public":"//sns.amap.com/ws/oss/activity_base/notify/update"},owner_cash_to_wallet:{test:"//sns.testing.amap.com/ws/oss/activity_base/wallet/withdraw-cash","public":"//sns.amap.com/ws/oss/activity_base/wallet/withdraw-cash"},strategy_list:{test:"//sns.testing.amap.com/ws/oss/activity_base/strategy/list","public":"//sns.amap.com/ws/oss/activity_base/strategy/list"},strategy_reward:{test:"//sns.testing.amap.com/ws/oss/activity_base/strategy/reward","public":"//sns.amap.com/ws/oss/activity_base/strategy/reward"},share_share_conf:{test:"//sns.testing.amap.com/ws/oss/activity_base/share/share-conf","public":"//sns.amap.com/ws/oss/activity_base/share/share-conf"},game_bind:{test:"//sns.testing.amap.com/ws/oss/activity_base/game/user-bind","public":"//sns.amap.com/ws/oss/activity_base/game/user-bind"},address:{test:"//sns.testing.amap.com/ws/oss/activity_base/owner/address-edit","public":"//sns.amap.com/ws/oss/activity_base/owner/address-edit"},owner_exchange:{test:"//sns.testing.amap.com/ws/oss/activity_base/owner/exchange","public":"//sns.amap.com/ws/oss/activity_base/owner/exchange"}},m=location.protocol+("sns"==h?"//sns.amap.com/ws/oss/":"//oss.amap.com/ws/")+d,v=location.protocol+("sns"==h?"//sns.testing.amap.com/ws/oss/":"//oss.testing.amap.com/ws/")+d,y=f.debug?v:m;for(var w in g)g[w].test?p[w]=location.protocol+(f.debug?g[w].test:g[w]["public"]):p[w]=y+"/"+g[w];t.exports=p}).call(this,e("o7fRyq"),"undefined"!=typeof self?self:"undefined"!=typeof window?window:{},e("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/config/config.aos.js","/config")},{"./_ini":12,"./config.act":13,buffer:1,o7fRyq:4}],15:[function(e,t,n){(function(n,i,o,r,a,s,c,u,l){var f=e("./_ini"),d={},p={awardlist:{test:"//group.testing.amap.com/public/activity/common/page/awardlist.html","public":"//cache.amap.com/activity/common/page/awardlist.html"},editaddr:{test:"//group.testing.amap.com/public/activity/common/page/editaddr.html","public":"//cache.amap.com/activity/common/page/editaddr.html"},goldcoin:{test:"//group.testing.amap.com/public/goldcoin/index.html","public":"//wap.amap.com/goldcoin/index.html"},acturl:{test:"//group.testing.amap.com/public/activity/2017NewGold/page/index.html","public":"//cache.amap.com/activity/2017NewGold/page/index.html"}},h=location.protocol+"//wap.amap.com",g=location.protocol+"//group.testing.amap.com/public",m=f.debug?g:h;for(var v in p)p[v].test?d[v]=location.protocol+(f.debug?p[v].test:p[v]["public"]):d[v]=m+"/"+p[v];t.exports=d}).call(this,e("o7fRyq"),"undefined"!=typeof self?self:"undefined"!=typeof window?window:{},e("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/config/config.url.js","/config")},{"./_ini":12,buffer:1,o7fRyq:4}],16:[function(e,t,n){(function(n,i,o,r,a,s,c,u,l){var f=e("./common/base"),d={ready:f.Bridge.ready,getParams:function(e){var t=32,n=64,i=t|n;f.Native.getDeviceParamString(i,"@AMAP@",!0,function(t){var n=t.value;e(n)})},addPhoto:function(e,t,n,i,o){f.Bridge.send({action:"addPhoto",businessName:e,titleText:t,maxLength:n,onlyCamera:i},function(e){var t=e.imgbase64;o(t)})},getUserID:function(e,t,n){f.Native.getUserId(function(t){e(t.userid)},t,n)}};window.AmapApp=d,t.exports=d}).call(this,e("o7fRyq"),"undefined"!=typeof self?self:"undefined"!=typeof window?window:{},e("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_93c7163d.js","/")},{"./common/base":11,buffer:1,o7fRyq:4}],17:[function(e,t,n){(function(t,n,i,o,r,a,s,c,u){var l=e("./zepto"),f=l(".layer"),d={init:function(){this.$element=l('<div id="msgbox" class="msgbox-container"></div>'),this.appendDom(),this.bindEvent()},appendDom:function(){l(document.body).append(this.$element),f.length||(f=l('<div class="layer"></div>'),l(document.body).append(f),f.on("touchmove",!1))},bindEvent:function(){var e=this;this.$element.on("click","[data-click-type=ok]",function(){e.hide(),e.options.okFn&&e.options.okFn.call(e)}),this.$element.on("click","[data-click-type=cancel]",function(){e.hide(),e.options.cancelFn&&e.options.cancelFn.call(e)}),this.$element.on("click","[data-click-type=close]",function(){e.hide(),e.options.closeFn&&e.options.closeFn.call(e)}),this.$element.on("click","[data-click-type=share]",function(){e.options.shareFn&&e.options.shareFn.call(e)})},show:function(e){var t="";this.options=e,this.$element||this.init(),e.title&&(t+="<header><h3>"+e.title+"</h3></header>"),e.content&&(t+='<div class="msgbox-body">'+e.content+"</div>"),t+="<footer>",e.shareLabel&&(t+='<div class="msgbox-btn" data-click-type="share"><div>'+e.shareLabel+"</div></div>"),e.cancelLabel&&(t+='<div class="msgbox-btn" data-click-type="cancel"><div>'+e.cancelLabel+"</div></div>"),e.okLabel&&(t+='<div class="msgbox-btn" data-click-type="ok"><div>'+e.okLabel+"</div></div>"),t+="</footer>",e.tips&&(t+='<div class="mstips"><div>'+e.tips+"</div>"),e.hasClose&&(t+='<div class="closebtn" data-click-type="close"></div>'),this.$element.html(t),f.css("display","block"),this.$element.css("display","block")},hide:function(){this.$element.hide(),f.hide()}},p={title:"",content:"message body",okLabel:"",cancelLabel:"",shareLabel:"",okFn:function(){},cancelFn:function(){},shareFn:function(){},hasClose:!1};l.MsgBox=function(e){d.show(l.extend({},p,e))}}).call(this,e("o7fRyq"),"undefined"!=typeof self?self:"undefined"!=typeof window?window:{},e("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lib/msgbox.js","/lib")},{"./zepto":18,buffer:1,o7fRyq:4}],18:[function(e,t,n){(function(e,n,i,o,r,a,s,c,u){var l=function(){function e(e){return null==e?String(e):V[Y.call(e)]||"object"}function t(t){return"function"==e(t)}function n(e){return null!=e&&e==e.window}function i(e){return null!=e&&e.nodeType==e.DOCUMENT_NODE}function o(t){return"object"==e(t)}function r(e){return o(e)&&!n(e)&&Object.getPrototypeOf(e)==Object.prototype}function a(e){var t=!!e&&"length"in e&&e.length,i=A.type(e);return"function"!=i&&!n(e)&&("array"==i||0===t||"number"==typeof t&&t>0&&t-1 in e)}function s(e){return T.call(e,function(e){return null!=e})}function c(e){return e.length>0?A.fn.concat.apply([],e):e}function u(e){return e.replace(/::/g,"/").replace(/([A-Z]+)([A-Z][a-z])/g,"$1_$2").replace(/([a-z\d])([A-Z])/g,"$1_$2").replace(/_/g,"-").toLowerCase()}function l(e){return e in j?j[e]:j[e]=new RegExp("(^|\\s)"+e+"(\\s|$)")}function f(e,t){return"number"!=typeof t||U[u(e)]?t:t+"px"}function d(e){var t,n;return R[e]||(t=k.createElement(e),k.body.appendChild(t),n=getComputedStyle(t,"").getPropertyValue("display"),t.parentNode.removeChild(t),"none"==n&&(n="block"),R[e]=n),R[e]}function p(e){return"children"in e?N.call(e.children):A.map(e.childNodes,function(e){return 1==e.nodeType?e:void 0})}function h(e,t){var n,i=e?e.length:0;for(n=0;i>n;n++)this[n]=e[n];this.length=i,this.selector=t||""}function g(e,t,n){for(_ in t)n&&(r(t[_])||Q(t[_]))?(r(t[_])&&!r(e[_])&&(e[_]={}),Q(t[_])&&!Q(e[_])&&(e[_]=[]),g(e[_],t[_],n)):t[_]!==E&&(e[_]=t[_])}function m(e,t){return null==t?A(e):A(e).filter(t)}function v(e,n,i,o){return t(n)?n.call(e,i,o):n}function y(e,t,n){null==n?e.removeAttribute(t):e.setAttribute(t,n)}function w(e,t){var n=e.className||"",i=n&&n.baseVal!==E;return t===E?i?n.baseVal:n:void(i?n.baseVal=t:e.className=t)}function b(e){try{return e?"true"==e||("false"==e?!1:"null"==e?null:+e+""==e?+e:/^[\[\{]/.test(e)?A.parseJSON(e):e):e}catch(t){return e}}function x(e,t){t(e);for(var n=0,i=e.childNodes.length;i>n;n++)x(e.childNodes[n],t)}var E,_,A,I,S,L,C=[],B=C.concat,T=C.filter,N=C.slice,k=window.document,R={},j={},U={"column-count":1,columns:1,"font-weight":1,"line-height":1,opacity:1,"z-index":1,zoom:1},D=/^\s*<(\w+|!)[^>]*>/,O=/^<(\w+)\s*\/?>(?:<\/\1>|)$/,P=/<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/gi,M=/^(?:body|html)$/i,q=/([A-Z])/g,$=["val","css","html","text","data","width","height","offset"],F=["after","prepend","before","append"],J=k.createElement("table"),H=k.createElement("tr"),G={tr:k.createElement("tbody"),tbody:J,thead:J,tfoot:J,td:H,th:H,"*":k.createElement("div")},z=/complete|loaded|interactive/,W=/^[\w-]*$/,V={},Y=V.toString,Z={},X=k.createElement("div"),K={tabindex:"tabIndex",readonly:"readOnly","for":"htmlFor","class":"className",maxlength:"maxLength",cellspacing:"cellSpacing",cellpadding:"cellPadding",rowspan:"rowSpan",colspan:"colSpan",usemap:"useMap",frameborder:"frameBorder",contenteditable:"contentEditable"},Q=Array.isArray||function(e){return e instanceof Array};return Z.matches=function(e,t){if(!t||!e||1!==e.nodeType)return!1;var n=e.matches||e.webkitMatchesSelector||e.mozMatchesSelector||e.oMatchesSelector||e.matchesSelector;if(n)return n.call(e,t);var i,o=e.parentNode,r=!o;return r&&(o=X).appendChild(e),i=~Z.qsa(o,t).indexOf(e),r&&X.removeChild(e),i},S=function(e){return e.replace(/-+(.)?/g,function(e,t){return t?t.toUpperCase():""})},L=function(e){return T.call(e,function(t,n){return e.indexOf(t)==n})},Z.fragment=function(e,t,n){var i,o,a;return O.test(e)&&(i=A(k.createElement(RegExp.$1))),i||(e.replace&&(e=e.replace(P,"<$1></$2>")),t===E&&(t=D.test(e)&&RegExp.$1),t in G||(t="*"),a=G[t],a.innerHTML=""+e,i=A.each(N.call(a.childNodes),function(){a.removeChild(this)})),r(n)&&(o=A(i),A.each(n,function(e,t){$.indexOf(e)>-1?o[e](t):o.attr(e,t)})),i},Z.Z=function(e,t){return new h(e,t)},Z.isZ=function(e){return e instanceof Z.Z},Z.init=function(e,n){var i;if(!e)return Z.Z();if("string"==typeof e)if(e=e.trim(),"<"==e[0]&&D.test(e))i=Z.fragment(e,RegExp.$1,n),e=null;else{if(n!==E)return A(n).find(e);i=Z.qsa(k,e)}else{if(t(e))return A(k).ready(e);if(Z.isZ(e))return e;if(Q(e))i=s(e);else if(o(e))i=[e],e=null;else if(D.test(e))i=Z.fragment(e.trim(),RegExp.$1,n),e=null;else{if(n!==E)return A(n).find(e);i=Z.qsa(k,e)}}return Z.Z(i,e)},A=function(e,t){return Z.init(e,t)},A.extend=function(e){var t,n=N.call(arguments,1);return"boolean"==typeof e&&(t=e,e=n.shift()),n.forEach(function(n){g(e,n,t)}),e},Z.qsa=function(e,t){var n,i="#"==t[0],o=!i&&"."==t[0],r=i||o?t.slice(1):t,a=W.test(r);return e.getElementById&&a&&i?(n=e.getElementById(r))?[n]:[]:1!==e.nodeType&&9!==e.nodeType&&11!==e.nodeType?[]:N.call(a&&!i&&e.getElementsByClassName?o?e.getElementsByClassName(r):e.getElementsByTagName(t):e.querySelectorAll(t))},A.contains=k.documentElement.contains?function(e,t){return e!==t&&e.contains(t)}:function(e,t){for(;t&&(t=t.parentNode);)if(t===e)return!0;return!1},A.type=e,A.isFunction=t,A.isWindow=n,A.isArray=Q,A.isPlainObject=r,A.isEmptyObject=function(e){var t;for(t in e)return!1;return!0},A.isNumeric=function(e){var t=Number(e),n=typeof e;return null!=e&&"boolean"!=n&&("string"!=n||e.length)&&!isNaN(t)&&isFinite(t)||!1},A.inArray=function(e,t,n){return C.indexOf.call(t,e,n)},A.camelCase=S,A.trim=function(e){return null==e?"":String.prototype.trim.call(e)},A.uuid=0,A.support={},A.expr={},A.noop=function(){},A.map=function(e,t){var n,i,o,r=[];if(a(e))for(i=0;i<e.length;i++)n=t(e[i],i),null!=n&&r.push(n);else for(o in e)n=t(e[o],o),null!=n&&r.push(n);return c(r)},A.each=function(e,t){var n,i;if(a(e)){for(n=0;n<e.length;n++)if(t.call(e[n],n,e[n])===!1)return e}else for(i in e)if(t.call(e[i],i,e[i])===!1)return e;return e},A.grep=function(e,t){return T.call(e,t)},window.JSON&&(A.parseJSON=JSON.parse),A.each("Boolean Number String Function Array Date RegExp Object Error".split(" "),function(e,t){V["[object "+t+"]"]=t.toLowerCase()}),A.fn={constructor:Z.Z,length:0,forEach:C.forEach,reduce:C.reduce,push:C.push,sort:C.sort,splice:C.splice,indexOf:C.indexOf,concat:function(){var e,t,n=[];for(e=0;e<arguments.length;e++)t=arguments[e],n[e]=Z.isZ(t)?t.toArray():t;return B.apply(Z.isZ(this)?this.toArray():this,n)},map:function(e){return A(A.map(this,function(t,n){return e.call(t,n,t)}))},slice:function(){return A(N.apply(this,arguments))},ready:function(e){return z.test(k.readyState)&&k.body?e(A):k.addEventListener("DOMContentLoaded",function(){e(A)},!1),this},get:function(e){return e===E?N.call(this):this[e>=0?e:e+this.length]},toArray:function(){return this.get()},size:function(){return this.length},remove:function(){return this.each(function(){null!=this.parentNode&&this.parentNode.removeChild(this)})},each:function(e){return C.every.call(this,function(t,n){return e.call(t,n,t)!==!1}),this},filter:function(e){return t(e)?this.not(this.not(e)):A(T.call(this,function(t){return Z.matches(t,e)}))},add:function(e,t){return A(L(this.concat(A(e,t))))},is:function(e){return this.length>0&&Z.matches(this[0],e)},not:function(e){var n=[];if(t(e)&&e.call!==E)this.each(function(t){e.call(this,t)||n.push(this)});else{var i="string"==typeof e?this.filter(e):a(e)&&t(e.item)?N.call(e):A(e);this.forEach(function(e){i.indexOf(e)<0&&n.push(e)})}return A(n)},has:function(e){return this.filter(function(){return o(e)?A.contains(this,e):A(this).find(e).size()})},eq:function(e){return-1===e?this.slice(e):this.slice(e,+e+1)},first:function(){var e=this[0];return e&&!o(e)?e:A(e)},last:function(){var e=this[this.length-1];return e&&!o(e)?e:A(e)},find:function(e){var t,n=this;return t=e?"object"==typeof e?A(e).filter(function(){var e=this;return C.some.call(n,function(t){return A.contains(t,e)})}):1==this.length?A(Z.qsa(this[0],e)):this.map(function(){return Z.qsa(this,e)}):A()},closest:function(e,t){var n=[],o="object"==typeof e&&A(e);return this.each(function(r,a){for(;a&&!(o?o.indexOf(a)>=0:Z.matches(a,e));)a=a!==t&&!i(a)&&a.parentNode;a&&n.indexOf(a)<0&&n.push(a)}),A(n)},parents:function(e){for(var t=[],n=this;n.length>0;)n=A.map(n,function(e){return(e=e.parentNode)&&!i(e)&&t.indexOf(e)<0?(t.push(e),e):void 0});return m(t,e)},parent:function(e){return m(L(this.pluck("parentNode")),e)},children:function(e){return m(this.map(function(){return p(this)}),e)},contents:function(){return this.map(function(){return this.contentDocument||N.call(this.childNodes)})},siblings:function(e){return m(this.map(function(e,t){return T.call(p(t.parentNode),function(e){return e!==t})}),e)},empty:function(){return this.each(function(){this.innerHTML=""})},pluck:function(e){return A.map(this,function(t){return t[e]})},show:function(){return this.each(function(){"none"==this.style.display&&(this.style.display=""),"none"==getComputedStyle(this,"").getPropertyValue("display")&&(this.style.display=d(this.nodeName))})},replaceWith:function(e){return this.before(e).remove()},wrap:function(e){var n=t(e);if(this[0]&&!n)var i=A(e).get(0),o=i.parentNode||this.length>1;return this.each(function(t){A(this).wrapAll(n?e.call(this,t):o?i.cloneNode(!0):i)})},wrapAll:function(e){if(this[0]){A(this[0]).before(e=A(e));for(var t;(t=e.children()).length;)e=t.first();A(e).append(this)}return this},wrapInner:function(e){var n=t(e);return this.each(function(t){var i=A(this),o=i.contents(),r=n?e.call(this,t):e;o.length?o.wrapAll(r):i.append(r)})},unwrap:function(){return this.parent().each(function(){A(this).replaceWith(A(this).children())}),this},clone:function(){return this.map(function(){return this.cloneNode(!0)})},hide:function(){return this.css("display","none")},toggle:function(e){return this.each(function(){var t=A(this);(e===E?"none"==t.css("display"):e)?t.show():t.hide()})},prev:function(e){return A(this.pluck("previousElementSibling")).filter(e||"*")},next:function(e){return A(this.pluck("nextElementSibling")).filter(e||"*")},html:function(e){return 0 in arguments?this.each(function(t){var n=this.innerHTML;A(this).empty().append(v(this,e,t,n))}):0 in this?this[0].innerHTML:null},text:function(e){return 0 in arguments?this.each(function(t){var n=v(this,e,t,this.textContent);this.textContent=null==n?"":""+n}):0 in this?this.pluck("textContent").join(""):null},attr:function(e,t){var n;return"string"!=typeof e||1 in arguments?this.each(function(n){if(1===this.nodeType)if(o(e))for(_ in e)y(this,_,e[_]);else y(this,e,v(this,t,n,this.getAttribute(e)))}):0 in this&&1==this[0].nodeType&&null!=(n=this[0].getAttribute(e))?n:E},removeAttr:function(e){return this.each(function(){1===this.nodeType&&e.split(" ").forEach(function(e){y(this,e)},this)})},prop:function(e,t){return e=K[e]||e,1 in arguments?this.each(function(n){this[e]=v(this,t,n,this[e])}):this[0]&&this[0][e]},removeProp:function(e){return e=K[e]||e,this.each(function(){delete this[e]})},data:function(e,t){var n="data-"+e.replace(q,"-$1").toLowerCase(),i=1 in arguments?this.attr(n,t):this.attr(n);return null!==i?b(i):E},val:function(e){return 0 in arguments?(null==e&&(e=""),this.each(function(t){this.value=v(this,e,t,this.value)})):this[0]&&(this[0].multiple?A(this[0]).find("option").filter(function(){return this.selected}).pluck("value"):this[0].value)},offset:function(e){if(e)return this.each(function(t){var n=A(this),i=v(this,e,t,n.offset()),o=n.offsetParent().offset(),r={top:i.top-o.top,left:i.left-o.left};"static"==n.css("position")&&(r.position="relative"),n.css(r)});if(!this.length)return null;if(k.documentElement!==this[0]&&!A.contains(k.documentElement,this[0]))return{top:0,left:0};var t=this[0].getBoundingClientRect();return{left:t.left+window.pageXOffset,top:t.top+window.pageYOffset,width:Math.round(t.width),height:Math.round(t.height)}},css:function(t,n){if(arguments.length<2){var i=this[0];if("string"==typeof t){if(!i)return;return i.style[S(t)]||getComputedStyle(i,"").getPropertyValue(t)}if(Q(t)){if(!i)return;var o={},r=getComputedStyle(i,"");return A.each(t,function(e,t){o[t]=i.style[S(t)]||r.getPropertyValue(t)}),o}}var a="";if("string"==e(t))n||0===n?a=u(t)+":"+f(t,n):this.each(function(){this.style.removeProperty(u(t))});else for(_ in t)t[_]||0===t[_]?a+=u(_)+":"+f(_,t[_])+";":this.each(function(){this.style.removeProperty(u(_))});return this.each(function(){this.style.cssText+=";"+a})},index:function(e){return e?this.indexOf(A(e)[0]):this.parent().children().indexOf(this[0])},hasClass:function(e){return e?C.some.call(this,function(e){return this.test(w(e))},l(e)):!1},addClass:function(e){return e?this.each(function(t){if("className"in this){I=[];var n=w(this),i=v(this,e,t,n);i.split(/\s+/g).forEach(function(e){A(this).hasClass(e)||I.push(e)},this),I.length&&w(this,n+(n?" ":"")+I.join(" "))}}):this},removeClass:function(e){return this.each(function(t){if("className"in this){if(e===E)return w(this,"");I=w(this),v(this,e,t,I).split(/\s+/g).forEach(function(e){I=I.replace(l(e)," ")}),w(this,I.trim())}})},toggleClass:function(e,t){return e?this.each(function(n){var i=A(this),o=v(this,e,n,w(this));o.split(/\s+/g).forEach(function(e){(t===E?!i.hasClass(e):t)?i.addClass(e):i.removeClass(e)})}):this},scrollTop:function(e){if(this.length){var t="scrollTop"in this[0];return e===E?t?this[0].scrollTop:this[0].pageYOffset:this.each(t?function(){this.scrollTop=e}:function(){this.scrollTo(this.scrollX,e)})}},scrollLeft:function(e){if(this.length){var t="scrollLeft"in this[0];return e===E?t?this[0].scrollLeft:this[0].pageXOffset:this.each(t?function(){this.scrollLeft=e}:function(){this.scrollTo(e,this.scrollY)})}},position:function(){if(this.length){var e=this[0],t=this.offsetParent(),n=this.offset(),i=M.test(t[0].nodeName)?{top:0,left:0}:t.offset();return n.top-=parseFloat(A(e).css("margin-top"))||0,n.left-=parseFloat(A(e).css("margin-left"))||0,i.top+=parseFloat(A(t[0]).css("border-top-width"))||0,i.left+=parseFloat(A(t[0]).css("border-left-width"))||0,{top:n.top-i.top,left:n.left-i.left}}},offsetParent:function(){return this.map(function(){for(var e=this.offsetParent||k.body;e&&!M.test(e.nodeName)&&"static"==A(e).css("position");)e=e.offsetParent;return e})}},A.fn.detach=A.fn.remove,["width","height"].forEach(function(e){var t=e.replace(/./,function(e){return e[0].toUpperCase()});A.fn[e]=function(o){var r,a=this[0];return o===E?n(a)?a["inner"+t]:i(a)?a.documentElement["scroll"+t]:(r=this.offset())&&r[e]:this.each(function(t){a=A(this),a.css(e,v(this,o,t,a[e]()))})}}),F.forEach(function(t,n){var i=n%2;A.fn[t]=function(){var t,o,r=A.map(arguments,function(n){var i=[];return t=e(n),"array"==t?(n.forEach(function(e){return e.nodeType!==E?i.push(e):A.zepto.isZ(e)?i=i.concat(e.get()):void(i=i.concat(Z.fragment(e)))}),i):"object"==t||null==n?n:Z.fragment(n)}),a=this.length>1;return r.length<1?this:this.each(function(e,t){o=i?t:t.parentNode,t=0==n?t.nextSibling:1==n?t.firstChild:2==n?t:null;var s=A.contains(k.documentElement,o);r.forEach(function(e){if(a)e=e.cloneNode(!0);else if(!o)return A(e).remove();o.insertBefore(e,t),s&&x(e,function(e){if(!(null==e.nodeName||"SCRIPT"!==e.nodeName.toUpperCase()||e.type&&"text/javascript"!==e.type||e.src)){var t=e.ownerDocument?e.ownerDocument.defaultView:window;t.eval.call(t,e.innerHTML)}})})})},A.fn[i?t+"To":"insert"+(n?"Before":"After")]=function(e){return A(e)[t](this),this}}),Z.Z.prototype=h.prototype=A.fn,Z.uniq=L,Z.deserializeValue=b,A.zepto=Z,A}();window.Zepto=l,void 0===window.$&&(window.$=l),function(e){function t(e){return e._zid||(e._zid=d++)}function n(e,n,r,a){if(n=i(n),n.ns)var s=o(n.ns);return(m[t(e)]||[]).filter(function(e){return e&&(!n.e||e.e==n.e)&&(!n.ns||s.test(e.ns))&&(!r||t(e.fn)===t(r))&&(!a||e.sel==a)})}function i(e){var t=(""+e).split(".");return{e:t[0],ns:t.slice(1).sort().join(" ")}}function o(e){return new RegExp("(?:^| )"+e.replace(" "," .* ?")+"(?: |$)")}function r(e,t){return e.del&&!y&&e.e in w||!!t}function a(e){return b[e]||y&&w[e]||e}function s(n,o,s,c,l,d,p){var h=t(n),g=m[h]||(m[h]=[]);o.split(/\s/).forEach(function(t){if("ready"==t)return e(document).ready(s);var o=i(t);o.fn=s,o.sel=l,o.e in b&&(s=function(t){var n=t.relatedTarget;return!n||n!==this&&!e.contains(this,n)?o.fn.apply(this,arguments):void 0}),o.del=d;var h=d||s;o.proxy=function(e){if(e=u(e),!e.isImmediatePropagationStopped()){e.data=c;var t=h.apply(n,e._args==f?[e]:[e].concat(e._args));return t===!1&&(e.preventDefault(),e.stopPropagation()),t}},o.i=g.length,g.push(o),"addEventListener"in n&&n.addEventListener(a(o.e),o.proxy,r(o,p))})}function c(e,i,o,s,c){var u=t(e);(i||"").split(/\s/).forEach(function(t){n(e,t,o,s).forEach(function(t){delete m[u][t.i],"removeEventListener"in e&&e.removeEventListener(a(t.e),t.proxy,r(t,c))})})}function u(t,n){return!n&&t.isDefaultPrevented||(n||(n=t),e.each(A,function(e,i){var o=n[e];t[e]=function(){return this[i]=x,o&&o.apply(n,arguments)},t[i]=E}),t.timeStamp||(t.timeStamp=Date.now()),(n.defaultPrevented!==f?n.defaultPrevented:"returnValue"in n?n.returnValue===!1:n.getPreventDefault&&n.getPreventDefault())&&(t.isDefaultPrevented=x)),t}function l(e){var t,n={originalEvent:e};for(t in e)_.test(t)||e[t]===f||(n[t]=e[t]);return u(n,e)}var f,d=1,p=Array.prototype.slice,h=e.isFunction,g=function(e){return"string"==typeof e},m={},v={},y="onfocusin"in window,w={focus:"focusin",blur:"focusout"},b={mouseenter:"mouseover",mouseleave:"mouseout"};v.click=v.mousedown=v.mouseup=v.mousemove="MouseEvents",e.event={add:s,remove:c},e.proxy=function(n,i){var o=2 in arguments&&p.call(arguments,2);if(h(n)){var r=function(){return n.apply(i,o?o.concat(p.call(arguments)):arguments)};return r._zid=t(n),r}if(g(i))return o?(o.unshift(n[i],n),e.proxy.apply(null,o)):e.proxy(n[i],n);throw new TypeError("expected function")},e.fn.bind=function(e,t,n){return this.on(e,t,n)},e.fn.unbind=function(e,t){return this.off(e,t)},e.fn.one=function(e,t,n,i){return this.on(e,t,n,i,1)};var x=function(){return!0},E=function(){return!1},_=/^([A-Z]|returnValue$|layer[XY]$|webkitMovement[XY]$)/,A={preventDefault:"isDefaultPrevented",stopImmediatePropagation:"isImmediatePropagationStopped",stopPropagation:"isPropagationStopped"};e.fn.delegate=function(e,t,n){return this.on(t,e,n)},e.fn.undelegate=function(e,t,n){return this.off(t,e,n)},e.fn.live=function(t,n){return e(document.body).delegate(this.selector,t,n),this},e.fn.die=function(t,n){return e(document.body).undelegate(this.selector,t,n),this},e.fn.on=function(t,n,i,o,r){var a,u,d=this;return t&&!g(t)?(e.each(t,function(e,t){d.on(e,n,i,t,r)}),d):(g(n)||h(o)||o===!1||(o=i,i=n,n=f),o!==f&&i!==!1||(o=i,i=f),o===!1&&(o=E),d.each(function(f,d){r&&(a=function(e){return c(d,e.type,o),o.apply(this,arguments)}),n&&(u=function(t){var i,r=e(t.target).closest(n,d).get(0);return r&&r!==d?(i=e.extend(l(t),{currentTarget:r,liveFired:d}),(a||o).apply(r,[i].concat(p.call(arguments,1)))):void 0}),s(d,t,o,i,n,u||a)}))},e.fn.off=function(t,n,i){var o=this;return t&&!g(t)?(e.each(t,function(e,t){o.off(e,n,t)}),o):(g(n)||h(i)||i===!1||(i=n,n=f),i===!1&&(i=E),o.each(function(){c(this,t,i,n)}))},e.fn.trigger=function(t,n){return t=g(t)||e.isPlainObject(t)?e.Event(t):u(t),t._args=n,this.each(function(){t.type in w&&"function"==typeof this[t.type]?this[t.type]():"dispatchEvent"in this?this.dispatchEvent(t):e(this).triggerHandler(t,n)})},e.fn.triggerHandler=function(t,i){var o,r;return this.each(function(a,s){o=l(g(t)?e.Event(t):t),o._args=i,o.target=s,e.each(n(s,t.type||t),function(e,t){return r=t.proxy(o),o.isImmediatePropagationStopped()?!1:void 0})}),r},"focusin focusout focus blur load resize scroll unload click dblclick mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave change select keydown keypress keyup error".split(" ").forEach(function(t){e.fn[t]=function(e){return 0 in arguments?this.bind(t,e):this.trigger(t)}}),e.Event=function(e,t){g(e)||(t=e,e=t.type);var n=document.createEvent(v[e]||"Events"),i=!0;if(t)for(var o in t)"bubbles"==o?i=!!t[o]:n[o]=t[o];return n.initEvent(e,i,!0),u(n)}}(l),function(e){function t(t,n,i){var o=e.Event(n);return e(t).trigger(o,i),!o.isDefaultPrevented()}function n(e,n,i,o){return e.global?t(n||w,i,o):void 0}function i(t){t.global&&0===e.active++&&n(t,null,"ajaxStart")}function o(t){t.global&&!--e.active&&n(t,null,"ajaxStop")}function r(e,t){var i=t.context;return t.beforeSend.call(i,e,t)===!1||n(t,i,"ajaxBeforeSend",[e,t])===!1?!1:void n(t,i,"ajaxSend",[e,t])}function a(e,t,i,o){var r=i.context,a="success";i.success.call(r,e,a,t),o&&o.resolveWith(r,[e,a,t]),n(i,r,"ajaxSuccess",[t,i,e]),c(a,t,i)}function s(e,t,i,o,r){var a=o.context;o.error.call(a,i,t,e),r&&r.rejectWith(a,[i,t,e]),n(o,a,"ajaxError",[i,o,e||t]),c(t,i,o)}function c(e,t,i){var r=i.context;i.complete.call(r,t,e),n(i,r,"ajaxComplete",[t,i]),o(i)}function u(e,t,n){if(n.dataFilter==l)return e;var i=n.context;return n.dataFilter.call(i,e,t)}function l(){}function f(e){return e&&(e=e.split(";",2)[0]),e&&(e==A?"html":e==_?"json":x.test(e)?"script":E.test(e)&&"xml")||"text"}function d(e,t){return""==t?e:(e+"&"+t).replace(/[&?]{1,2}/,"?")}function p(t){t.processData&&t.data&&"string"!=e.type(t.data)&&(t.data=e.param(t.data,t.traditional)),!t.data||t.type&&"GET"!=t.type.toUpperCase()&&"jsonp"!=t.dataType||(t.url=d(t.url,t.data),t.data=void 0)}function h(t,n,i,o){return e.isFunction(n)&&(o=i,i=n,n=void 0),e.isFunction(i)||(o=i,i=void 0),{url:t,data:n,success:i,dataType:o}}function g(t,n,i,o){var r,a=e.isArray(n),s=e.isPlainObject(n);e.each(n,function(n,c){r=e.type(c),o&&(n=i?o:o+"["+(s||"object"==r||"array"==r?n:"")+"]"),!o&&a?t.add(c.name,c.value):"array"==r||!i&&"object"==r?g(t,c,i,n):t.add(n,c)})}var m,v,y=+new Date,w=window.document,b=/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,x=/^(?:text|application)\/javascript/i,E=/^(?:text|application)\/xml/i,_="application/json",A="text/html",I=/^\s*$/,S=w.createElement("a");S.href=window.location.href,e.active=0,e.ajaxJSONP=function(t,n){if(!("type"in t))return e.ajax(t);var i,o,c=t.jsonpCallback,u=(e.isFunction(c)?c():c)||"Zepto"+y++,l=w.createElement("script"),f=window[u],d=function(t){e(l).triggerHandler("error",t||"abort")},p={abort:d};return n&&n.promise(p),e(l).on("load error",function(r,c){clearTimeout(o),e(l).off().remove(),"error"!=r.type&&i?a(i[0],p,t,n):s(null,c||"error",p,t,n),window[u]=f,i&&e.isFunction(f)&&f(i[0]),f=i=void 0}),r(p,t)===!1?(d("abort"),p):(window[u]=function(){i=arguments},l.src=t.url.replace(/\?(.+)=\?/,"?$1="+u),w.head.appendChild(l),t.timeout>0&&(o=setTimeout(function(){d("timeout")},t.timeout)),p)},e.ajaxSettings={type:"GET",beforeSend:l,success:l,error:l,complete:l,context:null,global:!0,xhr:function(){return new window.XMLHttpRequest},accepts:{script:"text/javascript, application/javascript, application/x-javascript",
-json:_,xml:"application/xml, text/xml",html:A,text:"text/plain"},crossDomain:!1,timeout:0,processData:!0,cache:!0,dataFilter:l},e.ajax=function(t){var n,o,c=e.extend({},t||{}),h=e.Deferred&&e.Deferred();for(m in e.ajaxSettings)void 0===c[m]&&(c[m]=e.ajaxSettings[m]);i(c),c.crossDomain||(n=w.createElement("a"),n.href=c.url,n.href=n.href,c.crossDomain=S.protocol+"//"+S.host!=n.protocol+"//"+n.host),c.url||(c.url=window.location.toString()),(o=c.url.indexOf("#"))>-1&&(c.url=c.url.slice(0,o)),p(c);var g=c.dataType,y=/\?.+=\?/.test(c.url);if(y&&(g="jsonp"),c.cache!==!1&&(t&&t.cache===!0||"script"!=g&&"jsonp"!=g)||(c.url=d(c.url,"_="+Date.now())),"jsonp"==g)return y||(c.url=d(c.url,c.jsonp?c.jsonp+"=?":c.jsonp===!1?"":"callback=?")),e.ajaxJSONP(c,h);var b,x=c.accepts[g],E={},_=function(e,t){E[e.toLowerCase()]=[e,t]},A=/^([\w-]+:)\/\//.test(c.url)?RegExp.$1:window.location.protocol,L=c.xhr(),C=L.setRequestHeader;if(h&&h.promise(L),c.crossDomain||_("X-Requested-With","XMLHttpRequest"),_("Accept",x||"*/*"),(x=c.mimeType||x)&&(x.indexOf(",")>-1&&(x=x.split(",",2)[0]),L.overrideMimeType&&L.overrideMimeType(x)),(c.contentType||c.contentType!==!1&&c.data&&"GET"!=c.type.toUpperCase())&&_("Content-Type",c.contentType||"application/x-www-form-urlencoded"),c.headers)for(v in c.headers)_(v,c.headers[v]);if(L.setRequestHeader=_,L.onreadystatechange=function(){if(4==L.readyState){L.onreadystatechange=l,clearTimeout(b);var t,n=!1;if(L.status>=200&&L.status<300||304==L.status||0==L.status&&"file:"==A){if(g=g||f(c.mimeType||L.getResponseHeader("content-type")),"arraybuffer"==L.responseType||"blob"==L.responseType)t=L.response;else{t=L.responseText;try{t=u(t,g,c),"script"==g?(0,eval)(t):"xml"==g?t=L.responseXML:"json"==g&&(t=I.test(t)?null:e.parseJSON(t))}catch(i){n=i}if(n)return s(n,"parsererror",L,c,h)}a(t,L,c,h)}else s(L.statusText||null,L.status?"error":"abort",L,c,h)}},r(L,c)===!1)return L.abort(),s(null,"abort",L,c,h),L;var B="async"in c?c.async:!0;if(L.open(c.type,c.url,B,c.username,c.password),c.xhrFields)for(v in c.xhrFields)L[v]=c.xhrFields[v];for(v in E)C.apply(L,E[v]);return c.timeout>0&&(b=setTimeout(function(){L.onreadystatechange=l,L.abort(),s(null,"timeout",L,c,h)},c.timeout)),L.send(c.data?c.data:null),L},e.get=function(){return e.ajax(h.apply(null,arguments))},e.post=function(){var t=h.apply(null,arguments);return t.type="POST",e.ajax(t)},e.getJSON=function(){var t=h.apply(null,arguments);return t.dataType="json",e.ajax(t)},e.fn.load=function(t,n,i){if(!this.length)return this;var o,r=this,a=t.split(/\s/),s=h(t,n,i),c=s.success;return a.length>1&&(s.url=a[0],o=a[1]),s.success=function(t){r.html(o?e("<div>").html(t.replace(b,"")).find(o):t),c&&c.apply(r,arguments)},e.ajax(s),this};var L=encodeURIComponent;e.param=function(t,n){var i=[];return i.add=function(t,n){e.isFunction(n)&&(n=n()),null==n&&(n=""),this.push(L(t)+"="+L(n))},g(i,t,n),i.join("&").replace(/%20/g,"+")}}(l),function(e){e.fn.serializeArray=function(){var t,n,i=[],o=function(e){return e.forEach?e.forEach(o):void i.push({name:t,value:e})};return this[0]&&e.each(this[0].elements,function(i,r){n=r.type,t=r.name,t&&"fieldset"!=r.nodeName.toLowerCase()&&!r.disabled&&"submit"!=n&&"reset"!=n&&"button"!=n&&"file"!=n&&("radio"!=n&&"checkbox"!=n||r.checked)&&o(e(r).val())}),i},e.fn.serialize=function(){var e=[];return this.serializeArray().forEach(function(t){e.push(encodeURIComponent(t.name)+"="+encodeURIComponent(t.value))}),e.join("&")},e.fn.submit=function(t){if(0 in arguments)this.bind("submit",t);else if(this.length){var n=e.Event("submit");this.eq(0).trigger(n),n.isDefaultPrevented()||this.get(0).submit()}return this}}(l),function(){try{getComputedStyle(void 0)}catch(e){var t=getComputedStyle;window.getComputedStyle=function(e,n){try{return t(e,n)}catch(i){return null}}}}(),t.exports=l}).call(this,e("o7fRyq"),"undefined"!=typeof self?self:"undefined"!=typeof window?window:{},e("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lib/zepto.js","/lib")},{buffer:1,o7fRyq:4}],19:[function(e,t,n){(function(n,i,o,r,a,s,c,u,l){var f=e("./util"),d=e("./os"),p=e("../amap/log"),h=e("../amap/native"),g=e("../config/config.url"),m=e("../config/config.act"),v={locationRedirect:function(e,t){if(t&&this.locationReplace(e),d.ios){var n=$("#locationRedirect"),i=document.createEvent("HTMLEvents");i.initEvent("click",!1,!0),n.length?n.attr("href",e):(n=$('<a id="locationRedirect" href="'+e+'" style="display:none;"></a>'),$(document.body).append(n)),n[0].dispatchEvent(i)}else window.location.href=e},locationReplace:function(e){d.ios&&/^9\.[01]/.test(d.version)?(history.replaceState({},null,e),location.reload()):location.replace(e)},locationRedirectForHistory:function(e,t){var n=this;d.ios||n.setlocationHistory();var i=n.locationHistory,o=0,r=e.match(/([\w\-]+)\.html(?:\?|\#|$)/);if(!r||r[1]==i[i.length-1])return t&&n.locationReplace(e),!1;r=r[1];for(var a=i.length,s=a-2;s>=-1;s--)if(o++,i[s]&&r==i[s].page){i.length=s+1,sessionStorage.setItem(n.StorageName,JSON.stringify(i));break}if(a>o)history.go(-o);else if(t){var c=(location.pathname.match(/([^\/]+).html/)||location.pathname.match(/([^\/]+).htm/)||["","index"])[1];"index"==c&&location.hash&&"#/"!=location.hash||(i.length-=1,sessionStorage.setItem(n.StorageName,JSON.stringify(i))),n.locationReplace(e)}else n.locationRedirect(e)},setlocationHistory:function(){for(var e=this,t=(e.pathname.match(/\/([\w\-]+)\.html/)||e.pathname.match(/\/([\w\-]+)\.htm/))[1],n=e.locationHistory,i=n.length,o=i-1;o>=0;o--)if(t==n[o].page){n.length=o;break}for(var i=n.length,o=0;i>o;o++)n[o].isUpdate=!0;n.push({page:t,isUpdate:!1}),sessionStorage.setItem(e.StorageName,JSON.stringify(n))},locationHistoryInit:function(){function e(){var n=(t.pathname.match(/\/([\w\-]+)\.html/)||t.pathname.match(/\/([\w\-]+)\.htm/))[1];t.locationHistory=JSON.parse(sessionStorage.getItem(t.StorageName));for(var i=null,o=t.locationHistory.length,r=o-1;r>=0;r--)if(n==t.locationHistory[r].page){i=t.locationHistory[r],i&&i.isUpdate&&(AmapApp.util.v_router&&"home"!=AmapApp.util.v_router.currentRoute.name&&AmapApp.util.v_router.back(),AmapApp.Log.log("pv"),$(window).trigger("updateData")),t.locationHistory.length=r,t.locationHistory.push({page:n,isUpdate:!1}),sessionStorage.setItem(t.StorageName,JSON.stringify(t.locationHistory));break}requestAnimationFrame(e)}var t=this,n=location.pathname;n.search(/[\w\-]+\.html/)<0&&(n+="index.html"),t.pathname=n,t.StorageName=n.replace(/(page\/|\/)[\w\-]+\.html/,"").replace(/(^\/|\/$)/g,"").replace(/\//g,"_"),!t.StorageName&&(t.StorageName="session_history"),sessionStorage.getItem(t.StorageName)||sessionStorage.setItem(t.StorageName,JSON.stringify([])),t.locationHistory=JSON.parse(sessionStorage.getItem(t.StorageName)),t.setlocationHistory(),d.ios&&requestAnimationFrame(e)},pageJump:function(e,t){-1!=e.indexOf("//")?v.locationRedirect(e,t):v.locationRedirectForHistory(e,t)},pageError:function(e,t,n){if(-1!=e.indexOf("/")){var i=e.match(/[^\/]+\/[^\/]+$/);i="aos_"+(i[0]?i[0].replace("/",""):"")}else{var i="action_"+e;t=999}n?v.errorAlert(i,t):v.interError(i,t)},interError:function(e,t,n){if(n)this.errorAlert(t,e);else{var i=location.href,o=i.match(/[^\/]+$/)||[""];o=o[0].split(".")[0];var r="error.html?code="+t+"&inter="+encodeURIComponent(e||"");r+="&gd_from="+o,this.pageJump(r,!0)}},errorAlert:function(t,n){e("../lib/msgbox");if(0>n)var i="网络无法连接，刷新一下";else var i="剁手的人太多了，刷新试试";$.MsgBox({content:i,shareLabel:"刷新",shareFn:function(){location.reload()}}),p.log("aoserror",{type:t+"_"+n})},goAward:function(e,t,n,i,o){var r=g.awardlist+"?gd_from="+m.logname;i=i||"",t&&e&&n?o?r+="&act="+e+"&aid="+n+"&rid="+o+"#&detail-normal":i&&(r+="&act="+e+"&aid="+n+"&coupon="+i+"#&detail-normal"):e&&(r+="&act="+e),h.loadSchema(f.getSchema(r,!1,!0))},goAddr:function(e){if(e){var t=g.editaddr+"?gd_from="+m.logname+"&activity="+e;h.loadSchema(f.getSchema(t,!1,!1))}},routePlan:function(e,t,n){e=e?e:0;var i="amapuri://route/plan?t="+e;t&&t.name&&(t.poiid||t.x&&t.y)&&(i+="&sid="+t.poiid+"&slat="+t.y+"&slon="+t.x+"&sname="+encodeURIComponent(t.name)),n&&n.name&&(n.poiid||n.x&&n.y)&&(i+=n.poiid?"&did="+n.poiid:"&dlat="+n.y+"&dlon="+n.x,i+="&dname="+encodeURIComponent(n.name)),console.log(i),h.loadSchema(i)}};v.locationHistoryInit(),t.exports={pageJump:v.pageJump.bind(v),pageError:v.pageError.bind(v),goAward:v.goAward.bind(v),goAddr:v.goAddr.bind(v),routePlan:v.routePlan.bind(v)}}).call(this,e("o7fRyq"),"undefined"!=typeof self?self:"undefined"!=typeof window?window:{},e("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/util/locat.js","/util")},{"../amap/log":8,"../amap/native":9,"../config/config.act":13,"../config/config.url":15,"../lib/msgbox":17,"./os":22,"./util":23,buffer:1,o7fRyq:4}],20:[function(e,t,n){(function(n,i,o,r,a,s,c,u,l){e("../lib/msgbox");var f=e("../amap/native"),d=e("../amap/loader"),p=(e("./os"),e("../amap/log")),h=e("../config/config.act").activity,g={tid:null,init:function(e){this.tid?this.login(e):this.getTid(e)},getTid:function(e){var t=this;f.getAppInfo(function(n){n.tid?(t.tid=n.tid,t.login(e)):AmapApp.util.pageError(n.code,"getExtraUrl")})},login:function(e,t){var n=this,i=[{tid:n.tid,sign:1},{force:0,sign:1},{activity:h}];f.getUserId(function(t){t.userid?d.get(AmapApp.AOSURL.game_bind,i,function(t){console.log("game_bind",t),1==t.code?e&&e(!0):2==t.code?n.needbind(e):AmapApp.util.pageError(AmapApp.AOSURL.game_bind,t.code)}):e&&e(!1)},!1,t||!1)},needbind:function(e){var t=this,n=[{tid:t.tid,sign:1},{force:1,sign:1},{activity:h}];$.MsgBox({content:"检测到您登录的账号已有游戏数据，是否同步？",okLabel:"同步",cancelLabel:"切换账号",cancelFn:function(){$.MsgBox({content:"将会为你退出当前账号登录，<br/>换一个别的账号再来吧",okLabel:"好的",cancelLabel:"取消",okFn:function(){p.log("reloginok"),t.login(e,!0)},cancelFn:function(){p.log("relogincancle"),t.needbind(e)}})},okFn:function(){$.MsgBox({content:"继续同步将擦除当前设备的数据，恢复账号的游戏进度，是否继续？",okLabel:"确认",cancelLabel:"取消",okFn:function(){p.log("bindok"),d.get(AmapApp.AOSURL.game_bind,n,function(t){console.log("game_bind",t),1==t.code?e&&e(!0):AmapApp.util.pageError(AmapApp.AOSURL.game_bind,t.code)})},cancelFn:function(){p.log("bindcancle"),t.needbind(e)}})}})}};t.exports={login:g.init.bind(g)}}).call(this,e("o7fRyq"),"undefined"!=typeof self?self:"undefined"!=typeof window?window:{},e("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/util/needBind.js","/util")},{"../amap/loader":7,"../amap/log":8,"../amap/native":9,"../config/config.act":13,"../lib/msgbox":17,"./os":22,buffer:1,o7fRyq:4}],21:[function(e,t,n){(function(n,i,o,r,a,s,c,u,l){var f=e("./os"),d=e("./webview_info"),p=e("../amap/native"),h=e("../amap/log"),g={getSchema:function(e,t,n){t=!!t;var i="amapuri",o=/^(?:(?:ios|android)amap|amapuri):\/\//i.test(e);if(o)return/^(?:(?:ios|android)amap|amapuri)(:\/\/.*)$/i.exec(e)[0];if(t){var r=f.ios?"ios":"android";i=r+"amap"}return i+"://openFeature?featureName=OpenURL&sa=1&sourceApplication=banner&url="+encodeURIComponent(e)+"&urlType=0&contentType=autonavi"+(n?"&hide_title=1":"")},getCallNative:function(e,t,n){t=!!t;var i="",o="http://m.autonavi.com/callnative/?";return i=o+"schema="+encodeURIComponent(this.getSchema(e,t,n))+"&title=高德地图"},openApp:function(e,t,n,i,o){if(n||(n="goamap"),d.isInAmap())e.on("click",function(){h.logJump(function(){f.ios||p.destroyRightButton(),location.href=t},n)});else{var r=this.getCallNative(t,!0,i);o&&(r+="&type="+o);var a=$('<a id="amapOpenApp" href="'+r+'" style="display:none;"/>');$("body").append(a),e.on("click",function(){h.logJump(function(){$("#amapOpenApp").trigger("click")},n)})}}};t.exports=g}).call(this,e("o7fRyq"),"undefined"!=typeof self?self:"undefined"!=typeof window?window:{},e("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/util/openAmap.js","/util")},{"../amap/log":8,"../amap/native":9,"./os":22,"./webview_info":24,buffer:1,o7fRyq:4}],22:[function(e,t,n){(function(n,i,o,r,a,s,c,u,l){var f={},d=e("./util"),p=window.document.documentElement,h=window.navigator.userAgent.toLowerCase().split("amap/")[0],g=function(e){return-1!==h.indexOf(e)};if(f.windows=g("windows"),f.iphone=!f.windows&&g("iphone"),f.ipod=g("ipod"),f.ipad=g("ipad"),f.ios=f.iphone||f.ipod||f.ipad,f.android=!f.windows&&g("android"),f.androidPhone=f.android&&g("mobile"),f.androidTablet=f.android&&!g("mobile"),f.ios){f.ipad?d.addClass(p,"ios ipad tablet"):f.iphone?d.addClass(p,"ios iphone mobile"):f.ipod&&d.addClass(p,"ios ipod mobile");var m=h.match(/(iphone|ipad|ipod).*?os\s([\d_]+)\s/i);f.version=m[2]}else f.android&&(f.androidTablet?d.addClass(p,"android tablet"):d.addClass(p,"android mobile"),f.version=h.substr(h.indexOf("android")+8,3));t.exports=f}).call(this,e("o7fRyq"),"undefined"!=typeof self?self:"undefined"!=typeof window?window:{},e("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/util/os.js","/util")},{"./util":23,buffer:1,o7fRyq:4}],23:[function(e,t,n){(function(e,n,i,o,r,a,s,c,u){var l={getUrlParam:function(e){var t=window.location.search.substr(1);if(!t)return"";if(e){var n=new RegExp("(?:^|&)"+e+"=([^&]*)(&|$)","g").exec(t);return l.htmlEncodeAll(n&&window.decodeURIComponent(n[1])||"")}for(var i,o={},r=/(?:^|&)([^&=]+)=([^&]*)(?=(&|$))/g;i=r.exec(t);)o[i[1]]=l.htmlEncodeAll(window.decodeURIComponent(i[2]));return o},htmlEncodeAll:function(e){return null==e?"":e.replace(/\</g,"&lt;").replace(/\>/g,"&gt;").replace(/\&/g,"&amp;").replace(/"/g,"&quot;").replace(/'/g,"'")},addScript:function(e,t,n){var i=document.createElement("script");return t&&(i.onload=function(){t(i)}),i.onerror=function(){n?n(i):t&&t(i)},i.src=e,document.head.appendChild(i),i},extend:function(e,t){for(var n in t)"undefined"!==t[n]&&(e[n]=t[n])},urlAddParam:function(e,t,n){var i=e.match(/([^\?#]*\??)([^#]*)?(#.*)?/),o=i[1],r=i[2];r?o+=r+"&":-1===i[1].indexOf("?")&&(o+="?");var a="";if("object"==typeof t){for(var s in t)a+="&"+s+"="+encodeURIComponent(t[s]);a=a.substr(1)}else a=t+"="+encodeURIComponent(n);return o+a+(i[3]||"")},hasClass:function(e,t){var n;return n=new RegExp(t,"i"),e.className.match(n)},addClass:function(e,t){var n=null;this.hasClass(e,t)||(n=e.className.replace(/^\s+|\s+$/g,""),e.className=n+" "+t)},removeClass:function(e,t){this.hasClass(e,t)&&(e.className=e.className.replace(" "+t,""))}};t.exports=l}).call(this,e("o7fRyq"),"undefined"!=typeof self?self:"undefined"!=typeof window?window:{},e("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/util/util.js","/util")},{buffer:1,o7fRyq:4}],24:[function(e,t,n){(function(n,i,o,r,a,s,c,u,l){var f=e("./os"),d=(e("./util"),window.navigator.userAgent.toLowerCase()),p=e("../config/_ini"),h=!1;-1!=d.indexOf("amap/")&&(h=!0),d=d.split("amap/")[0];var g={setIsInAmap:function(e){h=!!e},isInAmap:function(){return h},isInWeibo:function(){return/ Weibo /i.test(d)},isInWeixin:function(){return/MicroMessenger/i.test(d)},isPublic:function(){return/^[a-z]+\.amap\.com$/.test(location.host)||!p.debug},setTitlebar:function(e,t){t=t?t:"750";var n=t/750,i=f.ios?"1.25"*n:"0.9"*n;if(0==$("#titlebar").length){e=e?e:"请设置标题~";var o='<div id="titlebar"><div id="titleback" onclick="javascript:AmapApp.Native.webviewGoBack();"></div><span>'+e+"</span></div>";$("body").prepend(o)}else e&&$("#titlebar").find("span").html(e);$("body").css("padding-top",i+"rem"),1!=n&&$("#titlebar").css("transform","scale("+n+")")},setTransparentTitlebar:function(e,t){$("body").css("background","#4382ef"),t=t?t:"750";var n=t/750,i=(f.ios?"1.25"*n:"0.9"*n,$("#titlebar"));if(i.length<=0){e=e?e:"请设置标题~";var o='<div id="titlebar" class="titlebarTransparent"><div id="titleback" class="titlebackTransparent" onclick="javascript:AmapApp.Native.webviewGoBack();" ></div><span>'+e+"</span></div>";$("body").prepend(o)}else e&&$("#titlebar").find("span").html(e);1!=n&&$("#titlebar").css("transform","scale("+n+")"),window.onscroll=function(){document.body.scrollTop>10?($("#titlebar").removeClass("titlebarTransparent"),$("#titleback").removeClass("titlebackTransparent"),$("body").css("background","#f0f0f0")):($("#titlebar").addClass("titlebarTransparent"),$("#titleback").addClass("titlebackTransparent"),$("body").css("background","#4382ef"))}}};t.exports=g}).call(this,e("o7fRyq"),"undefined"!=typeof self?self:"undefined"!=typeof window?window:{},e("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/util/webview_info.js","/util")},{"../config/_ini":12,"./os":22,"./util":23,buffer:1,o7fRyq:4}]},{},[16]);
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+/*!
+ * The buffer module from node.js, for the browser.
+ *
+ * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+ * @license  MIT
+ */
+
+var base64 = require('base64-js')
+var ieee754 = require('ieee754')
+
+exports.Buffer = Buffer
+exports.SlowBuffer = Buffer
+exports.INSPECT_MAX_BYTES = 50
+Buffer.poolSize = 8192
+
+/**
+ * If `Buffer._useTypedArrays`:
+ *   === true    Use Uint8Array implementation (fastest)
+ *   === false   Use Object implementation (compatible down to IE6)
+ */
+Buffer._useTypedArrays = (function () {
+  // Detect if browser supports Typed Arrays. Supported browsers are IE 10+, Firefox 4+,
+  // Chrome 7+, Safari 5.1+, Opera 11.6+, iOS 4.2+. If the browser does not support adding
+  // properties to `Uint8Array` instances, then that's the same as no `Uint8Array` support
+  // because we need to be able to add all the node Buffer API methods. This is an issue
+  // in Firefox 4-29. Now fixed: https://bugzilla.mozilla.org/show_bug.cgi?id=695438
+  try {
+    var buf = new ArrayBuffer(0)
+    var arr = new Uint8Array(buf)
+    arr.foo = function () { return 42 }
+    return 42 === arr.foo() &&
+        typeof arr.subarray === 'function' // Chrome 9-10 lack `subarray`
+  } catch (e) {
+    return false
+  }
+})()
+
+/**
+ * Class: Buffer
+ * =============
+ *
+ * The Buffer constructor returns instances of `Uint8Array` that are augmented
+ * with function properties for all the node `Buffer` API functions. We use
+ * `Uint8Array` so that square bracket notation works as expected -- it returns
+ * a single octet.
+ *
+ * By augmenting the instances, we can avoid modifying the `Uint8Array`
+ * prototype.
+ */
+function Buffer (subject, encoding, noZero) {
+  if (!(this instanceof Buffer))
+    return new Buffer(subject, encoding, noZero)
+
+  var type = typeof subject
+
+  // Workaround: node's base64 implementation allows for non-padded strings
+  // while base64-js does not.
+  if (encoding === 'base64' && type === 'string') {
+    subject = stringtrim(subject)
+    while (subject.length % 4 !== 0) {
+      subject = subject + '='
+    }
+  }
+
+  // Find the length
+  var length
+  if (type === 'number')
+    length = coerce(subject)
+  else if (type === 'string')
+    length = Buffer.byteLength(subject, encoding)
+  else if (type === 'object')
+    length = coerce(subject.length) // assume that object is array-like
+  else
+    throw new Error('First argument needs to be a number, array or string.')
+
+  var buf
+  if (Buffer._useTypedArrays) {
+    // Preferred: Return an augmented `Uint8Array` instance for best performance
+    buf = Buffer._augment(new Uint8Array(length))
+  } else {
+    // Fallback: Return THIS instance of Buffer (created by `new`)
+    buf = this
+    buf.length = length
+    buf._isBuffer = true
+  }
+
+  var i
+  if (Buffer._useTypedArrays && typeof subject.byteLength === 'number') {
+    // Speed optimization -- use set if we're copying from a typed array
+    buf._set(subject)
+  } else if (isArrayish(subject)) {
+    // Treat array-ish objects as a byte array
+    for (i = 0; i < length; i++) {
+      if (Buffer.isBuffer(subject))
+        buf[i] = subject.readUInt8(i)
+      else
+        buf[i] = subject[i]
+    }
+  } else if (type === 'string') {
+    buf.write(subject, 0, encoding)
+  } else if (type === 'number' && !Buffer._useTypedArrays && !noZero) {
+    for (i = 0; i < length; i++) {
+      buf[i] = 0
+    }
+  }
+
+  return buf
+}
+
+// STATIC METHODS
+// ==============
+
+Buffer.isEncoding = function (encoding) {
+  switch (String(encoding).toLowerCase()) {
+    case 'hex':
+    case 'utf8':
+    case 'utf-8':
+    case 'ascii':
+    case 'binary':
+    case 'base64':
+    case 'raw':
+    case 'ucs2':
+    case 'ucs-2':
+    case 'utf16le':
+    case 'utf-16le':
+      return true
+    default:
+      return false
+  }
+}
+
+Buffer.isBuffer = function (b) {
+  return !!(b !== null && b !== undefined && b._isBuffer)
+}
+
+Buffer.byteLength = function (str, encoding) {
+  var ret
+  str = str + ''
+  switch (encoding || 'utf8') {
+    case 'hex':
+      ret = str.length / 2
+      break
+    case 'utf8':
+    case 'utf-8':
+      ret = utf8ToBytes(str).length
+      break
+    case 'ascii':
+    case 'binary':
+    case 'raw':
+      ret = str.length
+      break
+    case 'base64':
+      ret = base64ToBytes(str).length
+      break
+    case 'ucs2':
+    case 'ucs-2':
+    case 'utf16le':
+    case 'utf-16le':
+      ret = str.length * 2
+      break
+    default:
+      throw new Error('Unknown encoding')
+  }
+  return ret
+}
+
+Buffer.concat = function (list, totalLength) {
+  assert(isArray(list), 'Usage: Buffer.concat(list, [totalLength])\n' +
+      'list should be an Array.')
+
+  if (list.length === 0) {
+    return new Buffer(0)
+  } else if (list.length === 1) {
+    return list[0]
+  }
+
+  var i
+  if (typeof totalLength !== 'number') {
+    totalLength = 0
+    for (i = 0; i < list.length; i++) {
+      totalLength += list[i].length
+    }
+  }
+
+  var buf = new Buffer(totalLength)
+  var pos = 0
+  for (i = 0; i < list.length; i++) {
+    var item = list[i]
+    item.copy(buf, pos)
+    pos += item.length
+  }
+  return buf
+}
+
+// BUFFER INSTANCE METHODS
+// =======================
+
+function _hexWrite (buf, string, offset, length) {
+  offset = Number(offset) || 0
+  var remaining = buf.length - offset
+  if (!length) {
+    length = remaining
+  } else {
+    length = Number(length)
+    if (length > remaining) {
+      length = remaining
+    }
+  }
+
+  // must be an even number of digits
+  var strLen = string.length
+  assert(strLen % 2 === 0, 'Invalid hex string')
+
+  if (length > strLen / 2) {
+    length = strLen / 2
+  }
+  for (var i = 0; i < length; i++) {
+    var byte = parseInt(string.substr(i * 2, 2), 16)
+    assert(!isNaN(byte), 'Invalid hex string')
+    buf[offset + i] = byte
+  }
+  Buffer._charsWritten = i * 2
+  return i
+}
+
+function _utf8Write (buf, string, offset, length) {
+  var charsWritten = Buffer._charsWritten =
+    blitBuffer(utf8ToBytes(string), buf, offset, length)
+  return charsWritten
+}
+
+function _asciiWrite (buf, string, offset, length) {
+  var charsWritten = Buffer._charsWritten =
+    blitBuffer(asciiToBytes(string), buf, offset, length)
+  return charsWritten
+}
+
+function _binaryWrite (buf, string, offset, length) {
+  return _asciiWrite(buf, string, offset, length)
+}
+
+function _base64Write (buf, string, offset, length) {
+  var charsWritten = Buffer._charsWritten =
+    blitBuffer(base64ToBytes(string), buf, offset, length)
+  return charsWritten
+}
+
+function _utf16leWrite (buf, string, offset, length) {
+  var charsWritten = Buffer._charsWritten =
+    blitBuffer(utf16leToBytes(string), buf, offset, length)
+  return charsWritten
+}
+
+Buffer.prototype.write = function (string, offset, length, encoding) {
+  // Support both (string, offset, length, encoding)
+  // and the legacy (string, encoding, offset, length)
+  if (isFinite(offset)) {
+    if (!isFinite(length)) {
+      encoding = length
+      length = undefined
+    }
+  } else {  // legacy
+    var swap = encoding
+    encoding = offset
+    offset = length
+    length = swap
+  }
+
+  offset = Number(offset) || 0
+  var remaining = this.length - offset
+  if (!length) {
+    length = remaining
+  } else {
+    length = Number(length)
+    if (length > remaining) {
+      length = remaining
+    }
+  }
+  encoding = String(encoding || 'utf8').toLowerCase()
+
+  var ret
+  switch (encoding) {
+    case 'hex':
+      ret = _hexWrite(this, string, offset, length)
+      break
+    case 'utf8':
+    case 'utf-8':
+      ret = _utf8Write(this, string, offset, length)
+      break
+    case 'ascii':
+      ret = _asciiWrite(this, string, offset, length)
+      break
+    case 'binary':
+      ret = _binaryWrite(this, string, offset, length)
+      break
+    case 'base64':
+      ret = _base64Write(this, string, offset, length)
+      break
+    case 'ucs2':
+    case 'ucs-2':
+    case 'utf16le':
+    case 'utf-16le':
+      ret = _utf16leWrite(this, string, offset, length)
+      break
+    default:
+      throw new Error('Unknown encoding')
+  }
+  return ret
+}
+
+Buffer.prototype.toString = function (encoding, start, end) {
+  var self = this
+
+  encoding = String(encoding || 'utf8').toLowerCase()
+  start = Number(start) || 0
+  end = (end !== undefined)
+    ? Number(end)
+    : end = self.length
+
+  // Fastpath empty strings
+  if (end === start)
+    return ''
+
+  var ret
+  switch (encoding) {
+    case 'hex':
+      ret = _hexSlice(self, start, end)
+      break
+    case 'utf8':
+    case 'utf-8':
+      ret = _utf8Slice(self, start, end)
+      break
+    case 'ascii':
+      ret = _asciiSlice(self, start, end)
+      break
+    case 'binary':
+      ret = _binarySlice(self, start, end)
+      break
+    case 'base64':
+      ret = _base64Slice(self, start, end)
+      break
+    case 'ucs2':
+    case 'ucs-2':
+    case 'utf16le':
+    case 'utf-16le':
+      ret = _utf16leSlice(self, start, end)
+      break
+    default:
+      throw new Error('Unknown encoding')
+  }
+  return ret
+}
+
+Buffer.prototype.toJSON = function () {
+  return {
+    type: 'Buffer',
+    data: Array.prototype.slice.call(this._arr || this, 0)
+  }
+}
+
+// copy(targetBuffer, targetStart=0, sourceStart=0, sourceEnd=buffer.length)
+Buffer.prototype.copy = function (target, target_start, start, end) {
+  var source = this
+
+  if (!start) start = 0
+  if (!end && end !== 0) end = this.length
+  if (!target_start) target_start = 0
+
+  // Copy 0 bytes; we're done
+  if (end === start) return
+  if (target.length === 0 || source.length === 0) return
+
+  // Fatal error conditions
+  assert(end >= start, 'sourceEnd < sourceStart')
+  assert(target_start >= 0 && target_start < target.length,
+      'targetStart out of bounds')
+  assert(start >= 0 && start < source.length, 'sourceStart out of bounds')
+  assert(end >= 0 && end <= source.length, 'sourceEnd out of bounds')
+
+  // Are we oob?
+  if (end > this.length)
+    end = this.length
+  if (target.length - target_start < end - start)
+    end = target.length - target_start + start
+
+  var len = end - start
+
+  if (len < 100 || !Buffer._useTypedArrays) {
+    for (var i = 0; i < len; i++)
+      target[i + target_start] = this[i + start]
+  } else {
+    target._set(this.subarray(start, start + len), target_start)
+  }
+}
+
+function _base64Slice (buf, start, end) {
+  if (start === 0 && end === buf.length) {
+    return base64.fromByteArray(buf)
+  } else {
+    return base64.fromByteArray(buf.slice(start, end))
+  }
+}
+
+function _utf8Slice (buf, start, end) {
+  var res = ''
+  var tmp = ''
+  end = Math.min(buf.length, end)
+
+  for (var i = start; i < end; i++) {
+    if (buf[i] <= 0x7F) {
+      res += decodeUtf8Char(tmp) + String.fromCharCode(buf[i])
+      tmp = ''
+    } else {
+      tmp += '%' + buf[i].toString(16)
+    }
+  }
+
+  return res + decodeUtf8Char(tmp)
+}
+
+function _asciiSlice (buf, start, end) {
+  var ret = ''
+  end = Math.min(buf.length, end)
+
+  for (var i = start; i < end; i++)
+    ret += String.fromCharCode(buf[i])
+  return ret
+}
+
+function _binarySlice (buf, start, end) {
+  return _asciiSlice(buf, start, end)
+}
+
+function _hexSlice (buf, start, end) {
+  var len = buf.length
+
+  if (!start || start < 0) start = 0
+  if (!end || end < 0 || end > len) end = len
+
+  var out = ''
+  for (var i = start; i < end; i++) {
+    out += toHex(buf[i])
+  }
+  return out
+}
+
+function _utf16leSlice (buf, start, end) {
+  var bytes = buf.slice(start, end)
+  var res = ''
+  for (var i = 0; i < bytes.length; i += 2) {
+    res += String.fromCharCode(bytes[i] + bytes[i+1] * 256)
+  }
+  return res
+}
+
+Buffer.prototype.slice = function (start, end) {
+  var len = this.length
+  start = clamp(start, len, 0)
+  end = clamp(end, len, len)
+
+  if (Buffer._useTypedArrays) {
+    return Buffer._augment(this.subarray(start, end))
+  } else {
+    var sliceLen = end - start
+    var newBuf = new Buffer(sliceLen, undefined, true)
+    for (var i = 0; i < sliceLen; i++) {
+      newBuf[i] = this[i + start]
+    }
+    return newBuf
+  }
+}
+
+// `get` will be removed in Node 0.13+
+Buffer.prototype.get = function (offset) {
+  console.log('.get() is deprecated. Access using array indexes instead.')
+  return this.readUInt8(offset)
+}
+
+// `set` will be removed in Node 0.13+
+Buffer.prototype.set = function (v, offset) {
+  console.log('.set() is deprecated. Access using array indexes instead.')
+  return this.writeUInt8(v, offset)
+}
+
+Buffer.prototype.readUInt8 = function (offset, noAssert) {
+  if (!noAssert) {
+    assert(offset !== undefined && offset !== null, 'missing offset')
+    assert(offset < this.length, 'Trying to read beyond buffer length')
+  }
+
+  if (offset >= this.length)
+    return
+
+  return this[offset]
+}
+
+function _readUInt16 (buf, offset, littleEndian, noAssert) {
+  if (!noAssert) {
+    assert(typeof littleEndian === 'boolean', 'missing or invalid endian')
+    assert(offset !== undefined && offset !== null, 'missing offset')
+    assert(offset + 1 < buf.length, 'Trying to read beyond buffer length')
+  }
+
+  var len = buf.length
+  if (offset >= len)
+    return
+
+  var val
+  if (littleEndian) {
+    val = buf[offset]
+    if (offset + 1 < len)
+      val |= buf[offset + 1] << 8
+  } else {
+    val = buf[offset] << 8
+    if (offset + 1 < len)
+      val |= buf[offset + 1]
+  }
+  return val
+}
+
+Buffer.prototype.readUInt16LE = function (offset, noAssert) {
+  return _readUInt16(this, offset, true, noAssert)
+}
+
+Buffer.prototype.readUInt16BE = function (offset, noAssert) {
+  return _readUInt16(this, offset, false, noAssert)
+}
+
+function _readUInt32 (buf, offset, littleEndian, noAssert) {
+  if (!noAssert) {
+    assert(typeof littleEndian === 'boolean', 'missing or invalid endian')
+    assert(offset !== undefined && offset !== null, 'missing offset')
+    assert(offset + 3 < buf.length, 'Trying to read beyond buffer length')
+  }
+
+  var len = buf.length
+  if (offset >= len)
+    return
+
+  var val
+  if (littleEndian) {
+    if (offset + 2 < len)
+      val = buf[offset + 2] << 16
+    if (offset + 1 < len)
+      val |= buf[offset + 1] << 8
+    val |= buf[offset]
+    if (offset + 3 < len)
+      val = val + (buf[offset + 3] << 24 >>> 0)
+  } else {
+    if (offset + 1 < len)
+      val = buf[offset + 1] << 16
+    if (offset + 2 < len)
+      val |= buf[offset + 2] << 8
+    if (offset + 3 < len)
+      val |= buf[offset + 3]
+    val = val + (buf[offset] << 24 >>> 0)
+  }
+  return val
+}
+
+Buffer.prototype.readUInt32LE = function (offset, noAssert) {
+  return _readUInt32(this, offset, true, noAssert)
+}
+
+Buffer.prototype.readUInt32BE = function (offset, noAssert) {
+  return _readUInt32(this, offset, false, noAssert)
+}
+
+Buffer.prototype.readInt8 = function (offset, noAssert) {
+  if (!noAssert) {
+    assert(offset !== undefined && offset !== null,
+        'missing offset')
+    assert(offset < this.length, 'Trying to read beyond buffer length')
+  }
+
+  if (offset >= this.length)
+    return
+
+  var neg = this[offset] & 0x80
+  if (neg)
+    return (0xff - this[offset] + 1) * -1
+  else
+    return this[offset]
+}
+
+function _readInt16 (buf, offset, littleEndian, noAssert) {
+  if (!noAssert) {
+    assert(typeof littleEndian === 'boolean', 'missing or invalid endian')
+    assert(offset !== undefined && offset !== null, 'missing offset')
+    assert(offset + 1 < buf.length, 'Trying to read beyond buffer length')
+  }
+
+  var len = buf.length
+  if (offset >= len)
+    return
+
+  var val = _readUInt16(buf, offset, littleEndian, true)
+  var neg = val & 0x8000
+  if (neg)
+    return (0xffff - val + 1) * -1
+  else
+    return val
+}
+
+Buffer.prototype.readInt16LE = function (offset, noAssert) {
+  return _readInt16(this, offset, true, noAssert)
+}
+
+Buffer.prototype.readInt16BE = function (offset, noAssert) {
+  return _readInt16(this, offset, false, noAssert)
+}
+
+function _readInt32 (buf, offset, littleEndian, noAssert) {
+  if (!noAssert) {
+    assert(typeof littleEndian === 'boolean', 'missing or invalid endian')
+    assert(offset !== undefined && offset !== null, 'missing offset')
+    assert(offset + 3 < buf.length, 'Trying to read beyond buffer length')
+  }
+
+  var len = buf.length
+  if (offset >= len)
+    return
+
+  var val = _readUInt32(buf, offset, littleEndian, true)
+  var neg = val & 0x80000000
+  if (neg)
+    return (0xffffffff - val + 1) * -1
+  else
+    return val
+}
+
+Buffer.prototype.readInt32LE = function (offset, noAssert) {
+  return _readInt32(this, offset, true, noAssert)
+}
+
+Buffer.prototype.readInt32BE = function (offset, noAssert) {
+  return _readInt32(this, offset, false, noAssert)
+}
+
+function _readFloat (buf, offset, littleEndian, noAssert) {
+  if (!noAssert) {
+    assert(typeof littleEndian === 'boolean', 'missing or invalid endian')
+    assert(offset + 3 < buf.length, 'Trying to read beyond buffer length')
+  }
+
+  return ieee754.read(buf, offset, littleEndian, 23, 4)
+}
+
+Buffer.prototype.readFloatLE = function (offset, noAssert) {
+  return _readFloat(this, offset, true, noAssert)
+}
+
+Buffer.prototype.readFloatBE = function (offset, noAssert) {
+  return _readFloat(this, offset, false, noAssert)
+}
+
+function _readDouble (buf, offset, littleEndian, noAssert) {
+  if (!noAssert) {
+    assert(typeof littleEndian === 'boolean', 'missing or invalid endian')
+    assert(offset + 7 < buf.length, 'Trying to read beyond buffer length')
+  }
+
+  return ieee754.read(buf, offset, littleEndian, 52, 8)
+}
+
+Buffer.prototype.readDoubleLE = function (offset, noAssert) {
+  return _readDouble(this, offset, true, noAssert)
+}
+
+Buffer.prototype.readDoubleBE = function (offset, noAssert) {
+  return _readDouble(this, offset, false, noAssert)
+}
+
+Buffer.prototype.writeUInt8 = function (value, offset, noAssert) {
+  if (!noAssert) {
+    assert(value !== undefined && value !== null, 'missing value')
+    assert(offset !== undefined && offset !== null, 'missing offset')
+    assert(offset < this.length, 'trying to write beyond buffer length')
+    verifuint(value, 0xff)
+  }
+
+  if (offset >= this.length) return
+
+  this[offset] = value
+}
+
+function _writeUInt16 (buf, value, offset, littleEndian, noAssert) {
+  if (!noAssert) {
+    assert(value !== undefined && value !== null, 'missing value')
+    assert(typeof littleEndian === 'boolean', 'missing or invalid endian')
+    assert(offset !== undefined && offset !== null, 'missing offset')
+    assert(offset + 1 < buf.length, 'trying to write beyond buffer length')
+    verifuint(value, 0xffff)
+  }
+
+  var len = buf.length
+  if (offset >= len)
+    return
+
+  for (var i = 0, j = Math.min(len - offset, 2); i < j; i++) {
+    buf[offset + i] =
+        (value & (0xff << (8 * (littleEndian ? i : 1 - i)))) >>>
+            (littleEndian ? i : 1 - i) * 8
+  }
+}
+
+Buffer.prototype.writeUInt16LE = function (value, offset, noAssert) {
+  _writeUInt16(this, value, offset, true, noAssert)
+}
+
+Buffer.prototype.writeUInt16BE = function (value, offset, noAssert) {
+  _writeUInt16(this, value, offset, false, noAssert)
+}
+
+function _writeUInt32 (buf, value, offset, littleEndian, noAssert) {
+  if (!noAssert) {
+    assert(value !== undefined && value !== null, 'missing value')
+    assert(typeof littleEndian === 'boolean', 'missing or invalid endian')
+    assert(offset !== undefined && offset !== null, 'missing offset')
+    assert(offset + 3 < buf.length, 'trying to write beyond buffer length')
+    verifuint(value, 0xffffffff)
+  }
+
+  var len = buf.length
+  if (offset >= len)
+    return
+
+  for (var i = 0, j = Math.min(len - offset, 4); i < j; i++) {
+    buf[offset + i] =
+        (value >>> (littleEndian ? i : 3 - i) * 8) & 0xff
+  }
+}
+
+Buffer.prototype.writeUInt32LE = function (value, offset, noAssert) {
+  _writeUInt32(this, value, offset, true, noAssert)
+}
+
+Buffer.prototype.writeUInt32BE = function (value, offset, noAssert) {
+  _writeUInt32(this, value, offset, false, noAssert)
+}
+
+Buffer.prototype.writeInt8 = function (value, offset, noAssert) {
+  if (!noAssert) {
+    assert(value !== undefined && value !== null, 'missing value')
+    assert(offset !== undefined && offset !== null, 'missing offset')
+    assert(offset < this.length, 'Trying to write beyond buffer length')
+    verifsint(value, 0x7f, -0x80)
+  }
+
+  if (offset >= this.length)
+    return
+
+  if (value >= 0)
+    this.writeUInt8(value, offset, noAssert)
+  else
+    this.writeUInt8(0xff + value + 1, offset, noAssert)
+}
+
+function _writeInt16 (buf, value, offset, littleEndian, noAssert) {
+  if (!noAssert) {
+    assert(value !== undefined && value !== null, 'missing value')
+    assert(typeof littleEndian === 'boolean', 'missing or invalid endian')
+    assert(offset !== undefined && offset !== null, 'missing offset')
+    assert(offset + 1 < buf.length, 'Trying to write beyond buffer length')
+    verifsint(value, 0x7fff, -0x8000)
+  }
+
+  var len = buf.length
+  if (offset >= len)
+    return
+
+  if (value >= 0)
+    _writeUInt16(buf, value, offset, littleEndian, noAssert)
+  else
+    _writeUInt16(buf, 0xffff + value + 1, offset, littleEndian, noAssert)
+}
+
+Buffer.prototype.writeInt16LE = function (value, offset, noAssert) {
+  _writeInt16(this, value, offset, true, noAssert)
+}
+
+Buffer.prototype.writeInt16BE = function (value, offset, noAssert) {
+  _writeInt16(this, value, offset, false, noAssert)
+}
+
+function _writeInt32 (buf, value, offset, littleEndian, noAssert) {
+  if (!noAssert) {
+    assert(value !== undefined && value !== null, 'missing value')
+    assert(typeof littleEndian === 'boolean', 'missing or invalid endian')
+    assert(offset !== undefined && offset !== null, 'missing offset')
+    assert(offset + 3 < buf.length, 'Trying to write beyond buffer length')
+    verifsint(value, 0x7fffffff, -0x80000000)
+  }
+
+  var len = buf.length
+  if (offset >= len)
+    return
+
+  if (value >= 0)
+    _writeUInt32(buf, value, offset, littleEndian, noAssert)
+  else
+    _writeUInt32(buf, 0xffffffff + value + 1, offset, littleEndian, noAssert)
+}
+
+Buffer.prototype.writeInt32LE = function (value, offset, noAssert) {
+  _writeInt32(this, value, offset, true, noAssert)
+}
+
+Buffer.prototype.writeInt32BE = function (value, offset, noAssert) {
+  _writeInt32(this, value, offset, false, noAssert)
+}
+
+function _writeFloat (buf, value, offset, littleEndian, noAssert) {
+  if (!noAssert) {
+    assert(value !== undefined && value !== null, 'missing value')
+    assert(typeof littleEndian === 'boolean', 'missing or invalid endian')
+    assert(offset !== undefined && offset !== null, 'missing offset')
+    assert(offset + 3 < buf.length, 'Trying to write beyond buffer length')
+    verifIEEE754(value, 3.4028234663852886e+38, -3.4028234663852886e+38)
+  }
+
+  var len = buf.length
+  if (offset >= len)
+    return
+
+  ieee754.write(buf, value, offset, littleEndian, 23, 4)
+}
+
+Buffer.prototype.writeFloatLE = function (value, offset, noAssert) {
+  _writeFloat(this, value, offset, true, noAssert)
+}
+
+Buffer.prototype.writeFloatBE = function (value, offset, noAssert) {
+  _writeFloat(this, value, offset, false, noAssert)
+}
+
+function _writeDouble (buf, value, offset, littleEndian, noAssert) {
+  if (!noAssert) {
+    assert(value !== undefined && value !== null, 'missing value')
+    assert(typeof littleEndian === 'boolean', 'missing or invalid endian')
+    assert(offset !== undefined && offset !== null, 'missing offset')
+    assert(offset + 7 < buf.length,
+        'Trying to write beyond buffer length')
+    verifIEEE754(value, 1.7976931348623157E+308, -1.7976931348623157E+308)
+  }
+
+  var len = buf.length
+  if (offset >= len)
+    return
+
+  ieee754.write(buf, value, offset, littleEndian, 52, 8)
+}
+
+Buffer.prototype.writeDoubleLE = function (value, offset, noAssert) {
+  _writeDouble(this, value, offset, true, noAssert)
+}
+
+Buffer.prototype.writeDoubleBE = function (value, offset, noAssert) {
+  _writeDouble(this, value, offset, false, noAssert)
+}
+
+// fill(value, start=0, end=buffer.length)
+Buffer.prototype.fill = function (value, start, end) {
+  if (!value) value = 0
+  if (!start) start = 0
+  if (!end) end = this.length
+
+  if (typeof value === 'string') {
+    value = value.charCodeAt(0)
+  }
+
+  assert(typeof value === 'number' && !isNaN(value), 'value is not a number')
+  assert(end >= start, 'end < start')
+
+  // Fill 0 bytes; we're done
+  if (end === start) return
+  if (this.length === 0) return
+
+  assert(start >= 0 && start < this.length, 'start out of bounds')
+  assert(end >= 0 && end <= this.length, 'end out of bounds')
+
+  for (var i = start; i < end; i++) {
+    this[i] = value
+  }
+}
+
+Buffer.prototype.inspect = function () {
+  var out = []
+  var len = this.length
+  for (var i = 0; i < len; i++) {
+    out[i] = toHex(this[i])
+    if (i === exports.INSPECT_MAX_BYTES) {
+      out[i + 1] = '...'
+      break
+    }
+  }
+  return '<Buffer ' + out.join(' ') + '>'
+}
+
+/**
+ * Creates a new `ArrayBuffer` with the *copied* memory of the buffer instance.
+ * Added in Node 0.12. Only available in browsers that support ArrayBuffer.
+ */
+Buffer.prototype.toArrayBuffer = function () {
+  if (typeof Uint8Array !== 'undefined') {
+    if (Buffer._useTypedArrays) {
+      return (new Buffer(this)).buffer
+    } else {
+      var buf = new Uint8Array(this.length)
+      for (var i = 0, len = buf.length; i < len; i += 1)
+        buf[i] = this[i]
+      return buf.buffer
+    }
+  } else {
+    throw new Error('Buffer.toArrayBuffer not supported in this browser')
+  }
+}
+
+// HELPER FUNCTIONS
+// ================
+
+function stringtrim (str) {
+  if (str.trim) return str.trim()
+  return str.replace(/^\s+|\s+$/g, '')
+}
+
+var BP = Buffer.prototype
+
+/**
+ * Augment a Uint8Array *instance* (not the Uint8Array class!) with Buffer methods
+ */
+Buffer._augment = function (arr) {
+  arr._isBuffer = true
+
+  // save reference to original Uint8Array get/set methods before overwriting
+  arr._get = arr.get
+  arr._set = arr.set
+
+  // deprecated, will be removed in node 0.13+
+  arr.get = BP.get
+  arr.set = BP.set
+
+  arr.write = BP.write
+  arr.toString = BP.toString
+  arr.toLocaleString = BP.toString
+  arr.toJSON = BP.toJSON
+  arr.copy = BP.copy
+  arr.slice = BP.slice
+  arr.readUInt8 = BP.readUInt8
+  arr.readUInt16LE = BP.readUInt16LE
+  arr.readUInt16BE = BP.readUInt16BE
+  arr.readUInt32LE = BP.readUInt32LE
+  arr.readUInt32BE = BP.readUInt32BE
+  arr.readInt8 = BP.readInt8
+  arr.readInt16LE = BP.readInt16LE
+  arr.readInt16BE = BP.readInt16BE
+  arr.readInt32LE = BP.readInt32LE
+  arr.readInt32BE = BP.readInt32BE
+  arr.readFloatLE = BP.readFloatLE
+  arr.readFloatBE = BP.readFloatBE
+  arr.readDoubleLE = BP.readDoubleLE
+  arr.readDoubleBE = BP.readDoubleBE
+  arr.writeUInt8 = BP.writeUInt8
+  arr.writeUInt16LE = BP.writeUInt16LE
+  arr.writeUInt16BE = BP.writeUInt16BE
+  arr.writeUInt32LE = BP.writeUInt32LE
+  arr.writeUInt32BE = BP.writeUInt32BE
+  arr.writeInt8 = BP.writeInt8
+  arr.writeInt16LE = BP.writeInt16LE
+  arr.writeInt16BE = BP.writeInt16BE
+  arr.writeInt32LE = BP.writeInt32LE
+  arr.writeInt32BE = BP.writeInt32BE
+  arr.writeFloatLE = BP.writeFloatLE
+  arr.writeFloatBE = BP.writeFloatBE
+  arr.writeDoubleLE = BP.writeDoubleLE
+  arr.writeDoubleBE = BP.writeDoubleBE
+  arr.fill = BP.fill
+  arr.inspect = BP.inspect
+  arr.toArrayBuffer = BP.toArrayBuffer
+
+  return arr
+}
+
+// slice(start, end)
+function clamp (index, len, defaultValue) {
+  if (typeof index !== 'number') return defaultValue
+  index = ~~index;  // Coerce to integer.
+  if (index >= len) return len
+  if (index >= 0) return index
+  index += len
+  if (index >= 0) return index
+  return 0
+}
+
+function coerce (length) {
+  // Coerce length to a number (possibly NaN), round up
+  // in case it's fractional (e.g. 123.456) then do a
+  // double negate to coerce a NaN to 0. Easy, right?
+  length = ~~Math.ceil(+length)
+  return length < 0 ? 0 : length
+}
+
+function isArray (subject) {
+  return (Array.isArray || function (subject) {
+    return Object.prototype.toString.call(subject) === '[object Array]'
+  })(subject)
+}
+
+function isArrayish (subject) {
+  return isArray(subject) || Buffer.isBuffer(subject) ||
+      subject && typeof subject === 'object' &&
+      typeof subject.length === 'number'
+}
+
+function toHex (n) {
+  if (n < 16) return '0' + n.toString(16)
+  return n.toString(16)
+}
+
+function utf8ToBytes (str) {
+  var byteArray = []
+  for (var i = 0; i < str.length; i++) {
+    var b = str.charCodeAt(i)
+    if (b <= 0x7F)
+      byteArray.push(str.charCodeAt(i))
+    else {
+      var start = i
+      if (b >= 0xD800 && b <= 0xDFFF) i++
+      var h = encodeURIComponent(str.slice(start, i+1)).substr(1).split('%')
+      for (var j = 0; j < h.length; j++)
+        byteArray.push(parseInt(h[j], 16))
+    }
+  }
+  return byteArray
+}
+
+function asciiToBytes (str) {
+  var byteArray = []
+  for (var i = 0; i < str.length; i++) {
+    // Node's code seems to be doing this and not & 0x7F..
+    byteArray.push(str.charCodeAt(i) & 0xFF)
+  }
+  return byteArray
+}
+
+function utf16leToBytes (str) {
+  var c, hi, lo
+  var byteArray = []
+  for (var i = 0; i < str.length; i++) {
+    c = str.charCodeAt(i)
+    hi = c >> 8
+    lo = c % 256
+    byteArray.push(lo)
+    byteArray.push(hi)
+  }
+
+  return byteArray
+}
+
+function base64ToBytes (str) {
+  return base64.toByteArray(str)
+}
+
+function blitBuffer (src, dst, offset, length) {
+  var pos
+  for (var i = 0; i < length; i++) {
+    if ((i + offset >= dst.length) || (i >= src.length))
+      break
+    dst[i + offset] = src[i]
+  }
+  return i
+}
+
+function decodeUtf8Char (str) {
+  try {
+    return decodeURIComponent(str)
+  } catch (err) {
+    return String.fromCharCode(0xFFFD) // UTF 8 invalid char
+  }
+}
+
+/*
+ * We have to make sure that the value is a valid integer. This means that it
+ * is non-negative. It has no fractional component and that it does not
+ * exceed the maximum allowed value.
+ */
+function verifuint (value, max) {
+  assert(typeof value === 'number', 'cannot write a non-number as a number')
+  assert(value >= 0, 'specified a negative value for writing an unsigned value')
+  assert(value <= max, 'value is larger than maximum value for type')
+  assert(Math.floor(value) === value, 'value has a fractional component')
+}
+
+function verifsint (value, max, min) {
+  assert(typeof value === 'number', 'cannot write a non-number as a number')
+  assert(value <= max, 'value larger than maximum allowed value')
+  assert(value >= min, 'value smaller than minimum allowed value')
+  assert(Math.floor(value) === value, 'value has a fractional component')
+}
+
+function verifIEEE754 (value, max, min) {
+  assert(typeof value === 'number', 'cannot write a non-number as a number')
+  assert(value <= max, 'value larger than maximum allowed value')
+  assert(value >= min, 'value smaller than minimum allowed value')
+}
+
+function assert (test, message) {
+  if (!test) throw new Error(message || 'Failed assertion')
+}
+
+}).call(this,require("At5rgb"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../aflow/aflow/node_modules/_buffer@2.1.13@buffer/index.js","/../../../aflow/aflow/node_modules/_buffer@2.1.13@buffer")
+},{"At5rgb":4,"base64-js":2,"buffer":1,"ieee754":3}],2:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+
+;(function (exports) {
+	'use strict';
+
+  var Arr = (typeof Uint8Array !== 'undefined')
+    ? Uint8Array
+    : Array
+
+	var PLUS   = '+'.charCodeAt(0)
+	var SLASH  = '/'.charCodeAt(0)
+	var NUMBER = '0'.charCodeAt(0)
+	var LOWER  = 'a'.charCodeAt(0)
+	var UPPER  = 'A'.charCodeAt(0)
+	var PLUS_URL_SAFE = '-'.charCodeAt(0)
+	var SLASH_URL_SAFE = '_'.charCodeAt(0)
+
+	function decode (elt) {
+		var code = elt.charCodeAt(0)
+		if (code === PLUS ||
+		    code === PLUS_URL_SAFE)
+			return 62 // '+'
+		if (code === SLASH ||
+		    code === SLASH_URL_SAFE)
+			return 63 // '/'
+		if (code < NUMBER)
+			return -1 //no match
+		if (code < NUMBER + 10)
+			return code - NUMBER + 26 + 26
+		if (code < UPPER + 26)
+			return code - UPPER
+		if (code < LOWER + 26)
+			return code - LOWER + 26
+	}
+
+	function b64ToByteArray (b64) {
+		var i, j, l, tmp, placeHolders, arr
+
+		if (b64.length % 4 > 0) {
+			throw new Error('Invalid string. Length must be a multiple of 4')
+		}
+
+		// the number of equal signs (place holders)
+		// if there are two placeholders, than the two characters before it
+		// represent one byte
+		// if there is only one, then the three characters before it represent 2 bytes
+		// this is just a cheap hack to not do indexOf twice
+		var len = b64.length
+		placeHolders = '=' === b64.charAt(len - 2) ? 2 : '=' === b64.charAt(len - 1) ? 1 : 0
+
+		// base64 is 4/3 + up to two characters of the original data
+		arr = new Arr(b64.length * 3 / 4 - placeHolders)
+
+		// if there are placeholders, only get up to the last complete 4 chars
+		l = placeHolders > 0 ? b64.length - 4 : b64.length
+
+		var L = 0
+
+		function push (v) {
+			arr[L++] = v
+		}
+
+		for (i = 0, j = 0; i < l; i += 4, j += 3) {
+			tmp = (decode(b64.charAt(i)) << 18) | (decode(b64.charAt(i + 1)) << 12) | (decode(b64.charAt(i + 2)) << 6) | decode(b64.charAt(i + 3))
+			push((tmp & 0xFF0000) >> 16)
+			push((tmp & 0xFF00) >> 8)
+			push(tmp & 0xFF)
+		}
+
+		if (placeHolders === 2) {
+			tmp = (decode(b64.charAt(i)) << 2) | (decode(b64.charAt(i + 1)) >> 4)
+			push(tmp & 0xFF)
+		} else if (placeHolders === 1) {
+			tmp = (decode(b64.charAt(i)) << 10) | (decode(b64.charAt(i + 1)) << 4) | (decode(b64.charAt(i + 2)) >> 2)
+			push((tmp >> 8) & 0xFF)
+			push(tmp & 0xFF)
+		}
+
+		return arr
+	}
+
+	function uint8ToBase64 (uint8) {
+		var i,
+			extraBytes = uint8.length % 3, // if we have 1 byte left, pad 2 bytes
+			output = "",
+			temp, length
+
+		function encode (num) {
+			return lookup.charAt(num)
+		}
+
+		function tripletToBase64 (num) {
+			return encode(num >> 18 & 0x3F) + encode(num >> 12 & 0x3F) + encode(num >> 6 & 0x3F) + encode(num & 0x3F)
+		}
+
+		// go through the array every three bytes, we'll deal with trailing stuff later
+		for (i = 0, length = uint8.length - extraBytes; i < length; i += 3) {
+			temp = (uint8[i] << 16) + (uint8[i + 1] << 8) + (uint8[i + 2])
+			output += tripletToBase64(temp)
+		}
+
+		// pad the end with zeros, but make sure to not forget the extra bytes
+		switch (extraBytes) {
+			case 1:
+				temp = uint8[uint8.length - 1]
+				output += encode(temp >> 2)
+				output += encode((temp << 4) & 0x3F)
+				output += '=='
+				break
+			case 2:
+				temp = (uint8[uint8.length - 2] << 8) + (uint8[uint8.length - 1])
+				output += encode(temp >> 10)
+				output += encode((temp >> 4) & 0x3F)
+				output += encode((temp << 2) & 0x3F)
+				output += '='
+				break
+		}
+
+		return output
+	}
+
+	exports.toByteArray = b64ToByteArray
+	exports.fromByteArray = uint8ToBase64
+}(typeof exports === 'undefined' ? (this.base64js = {}) : exports))
+
+}).call(this,require("At5rgb"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../aflow/aflow/node_modules/_buffer@2.1.13@buffer/node_modules/base64-js/lib/b64.js","/../../../aflow/aflow/node_modules/_buffer@2.1.13@buffer/node_modules/base64-js/lib")
+},{"At5rgb":4,"buffer":1}],3:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+exports.read = function (buffer, offset, isLE, mLen, nBytes) {
+  var e, m
+  var eLen = nBytes * 8 - mLen - 1
+  var eMax = (1 << eLen) - 1
+  var eBias = eMax >> 1
+  var nBits = -7
+  var i = isLE ? (nBytes - 1) : 0
+  var d = isLE ? -1 : 1
+  var s = buffer[offset + i]
+
+  i += d
+
+  e = s & ((1 << (-nBits)) - 1)
+  s >>= (-nBits)
+  nBits += eLen
+  for (; nBits > 0; e = e * 256 + buffer[offset + i], i += d, nBits -= 8) {}
+
+  m = e & ((1 << (-nBits)) - 1)
+  e >>= (-nBits)
+  nBits += mLen
+  for (; nBits > 0; m = m * 256 + buffer[offset + i], i += d, nBits -= 8) {}
+
+  if (e === 0) {
+    e = 1 - eBias
+  } else if (e === eMax) {
+    return m ? NaN : ((s ? -1 : 1) * Infinity)
+  } else {
+    m = m + Math.pow(2, mLen)
+    e = e - eBias
+  }
+  return (s ? -1 : 1) * m * Math.pow(2, e - mLen)
+}
+
+exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
+  var e, m, c
+  var eLen = nBytes * 8 - mLen - 1
+  var eMax = (1 << eLen) - 1
+  var eBias = eMax >> 1
+  var rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0)
+  var i = isLE ? 0 : (nBytes - 1)
+  var d = isLE ? 1 : -1
+  var s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0
+
+  value = Math.abs(value)
+
+  if (isNaN(value) || value === Infinity) {
+    m = isNaN(value) ? 1 : 0
+    e = eMax
+  } else {
+    e = Math.floor(Math.log(value) / Math.LN2)
+    if (value * (c = Math.pow(2, -e)) < 1) {
+      e--
+      c *= 2
+    }
+    if (e + eBias >= 1) {
+      value += rt / c
+    } else {
+      value += rt * Math.pow(2, 1 - eBias)
+    }
+    if (value * c >= 2) {
+      e++
+      c /= 2
+    }
+
+    if (e + eBias >= eMax) {
+      m = 0
+      e = eMax
+    } else if (e + eBias >= 1) {
+      m = (value * c - 1) * Math.pow(2, mLen)
+      e = e + eBias
+    } else {
+      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen)
+      e = 0
+    }
+  }
+
+  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8) {}
+
+  e = (e << mLen) | m
+  eLen += mLen
+  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8) {}
+
+  buffer[offset + i - d] |= s * 128
+}
+
+}).call(this,require("At5rgb"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../aflow/aflow/node_modules/_buffer@2.1.13@buffer/node_modules/ieee754/index.js","/../../../aflow/aflow/node_modules/_buffer@2.1.13@buffer/node_modules/ieee754")
+},{"At5rgb":4,"buffer":1}],4:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+// shim for using process in browser
+
+var process = module.exports = {};
+
+process.nextTick = (function () {
+    var canSetImmediate = typeof window !== 'undefined'
+    && window.setImmediate;
+    var canPost = typeof window !== 'undefined'
+    && window.postMessage && window.addEventListener
+    ;
+
+    if (canSetImmediate) {
+        return function (f) { return window.setImmediate(f) };
+    }
+
+    if (canPost) {
+        var queue = [];
+        window.addEventListener('message', function (ev) {
+            var source = ev.source;
+            if ((source === window || source === null) && ev.data === 'process-tick') {
+                ev.stopPropagation();
+                if (queue.length > 0) {
+                    var fn = queue.shift();
+                    fn();
+                }
+            }
+        }, true);
+
+        return function nextTick(fn) {
+            queue.push(fn);
+            window.postMessage('process-tick', '*');
+        };
+    }
+
+    return function nextTick(fn) {
+        setTimeout(fn, 0);
+    };
+})();
+
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+}
+
+// TODO(shtylman)
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+
+}).call(this,require("At5rgb"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../../aflow/aflow/node_modules/_process@0.7.0@process/browser.js","/../../../aflow/aflow/node_modules/_process@0.7.0@process")
+},{"At5rgb":4,"buffer":1}],5:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+/**
+ * Created by qingye on 16/6/13.
+ * 核心功能  建立通信
+ */
+
+var os = require('../util/os');
+var util = require('../util/util');
+var webview = require('../util/webview_info');
+/**
+ * 高德地图客户端与js交互实现.
+ * 此js会生成全局变量 callback
+ *    callback 供客户端使用，不能直接调用
+ * 如果页面中使用了 iframe，则页面和 iframe 不能同时引用此js
+ */
+
+/** js与客户端交互对象 */
+var bridge;
+/** 存储需要回调的客户端请求的回调函数 */
+var handlerMap = {};
+/** 存储客户端主动调用的数据的回调函数 */
+var registerHandlerMap = {};
+/** 存储客户端连接建立前发出的请求 */
+var sendQueue = [];
+
+/**
+ * 客户端调用js的方法名称.
+ * 客户端调用js均通过此方法，此方法会作为全局函数存在
+ * 如果不同页面间有跳转关系，则这些页面的此方法名必须一致
+ */
+var CALLBACK_NAME = 'callback';
+
+/** bridge是否建立 */
+var isReady = false;
+var connected = false;
+var readyCallBack = [];
+
+
+/**
+ * 开始和客户端建立连接，如果客户端已建立好连接，则直接初始化.
+ */
+function init() {
+    if (window.amapJsBridge) {
+        bridge = window.amapJsBridge;
+        return;
+    }
+    if (os.ios) {
+        if (window.WebViewJavascriptBridge) {
+            connect({bridge: window.WebViewJavascriptBridge});
+        } else {
+            document.addEventListener('WebViewJavascriptBridgeReady', connect, false);
+        }
+    } else if (os.android) {
+        if (window.jsInterface) {
+            connect();
+        } else {
+            document.addEventListener('DOMContentLoaded', connect, false);
+        }
+    }
+}
+/**
+ * 客户端完成连接工作，js端保持连接对象，完成连接.
+ * @param {Object} event iOS 连接成功后的事件对象
+ */
+function connect(event) {
+    if (os.ios) {
+        document.removeEventListener('WebViewJavascriptBridgeReady', connect, false);
+        bridge = event.bridge;
+        bridge.init();
+        bridge.registerHandler('amapCallWebViewHandler', window[CALLBACK_NAME]);
+    } else if (os.android) {
+        document.removeEventListener('DOMContentLoaded', connect, false);
+        bridge = {
+            send: function (param) {
+                param = [JSON.stringify(param)];
+                if (arguments[1]) {
+                    param[1] = arguments[1];
+                }
+                if (window.jsInterface) {
+                    window.jsInterface.invokeMethod('send', param);
+                }
+            }
+        };
+        bridge.send({'action': 'registerCallback'}, CALLBACK_NAME);
+    }
+
+    window.amapJsBridge = bridge;
+    connectComplete();
+}
+/**
+ * js与客户端连接建立完成.
+ */
+function connectComplete() {
+    isReady = true;
+    connected = true;
+    webview.setIsInAmap(true);
+    util.addClass(window.document.documentElement, 'amap');
+    fireReadyCallBack();
+    // 处理连接建立前发起的请求
+    while (sendQueue.length) {
+        bridge.send(sendQueue.shift());
+    }
+}
+/**
+ * 接收客户端回调的方法.
+ * @param {Object} res 客户端传回的数据
+ */
+function callback(res) {
+    if ('string' === typeof res) {
+        res = JSON.parse(res);
+    }
+    var _act = res._action;
+    // 处理客户端主动调用的事件
+    if (typeof registerHandlerMap[_act] === 'function') {
+        registerHandlerMap[_act](res);
+        return;
+    }
+    if ('[object Function]' === Object.prototype.toString.call(handlerMap[_act])) {
+        handlerMap[_act](res);
+        if (res.content && res.content.code != 1) handlerMap[_act] = undefined;
+    }
+    if (_act && 0 !== _act.indexOf('_HOLD_')) {
+        handlerMap[_act] = undefined;
+    }
+}
+window[CALLBACK_NAME] = callback;
+
+/**
+ * js向客户端发起请求.
+ * @param {Object} param 请求参数
+ * @param {Function} [handler] 可选，回调函数
+ */
+function send(param, handler) {
+    if (handler) {
+        if (!param._action) {
+            var _actionStr = '_ACTION_TO_NATIVEAPI_' + Math.random();
+            // 注册右上角按钮时，回调不止触发一次，触发后回调函数不删除
+            if (param.hasOwnProperty('function')) {
+                _actionStr = '_HOLD' + _actionStr;
+                (param['function'])._action = _actionStr;
+            }
+            else {
+                param._action = _actionStr;
+            }
+            // add by jinjin
+            if ('needHold' in param) {
+                _actionStr = "_HOLD" + _actionStr;
+                param._action = _actionStr;
+                try {
+                    delete param.needHold
+                } catch (e) {
+                }
+            }
+            handlerMap[_actionStr] = handler;
+        }
+        else {
+            handlerMap[param._action] = handler;
+        }
+    }
+    if (bridge) {
+        bridge.send(param);
+    }
+    else {
+        sendQueue.push(param);
+    }
+}
+
+/**
+ * 向客户端注册供客户端主动调用的方法.
+ * @param {String} _action 事件标识
+ * @param {Function} handler 回调方法
+ */
+function registerCallback(_action, handler) {
+    registerHandlerMap[_action] = handler;
+}
+
+
+// 触发ready
+function fireReadyCallBack() {
+    readyCallBack.forEach(function (fn) {
+        fn();
+    });
+}
+
+var hasSetTimeout = false;
+
+init();
+
+module.exports = {
+    send: send,
+    registerCallback: registerCallback,
+    ready: function (fn) {
+        fn();
+    }
+};
+}).call(this,require("At5rgb"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/amap/bridge.js","/amap")
+},{"../util/os":19,"../util/util":20,"../util/webview_info":21,"At5rgb":4,"buffer":1}],6:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+/**
+ * Created by qingye on 16/6/13.
+ * 
+ * 对话框
+ */
+
+var Bridge = require('./bridge');
+
+/**
+ * 使用黑框显示提示信息.
+ * @param {String} msg 信息内容
+ * @param {Integer} [type=0] 显示类型
+ *    0 3s后自动消失的框
+ *    1 一直显示的提示框
+ *    -1 关闭提示框
+ */
+function promptMessage(msg, type) {
+    Bridge.send({action: 'promptMessage', message: msg, type: type || 0});
+}
+
+module.exports = {
+    toast: promptMessage
+};
+}).call(this,require("At5rgb"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/amap/dialog.js","/amap")
+},{"./bridge":5,"At5rgb":4,"buffer":1}],7:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+/**
+ * Created by qingye on 16/6/13.
+ *
+ * 数据加载
+ */
+
+var Bridge = require('./bridge');
+var Dialog = require('./dialog');
+var util = require('../util/util');
+var webview = require('../util/webview_info');
+
+/**
+ * aosrequest.
+ * 参数为两种形式，分别为 aosrequest(obj, handler) 和
+ * aosrequest(url, params, handler, progress, showNetErr, method)
+ *
+ * @param {String} url 请求url
+ *    此参数为 obj 类型时，此参数为所有参数列表，此时第二个参数为回调方法
+ *    此时 obj 的 key 应该和真实接口保持一致：
+ *    urlPrefix，method，progress，params，alert，encrypt，goback，showNetErr
+ * @param {Array.<Object>} params 请求参数列表
+ * @param {Function} handler 回调方法，请求结果会以JSON格式传给方法的第一个参数
+ * @param {Integer|String} [progress] 可选，请求时的提示信息，
+ *    为数字1时显示默认的提示信息
+ * @param {Boolean} [showNetErr=false] 网络异常时是否进行提示，默认不提示
+ * @param {String} [method=POST] 可选，请求方式
+ */
+function aosrequest(url, params, handler, progress, showNetErr, method) {
+    if (!url) return;
+    var obj;
+    // (obj, handler) 形式调用
+    if (typeof url === 'object') {
+        obj = url;
+        handler = params;
+        showNetErr = obj.showNetErr;
+        delete obj.showNetErr;
+    } else { // (url, params, handler, progress, showNetErr, method) 形式
+        obj = {
+            urlPrefix: url,
+            method: method,
+            progress: progress,
+            params: params
+        };
+    }
+    obj.action = 'aosrequest';
+    obj.method = 'string' === typeof obj.method && 'GET' === obj.method.toUpperCase() ? 'GET' : 'POST';
+    obj.headers = {"content-type": "application/x-www-form-urlencoded"};
+    if (obj.progress) {
+        obj.progress = 1 === obj.progress ? '正在加载' : obj.progress;
+    } else {
+        // ios 下 progress 为空字符串时会显示默认信息
+        delete obj.progress;
+    }
+    Bridge.send(obj, function (res) {
+        var result = JSON.parse(res.content);
+        if (!result || result.code === undefined) {
+            result = {code: -10};
+        } else if (showNetErr && (result.code == -1 || result.code == -2)) {
+            Dialog.toast('请检查网络后重试');
+        }
+        handler.call(this, result);
+    });
+}
+
+/// JSONP
+/** @type {Integer} jsonp请求计数器 */
+var callbackId = 0;
+/** @type {String} jsonp服务回调函数名称前缀 */
+var aosJsonpName = '_aosJsonpRequest';
+/**
+ * 通过wb服务进行签名转发aos请求.
+ * @param {String} urlname aos服务url
+ * @param {Array.<Object>} param 请求参数，与客户端中请求参数相同
+ * @param {Function} callback 回调函数
+ * @param {String} method 请求方法，默认get
+ */
+function aosJsonp(urlname, param, callback, method) {
+    var callbackName = aosJsonpName + (++callbackId);
+    method = method || 'get';
+    window[callbackName] = function (res) {
+        callback(res);
+    };
+    var serverAddress = webview.isPublic() ? '//wb.amap.com/channel.php' : '//wb.testing.amap.com/channel.php';
+    var scriptUrl = location.protocol + serverAddress + '?aoscommon=1&callback=' +
+        callbackName + '&urlname=' + encodeURIComponent(urlname) +
+        '&param=' + encodeURIComponent(JSON.stringify(param)) + '&method=' + method;
+    util.addScript(scriptUrl, jsonpComplete, function (script) {
+        window[callbackName]({content: {code: -2}});
+        jsonpComplete(script);
+    });
+    
+    function jsonpComplete(script) {
+        script.remove();
+        window[callbackName] = undefined;
+    }
+}
+
+
+module.exports = {
+    load: function () {
+        aosrequest.apply(this, arguments);
+    },
+    aosJsonp: function () {
+        aosJsonp.apply(this, arguments);
+    },
+    jsonp: function (url, params, handler) {
+        aosJsonp.call(this, url, params, handler, 'get');
+    },
+    get: function (url, params, handler, progress) {
+        aosrequest.call(this, url, params, handler, progress, true, 'get');
+    },
+    post: function (url, params, handler, progress) {
+        aosrequest.call(this, url, params, handler, progress, true, 'post');
+    }
+};
+
+
+}).call(this,require("At5rgb"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/amap/loader.js","/amap")
+},{"../util/util":20,"../util/webview_info":21,"./bridge":5,"./dialog":6,"At5rgb":4,"buffer":1}],8:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+/**
+ * Created by qingye on 16/6/13.
+ */
+
+var Bridge = require('./bridge');
+var os = require('../util/os');
+var WebView = require('../util/webview_info');
+var Loader = require('./loader');
+var util = require('../util/util');
+
+
+/** @type {String} 日志url */
+var logServer = WebView.isPublic() ? location.protocol + '//oss.amap.com/ws/h5_log' :
+location.protocol + '//oss.testing.amap.com/ws/h5_log';
+
+
+var logApi = {
+    
+    PAGE_SOURCE_KEY: 'gd_from',
+    
+    LOG_TYPE_ONLINE_AND_OFFLINE: 0,  // 0: 默认,端内离线,端外在线
+    LOG_TYPE_ONLINE_CHART: 1, // 1. 端内离线&pv实时看板、端外在线 
+    
+    type: 0,//埋点方式
+    
+    /* 页面埋点通用参数 */
+    _commonParam: {
+        source: util.getUrlParam('gd_from') || '-'
+    }, 
+    
+    /**
+     * 增加日志通用参数.
+     * 调用此方法后，本页面所有埋点都会自动添加此参数
+     * @param {Object} obj 如果为String类型，则表示page，否则按对应的键设置
+     */
+    addCommonParam: function (obj) {   
+        if (!WebView.isInAmap()) {
+            this._commonParam.os = os.ios ? 'ios' : 'and';
+            this._commonParam.plat = WebView.isInWeixin() ? 'wx' : (WebView.isInWeibo() ? 'wb' : '-');
+        }
+        
+        util.extend(this._commonParam, obj);   
+    },
+    
+    /**
+     * 初始化日志页面名称.
+     * 端外页面会自动拼接平台（Android|iOS）及来源
+     * @param {String} pageName 活动名称_页面名称
+     * @param {number} type 日志类型
+     */
+    initLog: function (pageName, type) { 
+        this.type = type || this.LOG_TYPE_ONLINE_AND_OFFLINE; 
+        this.addCommonParam({page: pageName});
+    },
+    /**
+     * 记录日志.
+     * 端内记录离线日志，端外记录在线日志
+     * @see _formatLogParam
+     */
+    log: function (click, otherInfo) { 
+        if (WebView.isInAmap()) {//端内埋离线
+            var param = this._formatLogParam(click, otherInfo); 
+            Bridge.send({
+                action: 'logUserAction',
+                pageid: '1000',
+                buttonid: 1,
+                para: JSON.stringify(param)
+            });
+        } else {
+            this.browserLog(click, otherInfo);
+        }
+        if (this.type == this.LOG_TYPE_ONLINE_CHART&&click=='pv') {//type=1且为pv时候要埋实时看板
+            this.nativeOnlineLog(click+'_online', otherInfo);
+        }
+    },
+    
+    /**
+     * 端外在线实时日志.
+     */
+    browserLog: function (click, otherInfo) {
+        new Image().src = this._formatLogUrl(click, otherInfo);
+    },
+    /**
+     * 端内在线实时日志.
+     * 日志包含客户端信息的通用参数
+     */
+    nativeOnlineLog: function (click, otherInfo) {
+        var url = this._formatLogUrl(click, otherInfo);
+        Loader.get(url, [
+            {id: this._commonParam.page, sign: 1},
+            {timestamp: (new Date()).getTime() / 1000, sign: 1}
+        ], function () {
+        }, 0, 0, 'get');
+    },
+    /**
+     * 埋点参数转换为对象格式.
+     * 两个参数不能同时缺省
+     * @param {String} [click] click值
+     * @param {Object} [otherInfo] 其它参数
+     * @return {Object} 合并后的键值对象
+     */
+    _formatLogParam: function (click, otherInfo) {
+        var param = {}; 
+        util.extend(param, this._commonParam); 
+        if (typeof click === 'string') {
+            if (otherInfo) {
+                util.extend(param, otherInfo);
+            }
+            param.click = click;
+        }
+        else {
+            util.extend(param, click);
+        }
+        return param;
+    },
+    /**
+     * 将日志参数处理为完整的日志url.
+     * @return {String}
+     */
+    _formatLogUrl: function (click, otherInfo) {
+        var param = this._formatLogParam(click, otherInfo);
+        // param.key = param.page;
+        // param.value = param.click;
+        return logServer + '?t=' + Math.random() +
+            '&' + this._serializeParam(param);
+    },
+    /**
+     * 序列化对象为url参数形式.
+     * @param {Object} param 只有一层的对象
+     * @return {String} 序列化后的字符串
+     */
+    _serializeParam: function (param) {
+        var str = '';
+        for (var key in param) {
+            var value = param[key];
+            if (value !== undefined) {
+                str += '&' + key + '=' +
+                    ( value == null ? '' : encodeURIComponent(value) );
+            }
+        }
+        return str.substr(1);
+    },
+    /**
+     * 记录日志并延迟执行跳转.
+     * 因为记录日志为网络请求，如果记录日志后立即进行页面跳转可能造成记录失败，
+     * 对于记录日志后发生跳转的问题，对跳转进行延迟处理
+     * @param {String|Function} url 跳转的url或执行的方法
+     */
+    logJump: function (url, click, otherInfo) {
+        this.log(click, otherInfo);
+        setTimeout(function () {
+            if (typeof url === 'function') {
+                url();
+            }
+            else {
+                Tools.locationRedirect(url);
+            }
+        }, 200);
+    }
+};
+
+module.exports = {
+    initLog: logApi.initLog.bind(logApi),
+    log: logApi.log.bind(logApi),
+    logJump: logApi.logJump.bind(logApi),
+    nativeOnlineLog:logApi.nativeOnlineLog.bind(logApi)
+};
+}).call(this,require("At5rgb"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/amap/log.js","/amap")
+},{"../util/os":19,"../util/util":20,"../util/webview_info":21,"./bridge":5,"./loader":7,"At5rgb":4,"buffer":1}],9:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+/**
+ * Created by qingye on 17/2/6.
+ * 地图相关基本功能
+ */
+
+var Bridge = require('./bridge');
+var os = require('../util/os');
+
+var native = {
+    /**
+     * 获取高德地图的基本信息.
+     * @param {Function} handler 回调函数
+     */
+    getAppInfo: function (handler) {
+        Bridge.send({action: 'getExtraUrl'}, function (res) {
+            if (res && res.div) {
+                res._div = res.div.match(/\d+/);
+                res._div = res._div && res._div.toString().replace(/^0+/, '') * 1;
+            }
+            handler(res);
+        });
+    },
+
+    /**
+     * 比较地图版本号
+     * @params     testdiv 需判断的版本号，如772版本请传'070702'
+     * @params     handler 回调方法，使用如下
+     * AmapApp.Native.compareDiv('070702', function(res){
+     *   if(res){
+     *      //当前版本大于等于772版本
+     *   }else{       
+     *   } 
+     * })
+     */
+    compareDiv: function (testdiv, handler) {
+        this.getAppInfo(function (res) {
+            var comp_res = false;
+            if (res && res.div) {
+                comp_res = (Math.floor(res.div.substr(5, 5)) - Math.floor(testdiv)) >= 0;
+            }
+            handler(comp_res);
+        });
+
+    },
+    /**
+     * 获取用户id.
+     * 获取用户id.
+     * @param {Function} handler 回调函数。
+     *    参数为对象，如果其属性 userid 为空则登录失败||未登录，否则登录成功||已登录
+     * @param {Boolean} [默认onlyGetId=false] 可选，是否只获取id，false的话用户未登录时就会自动跳转登录面板
+     * @param {Boolean} [默认needRelogin=false] 可选，是否强制重新登录
+     */
+    getUserId: function (handler, onlyGetId, needRelogin) {
+        var param = {
+            action: 'getAmapUserId'
+        };
+        param.onlyGetId = onlyGetId ? '1' : '0';
+        param.needRelogin = needRelogin ? '1' : '0';
+        Bridge.send(param, handler);
+    },
+    /**
+     * 登陆并绑定相关账号.
+     * @param {Function} handler 回调函数。
+     --返回值{参数为对象}：
+     userid－－－－－String－－－－－用户id
+     phone －－－－－String－－－－－用户绑定的手机号
+     taobao－－－－－String－－－－－淘宝账号
+     tid   －－－－－String－－－－－阿里统一id
+     * @param {string} type[默认type=0] 要绑定的账号类型，0为手机号，1为淘宝账号
+     *使用如下：AmapApp.util.loginBind(function(res){
+            //res.userid 已登陆返回该用户userid
+            //res.phone  已绑定手机号返回相应手机号phone
+      })
+     */
+    loginBind: function (handler, type) {
+        type = type ? type : 0;
+        var param = {
+            action: 'loginBind',
+            type: type ? 'taobao' : 'phone'
+        };
+        Bridge.send(param, handler);
+    },
+    /**解绑用户的账号绑定信息，如手机、支付宝等
+     注意：接口只清除客户端的绑定状态，不涉及网络端数据登陆并绑定相关账号.
+     * @param {Array} unbundling   要解绑的账号列表["phone", "taobao", "alipay", "weixin", "qq", "weibo", "email"]
+     * @param {Function} handler 回调方法
+     *使用如下：
+     AmapApp.Native.userUnbundling(["phone","taobao"］,function(){
+                //解绑后回调
+            })
+     */
+    userUnbundling: function (mArray, handler) {
+        if (!mArray || mArray.length == 0) {
+            return;
+        }
+        var param = {
+            action: 'userUnbundling',
+            unbundling: mArray
+        };
+        Bridge.send(param, handler);
+    },
+    /**
+     * 获取当前用户位置：城市，经纬度.
+     * @param {Function} handler 回调方法
+     */
+    getMapLocation: function (handler) {
+        var param = {
+            action: 'getMapLocation',
+            forceReturnValue: '1'
+        };
+        Bridge.send(param, handler);
+    },
+    /**
+     * 打开poi页面.
+     * @param {Object} poiInfo poi的基础信息
+     * @param {Boolean} [status=false] 状态，默认打开tips形式，值为true时直接打开poi详情
+     * @param {String|Integer} status 打开的状态
+     *    0 或缺省打开主图显示tip样式
+     *    1 直接打开poi详情页
+     *    3 打开待tip的主图，但是poi必须为当前poi，用于poi详情页面地址栏点击
+     * @param {String} module 打开酒店详情时此值需要为'hotel'
+     */
+    openPoi: function (poiInfo, status, module) {
+        var obj = {
+            action: 'openPoi',
+            poiInfo: poiInfo
+        };
+        if (status) {
+            obj.status = status + '';
+        }
+        if (module) {
+            obj.module = module;
+        }
+        Bridge.send(obj);
+    },
+    /**
+     * 执行路线规划.
+     * @param {Object} start 起始poi点
+     * @param {Object} end 结束poi点
+     */
+    searchRoute: function (start, end) {
+        var param = {
+            action: 'searchRoute'
+        };
+        if (start) {
+            param.startPoi = start;
+        }
+        if (end) {
+            param.endPoi = end;
+        }
+        Bridge.send(param);
+    },
+    /**
+     * 设置title.
+     * @param {String} title 标题内容
+     */
+    setWebViewTitle: function (title) {
+        if (os.ios) {
+            Bridge.send({
+                action: 'setWebViewTitle',
+                title: title
+            });
+        }
+        document.title = title;
+    },
+    /**
+     * 通过指定schema到客户端页面
+     * @param {String} ios ios schema
+     * @param {String} and and schema
+     * 如果ios、and通用则只传一个参数即可
+     * 常用schema：https://lark.alipay.com/activity/wiki/schema
+     */
+    loadSchema: function (ios, and) {
+        if (!ios) {
+            return;
+        }
+        try {
+            var music = document.getElementsByTagName('audio')[0];
+            music.pause();
+        } catch (e) {
+
+        }
+
+        if (os.ios) {
+            var doc = document,
+                schemaIframe = doc.getElementById('loadSchemaIframe');
+            // 不存在时创建iframe
+            if (!schemaIframe) {
+                schemaIframe = doc.createElement('iframe');
+                schemaIframe.id = 'loadSchemaIframe';
+                schemaIframe.style.cssText = 'display:none;width:0px;height:0px';
+                doc.body.appendChild(schemaIframe);
+            }
+            schemaIframe.src = ios;
+        } else {
+            and = and ? and : ios;
+            Bridge.send({
+                action: 'loadSchema',
+                url: and
+            });
+        }
+    },
+    /**
+     * 调起客户端的分享面板.
+     * @param {Array.<Object>} content 分享内容
+     *    数组元素属性说明：
+     *    shareType 788+分享类型： 0图文＋链接；1仅图片；2仅文字。默认0,目前只支持微信与钉钉。
+     *    type 分享渠道： weixin 微信好友，pengyou 微信朋友圈，weibo 新浪微博
+     *    url 分享的 url
+     *    title 分享信息的标题，type=weibo时不需要
+     *    message 分享信息的内容，type=pengyou时不需要
+     *    imgUrl 分享信息显示的图片，微信朋友圈建议使用80*80，微博使用300*300的图片
+     *    注：数组长度小于3时，将不显示对应的渠道按钮
+     * @param {Function} handler(res) 分享后的回调。
+     *     参数类型为对象， 属性 type 为用户选择的分享渠道
+     AmapApp.Native.share([
+     {
+         "type"    : "weibo",
+         "title"   : "标题",
+         "url"     : "http://www.autonavi.com/",
+         "imgUrl"  : "图片地址"
+     }, {
+            "type"    : "weixin",
+            "shareType": "0",
+            "title"   : "标题",
+            "message" : "内容",
+            "url"     : "http://www.autonavi.com/",
+        }], function(res){
+            //分享成功回调
+            //该回调在780及以上点击各渠道触发，780以下点击分享即触发。
+        })
+     *   详细使用说明：http://gitlab.alibaba-inc.com/amap-h5/home/wikis/native-api-client#share
+     */
+    share: function (content, handler, hide) {
+        var param = {
+            action: 'share',
+            urlType: 1,
+            useCustomUrl: '1',
+            content: content,
+            loadDirectly: content.length === 1 ? '1' : '0'
+        };
+        if (hide) {
+            param.hideLinkCopyBtn = 1;
+            param.hideMoreBtn = 1;
+        }
+
+        //回调函数整理
+        this.compareDiv('070800', function (high) {
+            if (high) {
+                param.callbackcase = 1;
+                Bridge.send(param, function (res) {
+                    setTimeout(function () {
+                        handler && handler(res)
+                    }, 600);
+                });
+            } else {
+                Bridge.send(param);
+                setTimeout(function () {
+                    handler && handler(null)
+                }, 600);
+            }
+        });
+    },
+    /**
+     * 关闭当前webview（ios端有bug：不会触发上一个webview的pageshow，改用webviewgoback）
+     * @param handler
+     */
+    closeCurretnWebview: function (handler) {
+        Bridge.send({
+            action: 'closeCurrentWebview'
+        }, handler);
+    },
+    /*
+     打开第三方h5页面
+     * @param url 第三方h5页面
+     * @param name loading的第三方h5页面名称（高德地图正在带你去{name}）
+     * @param time loading时长，默认1500ms，为0时直接进入无loading动画
+     * @param handler
+     */
+    openAppUrl: function (url, name, time, handler) {
+        Bridge.send({
+            action: 'openAppUrl',
+            wapUrl: url,
+            appName: name,
+            loadingTime: time ? time : '1500'
+        }, handler);
+    },
+    /**
+     * 注册titlebar右侧按钮
+     －－安卓离开页面时需要再次调用且‘text传空’去掉此按钮，否则有bug
+     * @param type
+     * @param text
+     * @param handler
+     */
+    registRightButton: function (type, text, handler) {
+        var action = os.ios ? 'registRightButton' : 'registRightButtonNew';
+        Bridge.send({
+            action: action,
+            type: type,
+            buttonText: text,
+            function: {
+                'action': 'jsCallBack'
+            }
+        }, handler);
+    },
+    /**
+     * 注销titlebar右侧按钮
+     －－安卓上跳转其他页面之前，需要调用此方法去掉titlebar右上角btn，否则有bug
+     * @param type
+     * @param text
+     * @param handler
+     */
+    destroyRightButton: function (handler) {
+        var action = os.ios ? 'registRightButton' : 'registRightButtonNew';
+        Bridge.send({
+            action: action,
+            type: "",
+            buttonText: "",
+            function: {
+                'action': 'jsCallBack'
+            }
+        }, handler);
+    },
+    /**
+     * 使用XXTEA方式加密（ent2）
+     * @param text[string] 必传，待加密字符串
+     * @handler(res) 加密成功后的回调,res加密后的串
+     */
+    xxEncode: function (text, handler) {
+        Bridge.send({
+            action: 'xxEncode',
+            text: text ? text : ''
+        }, function (res) {
+            handler && handler(res.result.in)
+        });
+    },
+    /**
+     * 使用XXTEA方式解密
+     * @param  text[string] 必传，待解密字符串
+     * @handler(res) 解密成功后的回调,res解密后的串
+     */
+    xxDecode: function (text, handler) {
+        Bridge.send({
+            action: 'xxDecode',
+            text: text ? text : ''
+        }, function (res) {
+            handler && handler(res.result.de)
+        });
+    },
+    /**
+     * 关闭默认 'X'按钮
+     * @param  ishidden[boolean] 是否隐藏关闭按钮，默认显示
+     */
+    setWebViewCloseBtn: function (ishidden) {
+        Bridge.send({
+            'action': 'setWebViewCloseBtn',
+            'hidden': ishidden ? true : false,
+        });
+    },
+    /**
+     * 客户端回退
+     * @param  step[number] 回退步数，默认为1（回退多步有bug）
+     */
+    webviewGoBack: function (step) {
+        step ? step : 1;
+        Bridge.send({
+            action: 'webviewGoBack',
+            step: step
+        }, function (res) {
+        });
+    },
+    getDeviceParamString: function (params, delimiting, encypt, handler) {
+        Bridge.send({
+            'action': 'getDeviceParamString',
+            'params': params,
+            'delimiting': delimiting,
+            'encypt': encypt
+        }, function (res) {
+            handler(res);
+        });
+    }
+};
+
+module.exports = native;
+}).call(this,require("At5rgb"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/amap/native.js","/amap")
+},{"../util/os":19,"./bridge":5,"At5rgb":4,"buffer":1}],10:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+/**
+ * Created by qingye on 17/2/9.
+ * 请勿手动修改此问题
+ */
+
+// 是否调试模式
+var debug = true;
+ 
+ 
+module.exports = {
+    debug: debug
+};
+
+}).call(this,require("At5rgb"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/config/_ini.js","/config")
+},{"At5rgb":4,"buffer":1}],11:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+/**
+ * Created by qingye on 17/2/13.
+ * 活动各种名称配置文件, 需要用户手动配置
+ */
+module.exports = {
+    logname:'2017golf',//埋点名称&活动名称
+    aosname:'volkswagen',//aos链接名称
+    activity:'volkswagen',//aos通用模块活动名称
+};
+
+}).call(this,require("At5rgb"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/config/config.act.js","/config")
+},{"At5rgb":4,"buffer":1}],12:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+/**
+ * Created by qingye on 17/2/13.
+ * URL配置文件, 需要用户手动配置
+ */
+var ini = require('./_ini');
+var LINKURL = {};  // output
+var linkURL = {  
+    //我的奖品,AmapApp.util.goAward()
+    awardlist: {
+        test: '//group.testing.amap.com/public/activity/common/page/awardlist.html',
+        public: '//cache.amap.com/activity/common/page/awardlist.html'
+    },
+    //编辑地址,AmapApp.util.goAddr()
+    editaddr: {
+        test: '//group.testing.amap.com/public/activity/common/page/editaddr.html',
+        public: '//cache.amap.com/activity/common/page/editaddr.html'
+    },
+    //金币商城,AmapApp.util.pageJump(AmapApp.LINKURL.goldcoin+'?gd_from='+AmapApp.ACTNAME)
+    goldcoin:{
+        test: '//group.testing.amap.com/public/goldcoin/index.html',
+        public: '//wap.amap.com/goldcoin/index.html'
+    },
+    //功能结束模块化弹窗跳转链接
+    acturl:{
+        test: '//group.testing.amap.com/public/activity/2017NewGold/page/index.html',
+        public: '//cache.amap.com/activity/2017NewGold/page/index.html'
+    }
+};
+
+var ONLINE_HOST = location.protocol + '//wap.amap.com';
+var DEBUG_HOST = location.protocol + '//group.testing.amap.com/public';
+var HOST = ini.debug ? DEBUG_HOST : ONLINE_HOST;
+for (var k in linkURL) {
+    if (linkURL[k].test) {
+        LINKURL[k] = location.protocol + (ini.debug ? linkURL[k].test : linkURL[k].public)
+    } else {
+        LINKURL[k] = HOST + '/' + linkURL[k];
+    }
+}
+
+
+module.exports = LINKURL;
+
+}).call(this,require("At5rgb"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/config/config.url.js","/config")
+},{"./_ini":10,"At5rgb":4,"buffer":1}],13:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+/**
+ * Created by hyr111276 on 2017/11/13.
+ */
+var log = require('./amap/log');
+var Bridge = require('./amap/bridge');
+var Native = require('./amap/native');
+var Loader = require('./amap/loader');
+var util = require('./util/util');
+var os  = require('./util/os');
+var webview = require('./util/webview_info');
+var locat = require('./util/locat');
+var openAmap = require('./util/openAmap');
+var login = require('./util/needBind');
+util.extend(util, openAmap);
+util.extend(util, locat);
+util.extend(util, webview);
+util.extend(util, login);
+util.os = os;
+
+var thirdCommon = {
+    ready: Bridge.ready,
+    //广州交警获取tid+token
+    getParams: function (handler) {
+        var tid = 0x20;
+        var token = 0x40;
+        var params = tid | token;
+        Native.getDeviceParamString(params, '@AMAP@', true, function (res) {
+            var value = res.value;
+            handler(value);
+        })
+    },
+    addPhoto: function (businessName, titleText, maxLength, onlyCamera, cb) {
+        Bridge.send({
+            "action": "addPhoto",
+            "businessName": businessName,
+            "titleText": titleText,
+            "maxLength": maxLength,
+            "onlyCamera": onlyCamera //(是否直接调起摄像头拍照 （7.7.8+支持）),
+        }, function (base64) {
+            var value = base64.imgbase64;
+            cb(value);
+        });
+    },
+    /**
+     * 获取用户id.
+     * 获取用户id.
+     * @param {Function} handler 回调函数。
+     *    参数为对象，如果其属性 userid 为空则登录失败||未登录，否则登录成功||已登录
+     * @param {Boolean} [默认onlyGetId=false] 可选，是否只获取id，false的话用户未登录时就会自动跳转登录面板
+     * @param {Boolean} [默认needRelogin=false] 可选，是否强制重新登录
+     */
+    getUserID: function (handler, onlyGetId, needRelogin) {
+        Native.getUserId(function (userInfo) {
+            handler(userInfo.userid);
+        }, onlyGetId, needRelogin)
+    },
+    //获取日历
+    freshRoomData: function () {
+        Bridge.send({
+            "action": "openHotelCalendar",
+            "type": "scenic",
+            "date": "2017-11-29"
+        }, function (obj) {
+            alert(obj.date);
+        });
+    },
+    //openApp
+    openApp: function () {
+        util.openApp.apply(util, arguments);
+    },
+    /**
+     * 调起客户端的分享面板.
+     *
+     * @param {Array.<Object>} content 分享内容
+     *    数组元素属性说明：
+     *    type 分享渠道： weixin 微信好友，pengyou 微信朋友圈，weibo 新浪微博
+     *    url 分享的 url
+     *    title 分享信息的标题，type=weibo时不需要
+     *    message 分享信息的内容，type=pengyou时不需要
+     *    imgUrl 分享信息显示的图片，微信朋友圈建议使用80*80，微博使用300*300的图片
+     *    示例：
+     *    [
+     *      {type: 'weixin', title: '分享标题', message: '分享内容', url: 'http://a.com', imgUrl: 'http://b.jpg'},
+     *      {type: 'pengyou', title: '分享信息', url: 'http://a.com', imgUrl: 'http://b.jpg'},
+     *      {type: 'weibo', message: '分享信息', url: 'http://a.com', imgUrl: 'http://b.jpg'}
+     *    ]
+     *    注：数组长度小于3时，将不显示对应的渠道按钮
+     * @param {Function} handler 分享后的回调。
+     *   参数类型未对象， 属性 type 为用户选择的分享渠道，
+     *   属性result=ok 时表示分享成功
+     *   注：分享成功后未点击回到高德地图时 result 为 fail
+     */
+    share: function(content, handler) {
+        Bridge.send({
+            action       : 'share',
+            urlType      : '1',
+            useCustomUrl : '1',
+            content      : content,
+            loadDirectly : 0,//只有1个时候传1，非1个传0
+            hideLinkCopyBtn: 0,
+            hideMoreBtn: 0
+        }, handler);
+    },
+    Log: log,
+    util: util,
+    Native: Native,
+    Loader: Loader,
+    Bridge:Bridge,
+
+};
+
+window.AmapApp = thirdCommon;
+
+module.exports = thirdCommon;
+}).call(this,require("At5rgb"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_6b0d9f4c.js","/")
+},{"./amap/bridge":5,"./amap/loader":7,"./amap/log":8,"./amap/native":9,"./util/locat":16,"./util/needBind":17,"./util/openAmap":18,"./util/os":19,"./util/util":20,"./util/webview_info":21,"At5rgb":4,"buffer":1}],14:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+/** 
+ *  HOW TO USE:
+ *  require('./lib/msgbox'); 
+    $.MsgBox({
+        content: '提示文案',
+        tips:'小字提示文案',
+        cancelLabel: '取消按钮文案/点击后关闭弹窗',
+        cancelFn: function () {
+            //取消按钮点击回调
+        },
+        okLabel: '确定按钮文案/点击后关闭弹窗',
+        okFn: function () {
+            //确定按钮点击回调
+        },
+        shareLabel: '分享按钮文案/点击后不关闭弹窗',
+        shareFn: function () {
+            //分享按钮点击回调
+        }, 
+        hasClose: false //默认没有关闭按钮
+        
+    });
+ */
+var $ = require('./zepto');
+var $layer = $('.layer');
+
+
+var MsgBox = {
+
+    init: function() { 
+        this.$element = $('<div id="msgbox" class="msgbox-container"></div>');
+        this.appendDom();
+        this.bindEvent();
+    },
+
+    appendDom: function() { 
+        $(document.body).append(this.$element);
+        if (!$layer.length) {
+            $layer = $('<div class="layer"></div>'); 
+            $(document.body).append($layer);
+            $layer.on('touchmove', false);
+        } 
+    },
+
+    bindEvent: function() {
+        var me = this; 
+        this.$element.on('click', '[data-click-type=ok]', function() {
+            me.hide();
+            me.options.okFn && me.options.okFn.call(me);
+        });
+        this.$element.on('click', '[data-click-type=cancel]', function() {
+            me.hide();
+            me.options.cancelFn && me.options.cancelFn.call(me);
+        });
+        this.$element.on('click', '[data-click-type=close]', function() {
+            me.hide();
+            me.options.closeFn && me.options.closeFn.call(me);
+        });
+        this.$element.on('click', '[data-click-type=share]', function() {
+            me.options.shareFn && me.options.shareFn.call(me);
+        });
+    },
+
+    show: function(opts) {
+        var html = '';
+        this.options = opts;
+        if (!this.$element) {
+            this.init();
+        }
+        if (opts.title) {
+            html += '<header><h3>' + opts.title + '</h3></header>'
+        }
+        if (opts.content) {
+            html += '<div class="msgbox-body">' + opts.content + '</div>';
+        }
+        html += '<footer>';
+        if (opts.shareLabel) {
+            html += '<div class="msgbox-btn" data-click-type="share"><div>' + opts.shareLabel + '</div></div>';
+        }
+        if (opts.cancelLabel) {
+            html += '<div class="msgbox-btn" data-click-type="cancel"><div>' + opts.cancelLabel + '</div></div>';
+        }
+        if (opts.okLabel) {
+            html += '<div class="msgbox-btn" data-click-type="ok"><div>' + opts.okLabel + '</div></div>';
+        }
+        html += '</footer>';
+        if (opts.tips) {
+            html += '<div class="mstips"><div>' + opts.tips + '</div>';
+        } 
+        if (opts.hasClose) { 
+            html += '<div class="closebtn" data-click-type="close"></div>';
+        }
+        this.$element.html(html);
+        $layer.css('display', 'block');
+        this.$element.css('display', 'block');
+    },
+
+    hide: function() {
+        this.$element.hide();
+        $layer.hide();
+    }
+
+};
+
+var opts = {
+    title: '',
+    content: 'message body',
+    okLabel: '',
+    cancelLabel: '',
+    shareLabel: '',
+    okFn: function() {},
+    cancelFn: function() {},
+    shareFn: function() {},
+    hasClose: false //默认没有关闭按钮
+};
+
+$.MsgBox = function(_opts) { 
+    MsgBox.show($.extend({}, opts, _opts)); 
+}; 
+
+// module.exports = new MsgBox();
+}).call(this,require("At5rgb"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lib/msgbox.js","/lib")
+},{"./zepto":15,"At5rgb":4,"buffer":1}],15:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+/* Zepto v1.2.0 - zepto event ajax form ie - zeptojs.com/license */
+// (function(global, factory) {
+//   if (typeof define === 'function' && define.amd)
+//     define(function() { return factory(global) })
+//   else
+//     factory(global)
+// }(this, function(window) {
+var Zepto = (function() {
+    var undefined, key, $, classList, emptyArray = [], concat = emptyArray.concat, filter = emptyArray.filter, slice = emptyArray.slice,
+        document = window.document,
+        elementDisplay = {}, classCache = {},
+        cssNumber = { 'column-count': 1, 'columns': 1, 'font-weight': 1, 'line-height': 1,'opacity': 1, 'z-index': 1, 'zoom': 1 },
+        fragmentRE = /^\s*<(\w+|!)[^>]*>/,
+        singleTagRE = /^<(\w+)\s*\/?>(?:<\/\1>|)$/,
+        tagExpanderRE = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/ig,
+        rootNodeRE = /^(?:body|html)$/i,
+        capitalRE = /([A-Z])/g,
+        
+        // special attributes that should be get/set via method calls
+        methodAttributes = ['val', 'css', 'html', 'text', 'data', 'width', 'height', 'offset'],
+        
+        adjacencyOperators = [ 'after', 'prepend', 'before', 'append' ],
+        table = document.createElement('table'),
+        tableRow = document.createElement('tr'),
+        containers = {
+            'tr': document.createElement('tbody'),
+            'tbody': table, 'thead': table, 'tfoot': table,
+            'td': tableRow, 'th': tableRow,
+            '*': document.createElement('div')
+        },
+        readyRE = /complete|loaded|interactive/,
+        simpleSelectorRE = /^[\w-]*$/,
+        class2type = {},
+        toString = class2type.toString,
+        zepto = {},
+        camelize, uniq,
+        tempParent = document.createElement('div'),
+        propMap = {
+            'tabindex': 'tabIndex',
+            'readonly': 'readOnly',
+            'for': 'htmlFor',
+            'class': 'className',
+            'maxlength': 'maxLength',
+            'cellspacing': 'cellSpacing',
+            'cellpadding': 'cellPadding',
+            'rowspan': 'rowSpan',
+            'colspan': 'colSpan',
+            'usemap': 'useMap',
+            'frameborder': 'frameBorder',
+            'contenteditable': 'contentEditable'
+        },
+        isArray = Array.isArray ||
+            function(object){ return object instanceof Array }
+    
+    zepto.matches = function(element, selector) {
+        if (!selector || !element || element.nodeType !== 1) return false
+        var matchesSelector = element.matches || element.webkitMatchesSelector ||
+            element.mozMatchesSelector || element.oMatchesSelector ||
+            element.matchesSelector
+        if (matchesSelector) return matchesSelector.call(element, selector)
+        // fall back to performing a selector:
+        var match, parent = element.parentNode, temp = !parent
+        if (temp) (parent = tempParent).appendChild(element)
+        match = ~zepto.qsa(parent, selector).indexOf(element)
+        temp && tempParent.removeChild(element)
+        return match
+    }
+    
+    function type(obj) {
+        return obj == null ? String(obj) :
+        class2type[toString.call(obj)] || "object"
+    }
+    
+    function isFunction(value) { return type(value) == "function" }
+    function isWindow(obj)     { return obj != null && obj == obj.window }
+    function isDocument(obj)   { return obj != null && obj.nodeType == obj.DOCUMENT_NODE }
+    function isObject(obj)     { return type(obj) == "object" }
+    function isPlainObject(obj) {
+        return isObject(obj) && !isWindow(obj) && Object.getPrototypeOf(obj) == Object.prototype
+    }
+    
+    function likeArray(obj) {
+        var length = !!obj && 'length' in obj && obj.length,
+            type = $.type(obj)
+        
+        return 'function' != type && !isWindow(obj) && (
+                'array' == type || length === 0 ||
+                (typeof length == 'number' && length > 0 && (length - 1) in obj)
+            )
+    }
+    
+    function compact(array) { return filter.call(array, function(item){ return item != null }) }
+    function flatten(array) { return array.length > 0 ? $.fn.concat.apply([], array) : array }
+    camelize = function(str){ return str.replace(/-+(.)?/g, function(match, chr){ return chr ? chr.toUpperCase() : '' }) }
+    function dasherize(str) {
+        return str.replace(/::/g, '/')
+            .replace(/([A-Z]+)([A-Z][a-z])/g, '$1_$2')
+            .replace(/([a-z\d])([A-Z])/g, '$1_$2')
+            .replace(/_/g, '-')
+            .toLowerCase()
+    }
+    uniq = function(array){ return filter.call(array, function(item, idx){ return array.indexOf(item) == idx }) }
+    
+    function classRE(name) {
+        return name in classCache ?
+            classCache[name] : (classCache[name] = new RegExp('(^|\\s)' + name + '(\\s|$)'))
+    }
+    
+    function maybeAddPx(name, value) {
+        return (typeof value == "number" && !cssNumber[dasherize(name)]) ? value + "px" : value
+    }
+    
+    function defaultDisplay(nodeName) {
+        var element, display
+        if (!elementDisplay[nodeName]) {
+            element = document.createElement(nodeName)
+            document.body.appendChild(element)
+            display = getComputedStyle(element, '').getPropertyValue("display")
+            element.parentNode.removeChild(element)
+            display == "none" && (display = "block")
+            elementDisplay[nodeName] = display
+        }
+        return elementDisplay[nodeName]
+    }
+    
+    function children(element) {
+        return 'children' in element ?
+            slice.call(element.children) :
+            $.map(element.childNodes, function(node){ if (node.nodeType == 1) return node })
+    }
+    
+    function Z(dom, selector) {
+        var i, len = dom ? dom.length : 0
+        for (i = 0; i < len; i++) this[i] = dom[i]
+        this.length = len
+        this.selector = selector || ''
+    }
+    
+    // `$.zepto.fragment` takes a html string and an optional tag name
+    // to generate DOM nodes from the given html string.
+    // The generated DOM nodes are returned as an array.
+    // This function can be overridden in plugins for example to make
+    // it compatible with browsers that don't support the DOM fully.
+    zepto.fragment = function(html, name, properties) {
+        var dom, nodes, container
+        
+        // A special case optimization for a single tag
+        if (singleTagRE.test(html)) dom = $(document.createElement(RegExp.$1))
+        
+        if (!dom) {
+            if (html.replace) html = html.replace(tagExpanderRE, "<$1></$2>")
+            if (name === undefined) name = fragmentRE.test(html) && RegExp.$1
+            if (!(name in containers)) name = '*'
+            
+            container = containers[name]
+            container.innerHTML = '' + html
+            dom = $.each(slice.call(container.childNodes), function(){
+                container.removeChild(this)
+            })
+        }
+        
+        if (isPlainObject(properties)) {
+            nodes = $(dom)
+            $.each(properties, function(key, value) {
+                if (methodAttributes.indexOf(key) > -1) nodes[key](value)
+                else nodes.attr(key, value)
+            })
+        }
+        
+        return dom
+    }
+    
+    // `$.zepto.Z` swaps out the prototype of the given `dom` array
+    // of nodes with `$.fn` and thus supplying all the Zepto functions
+    // to the array. This method can be overridden in plugins.
+    zepto.Z = function(dom, selector) {
+        return new Z(dom, selector)
+    }
+    
+    // `$.zepto.isZ` should return `true` if the given object is a Zepto
+    // collection. This method can be overridden in plugins.
+    zepto.isZ = function(object) {
+        return object instanceof zepto.Z
+    }
+    
+    // `$.zepto.init` is Zepto's counterpart to jQuery's `$.fn.init` and
+    // takes a CSS selector and an optional context (and handles various
+    // special cases).
+    // This method can be overridden in plugins.
+    zepto.init = function(selector, context) {
+        var dom
+        // If nothing given, return an empty Zepto collection
+        if (!selector) return zepto.Z()
+        // Optimize for string selectors
+        else if (typeof selector == 'string') {
+            selector = selector.trim()
+            // If it's a html fragment, create nodes from it
+            // Note: In both Chrome 21 and Firefox 15, DOM error 12
+            // is thrown if the fragment doesn't begin with <
+            if (selector[0] == '<' && fragmentRE.test(selector))
+                dom = zepto.fragment(selector, RegExp.$1, context), selector = null
+            // If there's a context, create a collection on that context first, and select
+            // nodes from there
+            else if (context !== undefined) return $(context).find(selector)
+            // If it's a CSS selector, use it to select nodes.
+            else dom = zepto.qsa(document, selector)
+        }
+        // If a function is given, call it when the DOM is ready
+        else if (isFunction(selector)) return $(document).ready(selector)
+        // If a Zepto collection is given, just return it
+        else if (zepto.isZ(selector)) return selector
+        else {
+            // normalize array if an array of nodes is given
+            if (isArray(selector)) dom = compact(selector)
+            // Wrap DOM nodes.
+            else if (isObject(selector))
+                dom = [selector], selector = null
+            // If it's a html fragment, create nodes from it
+            else if (fragmentRE.test(selector))
+                dom = zepto.fragment(selector.trim(), RegExp.$1, context), selector = null
+            // If there's a context, create a collection on that context first, and select
+            // nodes from there
+            else if (context !== undefined) return $(context).find(selector)
+            // And last but no least, if it's a CSS selector, use it to select nodes.
+            else dom = zepto.qsa(document, selector)
+        }
+        // create a new Zepto collection from the nodes found
+        return zepto.Z(dom, selector)
+    }
+    
+    // `$` will be the base `Zepto` object. When calling this
+    // function just call `$.zepto.init, which makes the implementation
+    // details of selecting nodes and creating Zepto collections
+    // patchable in plugins.
+    $ = function(selector, context){
+        return zepto.init(selector, context)
+    }
+    
+    function extend(target, source, deep) {
+        for (key in source)
+            if (deep && (isPlainObject(source[key]) || isArray(source[key]))) {
+                if (isPlainObject(source[key]) && !isPlainObject(target[key]))
+                    target[key] = {}
+                if (isArray(source[key]) && !isArray(target[key]))
+                    target[key] = []
+                extend(target[key], source[key], deep)
+            }
+            else if (source[key] !== undefined) target[key] = source[key]
+    }
+    
+    // Copy all but undefined properties from one or more
+    // objects to the `target` object.
+    $.extend = function(target){
+        var deep, args = slice.call(arguments, 1)
+        if (typeof target == 'boolean') {
+            deep = target
+            target = args.shift()
+        }
+        args.forEach(function(arg){ extend(target, arg, deep) })
+        return target
+    }
+    
+    // `$.zepto.qsa` is Zepto's CSS selector implementation which
+    // uses `document.querySelectorAll` and optimizes for some special cases, like `#id`.
+    // This method can be overridden in plugins.
+    zepto.qsa = function(element, selector){
+        var found,
+            maybeID = selector[0] == '#',
+            maybeClass = !maybeID && selector[0] == '.',
+            nameOnly = maybeID || maybeClass ? selector.slice(1) : selector, // Ensure that a 1 char tag name still gets checked
+            isSimple = simpleSelectorRE.test(nameOnly)
+        return (element.getElementById && isSimple && maybeID) ? // Safari DocumentFragment doesn't have getElementById
+            ( (found = element.getElementById(nameOnly)) ? [found] : [] ) :
+            (element.nodeType !== 1 && element.nodeType !== 9 && element.nodeType !== 11) ? [] :
+                slice.call(
+                    isSimple && !maybeID && element.getElementsByClassName ? // DocumentFragment doesn't have getElementsByClassName/TagName
+                        maybeClass ? element.getElementsByClassName(nameOnly) : // If it's simple, it could be a class
+                            element.getElementsByTagName(selector) : // Or a tag
+                        element.querySelectorAll(selector) // Or it's not simple, and we need to query all
+                )
+    }
+    
+    function filtered(nodes, selector) {
+        return selector == null ? $(nodes) : $(nodes).filter(selector)
+    }
+    
+    $.contains = document.documentElement.contains ?
+        function(parent, node) {
+            return parent !== node && parent.contains(node)
+        } :
+        function(parent, node) {
+            while (node && (node = node.parentNode))
+                if (node === parent) return true
+            return false
+        }
+    
+    function funcArg(context, arg, idx, payload) {
+        return isFunction(arg) ? arg.call(context, idx, payload) : arg
+    }
+    
+    function setAttribute(node, name, value) {
+        value == null ? node.removeAttribute(name) : node.setAttribute(name, value)
+    }
+    
+    // access className property while respecting SVGAnimatedString
+    function className(node, value){
+        var klass = node.className || '',
+            svg   = klass && klass.baseVal !== undefined
+        
+        if (value === undefined) return svg ? klass.baseVal : klass
+        svg ? (klass.baseVal = value) : (node.className = value)
+    }
+    
+    // "true"  => true
+    // "false" => false
+    // "null"  => null
+    // "42"    => 42
+    // "42.5"  => 42.5
+    // "08"    => "08"
+    // JSON    => parse if valid
+    // String  => self
+    function deserializeValue(value) {
+        try {
+            return value ?
+            value == "true" ||
+            ( value == "false" ? false :
+                value == "null" ? null :
+                    +value + "" == value ? +value :
+                        /^[\[\{]/.test(value) ? $.parseJSON(value) :
+                            value )
+                : value
+        } catch(e) {
+            return value
+        }
+    }
+    
+    $.type = type
+    $.isFunction = isFunction
+    $.isWindow = isWindow
+    $.isArray = isArray
+    $.isPlainObject = isPlainObject
+    
+    $.isEmptyObject = function(obj) {
+        var name
+        for (name in obj) return false
+        return true
+    }
+    
+    $.isNumeric = function(val) {
+        var num = Number(val), type = typeof val
+        return val != null && type != 'boolean' &&
+            (type != 'string' || val.length) &&
+            !isNaN(num) && isFinite(num) || false
+    }
+    
+    $.inArray = function(elem, array, i){
+        return emptyArray.indexOf.call(array, elem, i)
+    }
+    
+    $.camelCase = camelize
+    $.trim = function(str) {
+        return str == null ? "" : String.prototype.trim.call(str)
+    }
+    
+    // plugin compatibility
+    $.uuid = 0
+    $.support = { }
+    $.expr = { }
+    $.noop = function() {}
+    
+    $.map = function(elements, callback){
+        var value, values = [], i, key
+        if (likeArray(elements))
+            for (i = 0; i < elements.length; i++) {
+                value = callback(elements[i], i)
+                if (value != null) values.push(value)
+            }
+        else
+            for (key in elements) {
+                value = callback(elements[key], key)
+                if (value != null) values.push(value)
+            }
+        return flatten(values)
+    }
+    
+    $.each = function(elements, callback){
+        var i, key
+        if (likeArray(elements)) {
+            for (i = 0; i < elements.length; i++)
+                if (callback.call(elements[i], i, elements[i]) === false) return elements
+        } else {
+            for (key in elements)
+                if (callback.call(elements[key], key, elements[key]) === false) return elements
+        }
+        
+        return elements
+    }
+    
+    $.grep = function(elements, callback){
+        return filter.call(elements, callback)
+    }
+    
+    if (window.JSON) $.parseJSON = JSON.parse
+    
+    // Populate the class2type map
+    $.each("Boolean Number String Function Array Date RegExp Object Error".split(" "), function(i, name) {
+        class2type[ "[object " + name + "]" ] = name.toLowerCase()
+    })
+    
+    // Define methods that will be available on all
+    // Zepto collections
+    $.fn = {
+        constructor: zepto.Z,
+        length: 0,
+        
+        // Because a collection acts like an array
+        // copy over these useful array functions.
+        forEach: emptyArray.forEach,
+        reduce: emptyArray.reduce,
+        push: emptyArray.push,
+        sort: emptyArray.sort,
+        splice: emptyArray.splice,
+        indexOf: emptyArray.indexOf,
+        concat: function(){
+            var i, value, args = []
+            for (i = 0; i < arguments.length; i++) {
+                value = arguments[i]
+                args[i] = zepto.isZ(value) ? value.toArray() : value
+            }
+            return concat.apply(zepto.isZ(this) ? this.toArray() : this, args)
+        },
+        
+        // `map` and `slice` in the jQuery API work differently
+        // from their array counterparts
+        map: function(fn){
+            return $($.map(this, function(el, i){ return fn.call(el, i, el) }))
+        },
+        slice: function(){
+            return $(slice.apply(this, arguments))
+        },
+        
+        ready: function(callback){
+            // need to check if document.body exists for IE as that browser reports
+            // document ready when it hasn't yet created the body element
+            if (readyRE.test(document.readyState) && document.body) callback($)
+            else document.addEventListener('DOMContentLoaded', function(){ callback($) }, false)
+            return this
+        },
+        get: function(idx){
+            return idx === undefined ? slice.call(this) : this[idx >= 0 ? idx : idx + this.length]
+        },
+        toArray: function(){ return this.get() },
+        size: function(){
+            return this.length
+        },
+        remove: function(){
+            return this.each(function(){
+                if (this.parentNode != null)
+                    this.parentNode.removeChild(this)
+            })
+        },
+        each: function(callback){
+            emptyArray.every.call(this, function(el, idx){
+                return callback.call(el, idx, el) !== false
+            })
+            return this
+        },
+        filter: function(selector){
+            if (isFunction(selector)) return this.not(this.not(selector))
+            return $(filter.call(this, function(element){
+                return zepto.matches(element, selector)
+            }))
+        },
+        add: function(selector,context){
+            return $(uniq(this.concat($(selector,context))))
+        },
+        is: function(selector){
+            return this.length > 0 && zepto.matches(this[0], selector)
+        },
+        not: function(selector){
+            var nodes=[]
+            if (isFunction(selector) && selector.call !== undefined)
+                this.each(function(idx){
+                    if (!selector.call(this,idx)) nodes.push(this)
+                })
+            else {
+                var excludes = typeof selector == 'string' ? this.filter(selector) :
+                    (likeArray(selector) && isFunction(selector.item)) ? slice.call(selector) : $(selector)
+                this.forEach(function(el){
+                    if (excludes.indexOf(el) < 0) nodes.push(el)
+                })
+            }
+            return $(nodes)
+        },
+        has: function(selector){
+            return this.filter(function(){
+                return isObject(selector) ?
+                    $.contains(this, selector) :
+                    $(this).find(selector).size()
+            })
+        },
+        eq: function(idx){
+            return idx === -1 ? this.slice(idx) : this.slice(idx, + idx + 1)
+        },
+        first: function(){
+            var el = this[0]
+            return el && !isObject(el) ? el : $(el)
+        },
+        last: function(){
+            var el = this[this.length - 1]
+            return el && !isObject(el) ? el : $(el)
+        },
+        find: function(selector){
+            var result, $this = this
+            if (!selector) result = $()
+            else if (typeof selector == 'object')
+                result = $(selector).filter(function(){
+                    var node = this
+                    return emptyArray.some.call($this, function(parent){
+                        return $.contains(parent, node)
+                    })
+                })
+            else if (this.length == 1) result = $(zepto.qsa(this[0], selector))
+            else result = this.map(function(){ return zepto.qsa(this, selector) })
+            return result
+        },
+        closest: function(selector, context){
+            var nodes = [], collection = typeof selector == 'object' && $(selector)
+            this.each(function(_, node){
+                while (node && !(collection ? collection.indexOf(node) >= 0 : zepto.matches(node, selector)))
+                    node = node !== context && !isDocument(node) && node.parentNode
+                if (node && nodes.indexOf(node) < 0) nodes.push(node)
+            })
+            return $(nodes)
+        },
+        parents: function(selector){
+            var ancestors = [], nodes = this
+            while (nodes.length > 0)
+                nodes = $.map(nodes, function(node){
+                    if ((node = node.parentNode) && !isDocument(node) && ancestors.indexOf(node) < 0) {
+                        ancestors.push(node)
+                        return node
+                    }
+                })
+            return filtered(ancestors, selector)
+        },
+        parent: function(selector){
+            return filtered(uniq(this.pluck('parentNode')), selector)
+        },
+        children: function(selector){
+            return filtered(this.map(function(){ return children(this) }), selector)
+        },
+        contents: function() {
+            return this.map(function() { return this.contentDocument || slice.call(this.childNodes) })
+        },
+        siblings: function(selector){
+            return filtered(this.map(function(i, el){
+                return filter.call(children(el.parentNode), function(child){ return child!==el })
+            }), selector)
+        },
+        empty: function(){
+            return this.each(function(){ this.innerHTML = '' })
+        },
+        // `pluck` is borrowed from Prototype.js
+        pluck: function(property){
+            return $.map(this, function(el){ return el[property] })
+        },
+        show: function(){
+            return this.each(function(){
+                this.style.display == "none" && (this.style.display = '')
+                if (getComputedStyle(this, '').getPropertyValue("display") == "none")
+                    this.style.display = defaultDisplay(this.nodeName)
+            })
+        },
+        replaceWith: function(newContent){
+            return this.before(newContent).remove()
+        },
+        wrap: function(structure){
+            var func = isFunction(structure)
+            if (this[0] && !func)
+                var dom   = $(structure).get(0),
+                    clone = dom.parentNode || this.length > 1
+            
+            return this.each(function(index){
+                $(this).wrapAll(
+                    func ? structure.call(this, index) :
+                        clone ? dom.cloneNode(true) : dom
+                )
+            })
+        },
+        wrapAll: function(structure){
+            if (this[0]) {
+                $(this[0]).before(structure = $(structure))
+                var children
+                // drill down to the inmost element
+                while ((children = structure.children()).length) structure = children.first()
+                $(structure).append(this)
+            }
+            return this
+        },
+        wrapInner: function(structure){
+            var func = isFunction(structure)
+            return this.each(function(index){
+                var self = $(this), contents = self.contents(),
+                    dom  = func ? structure.call(this, index) : structure
+                contents.length ? contents.wrapAll(dom) : self.append(dom)
+            })
+        },
+        unwrap: function(){
+            this.parent().each(function(){
+                $(this).replaceWith($(this).children())
+            })
+            return this
+        },
+        clone: function(){
+            return this.map(function(){ return this.cloneNode(true) })
+        },
+        hide: function(){
+            return this.css("display", "none")
+        },
+        toggle: function(setting){
+            return this.each(function(){
+                var el = $(this)
+                    ;(setting === undefined ? el.css("display") == "none" : setting) ? el.show() : el.hide()
+            })
+        },
+        prev: function(selector){ return $(this.pluck('previousElementSibling')).filter(selector || '*') },
+        next: function(selector){ return $(this.pluck('nextElementSibling')).filter(selector || '*') },
+        html: function(html){
+            return 0 in arguments ?
+                this.each(function(idx){
+                    var originHtml = this.innerHTML
+                    $(this).empty().append( funcArg(this, html, idx, originHtml) )
+                }) :
+                (0 in this ? this[0].innerHTML : null)
+        },
+        text: function(text){
+            return 0 in arguments ?
+                this.each(function(idx){
+                    var newText = funcArg(this, text, idx, this.textContent)
+                    this.textContent = newText == null ? '' : ''+newText
+                }) :
+                (0 in this ? this.pluck('textContent').join("") : null)
+        },
+        attr: function(name, value){
+            var result
+            return (typeof name == 'string' && !(1 in arguments)) ?
+                (0 in this && this[0].nodeType == 1 && (result = this[0].getAttribute(name)) != null ? result : undefined) :
+                this.each(function(idx){
+                    if (this.nodeType !== 1) return
+                    if (isObject(name)) for (key in name) setAttribute(this, key, name[key])
+                    else setAttribute(this, name, funcArg(this, value, idx, this.getAttribute(name)))
+                })
+        },
+        removeAttr: function(name){
+            return this.each(function(){ this.nodeType === 1 && name.split(' ').forEach(function(attribute){
+                setAttribute(this, attribute)
+            }, this)})
+        },
+        prop: function(name, value){
+            name = propMap[name] || name
+            return (1 in arguments) ?
+                this.each(function(idx){
+                    this[name] = funcArg(this, value, idx, this[name])
+                }) :
+                (this[0] && this[0][name])
+        },
+        removeProp: function(name){
+            name = propMap[name] || name
+            return this.each(function(){ delete this[name] })
+        },
+        data: function(name, value){
+            var attrName = 'data-' + name.replace(capitalRE, '-$1').toLowerCase()
+            
+            var data = (1 in arguments) ?
+                this.attr(attrName, value) :
+                this.attr(attrName)
+            
+            return data !== null ? deserializeValue(data) : undefined
+        },
+        val: function(value){
+            if (0 in arguments) {
+                if (value == null) value = ""
+                return this.each(function(idx){
+                    this.value = funcArg(this, value, idx, this.value)
+                })
+            } else {
+                return this[0] && (this[0].multiple ?
+                        $(this[0]).find('option').filter(function(){ return this.selected }).pluck('value') :
+                        this[0].value)
+            }
+        },
+        offset: function(coordinates){
+            if (coordinates) return this.each(function(index){
+                var $this = $(this),
+                    coords = funcArg(this, coordinates, index, $this.offset()),
+                    parentOffset = $this.offsetParent().offset(),
+                    props = {
+                        top:  coords.top  - parentOffset.top,
+                        left: coords.left - parentOffset.left
+                    }
+                
+                if ($this.css('position') == 'static') props['position'] = 'relative'
+                $this.css(props)
+            })
+            if (!this.length) return null
+            if (document.documentElement !== this[0] && !$.contains(document.documentElement, this[0]))
+                return {top: 0, left: 0}
+            var obj = this[0].getBoundingClientRect()
+            return {
+                left: obj.left + window.pageXOffset,
+                top: obj.top + window.pageYOffset,
+                width: Math.round(obj.width),
+                height: Math.round(obj.height)
+            }
+        },
+        css: function(property, value){
+            if (arguments.length < 2) {
+                var element = this[0]
+                if (typeof property == 'string') {
+                    if (!element) return
+                    return element.style[camelize(property)] || getComputedStyle(element, '').getPropertyValue(property)
+                } else if (isArray(property)) {
+                    if (!element) return
+                    var props = {}
+                    var computedStyle = getComputedStyle(element, '')
+                    $.each(property, function(_, prop){
+                        props[prop] = (element.style[camelize(prop)] || computedStyle.getPropertyValue(prop))
+                    })
+                    return props
+                }
+            }
+            
+            var css = ''
+            if (type(property) == 'string') {
+                if (!value && value !== 0)
+                    this.each(function(){ this.style.removeProperty(dasherize(property)) })
+                else
+                    css = dasherize(property) + ":" + maybeAddPx(property, value)
+            } else {
+                for (key in property)
+                    if (!property[key] && property[key] !== 0)
+                        this.each(function(){ this.style.removeProperty(dasherize(key)) })
+                    else
+                        css += dasherize(key) + ':' + maybeAddPx(key, property[key]) + ';'
+            }
+            
+            return this.each(function(){ this.style.cssText += ';' + css })
+        },
+        index: function(element){
+            return element ? this.indexOf($(element)[0]) : this.parent().children().indexOf(this[0])
+        },
+        hasClass: function(name){
+            if (!name) return false
+            return emptyArray.some.call(this, function(el){
+                return this.test(className(el))
+            }, classRE(name))
+        },
+        addClass: function(name){
+            if (!name) return this
+            return this.each(function(idx){
+                if (!('className' in this)) return
+                classList = []
+                var cls = className(this), newName = funcArg(this, name, idx, cls)
+                newName.split(/\s+/g).forEach(function(klass){
+                    if (!$(this).hasClass(klass)) classList.push(klass)
+                }, this)
+                classList.length && className(this, cls + (cls ? " " : "") + classList.join(" "))
+            })
+        },
+        removeClass: function(name){
+            return this.each(function(idx){
+                if (!('className' in this)) return
+                if (name === undefined) return className(this, '')
+                classList = className(this)
+                funcArg(this, name, idx, classList).split(/\s+/g).forEach(function(klass){
+                    classList = classList.replace(classRE(klass), " ")
+                })
+                className(this, classList.trim())
+            })
+        },
+        toggleClass: function(name, when){
+            if (!name) return this
+            return this.each(function(idx){
+                var $this = $(this), names = funcArg(this, name, idx, className(this))
+                names.split(/\s+/g).forEach(function(klass){
+                    (when === undefined ? !$this.hasClass(klass) : when) ?
+                        $this.addClass(klass) : $this.removeClass(klass)
+                })
+            })
+        },
+        scrollTop: function(value){
+            if (!this.length) return
+            var hasScrollTop = 'scrollTop' in this[0]
+            if (value === undefined) return hasScrollTop ? this[0].scrollTop : this[0].pageYOffset
+            return this.each(hasScrollTop ?
+                function(){ this.scrollTop = value } :
+                function(){ this.scrollTo(this.scrollX, value) })
+        },
+        scrollLeft: function(value){
+            if (!this.length) return
+            var hasScrollLeft = 'scrollLeft' in this[0]
+            if (value === undefined) return hasScrollLeft ? this[0].scrollLeft : this[0].pageXOffset
+            return this.each(hasScrollLeft ?
+                function(){ this.scrollLeft = value } :
+                function(){ this.scrollTo(value, this.scrollY) })
+        },
+        position: function() {
+            if (!this.length) return
+            
+            var elem = this[0],
+                // Get *real* offsetParent
+                offsetParent = this.offsetParent(),
+                // Get correct offsets
+                offset       = this.offset(),
+                parentOffset = rootNodeRE.test(offsetParent[0].nodeName) ? { top: 0, left: 0 } : offsetParent.offset()
+            
+            // Subtract element margins
+            // note: when an element has margin: auto the offsetLeft and marginLeft
+            // are the same in Safari causing offset.left to incorrectly be 0
+            offset.top  -= parseFloat( $(elem).css('margin-top') ) || 0
+            offset.left -= parseFloat( $(elem).css('margin-left') ) || 0
+            
+            // Add offsetParent borders
+            parentOffset.top  += parseFloat( $(offsetParent[0]).css('border-top-width') ) || 0
+            parentOffset.left += parseFloat( $(offsetParent[0]).css('border-left-width') ) || 0
+            
+            // Subtract the two offsets
+            return {
+                top:  offset.top  - parentOffset.top,
+                left: offset.left - parentOffset.left
+            }
+        },
+        offsetParent: function() {
+            return this.map(function(){
+                var parent = this.offsetParent || document.body
+                while (parent && !rootNodeRE.test(parent.nodeName) && $(parent).css("position") == "static")
+                    parent = parent.offsetParent
+                return parent
+            })
+        }
+    }
+    
+    // for now
+    $.fn.detach = $.fn.remove
+    
+    // Generate the `width` and `height` functions
+    ;['width', 'height'].forEach(function(dimension){
+        var dimensionProperty =
+            dimension.replace(/./, function(m){ return m[0].toUpperCase() })
+        
+        $.fn[dimension] = function(value){
+            var offset, el = this[0]
+            if (value === undefined) return isWindow(el) ? el['inner' + dimensionProperty] :
+                isDocument(el) ? el.documentElement['scroll' + dimensionProperty] :
+                (offset = this.offset()) && offset[dimension]
+            else return this.each(function(idx){
+                el = $(this)
+                el.css(dimension, funcArg(this, value, idx, el[dimension]()))
+            })
+        }
+    })
+    
+    function traverseNode(node, fun) {
+        fun(node)
+        for (var i = 0, len = node.childNodes.length; i < len; i++)
+            traverseNode(node.childNodes[i], fun)
+    }
+    
+    // Generate the `after`, `prepend`, `before`, `append`,
+    // `insertAfter`, `insertBefore`, `appendTo`, and `prependTo` methods.
+    adjacencyOperators.forEach(function(operator, operatorIndex) {
+        var inside = operatorIndex % 2 //=> prepend, append
+        
+        $.fn[operator] = function(){
+            // arguments can be nodes, arrays of nodes, Zepto objects and HTML strings
+            var argType, nodes = $.map(arguments, function(arg) {
+                    var arr = []
+                    argType = type(arg)
+                    if (argType == "array") {
+                        arg.forEach(function(el) {
+                            if (el.nodeType !== undefined) return arr.push(el)
+                            else if ($.zepto.isZ(el)) return arr = arr.concat(el.get())
+                            arr = arr.concat(zepto.fragment(el))
+                        })
+                        return arr
+                    }
+                    return argType == "object" || arg == null ?
+                        arg : zepto.fragment(arg)
+                }),
+                parent, copyByClone = this.length > 1
+            if (nodes.length < 1) return this
+            
+            return this.each(function(_, target){
+                parent = inside ? target : target.parentNode
+                
+                // convert all methods to a "before" operation
+                target = operatorIndex == 0 ? target.nextSibling :
+                    operatorIndex == 1 ? target.firstChild :
+                        operatorIndex == 2 ? target :
+                            null
+                
+                var parentInDocument = $.contains(document.documentElement, parent)
+                
+                nodes.forEach(function(node){
+                    if (copyByClone) node = node.cloneNode(true)
+                    else if (!parent) return $(node).remove()
+                    
+                    parent.insertBefore(node, target)
+                    if (parentInDocument) traverseNode(node, function(el){
+                        if (el.nodeName != null && el.nodeName.toUpperCase() === 'SCRIPT' &&
+                            (!el.type || el.type === 'text/javascript') && !el.src){
+                            var target = el.ownerDocument ? el.ownerDocument.defaultView : window
+                            target['eval'].call(target, el.innerHTML)
+                        }
+                    })
+                })
+            })
+        }
+        
+        // after    => insertAfter
+        // prepend  => prependTo
+        // before   => insertBefore
+        // append   => appendTo
+        $.fn[inside ? operator+'To' : 'insert'+(operatorIndex ? 'Before' : 'After')] = function(html){
+            $(html)[operator](this)
+            return this
+        }
+    })
+    
+    zepto.Z.prototype = Z.prototype = $.fn
+    
+    // Export internal API functions in the `$.zepto` namespace
+    zepto.uniq = uniq
+    zepto.deserializeValue = deserializeValue
+    $.zepto = zepto
+    
+    return $
+})()
+
+window.Zepto = Zepto
+window.$ === undefined && (window.$ = Zepto)
+
+;(function($){
+    var _zid = 1, undefined,
+        slice = Array.prototype.slice,
+        isFunction = $.isFunction,
+        isString = function(obj){ return typeof obj == 'string' },
+        handlers = {},
+        specialEvents={},
+        focusinSupported = 'onfocusin' in window,
+        focus = { focus: 'focusin', blur: 'focusout' },
+        hover = { mouseenter: 'mouseover', mouseleave: 'mouseout' }
+    
+    specialEvents.click = specialEvents.mousedown = specialEvents.mouseup = specialEvents.mousemove = 'MouseEvents'
+    
+    function zid(element) {
+        return element._zid || (element._zid = _zid++)
+    }
+    function findHandlers(element, event, fn, selector) {
+        event = parse(event)
+        if (event.ns) var matcher = matcherFor(event.ns)
+        return (handlers[zid(element)] || []).filter(function(handler) {
+            return handler
+                && (!event.e  || handler.e == event.e)
+                && (!event.ns || matcher.test(handler.ns))
+                && (!fn       || zid(handler.fn) === zid(fn))
+                && (!selector || handler.sel == selector)
+        })
+    }
+    function parse(event) {
+        var parts = ('' + event).split('.')
+        return {e: parts[0], ns: parts.slice(1).sort().join(' ')}
+    }
+    function matcherFor(ns) {
+        return new RegExp('(?:^| )' + ns.replace(' ', ' .* ?') + '(?: |$)')
+    }
+    
+    function eventCapture(handler, captureSetting) {
+        return handler.del &&
+            (!focusinSupported && (handler.e in focus)) ||
+            !!captureSetting
+    }
+    
+    function realEvent(type) {
+        return hover[type] || (focusinSupported && focus[type]) || type
+    }
+    
+    function add(element, events, fn, data, selector, delegator, capture){
+        var id = zid(element), set = (handlers[id] || (handlers[id] = []))
+        events.split(/\s/).forEach(function(event){
+            if (event == 'ready') return $(document).ready(fn)
+            var handler   = parse(event)
+            handler.fn    = fn
+            handler.sel   = selector
+            // emulate mouseenter, mouseleave
+            if (handler.e in hover) fn = function(e){
+                var related = e.relatedTarget
+                if (!related || (related !== this && !$.contains(this, related)))
+                    return handler.fn.apply(this, arguments)
+            }
+            handler.del   = delegator
+            var callback  = delegator || fn
+            handler.proxy = function(e){
+                e = compatible(e)
+                if (e.isImmediatePropagationStopped()) return
+                e.data = data
+                var result = callback.apply(element, e._args == undefined ? [e] : [e].concat(e._args))
+                if (result === false) e.preventDefault(), e.stopPropagation()
+                return result
+            }
+            handler.i = set.length
+            set.push(handler)
+            if ('addEventListener' in element)
+                element.addEventListener(realEvent(handler.e), handler.proxy, eventCapture(handler, capture))
+        })
+    }
+    function remove(element, events, fn, selector, capture){
+        var id = zid(element)
+            ;(events || '').split(/\s/).forEach(function(event){
+            findHandlers(element, event, fn, selector).forEach(function(handler){
+                delete handlers[id][handler.i]
+                if ('removeEventListener' in element)
+                    element.removeEventListener(realEvent(handler.e), handler.proxy, eventCapture(handler, capture))
+            })
+        })
+    }
+    
+    $.event = { add: add, remove: remove }
+    
+    $.proxy = function(fn, context) {
+        var args = (2 in arguments) && slice.call(arguments, 2)
+        if (isFunction(fn)) {
+            var proxyFn = function(){ return fn.apply(context, args ? args.concat(slice.call(arguments)) : arguments) }
+            proxyFn._zid = zid(fn)
+            return proxyFn
+        } else if (isString(context)) {
+            if (args) {
+                args.unshift(fn[context], fn)
+                return $.proxy.apply(null, args)
+            } else {
+                return $.proxy(fn[context], fn)
+            }
+        } else {
+            throw new TypeError("expected function")
+        }
+    }
+    
+    $.fn.bind = function(event, data, callback){
+        return this.on(event, data, callback)
+    }
+    $.fn.unbind = function(event, callback){
+        return this.off(event, callback)
+    }
+    $.fn.one = function(event, selector, data, callback){
+        return this.on(event, selector, data, callback, 1)
+    }
+    
+    var returnTrue = function(){return true},
+        returnFalse = function(){return false},
+        ignoreProperties = /^([A-Z]|returnValue$|layer[XY]$|webkitMovement[XY]$)/,
+        eventMethods = {
+            preventDefault: 'isDefaultPrevented',
+            stopImmediatePropagation: 'isImmediatePropagationStopped',
+            stopPropagation: 'isPropagationStopped'
+        }
+    
+    function compatible(event, source) {
+        if (source || !event.isDefaultPrevented) {
+            source || (source = event)
+            
+            $.each(eventMethods, function(name, predicate) {
+                var sourceMethod = source[name]
+                event[name] = function(){
+                    this[predicate] = returnTrue
+                    return sourceMethod && sourceMethod.apply(source, arguments)
+                }
+                event[predicate] = returnFalse
+            })
+            
+            event.timeStamp || (event.timeStamp = Date.now())
+            
+            if (source.defaultPrevented !== undefined ? source.defaultPrevented :
+                    'returnValue' in source ? source.returnValue === false :
+                    source.getPreventDefault && source.getPreventDefault())
+                event.isDefaultPrevented = returnTrue
+        }
+        return event
+    }
+    
+    function createProxy(event) {
+        var key, proxy = { originalEvent: event }
+        for (key in event)
+            if (!ignoreProperties.test(key) && event[key] !== undefined) proxy[key] = event[key]
+        
+        return compatible(proxy, event)
+    }
+    
+    $.fn.delegate = function(selector, event, callback){
+        return this.on(event, selector, callback)
+    }
+    $.fn.undelegate = function(selector, event, callback){
+        return this.off(event, selector, callback)
+    }
+    
+    $.fn.live = function(event, callback){
+        $(document.body).delegate(this.selector, event, callback)
+        return this
+    }
+    $.fn.die = function(event, callback){
+        $(document.body).undelegate(this.selector, event, callback)
+        return this
+    }
+    
+    $.fn.on = function(event, selector, data, callback, one){
+        var autoRemove, delegator, $this = this
+        if (event && !isString(event)) {
+            $.each(event, function(type, fn){
+                $this.on(type, selector, data, fn, one)
+            })
+            return $this
+        }
+        
+        if (!isString(selector) && !isFunction(callback) && callback !== false)
+            callback = data, data = selector, selector = undefined
+        if (callback === undefined || data === false)
+            callback = data, data = undefined
+        
+        if (callback === false) callback = returnFalse
+        
+        return $this.each(function(_, element){
+            if (one) autoRemove = function(e){
+                remove(element, e.type, callback)
+                return callback.apply(this, arguments)
+            }
+            
+            if (selector) delegator = function(e){
+                var evt, match = $(e.target).closest(selector, element).get(0)
+                if (match && match !== element) {
+                    evt = $.extend(createProxy(e), {currentTarget: match, liveFired: element})
+                    return (autoRemove || callback).apply(match, [evt].concat(slice.call(arguments, 1)))
+                }
+            }
+            
+            add(element, event, callback, data, selector, delegator || autoRemove)
+        })
+    }
+    $.fn.off = function(event, selector, callback){
+        var $this = this
+        if (event && !isString(event)) {
+            $.each(event, function(type, fn){
+                $this.off(type, selector, fn)
+            })
+            return $this
+        }
+        
+        if (!isString(selector) && !isFunction(callback) && callback !== false)
+            callback = selector, selector = undefined
+        
+        if (callback === false) callback = returnFalse
+        
+        return $this.each(function(){
+            remove(this, event, callback, selector)
+        })
+    }
+    
+    $.fn.trigger = function(event, args){
+        event = (isString(event) || $.isPlainObject(event)) ? $.Event(event) : compatible(event)
+        event._args = args
+        return this.each(function(){
+            // handle focus(), blur() by calling them directly
+            if (event.type in focus && typeof this[event.type] == "function") this[event.type]()
+            // items in the collection might not be DOM elements
+            else if ('dispatchEvent' in this) this.dispatchEvent(event)
+            else $(this).triggerHandler(event, args)
+        })
+    }
+    
+    // triggers event handlers on current element just as if an event occurred,
+    // doesn't trigger an actual event, doesn't bubble
+    $.fn.triggerHandler = function(event, args){
+        var e, result
+        this.each(function(i, element){
+            e = createProxy(isString(event) ? $.Event(event) : event)
+            e._args = args
+            e.target = element
+            $.each(findHandlers(element, event.type || event), function(i, handler){
+                result = handler.proxy(e)
+                if (e.isImmediatePropagationStopped()) return false
+            })
+        })
+        return result
+    }
+    
+    // shortcut methods for `.bind(event, fn)` for each event type
+    ;('focusin focusout focus blur load resize scroll unload click dblclick '+
+    'mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave '+
+    'change select keydown keypress keyup error').split(' ').forEach(function(event) {
+        $.fn[event] = function(callback) {
+            return (0 in arguments) ?
+                this.bind(event, callback) :
+                this.trigger(event)
+        }
+    })
+    
+    $.Event = function(type, props) {
+        if (!isString(type)) props = type, type = props.type
+        var event = document.createEvent(specialEvents[type] || 'Events'), bubbles = true
+        if (props) for (var name in props) (name == 'bubbles') ? (bubbles = !!props[name]) : (event[name] = props[name])
+        event.initEvent(type, bubbles, true)
+        return compatible(event)
+    }
+    
+})(Zepto)
+
+;(function($){
+    var jsonpID = +new Date(),
+        document = window.document,
+        key,
+        name,
+        rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
+        scriptTypeRE = /^(?:text|application)\/javascript/i,
+        xmlTypeRE = /^(?:text|application)\/xml/i,
+        jsonType = 'application/json',
+        htmlType = 'text/html',
+        blankRE = /^\s*$/,
+        originAnchor = document.createElement('a')
+    
+    originAnchor.href = window.location.href
+    
+    // trigger a custom event and return false if it was cancelled
+    function triggerAndReturn(context, eventName, data) {
+        var event = $.Event(eventName)
+        $(context).trigger(event, data)
+        return !event.isDefaultPrevented()
+    }
+    
+    // trigger an Ajax "global" event
+    function triggerGlobal(settings, context, eventName, data) {
+        if (settings.global) return triggerAndReturn(context || document, eventName, data)
+    }
+    
+    // Number of active Ajax requests
+    $.active = 0
+    
+    function ajaxStart(settings) {
+        if (settings.global && $.active++ === 0) triggerGlobal(settings, null, 'ajaxStart')
+    }
+    function ajaxStop(settings) {
+        if (settings.global && !(--$.active)) triggerGlobal(settings, null, 'ajaxStop')
+    }
+    
+    // triggers an extra global event "ajaxBeforeSend" that's like "ajaxSend" but cancelable
+    function ajaxBeforeSend(xhr, settings) {
+        var context = settings.context
+        if (settings.beforeSend.call(context, xhr, settings) === false ||
+            triggerGlobal(settings, context, 'ajaxBeforeSend', [xhr, settings]) === false)
+            return false
+        
+        triggerGlobal(settings, context, 'ajaxSend', [xhr, settings])
+    }
+    function ajaxSuccess(data, xhr, settings, deferred) {
+        var context = settings.context, status = 'success'
+        settings.success.call(context, data, status, xhr)
+        if (deferred) deferred.resolveWith(context, [data, status, xhr])
+        triggerGlobal(settings, context, 'ajaxSuccess', [xhr, settings, data])
+        ajaxComplete(status, xhr, settings)
+    }
+    // type: "timeout", "error", "abort", "parsererror"
+    function ajaxError(error, type, xhr, settings, deferred) {
+        var context = settings.context
+        settings.error.call(context, xhr, type, error)
+        if (deferred) deferred.rejectWith(context, [xhr, type, error])
+        triggerGlobal(settings, context, 'ajaxError', [xhr, settings, error || type])
+        ajaxComplete(type, xhr, settings)
+    }
+    // status: "success", "notmodified", "error", "timeout", "abort", "parsererror"
+    function ajaxComplete(status, xhr, settings) {
+        var context = settings.context
+        settings.complete.call(context, xhr, status)
+        triggerGlobal(settings, context, 'ajaxComplete', [xhr, settings])
+        ajaxStop(settings)
+    }
+    
+    function ajaxDataFilter(data, type, settings) {
+        if (settings.dataFilter == empty) return data
+        var context = settings.context
+        return settings.dataFilter.call(context, data, type)
+    }
+    
+    // Empty function, used as default callback
+    function empty() {}
+    
+    $.ajaxJSONP = function(options, deferred){
+        if (!('type' in options)) return $.ajax(options)
+        
+        var _callbackName = options.jsonpCallback,
+            callbackName = ($.isFunction(_callbackName) ?
+                    _callbackName() : _callbackName) || ('Zepto' + (jsonpID++)),
+            script = document.createElement('script'),
+            originalCallback = window[callbackName],
+            responseData,
+            abort = function(errorType) {
+                $(script).triggerHandler('error', errorType || 'abort')
+            },
+            xhr = { abort: abort }, abortTimeout
+        
+        if (deferred) deferred.promise(xhr)
+        
+        $(script).on('load error', function(e, errorType){
+            clearTimeout(abortTimeout)
+            $(script).off().remove()
+            
+            if (e.type == 'error' || !responseData) {
+                ajaxError(null, errorType || 'error', xhr, options, deferred)
+            } else {
+                ajaxSuccess(responseData[0], xhr, options, deferred)
+            }
+            
+            window[callbackName] = originalCallback
+            if (responseData && $.isFunction(originalCallback))
+                originalCallback(responseData[0])
+            
+            originalCallback = responseData = undefined
+        })
+        
+        if (ajaxBeforeSend(xhr, options) === false) {
+            abort('abort')
+            return xhr
+        }
+        
+        window[callbackName] = function(){
+            responseData = arguments
+        }
+        
+        script.src = options.url.replace(/\?(.+)=\?/, '?$1=' + callbackName)
+        document.head.appendChild(script)
+        
+        if (options.timeout > 0) abortTimeout = setTimeout(function(){
+            abort('timeout')
+        }, options.timeout)
+        
+        return xhr
+    }
+    
+    $.ajaxSettings = {
+        // Default type of request
+        type: 'GET',
+        // Callback that is executed before request
+        beforeSend: empty,
+        // Callback that is executed if the request succeeds
+        success: empty,
+        // Callback that is executed the the server drops error
+        error: empty,
+        // Callback that is executed on request complete (both: error and success)
+        complete: empty,
+        // The context for the callbacks
+        context: null,
+        // Whether to trigger "global" Ajax events
+        global: true,
+        // Transport
+        xhr: function () {
+            return new window.XMLHttpRequest()
+        },
+        // MIME types mapping
+        // IIS returns Javascript as "application/x-javascript"
+        accepts: {
+            script: 'text/javascript, application/javascript, application/x-javascript',
+            json:   jsonType,
+            xml:    'application/xml, text/xml',
+            html:   htmlType,
+            text:   'text/plain'
+        },
+        // Whether the request is to another domain
+        crossDomain: false,
+        // Default timeout
+        timeout: 0,
+        // Whether data should be serialized to string
+        processData: true,
+        // Whether the browser should be allowed to cache GET responses
+        cache: true,
+        //Used to handle the raw response data of XMLHttpRequest.
+        //This is a pre-filtering function to sanitize the response.
+        //The sanitized response should be returned
+        dataFilter: empty
+    }
+    
+    function mimeToDataType(mime) {
+        if (mime) mime = mime.split(';', 2)[0]
+        return mime && ( mime == htmlType ? 'html' :
+                mime == jsonType ? 'json' :
+                    scriptTypeRE.test(mime) ? 'script' :
+                    xmlTypeRE.test(mime) && 'xml' ) || 'text'
+    }
+    
+    function appendQuery(url, query) {
+        if (query == '') return url
+        return (url + '&' + query).replace(/[&?]{1,2}/, '?')
+    }
+    
+    // serialize payload and append it to the URL for GET requests
+    function serializeData(options) {
+        if (options.processData && options.data && $.type(options.data) != "string")
+            options.data = $.param(options.data, options.traditional)
+        if (options.data && (!options.type || options.type.toUpperCase() == 'GET' || 'jsonp' == options.dataType))
+            options.url = appendQuery(options.url, options.data), options.data = undefined
+    }
+    
+    $.ajax = function(options){
+        var settings = $.extend({}, options || {}),
+            deferred = $.Deferred && $.Deferred(),
+            urlAnchor, hashIndex
+        for (key in $.ajaxSettings) if (settings[key] === undefined) settings[key] = $.ajaxSettings[key]
+        
+        ajaxStart(settings)
+        
+        if (!settings.crossDomain) {
+            urlAnchor = document.createElement('a')
+            urlAnchor.href = settings.url
+            // cleans up URL for .href (IE only), see https://github.com/madrobby/zepto/pull/1049
+            urlAnchor.href = urlAnchor.href
+            settings.crossDomain = (originAnchor.protocol + '//' + originAnchor.host) !== (urlAnchor.protocol + '//' + urlAnchor.host)
+        }
+        
+        if (!settings.url) settings.url = window.location.toString()
+        if ((hashIndex = settings.url.indexOf('#')) > -1) settings.url = settings.url.slice(0, hashIndex)
+        serializeData(settings)
+        
+        var dataType = settings.dataType, hasPlaceholder = /\?.+=\?/.test(settings.url)
+        if (hasPlaceholder) dataType = 'jsonp'
+        
+        if (settings.cache === false || (
+                (!options || options.cache !== true) &&
+                ('script' == dataType || 'jsonp' == dataType)
+            ))
+            settings.url = appendQuery(settings.url, '_=' + Date.now())
+        
+        if ('jsonp' == dataType) {
+            if (!hasPlaceholder)
+                settings.url = appendQuery(settings.url,
+                    settings.jsonp ? (settings.jsonp + '=?') : settings.jsonp === false ? '' : 'callback=?')
+            return $.ajaxJSONP(settings, deferred)
+        }
+        
+        var mime = settings.accepts[dataType],
+            headers = { },
+            setHeader = function(name, value) { headers[name.toLowerCase()] = [name, value] },
+            protocol = /^([\w-]+:)\/\//.test(settings.url) ? RegExp.$1 : window.location.protocol,
+            xhr = settings.xhr(),
+            nativeSetHeader = xhr.setRequestHeader,
+            abortTimeout
+        
+        if (deferred) deferred.promise(xhr)
+        
+        if (!settings.crossDomain) setHeader('X-Requested-With', 'XMLHttpRequest')
+        setHeader('Accept', mime || '*/*')
+        if (mime = settings.mimeType || mime) {
+            if (mime.indexOf(',') > -1) mime = mime.split(',', 2)[0]
+            xhr.overrideMimeType && xhr.overrideMimeType(mime)
+        }
+        if (settings.contentType || (settings.contentType !== false && settings.data && settings.type.toUpperCase() != 'GET'))
+            setHeader('Content-Type', settings.contentType || 'application/x-www-form-urlencoded')
+        
+        if (settings.headers) for (name in settings.headers) setHeader(name, settings.headers[name])
+        xhr.setRequestHeader = setHeader
+        
+        xhr.onreadystatechange = function(){
+            if (xhr.readyState == 4) {
+                xhr.onreadystatechange = empty
+                clearTimeout(abortTimeout)
+                var result, error = false
+                if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304 || (xhr.status == 0 && protocol == 'file:')) {
+                    dataType = dataType || mimeToDataType(settings.mimeType || xhr.getResponseHeader('content-type'))
+                    
+                    if (xhr.responseType == 'arraybuffer' || xhr.responseType == 'blob')
+                        result = xhr.response
+                    else {
+                        result = xhr.responseText
+                        
+                        try {
+                            // http://perfectionkills.com/global-eval-what-are-the-options/
+                            // sanitize response accordingly if data filter callback provided
+                            result = ajaxDataFilter(result, dataType, settings)
+                            if (dataType == 'script')    (1,eval)(result)
+                            else if (dataType == 'xml')  result = xhr.responseXML
+                            else if (dataType == 'json') result = blankRE.test(result) ? null : $.parseJSON(result)
+                        } catch (e) { error = e }
+                        
+                        if (error) return ajaxError(error, 'parsererror', xhr, settings, deferred)
+                    }
+                    
+                    ajaxSuccess(result, xhr, settings, deferred)
+                } else {
+                    ajaxError(xhr.statusText || null, xhr.status ? 'error' : 'abort', xhr, settings, deferred)
+                }
+            }
+        }
+        
+        if (ajaxBeforeSend(xhr, settings) === false) {
+            xhr.abort()
+            ajaxError(null, 'abort', xhr, settings, deferred)
+            return xhr
+        }
+        
+        var async = 'async' in settings ? settings.async : true
+        xhr.open(settings.type, settings.url, async, settings.username, settings.password)
+        
+        if (settings.xhrFields) for (name in settings.xhrFields) xhr[name] = settings.xhrFields[name]
+        
+        for (name in headers) nativeSetHeader.apply(xhr, headers[name])
+        
+        if (settings.timeout > 0) abortTimeout = setTimeout(function(){
+            xhr.onreadystatechange = empty
+            xhr.abort()
+            ajaxError(null, 'timeout', xhr, settings, deferred)
+        }, settings.timeout)
+        
+        // avoid sending empty string (#319)
+        xhr.send(settings.data ? settings.data : null)
+        return xhr
+    }
+    
+    // handle optional data/success arguments
+    function parseArguments(url, data, success, dataType) {
+        if ($.isFunction(data)) dataType = success, success = data, data = undefined
+        if (!$.isFunction(success)) dataType = success, success = undefined
+        return {
+            url: url
+            , data: data
+            , success: success
+            , dataType: dataType
+        }
+    }
+    
+    $.get = function(/* url, data, success, dataType */){
+        return $.ajax(parseArguments.apply(null, arguments))
+    }
+    
+    $.post = function(/* url, data, success, dataType */){
+        var options = parseArguments.apply(null, arguments)
+        options.type = 'POST'
+        return $.ajax(options)
+    }
+    
+    $.getJSON = function(/* url, data, success */){
+        var options = parseArguments.apply(null, arguments)
+        options.dataType = 'json'
+        return $.ajax(options)
+    }
+    
+    $.fn.load = function(url, data, success){
+        if (!this.length) return this
+        var self = this, parts = url.split(/\s/), selector,
+            options = parseArguments(url, data, success),
+            callback = options.success
+        if (parts.length > 1) options.url = parts[0], selector = parts[1]
+        options.success = function(response){
+            self.html(selector ?
+                $('<div>').html(response.replace(rscript, "")).find(selector)
+                : response)
+            callback && callback.apply(self, arguments)
+        }
+        $.ajax(options)
+        return this
+    }
+    
+    var escape = encodeURIComponent
+    
+    function serialize(params, obj, traditional, scope){
+        var type, array = $.isArray(obj), hash = $.isPlainObject(obj)
+        $.each(obj, function(key, value) {
+            type = $.type(value)
+            if (scope) key = traditional ? scope :
+            scope + '[' + (hash || type == 'object' || type == 'array' ? key : '') + ']'
+            // handle data in serializeArray() format
+            if (!scope && array) params.add(value.name, value.value)
+            // recurse into nested objects
+            else if (type == "array" || (!traditional && type == "object"))
+                serialize(params, value, traditional, key)
+            else params.add(key, value)
+        })
+    }
+    
+    $.param = function(obj, traditional){
+        var params = []
+        params.add = function(key, value) {
+            if ($.isFunction(value)) value = value()
+            if (value == null) value = ""
+            this.push(escape(key) + '=' + escape(value))
+        }
+        serialize(params, obj, traditional)
+        return params.join('&').replace(/%20/g, '+')
+    }
+})(Zepto)
+
+;(function($){
+    $.fn.serializeArray = function() {
+        var name, type, result = [],
+            add = function(value) {
+                if (value.forEach) return value.forEach(add)
+                result.push({ name: name, value: value })
+            }
+        if (this[0]) $.each(this[0].elements, function(_, field){
+            type = field.type, name = field.name
+            if (name && field.nodeName.toLowerCase() != 'fieldset' &&
+                !field.disabled && type != 'submit' && type != 'reset' && type != 'button' && type != 'file' &&
+                ((type != 'radio' && type != 'checkbox') || field.checked))
+                add($(field).val())
+        })
+        return result
+    }
+    
+    $.fn.serialize = function(){
+        var result = []
+        this.serializeArray().forEach(function(elm){
+            result.push(encodeURIComponent(elm.name) + '=' + encodeURIComponent(elm.value))
+        })
+        return result.join('&')
+    }
+    
+    $.fn.submit = function(callback) {
+        if (0 in arguments) this.bind('submit', callback)
+        else if (this.length) {
+            var event = $.Event('submit')
+            this.eq(0).trigger(event)
+            if (!event.isDefaultPrevented()) this.get(0).submit()
+        }
+        return this
+    }
+    
+})(Zepto)
+
+;(function(){
+    // getComputedStyle shouldn't freak out when called
+    // without a valid element as argument
+    try {
+        getComputedStyle(undefined)
+    } catch(e) {
+        var nativeGetComputedStyle = getComputedStyle
+        window.getComputedStyle = function(element, pseudoElement){
+            try {
+                return nativeGetComputedStyle(element, pseudoElement)
+            } catch(e) {
+                return null
+            }
+        }
+    }
+})()
+//   return Zepto
+// }))
+
+module.exports = Zepto;
+}).call(this,require("At5rgb"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/lib/zepto.js","/lib")
+},{"At5rgb":4,"buffer":1}],16:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+/**
+ * Created by cindy.wy on 17/3/4.
+ *
+ * 页面跳转相关工具方法
+ */
+var util = require('./util');
+var os = require('./os');
+var Log = require('../amap/log');
+var native = require('../amap/native');
+var link = require('../config/config.url');  
+var act = require('../config/config.act');
+
+var locat = {
+    /**
+     *模拟a标签跳转
+     *@param {string} url 要跳转的url
+     *@param {Boolean} isReplace 是否替换当前页
+     */
+    locationRedirect: function(url,isReplace) {
+        if (isReplace) {
+            this.locationReplace(url);
+        }
+        if (os.ios) {
+            var $lr = $("#locationRedirect"),
+                ev = document.createEvent('HTMLEvents');
+            ev.initEvent('click', false, true);
+            if ($lr.length) {
+                $lr.attr("href", url);
+            } else {
+                $lr = $('<a id="locationRedirect" href="' + url + '" style="display:none;"></a>');
+                $(document.body).append($lr);
+            }
+            $lr[0].dispatchEvent(ev);
+        } else {
+            window.location.href = url;
+        }
+    },
+    /**
+     * 修复iOS 9.0和9.1 下 replace后 再次跳转页面后调用back会回到前2个页面.
+     * @param {String} url replace 的url
+     */
+    locationReplace: function(url) {
+        if (os.ios && /^9\.[01]/.test(os.version)) {
+            history.replaceState({}, null, url);
+            location.reload();
+        } else {
+            location.replace(url);
+        }
+    },
+    /**
+     *  跳转页面（从历史记录）
+     *  @param {string} url 要跳转的url
+     *  @param {Boolean} isReplace 是否替换当前页
+     */
+    locationRedirectForHistory: function(url, isReplace) {
+        var _this = this; 
+        if (!os.ios) _this.setlocationHistory();
+        var locationHistory = _this.locationHistory;  
+        var step = 0;
+        var redirectName = url.match(/([\w\-]+)\.html(?:\?|\#|$)/);
+        if (!redirectName || redirectName[1] == locationHistory[locationHistory.length - 1]) {
+            if (isReplace) {
+                _this.locationReplace(url);
+            }
+            return false;
+        }
+        redirectName = redirectName[1];
+        for (var len = locationHistory.length, i = len - 2; i >= -1; i--) {
+            step++;
+            if (locationHistory[i] && redirectName == locationHistory[i].page) {
+                locationHistory.length = i + 1;
+                sessionStorage.setItem(_this.StorageName, JSON.stringify(locationHistory));
+                break;
+            }
+        }
+        if (step < len) {
+            history.go(-step);
+        } else {
+            if (isReplace) {
+                var page = (location.pathname.match(/([^\/]+).html/)|| location.pathname.match(/([^\/]+).htm/) || ['','index'])[1];
+                if(!(page=='index'&&location.hash&&location.hash!='#/')){
+                    locationHistory.length -= 1;
+                    sessionStorage.setItem(_this.StorageName, JSON.stringify(locationHistory));
+                }
+                /*locationHistory.length -= 1;
+                sessionStorage.setItem(_this.StorageName, JSON.stringify(locationHistory));*/
+                _this.locationReplace(url);
+            } else {
+                _this.locationRedirect(url);
+            }
+        }
+    },
+    setlocationHistory: function() {
+        var _this = this;
+        var pageName = (_this.pathname.match(/\/([\w\-]+)\.html/) || _this.pathname.match(/\/([\w\-]+)\.htm/)) [1];
+        var locationHistory = _this.locationHistory;
+        for (var len = locationHistory.length, i = len - 1; i >= 0; i--) {
+            if (pageName == locationHistory[i].page) {
+                locationHistory.length = i;
+                break;
+            }
+        }
+        for (var len = locationHistory.length, i = 0; i < len; i++) {
+            locationHistory[i].isUpdate = true;
+        }
+        locationHistory.push({
+            page: pageName,
+            isUpdate: false
+        });
+        sessionStorage.setItem(_this.StorageName, JSON.stringify(locationHistory));
+    },
+    locationHistoryInit: function() {
+        //获取本地存储
+        var _this = this;
+        var pathname = location.pathname;
+        pathname.search(/[\w\-]+\.html/) < 0 && (pathname += 'index.html');
+        _this.pathname = pathname;
+        _this.StorageName = pathname.replace(/(page\/|\/)[\w\-]+\.html/, '').replace(/(^\/|\/$)/g, '').replace(/\//g, '_');
+        !_this.StorageName && (_this.StorageName = 'session_history');
+        if (!sessionStorage.getItem(_this.StorageName)) {
+            sessionStorage.setItem(_this.StorageName, JSON.stringify([]));
+        }
+        _this.locationHistory = JSON.parse(sessionStorage.getItem(_this.StorageName));
+        _this.setlocationHistory();
+        if (os.ios) {
+            function checkReplace() {
+                var pageName = (_this.pathname.match(/\/([\w\-]+)\.html/) || _this.pathname.match(/\/([\w\-]+)\.htm/)) [1];
+                _this.locationHistory = JSON.parse(sessionStorage.getItem(_this.StorageName));
+                var currentHistory = null;
+                for (var len = _this.locationHistory.length, i = len - 1; i >= 0; i--) {
+                    if (pageName == _this.locationHistory[i].page) {
+                        currentHistory = _this.locationHistory[i];
+                        if (currentHistory && currentHistory.isUpdate) {
+                            if(AmapApp.util.v_router&&AmapApp.util.v_router.currentRoute.name!='home'){
+                                AmapApp.util.v_router.back();
+                            }
+                            AmapApp.Log.log('pv');
+                            $(window).trigger("updateData");
+                        }
+                        _this.locationHistory.length = i;
+                        _this.locationHistory.push({
+                            page: pageName,
+                            isUpdate: false
+                        });
+                        sessionStorage.setItem(_this.StorageName, JSON.stringify(_this.locationHistory));
+                        break;
+                    }
+                }
+                requestAnimationFrame(checkReplace);
+            }
+            requestAnimationFrame(checkReplace);
+        }
+    },
+    /**
+     *  跳转页面
+     *  @param {string} url 要跳转的url
+     *  @param {Boolean} isReplace 是否替换当前页
+     */
+    pageJump:function(url, isReplace){
+        if(url.indexOf('//')!=-1){//绝对路径&非项目内地址不计入历史记录
+            locat.locationRedirect(url, isReplace);   
+        }else{
+            locat.locationRedirectForHistory(url, isReplace); 
+        }
+    },
+    /**
+     * [pageErr 接口错误跳error页面]
+     * @param  {String} url  [aos url地址||actionname]
+     * @param  {[type]} code [aos code||action出错则不传code]
+     * @param  {boolean} onlytip 是否仅弹窗提示不跳转[默认false]
+     */
+    pageError: function(url, code, onlytip) {
+        if(url.indexOf('/')!=-1){
+            var inter = url.match(/[^\/]+\/[^\/]+$/); 
+            inter = 'aos_'+(inter[0] ? inter[0].replace('/', '') : '');
+        }else{
+            var inter = 'action_'+url;
+            code = 999;
+        }   
+        if(onlytip){
+            locat.errorAlert(inter, code);
+        }else{
+            locat.interError(inter, code);
+        } 
+    },
+    interError: function(inter,code, onlytip) {
+        if(onlytip){
+            this.errorAlert(code, inter);
+        }else{
+            var currentUrl = location.href;
+            var gd_from = currentUrl.match(/[^\/]+$/) || [''];
+            gd_from = gd_from[0].split('.')[0]; //获取页面名称 拼在error.html上
+            var url = 'error.html?code=' + code + '&inter=' + encodeURIComponent(inter || '');
+
+            url += '&gd_from=' + gd_from;
+            this.pageJump(url,true);
+        } 
+    },
+    errorAlert: function(inter, code) {
+        require('../lib/msgbox');
+        var _this = this;
+        if (code < 0) {
+            var content = '网络无法连接，刷新一下';  
+        } else {
+            var content = '剁手的人太多了，刷新试试';   
+        }
+        // var isReplace = (location.href.indexOf('index.html') != -1)?true:false;
+        $.MsgBox({
+            content: content, 
+            shareLabel: '刷新',
+            shareFn: function() { 
+                // _this.locationRedirectForHistory('./index.html?gd_from=aoserror',isReplace); 
+                location.reload();
+            }
+        });
+        Log.log('aoserror', {
+            type: inter + '_' + code
+        });
+    },
+    /**
+     * 去置入客户端的‘我的奖品’页面 
+     * @param activity 活动标识
+     * @param isdetail 是否去详情页，默认false去列表页
+     * @param awardid 奖品id
+     * @param coupon 券码 
+     * @param recordid 用户获奖id
+     1. 当去列表页：所有参数不传，如果传activity则仅展示该活动标识下的奖品；
+     2. 当去奖品详情页：activity、isdetail、awardid必传，否则去列表。 
+                  如果传recordid则展现用户在此奖品下的获奖信息(如收货地址、券码等)  
+     */
+    goAward: function(activity, isdetail, awardid, coupon,recordid){
+        var url = link.awardlist+'?gd_from='+act.logname;
+        coupon = coupon||"";
+        if(isdetail&&activity&&awardid){//详情页
+            if(recordid){
+                url += '&act='+activity+'&aid=' + awardid + '&rid=' + recordid + '#&detail-normal'
+            }else if(coupon){
+                url += '&act='+activity+'&aid=' + awardid + '&coupon=' + coupon + '#&detail-normal'
+            }
+        }else{
+            if(activity){
+                url += '&act='+activity;
+            }
+        } 
+        native.loadSchema(util.getSchema(url, false, true))
+    },
+    /**
+     * 去通用的‘编辑地址’页面  
+     * @param actname 活动标识 
+     */
+    goAddr: function(actname){
+        if(!actname)return;
+        var url = link.editaddr+'?gd_from='+act.logname+'&activity='+actname;
+        native.loadSchema(util.getSchema(url, false, false))
+    },
+    /*
+    * 带起终点的路线规划
+    * @param type  t = 0 (驾车) t = 1(公交) t = 2(步行) t = 3(骑行 788版本) t = 4(火车 804版本)
+    * AmapApp.util.routePlan(3,{},
+    *   {
+    *       poiid:'qwqqwdqe',
+    *       name:'名称',
+    *       x:'1224',
+    *       y:2112
+    *   }
+    * )
+    */
+    routePlan:function(type,startPoi,endPoi){
+        type = type?type:0;
+        var schema = "amapuri://route/plan?t="+type;
+        if(startPoi&&startPoi.name&&(startPoi.poiid||startPoi.x&&startPoi.y)){
+            schema+= "&sid="+startPoi.poiid+"&slat="+startPoi.y+"&slon="+startPoi.x+"&sname="+encodeURIComponent(startPoi.name);
+        }
+        if(endPoi&&endPoi.name&&(endPoi.poiid||endPoi.x&&endPoi.y)){
+            if(endPoi.poiid){
+                schema += "&did="+endPoi.poiid;
+            }else{
+                schema += "&dlat="+endPoi.y+"&dlon="+endPoi.x;
+            }
+            schema += "&dname="+encodeURIComponent(endPoi.name);
+        }
+         // schema = 'amapuri://route/plan?t=3&did=B0FFG734TD&dname=%E9%A6%96%E5%BC%80%E5%B9%BF%E5%9C%BA';
+        console.log(schema)
+
+        native.loadSchema(schema);
+    }
+};
+locat.locationHistoryInit();  
+module.exports = {
+    pageJump: locat.pageJump.bind(locat),
+    pageError: locat.pageError.bind(locat),
+    goAward: locat.goAward.bind(locat), 
+    goAddr: locat.goAddr.bind(locat),
+    routePlan:locat.routePlan.bind(locat)
+};
+}).call(this,require("At5rgb"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/util/locat.js","/util")
+},{"../amap/log":8,"../amap/native":9,"../config/config.act":11,"../config/config.url":12,"../lib/msgbox":14,"./os":19,"./util":20,"At5rgb":4,"buffer":1}],17:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+/**
+ * Created by kongxiaojian on 2017/3/21.
+ */
+require('../lib/msgbox');
+var native = require('../amap/native');
+var loader = require('../amap/loader');
+var os = require('./os');
+var Log = require('../amap/log');
+var activity = require('../config/config.act').activity;
+var needBind = {
+    tid:null,
+    init:function (callback) {
+        if(!this.tid){
+            this.getTid(callback);
+        }else{
+            this.login(callback);
+        }
+    },
+    getTid:function (callback) {
+        var _this =this;
+        native.getAppInfo(function (data) {
+            if(data.tid){
+                _this.tid = data.tid;
+                _this.login(callback);
+            } else {
+                AmapApp.util.pageError(data.code, 'getExtraUrl');
+            }
+        });
+    },
+    login:function (callback,relogin) {
+        var _this = this;
+        var params = [
+            {tid:_this.tid,sign:1},
+            {force: 0, sign: 1},
+            {activity:activity},
+        ];
+        native.getUserId(function (data) {
+            if(data.userid){
+                loader.get(AmapApp.AOSURL.game_bind, params, function (res) {
+                    console.log('game_bind',res);
+                    if(res.code==1){
+                        if(callback)callback(true);//不需要绑定
+                    } else if(res.code==2){//需要强制绑定
+                        _this.needbind(callback);
+                    }else{
+                        AmapApp.util.pageError(AmapApp.AOSURL.game_bind, res.code);
+                    }
+                });
+            }else{
+                if(callback)callback(false);//没登录
+            }
+        },false,relogin||false);
+    },
+    needbind:function (callback) {
+        var _this = this;
+        var params = [
+            {tid:_this.tid,sign:1},
+            {force: 1, sign: 1},
+            {activity:activity},
+        ];
+        $.MsgBox({
+            content: '检测到您登录的账号已有游戏数据，是否同步？',
+            okLabel: '同步',
+            cancelLabel: '切换账号',
+            cancelFn: function () {
+                //切换账号点击回调
+                $.MsgBox({
+                    content: '将会为你退出当前账号登录，<br/>换一个别的账号再来吧',
+                    okLabel: '好的',
+                    cancelLabel: '取消',
+                    okFn: function() { //强制同步
+                        Log.log('reloginok');
+                        _this.login(callback,true);
+                    },
+                    cancelFn: function() { //点击取消，再展示该弹框
+                        Log.log('relogincancle');
+                        _this.needbind(callback);
+                    }
+                });
+            },
+            okFn: function () {
+                //同步点击回调
+                $.MsgBox({
+                    content: '继续同步将擦除当前设备的数据，恢复账号的游戏进度，是否继续？',
+                    okLabel: '确认',
+                    cancelLabel: '取消',
+                    okFn: function() { //强制同步
+                        Log.log('bindok');
+                        loader.get(AmapApp.AOSURL.game_bind, params, function (res) {
+                            console.log('game_bind',res);
+                            if(res.code==1){
+                                if(callback)callback(true);
+                            }else{
+                                AmapApp.util.pageError(AmapApp.AOSURL.game_bind, res.code);
+                            }
+                        });
+                    },
+                    cancelFn: function() { //点击取消，再展示该弹框
+                        Log.log('bindcancle');
+                        _this.needbind(callback);
+                    }
+                });
+            }
+
+        });
+    }
+};
+module.exports= {
+    login:needBind.init.bind(needBind)
+};
+}).call(this,require("At5rgb"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/util/needBind.js","/util")
+},{"../amap/loader":7,"../amap/log":8,"../amap/native":9,"../config/config.act":11,"../lib/msgbox":14,"./os":19,"At5rgb":4,"buffer":1}],18:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+/**
+ * Created by maple on 17/3/12.
+ */
+
+var os = require('./os');
+var webview = require('./webview_info');
+var native = require('../amap/native');
+var Log = require('../amap/log');
+
+var openAmap = {
+
+    /**
+     * 生成schema
+     * @param url {string} 需要在amap里打开的url\schema
+     * @param noCommon {Boolean} 是否针对安卓ios使用不同协议iosamap、androidamap，默认false使用通用协议amapuri
+     * @param hideTitleBar {Boolean} 是否隐藏titlebar，默认false不隐藏
+     * @returns {string}
+     */
+    getSchema: function(url, noCommon, hideTitleBar) {
+        noCommon = noCommon?true:false;
+        var type = 'amapuri';
+        // 检查是否schema
+        var isSchema = /^(?:(?:ios|android)amap|amapuri):\/\//i.test(url);
+        if (isSchema) {
+            return /^(?:(?:ios|android)amap|amapuri)(:\/\/.*)$/i.exec(url)[0];
+        }
+        if(noCommon){
+            var _os = os.ios ? 'ios' : 'android';
+            type = _os + 'amap';
+        }
+        return type+'://openFeature?featureName=OpenURL&sa=1&sourceApplication=banner' +
+            '&url=' + encodeURIComponent(url) +'&urlType=0&contentType=autonavi' + (hideTitleBar ? '&hide_title=1' : '');
+    },
+    /**
+     * 生成通用呼起页面的地址
+     * @param url {string} 需要在amap里打开的url\schema
+     * @param noCommon {Boolean} 是否针对安卓ios使用不同协议iosamap、androidamap，默认false使用通用协议amapuri
+     * @param hideTitleBar {Boolean} 是否隐藏titlebar，默认false不隐藏
+     * @returns {string} 通用呼起页面的地址
+     */
+    getCallNative: function(url, noCommon, hideTitleBar) {
+        noCommon = noCommon?true:false;
+        var _url = '';
+        // var _callUrl = 'http://wap.amap.com/callnative/?';
+        var _callUrl = 'http://m.autonavi.com/callnative/?';
+        _url = _callUrl +
+            'schema=' + encodeURIComponent(this.getSchema(url,noCommon,hideTitleBar)) +
+                '&title=高德地图'; 
+        return _url;
+    },
+    /**
+     * 呼起高德地图并在端内打开指定页面且需要一键呼起
+     * @param {Object} dom 呼起按钮（呼起按钮（$dom对象，如 $('.openbtn')，必须为a标签，且只能呼起release版高德地图）
+     * @param {String} url 要打开页面的url\schema 
+     * @param {String} clicklog 该埋点的click值
+     * @param hideTitleBar {Boolean} 是否隐藏titlebar，默认false不隐藏
+     * @param type {String}  [非必传]渠道号:为满足wap站分渠道检测数据需求
+     */
+    openApp: function (dom, url, clicklog, hideTitleBar, type) { 
+        if(!clicklog)clicklog="goamap";
+
+        if(webview.isInAmap()){//在端内
+            dom.on('click', function () {
+                Log.logJump(function(){
+                    if(!os.ios)native.destroyRightButton();//清除右上角btn
+                    location.href = url;
+                },clicklog);
+            });  
+        }else{
+            var _scheme = this.getCallNative(url, true ,hideTitleBar); 
+            if(type){
+               _scheme += ('&type='+ type);
+            }
+            var $element = $('<a id="amapOpenApp" href="'+_scheme+'" style="display:none;"/>');
+            $('body').append($element); 
+            dom.on('click', function () {
+                Log.logJump(function(){
+                    $('#amapOpenApp').trigger('click');
+                },clicklog);
+            });     
+        } 
+    }
+};
+
+module.exports = openAmap;
+}).call(this,require("At5rgb"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/util/openAmap.js","/util")
+},{"../amap/log":8,"../amap/native":9,"./os":19,"./webview_info":21,"At5rgb":4,"buffer":1}],19:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+/**
+ * Created by qingye on 17/1/24.
+ * 判断设备信息
+ */
+
+
+var os = {};
+var util = require('./util');
+// The <html> element.
+var documentElement = window.document.documentElement;
+
+// The client user agent string.
+// Lowercase, so we can use the more efficient indexOf(), instead of Regex
+var userAgent = window.navigator.userAgent.toLowerCase().split('amap/')[0];
+
+// Simple UA string search
+var find = function (needle) {
+    return userAgent.indexOf(needle) !== -1;
+};
+
+// windows下浏览器
+os.windows = find('windows');
+os.iphone = !os.windows && find('iphone');
+os.ipod = find('ipod');
+os.ipad = find('ipad');
+os.ios = os.iphone || os.ipod || os.ipad;
+os.android = !os.windows && find('android');
+os.androidPhone = os.android && find('mobile');
+// 安卓平板
+os.androidTablet = os.android && !find('mobile');
+
+
+// Insert the appropriate CSS class based on the _user_agent.
+if (os.ios) {
+    if (os.ipad) {
+        util.addClass(documentElement, "ios ipad tablet");
+    } else if (os.iphone) {
+        util.addClass(documentElement, "ios iphone mobile");
+    } else if (os.ipod) {
+        util.addClass(documentElement, "ios ipod mobile");
+    } 
+    var v = userAgent.match(/(iphone|ipad|ipod).*?os\s([\d_]+)\s/i);
+    os.version = v[2];
+} else if (os.android) {
+    if (os.androidTablet) {
+        util.addClass(documentElement, "android tablet");
+    } else {
+        util.addClass(documentElement, "android mobile");
+    }
+    os.version = userAgent.substr(userAgent.indexOf('android') + 8, 3);
+}
+
+
+module.exports = os;
+
+}).call(this,require("At5rgb"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/util/os.js","/util")
+},{"./util":20,"At5rgb":4,"buffer":1}],20:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+/**
+ * Created by qingye on 17/1/25.
+ */ 
+
+var util = {
+    /**
+     * 获取url参数.
+     * @param {String} [name] 参数名称，无此参数时返回所有参数
+     * @return {String|Object} name存在时返回相应的值，否则返回所有参数
+     */
+    getUrlParam: function(name) {
+        var url = window.location.search.substr(1);
+        if (!url) {
+            return '';
+        }
+        if (name) {
+            var value = new RegExp('(?:^|&)' + name + '=([^&]*)(&|$)', 'g').exec(url);
+            return util.htmlEncodeAll(value && window.decodeURIComponent(value[1]) || '');
+        }
+        var result = {};
+        var reg = /(?:^|&)([^&=]+)=([^&]*)(?=(&|$))/g;
+        var item;
+        /* jshint boss: true */
+        while (item = reg.exec(url)) {
+            result[item[1]] = util.htmlEncodeAll(window.decodeURIComponent(item[2]));
+        }
+        return result;
+    },
+    /**
+     * 过滤html中的特殊符号
+     * @param  {String} [e] 待过滤的html
+     * @return {String}  返回过滤后的html
+     */
+    htmlEncodeAll: function(e) {
+        return null == e ? "" : e.replace(/\</g, "&lt;").replace(/\>/g, "&gt;").replace(/\&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "'");
+    },
+    /**
+     * 添加script.
+     * @param {String} url js url
+     * @param {Function} [onload] 加载成功回调
+     * @param {Function} [onerror] 加载失败回调
+     * @return {HTMLElement} script引用
+     */
+    addScript: function(url, onload, onerror) {
+        var script = document.createElement('script');
+        if (onload) {
+            script.onload = function() {
+                onload(script);
+            };
+        }
+        script.onerror = function() {
+            if(onerror){
+                onerror(script);
+            }else if(onload){
+                onload(script);
+            }
+        };
+        script.src = url;
+        document.head.appendChild(script);
+        return script;
+    },
+    /**
+     * 复制对象属性.
+     * @param {Object} toObj 复制到此对象
+     * @param {Object} fromObj 要复制的对象
+     */
+    extend: function(toObj, fromObj) {
+        for (var key in fromObj) {
+            if (fromObj[key] !== 'undefined') {
+                toObj[key] = fromObj[key];
+            }
+        }
+    },
+    /**
+     * 为url添加变量.
+     * @param {String} url
+     * @param {String|Object} name
+     *    为字符串类型时参数作为新增参数的名称，第三个参数不能缺省
+     *    为对象类型时参数为要增加的参数集合，属性为参数名称，值为参数值
+     * @param {String} value 变量值
+     * @return {String} 新的url
+     */
+    urlAddParam: function(url, name, value) {
+        // 分割url，arr[1] 为头部，arr[2]为参数，arr[3]为hash
+        var arr = url.match(/([^\?#]*\??)([^#]*)?(#.*)?/);
+        var prefix = arr[1];
+        var param = arr[2];
+
+        if (param) {
+            prefix += param + '&';
+        } else if (arr[1].indexOf('?') === -1) {
+            prefix += '?';
+        }
+        var newParam = '';
+        if (typeof name === 'object') {
+            for (var key in name) {
+                newParam += '&' + key + '=' + encodeURIComponent(name[key]);
+            }
+            newParam = newParam.substr(1);
+        } else {
+            newParam = name + '=' + encodeURIComponent(value);
+        }
+        return prefix + newParam + (arr[3] || '');
+    },
+    // Check if documentElement already has a given class.
+    hasClass: function(node, className) {
+        var regex;
+        regex = new RegExp(className, 'i');
+        return node.className.match(regex);
+    },
+
+    // Add one or more CSS classes to the <html> element.
+    addClass: function(node, className) {
+        var currentClassNames = null;
+        if (!this.hasClass(node, className)) {
+            currentClassNames = node.className.replace(/^\s+|\s+$/g, '');
+            node.className = currentClassNames + " " + className;
+        }
+    },
+
+    // Remove single CSS class from the <html> element.
+    removeClass: function(node, className) {
+        if (this.hasClass(node, className)) {
+            node.className = node.className.replace(" " + className, "");
+        }
+    }
+};
+
+module.exports = util;
+}).call(this,require("At5rgb"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/util/util.js","/util")
+},{"At5rgb":4,"buffer":1}],21:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+/**
+ * Created by qingye on 17/1/24.
+ */
+ 
+var os = require('./os');
+var util = require('./util');
+var userAgent = window.navigator.userAgent.toLowerCase(); 
+var ini = require('../config/_ini');
+
+// 作为一个私有变量
+var _isInAmap = false;
+if(userAgent.indexOf('amap/')!=-1){
+    _isInAmap = true;
+}
+userAgent = userAgent.split('amap/')[0]
+
+
+var webviewInfo = { 
+    /**
+     * 强制设置是否端内webview
+     * @param isInAmap
+     */
+    setIsInAmap: function (isInAmap) {
+        _isInAmap = !!isInAmap;
+    },
+    
+    /**
+     * 判断使用是否在高德地图客户端内webview打开 
+     */
+    isInAmap: function () { 
+        return _isInAmap;
+    },
+    /**
+     * 判断是否在微博中.
+     * @return {Boolean} 在微博客户端中返回true
+     */
+    isInWeibo: function () {
+        return / Weibo /i.test(userAgent);
+    },
+    /**
+     * 判断是否在微信中.
+     * @return {Boolean} 在微信中返回true
+     */
+    isInWeixin: function () {
+        return /MicroMessenger/i.test(userAgent);
+    },
+    
+    /**
+     * 是否公网
+     * @return {Boolean}
+     */
+    isPublic: function () {
+        // todo 判断方式十分粗糙
+        return /^[a-z]+\.amap\.com$/.test(location.host) || !ini.debug;
+    },
+    /*h5实现titlebar
+     *titletext  标题内容
+     *basewidth  [默认750]  640设计稿请传640
+     */
+    setTitlebar: function(titletext, basewidth) {
+        basewidth = basewidth ? basewidth : '750';
+        var myscale = basewidth / 750;
+        var bodytop = os.ios ? "1.25"*myscale : "0.9"*myscale;
+        if($('#titlebar').length==0){
+            titletext = titletext?titletext:'请设置标题~';
+            var str = "<div id=\"titlebar\"><div id=\"titleback\" onclick=\"javascript:AmapApp.Native.webviewGoBack();\"></div><span>" + titletext + "</span></div>";
+            $('body').prepend(str);
+        }else{
+            if(titletext){//已有titlebar时，如果传了标题只改标题
+                $('#titlebar').find('span').html(titletext);
+            }
+        }
+        $('body').css("padding-top", bodytop + "rem");
+        if (myscale != 1) {
+            $('#titlebar').css('transform', 'scale(' + myscale + ')');
+        }
+    },
+    /*h5实现titlebar
+     *titletext  标题内容
+     *basewidth  [默认750]  640设计稿请传640
+     */
+    setTransparentTitlebar: function (titletext, basewidth) {
+        $('body').css('background','#4382ef'); 
+        basewidth = basewidth ? basewidth : '750';
+        var myscale = basewidth / 750;
+        var bodytop = os.ios ? "1.25" * myscale : "0.9" * myscale;
+        var $titleBar = $('#titlebar');
+        if($titleBar.length <= 0){
+            titletext = titletext?titletext:'请设置标题~';
+            var str = '<div id="titlebar" class="titlebarTransparent"><div id="titleback" class="titlebackTransparent" onclick="javascript:AmapApp.Native.webviewGoBack();" ></div><span>' + titletext + '</span></div>';
+            $('body').prepend(str)
+        }else{
+            if(titletext){//已有titlebar时，如果传了标题只改标题
+                $('#titlebar').find('span').html(titletext);
+            }
+        }        
+        if (myscale != 1) {
+            $('#titlebar').css('transform', 'scale(' + myscale + ')');
+        } 
+        window.onscroll = function(){
+            if(document.body.scrollTop > 10){
+                $('#titlebar').removeClass('titlebarTransparent');
+                $('#titleback').removeClass('titlebackTransparent');
+                $('body').css('background','#f0f0f0'); //底部元素颜色(解决ios原声拉动下的视觉体验)
+            }else{
+                $('#titlebar').addClass('titlebarTransparent');
+                $('#titleback').addClass('titlebackTransparent'); 
+                $('body').css('background','#4382ef');  //顶部元素颜色(解决ios原声拉动下的视觉体验)
+            }
+        }
+    },
+};
+
+module.exports = webviewInfo;
+}).call(this,require("At5rgb"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/util/webview_info.js","/util")
+},{"../config/_ini":10,"./os":19,"./util":20,"At5rgb":4,"buffer":1}]},{},[13])
