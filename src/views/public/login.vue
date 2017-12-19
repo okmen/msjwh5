@@ -50,7 +50,7 @@ export default {
       }
       let reqData = {
         loginName: this.loginName,
-        password: this.password,
+        password: window.btoa(this.password),
         loginClient: window.localStorage.getItem('sourceOfCertification')
       }
       this.$axios.post(login, reqData).then(data => {
