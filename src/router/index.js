@@ -4,7 +4,7 @@ import publicRouter from './public'
 import tDrivingLicence from './transactionClass/drivingLicence' // 办理类驾驶证业务
 import aMotorVehicles from './appointmentClass/motorVehicles' // 预约类机动车业务
 import motorVehicles from './transactionClass/motorVehicles.js'
-import { getQueryString } from '@/utils/utils'
+import { getQueryString, wxShare } from '@/utils/utils'
 import qs from 'qs'
 
 Vue.use(Router)
@@ -62,8 +62,14 @@ let router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  let source = getQueryString('source')
+  // 微信分享
+  wxShare({
+    title: to.meta.title,
+    fullPath: to.fullPath,
+    source: to.query.source
+  })
   // 如果来源是高德，且未IOS系统
+  let source = getQueryString('source')
   if (source === 'G' && window.AmapApp.util.os.ios) {
     console.log('高德来源，设置标题', to.meta.title)
     window.AmapApp.Bridge.send({
