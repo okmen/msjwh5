@@ -44,7 +44,7 @@
         if (this.$route.query.source === 'M') return
         let _this = this
         window.AmapApp.ready(function () {
-          window.AmapApp.addPhoto('深圳交警','上传图片', '300',false, function (res) {
+          window.AmapApp.addPhoto('SSJJ','上传图片', '300',false, function (res) {
             _this.imgSrc = 'data:image/jpeg;base64,' + res
             _this.$emit('input', res)
           })

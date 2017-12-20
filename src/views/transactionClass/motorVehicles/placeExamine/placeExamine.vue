@@ -129,7 +129,7 @@ export default {
         mobilephone: this.mobile,
         businessType: 'szjj'
       }
-      if (this.$verification.isPhone(this.mobilePhone)) return
+      if (this.$verification.isPhone(this.mobile)) return
       axios.post(sendSMS, phonedata).then(data => {
         if (data.code === '0000') {
           count()

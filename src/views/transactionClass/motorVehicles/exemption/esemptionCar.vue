@@ -3,7 +3,7 @@
     <g-select title="车牌号码" :data="plateNumber" v-model="plateNumberOne" @getSelected="getPlateNumber" ref="plateNumberName"></g-select>
     <g-input title="车主姓名" v-model="ownersName" readonly></g-input>
     <g-select title="申请人类型" :data="congestionData" v-model="congestion"></g-select>
-    <g-input title="行驶证编号" v-model="drivingLicense" placeholder="请输入行驶证编号"></g-input>
+    <!-- <g-input title="行驶证编号" v-model="drivingLicense" placeholder="请输入行驶证编号"></g-input> -->
     <g-input title="手机号码" maxlength="11" v-model="mobilePhone" placeholder="请输入手机号码"></g-input>
     <get-verification-code :method="getCode" v-model="identifying"></get-verification-code>
     <g-input title="固定号码" v-model="telno" placeholder="请输入固定号码(非必填)"></g-input>
@@ -14,11 +14,11 @@
     <g-input title="" v-model="mailingAddress" placeholder="请输入详细地址"></g-input>
     <g-date-picker title="保险生效日期" v-model="effectiveDate"></g-date-picker>
     <g-date-picker title="保险终止日期" v-model="terminationDate"></g-date-picker>
-    <g-select title="保险结果告知方式" :data="placeSelectData" v-model="placeSelectMassage" classType='filled'></g-select>
+    <!-- <g-select title="保险结果告知方式" :data="placeSelectData" v-model="placeSelectMassage" classType='filled'></g-select>
     <g-input title="预约人" v-model="bookerName" placeholder="请输入预约人姓名"></g-input>
     <g-input title="预约人身份证号" v-model="bookerIdentityCard" placeholder="请输入预约人身份证号" classType='filled'></g-input>
-    <g-input title="预约方式" value="本人" classType='filled' readonly></g-input>
-    <span class="form-annotation">注:只能申请本人名下车辆</span>
+    <g-input title="预约方式" value="本人" classType='filled' readonly></g-input> -->
+    <!-- <span class="form-annotation">注:只能申请本人名下车辆</span> -->
     <g-button text="确认信息" @click.native="confirmInfo" v-if="plateNumber.length"></g-button>
     <g-button text="确认信息" v-if="!plateNumber.length" type="gray"></g-button>
   </div>
@@ -117,13 +117,10 @@ export default {
     // 确认信息
     confirmInfo () {
       let obj = {
-        drivingLicense: '请输入行驶证编号',
         mobilePhone: '请输入手机号码',
         identifying: '请输入验证码',
         postCode: '请输入邮政编码',
-        mailingAddress: '请输入详细地址',
-        bookerName: '请输入预约人姓名',
-        bookerIdentityCard: '请输入预约人身份证号'
+        mailingAddress: '请输入详细地址'
       }
       if (this.$_myMinxin_beforeSubmit(obj)) return
       if (this.$verification.isPhone(this.mobilePhone)) return
@@ -152,8 +149,8 @@ export default {
           'effectiveDate': this.effectiveDate,         // 保险生效日期
           'terminationDate': this.terminationDate,     // 保险终止日期
           'inform': this.placeSelectMassage,           // 保险告知方式
-          'bookerName': this.bookerName,              // 预约人名字
-          'bookerIdentityCard': this.bookerIdentityCard,   // 预约人身份证
+          'bookerName': this.$store.state.user.userName,              // 预约人名字
+          'bookerIdentityCard': this.$store.state.user.identityCard,   // 预约人身份证
           'bookerType': this.orderMode                     // 预约方式
         },
         invisibleObj: {
