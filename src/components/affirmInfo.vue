@@ -215,7 +215,7 @@ export default {
           let sendData = {
             title: this.$store.state.passByValue.title,
             type: 1,
-            waterNumber: json.data.waterNumber
+            waterNumber: json.data.waterNumber || json.data
           }
           this.$store.commit('saveSuccessInfo', sendData)
           this.$router.push({path: '/submitSuccess', query: this.$store.getters.queryURL})

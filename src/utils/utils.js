@@ -1,3 +1,4 @@
+import wx from 'weixin-js-sdk'
 // 获取 URL 查询参数
 export function getQueryString (name) {
   let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
@@ -7,8 +8,32 @@ export function getQueryString (name) {
   return false
 }
 
-// 获取用户须知
+// 微信分享
+export function wxShare (opt) {
+  let source = opt.source
+  if (source === 'M') {
+    let nowURL = window.location.href
+    if (nowURL.includes('?from=')) {
+      window.location.href = nowURL.split('?from=')[0] + '#' + opt.fullPath
+    }
+    let link
+    if (process.env.type === 'test') {
+      link = 'http://szjjmsjw.chudaokeji.com/#' + opt.fullPath
+    } else {
+      link = 'http://gzh.stc.gov.cn/msjw/#' + opt.fullPath
+    }
+    wx.onMenuShareTimeline({
+      title: opt.title,
+      link: link
+    })
+    wx.onMenuShareAppMessage({
+      title: opt.title,
+      link: link
+    })
+  }
+}
 
+// 获取用户须知
 export function getUserAgreement (name) {
   switch (name) {
     case 'szjj_hander_rmvp':
