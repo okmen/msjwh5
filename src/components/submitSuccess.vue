@@ -125,7 +125,9 @@ export default {
         orgAddr: '预约地址',
         appointmentDate: '预约日期',
         appointmentTime: '预约时间',
-        name: '预约人'
+        name: '预约人',
+        approveFlag: '审核结果',
+        approveInfo: '受理意见内容'
       },
       valListObj: {
         cartype: {
@@ -266,6 +268,10 @@ export default {
           createVehicleInfo_JD33: '档案更正',
           createVehicleInfo_JD48: '网约车使用性质变更',
           createVehicleInfo_JD30: '补换检验合格标志'
+        },
+        approveFlag: {
+          '1': '同意',
+          '0': '不同意'
         }
       }
     }
