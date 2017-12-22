@@ -51,4 +51,6 @@ export const getBusinessTypes = `${commonUrl}bookingbusiness/getBusinessTypes.ht
 
 export const createVehicleInspection = `${commonUrl}handleservice/createVehicleInspection.html` // 六年免检
 
+export const cancelVehicleInspection = `${commonUrl}handleservice/cancelVehicleInspection.html` // 六年免检取消
+
 export const getCarTypeId = `${commonUrl}handleservice/getCarTypeId.html` // 获取车辆类型Id
