@@ -87,10 +87,12 @@
           }
           axios.post(cancelVehicleInspection, requestData).then(json => {
             if (json.code === '0000') {
-              console.log(json, '预约信息')
+              this.$MessageBox.alert('取消预约成功').then(action => {
+                this.$router.push({ path: '/dealService', query: this.$store.getters.queryURL })
+              })
             } else {
               this.$MessageBox.alert(json.msg).then(action => {
-                this.$router.push('/')
+                this.$router.push({ path: '/dealService', query: this.$store.getters.queryURL })
               })
             }
           })
