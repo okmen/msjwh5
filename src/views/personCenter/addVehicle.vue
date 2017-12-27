@@ -9,7 +9,7 @@
     <g-input title="车主名字" v-model="addVehicleName" readonly v-if="typeData === '1'"></g-input>
     <g-input title="身份证号" v-model="idCard" readonly v-if="typeData === '1'"></g-input>
     <g-input title="车主名字" v-model="othersAddVehicleName" placeholder="请输入车主名字" v-if="typeData === '0'"></g-input>
-    <g-input title="身份证号" v-model="othersIdCard" placeholder='(车主身份证)外籍人士请在证件号前加F' v-if="typeData === '0'"></g-input>
+    <g-input class="addVehicle-input" title="身份证号" v-model="othersIdCard" placeholder='(车主身份证)外籍人士请在证件号前加F' v-if="typeData === '0'"></g-input>
     <group title="请按示例图上传以下证件照片" v-if="typeData === '0'">
       <div class="upload-group">
         <g-upload text="身份证(正面)" id="file" :bg="require('../../assets/images/IDcard-front.png')" v-model="IDCardFront"></g-upload>
@@ -152,6 +152,27 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+  }
+}
+</style>
+
+<style  lang='less'>
+.addVehicle-input {
+  .g-input-content input::-webkit-input-placeholder { /* WebKit browsers */
+    font-size:24px;
+    line-height: 56px;
+  }
+  .g-input-content input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    font-size:24px;
+    line-height: 56px;
+  }
+  .g-input-content input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    font-size:24px;
+    line-height: 56px;
+  }
+  .g-input-content input:-ms-input-placeholder { /* Internet Explorer 10+ */
+    font-size:24px;
+    line-height: 56px;
   }
 }
 </style>
