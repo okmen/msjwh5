@@ -14,5 +14,21 @@ export default [
       title: '退出登录'
     },
     component: () => import('@/views/personCenter/logOut')
+  },
+  {
+    name: 'addVehicle',
+    path: '/addVehicle',
+    meta: {
+      title: '添加车辆'
+    },
+    component: () => import('@/views/personCenter/addVehicle')
+  },
+  {
+    name: 'myCar',
+    path: '/myCar',
+    meta: {
+      title: '绑定车辆'
+    },
+    component: () => import('@/views/personCenter/myCar')
   }
 ]
