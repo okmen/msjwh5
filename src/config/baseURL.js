@@ -54,3 +54,5 @@ export const createVehicleInspection = `${commonUrl}handleservice/createVehicleI
 export const cancelVehicleInspection = `${commonUrl}handleservice/cancelVehicleInspection.html` // 六年免检取消
 
 export const getCarTypeId = `${commonUrl}handleservice/getCarTypeId.html` // 获取车辆类型Id
+
+export const updateUser = `${commonUrl}user/updateUser.html` // 修改个人资料接口
