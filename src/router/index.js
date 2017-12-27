@@ -4,6 +4,7 @@ import publicRouter from './public'
 import tDrivingLicence from './transactionClass/drivingLicence' // 办理类驾驶证业务
 import aMotorVehicles from './appointmentClass/motorVehicles' // 预约类机动车业务
 import motorVehicles from './transactionClass/motorVehicles.js'
+import personCenter from './personCenter' // 个人中心
 import { getQueryString, wxShare } from '@/utils/utils'
 import qs from 'qs'
 
@@ -57,7 +58,8 @@ let router = new Router({
     ...publicRouter,
     ...tDrivingLicence,
     ...aMotorVehicles,
-    ...motorVehicles
+    ...motorVehicles,
+    ...personCenter
   ]
 })
 
