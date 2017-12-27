@@ -54,3 +54,11 @@ export const createVehicleInspection = `${commonUrl}handleservice/createVehicleI
 export const cancelVehicleInspection = `${commonUrl}handleservice/cancelVehicleInspection.html` // 六年免检取消
 
 export const getCarTypeId = `${commonUrl}handleservice/getCarTypeId.html` // 获取车辆类型Id
+
+export const addVehicle = `${commonUrl}user/addVehicle.html` // 添加车辆接口
+
+export const bindCar = `${commonUrl}user/search/getBndTheVehicles.html` // 个人中心-绑定车辆接口
+
+export const unbindTheOtherDriverUseMyCar = `${commonUrl}user/unbindTheOtherDriverUseMyCar.html` // 车主解绑其他车辆使用人
+
+export const unbindVehicle = `${commonUrl}user/unbindVehicle.html` // 车主解绑车辆

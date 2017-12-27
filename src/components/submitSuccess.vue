@@ -79,6 +79,10 @@
       <p>车牌号码：{{JsonDataInfo.licenseNumber}}</p>
       <p>流水号：{{JsonDataInfo.JsonData}}</p>
     </section>
+    <section class="appoint-box" v-if="JsonDataInfo.type == 5">
+      <h3>申办结果</h3>
+      <p>您的信息已成功提交，我们将会在3个工作日内通过短信告知您的审核结果，您还可以凭身份证信息在深圳交警微信号中查询审核。</p>
+    </section>
 <!--     <div class="btn-appoint-backword" @click="btnBackword" v-if="!urlJsonData && JsonDataInfo.type == 1">返回</div>
     <div class="btn-appoint-backword mt-60" @click="btnBackword"  v-if="!urlJsonData && JsonDataInfo.type != 1">好的</div> -->
   </div>
