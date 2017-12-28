@@ -6,7 +6,7 @@
         ：<span >{{ valListObj[key] ? valListObj[key][value] : value }}</span>
       </div>
     </div>
-    <g-button text="取消预约" @click.native="cancelReverse" v-if="this.dataInfo.bookState == 1"></g-button>
+    <g-button text="取消预约" @click.native="cancelReverse" v-if="this.dataInfo.yyzt == 1"></g-button>
     <g-button text="取消预约" v-else type="gray"></g-button>
   </div>
 </template>
@@ -25,11 +25,11 @@
       return {
         dataInfo: {},
         keyListObj: {
-          bookNumber: '预约编号',
+          yyh: '预约编号',
           organization: '受理单位名称',
           businessType: '业务类型名称',
-          name: '姓名',
-          platNumber: '车牌号码',
+          xm: '姓名',
+          cphm: '车牌号码',
           personType: '人员类型',
           driveLicenseNumber: '行驶证编号',
           postCode: '邮政编码',
@@ -37,25 +37,25 @@
           recipientsMobile: '收件人电话',
           postAddr: '收件人地址',
           appointmentTime: '申请时间',
-          mobile: '手机号码',
+          sjhm: '手机号码',
           telno: '固定电话',
-          effectiveDate: '保险生效日期',
+          bxsxrq: '保险生效日期',
           terminationDate: '保险终止日期',
-          inform: '受理告知方式',
-          createDate: '创建日期',
-          bookState: '预约状态',
-          approveState: '审核状态',
-          approveInfo: '受理意见内容',
-          approveFlag: '审核结果'
+          slgzfs: '受理告知方式',
+          cjrq: '创建日期',
+          yyzt: '预约状态',
+          shzt: '审核状态',
+          slyjnr: '受理意见内容',
+          shjg: '审核结果'
         },
         valListObj: {
-          bookState: {
+          yyzt: {
             '1': '预约中',
             '2': '预约完成',
             '3': '失约',
             '4': '预约取消'
           },
-          approveState: {
+          shzt: {
             '0': '待审核',
             '2': '已审核'
           },
@@ -63,10 +63,12 @@
             '1': '机动车所有人',
             '2': '代理人'
           },
-          inform: {
-            '1': '互联网查询'
+          slgzfs: {
+            '1': '互联网查询',
+            '2': '短信告知',
+            '3': '非移动电话告知'
           },
-          approveFlag: {
+          shjg: {
             '1': '同意',
             '0': '不同意'
           }
@@ -82,8 +84,8 @@
       cancelReverse () {
         MessageBox.confirm('确定取消预约?').then(action => {
           let requestData = {
-            bookNumber: this.dataInfo.bookNumber,
-            numberPlate: this.dataInfo.platNumber
+            bookNumber: this.dataInfo.yyh,
+            numberPlate: this.dataInfo.cphm
           }
           axios.post(cancelVehicleInspection, requestData).then(json => {
             if (json.code === '0000') {
