@@ -25,6 +25,7 @@ export default {
   },
   created () {
     this.currentDate = this.value
+    console.log(this.currentDate)
     this.pickerVisible = this.value
   },
   computed: {
