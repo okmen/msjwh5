@@ -157,6 +157,16 @@
     }
   }
 </style>
+<style lang="less">
+  .mint-swipe-indicator{
+    width: 20px !important;
+    height: 20px !important;
+    background-color: #40aadb !important;
+  }
+  .mint-swipe-indicator.is-active{
+    opacity: 1;
+  }
+</style>
 <script>
   import { GButton } from 'form'
   import { bindCar, unbindTheOtherDriverUseMyCar, unbindVehicle } from '@/config/baseURL'
