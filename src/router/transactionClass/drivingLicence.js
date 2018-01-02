@@ -41,5 +41,14 @@ export default [
       loginStatus: true
     },
     component: () => import('@/views/transactionClass/drivingLicence/degradeCard')
+  },
+  {
+    path: '/changeConnect',
+    name: 'changeConnect',
+    meta: {
+      title: '驾驶人联系方式变更',
+      loginStatus: true
+    },
+    component: () => import('@/views/transactionClass/drivingLicence/changeConnect')
   }
 ]
