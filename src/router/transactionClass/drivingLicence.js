@@ -32,5 +32,14 @@ export default [
       loginStatus: true
     },
     component: () => import('@/views/transactionClass/drivingLicence/changeCard')
+  },
+  {
+    path: '/degradeCard',
+    name: 'degradeCard',
+    meta: {
+      title: '驾驶证自愿降级',
+      loginStatus: true
+    },
+    component: () => import('@/views/transactionClass/drivingLicence/degradeCard')
   }
 ]
