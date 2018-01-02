@@ -1,8 +1,8 @@
 <template>
   <div class="g-date-picker">
     <div class="g-date-picker-title" v-if="title">{{title}}</div>
-    <input class="g-date-picker-value" @click.stop="openPick" v-model="currentDate">
-    <mt-datetime-picker ref="picker" v-model="pickerVisible" type="date" year-format="{value} 年" month-format="{value} 月" date-format="{value} 日" @confirm="handleConfirm">
+    <input class="g-date-picker-value" readonly @click.stop="openPick" v-model="currentDate">
+    <mt-datetime-picker ref="picker" v-model="pickerVisible" :startDate="startDate" type="date" year-format="{value} 年" month-format="{value} 月" date-format="{value} 日" @confirm="handleConfirm">
     </mt-datetime-picker>
   </div>
 </template>
@@ -13,7 +13,8 @@ export default {
   name: 'GDatePicker',
   data () {
     return {
-      pickerVisible: ''
+      pickerVisible: '',
+      startDate: ''
     }
   },
   props: {
@@ -25,8 +26,7 @@ export default {
   },
   created () {
     this.currentDate = this.value
-    console.log(this.currentDate)
-    this.pickerVisible = this.value
+    this.startDate = new Date(this.value)
   },
   computed: {
     currentDate: {
@@ -44,7 +44,6 @@ export default {
     },
     handleConfirm (value) {
       this.currentDate = this.formatDate(value)
-      console.log(this.formatDate(value))
     },
     // 日期格式化
     formatDate: (date) => {
