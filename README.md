@@ -1,21 +1,34 @@
-# minshengjingwu-h5
+# 民生警务
 
-> A Vue.js project
+> 本项目是民生警务和高德地图接入的二合一项目
 
-## Build Setup
+## 编译安装
 
 ``` bash
-# install dependencies
+# 安装全部依赖
 npm install
 
-# serve with hot reload at localhost:8080
+# 启动本地开发环境 localhost:8080
 npm run dev
 
-# build for production with minification
+# 编译线上环境
 npm run build
 
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## 组件开发说明
+
+### 组件注释
+
+统一在组件顶部，加入描述组件功能的注释。
+
+```
+<!--
+  组件注释
+-->
+<template>
+ ...codes
+</template>
+```

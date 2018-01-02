@@ -1,5 +1,7 @@
+<!--
+  驾驶证类-驾驶证业务导航页
+-->
 <template>
-  <!-- 驾驶证类-驾驶证业务导航页 -->
   <div class="carService-outer">
     <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
       <router-link :to="{ path: '/userAgreement/jszns', query: queryURL }">机动车驾驶证年度审验</router-link>

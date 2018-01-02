@@ -1,5 +1,7 @@
+<!--
+  办理类-驾驶证业务导航页 ~
+-->
 <template>
-  <!-- 办理类-驾驶证业务导航页 -->
   <div class="carService-outer">
     <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
       <router-link :to="{ path: '/applyInterimCard', query: queryURL }">办理临时行驶车号牌</router-link>
