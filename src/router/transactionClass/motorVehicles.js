@@ -69,5 +69,21 @@ export default [
       title: '核发机动车检验合格标志'   // 六年免检查询取消
     },
     component: () => import('@/views/transactionClass/motorVehicles/exemption/exemptionAbolish')
+  },
+  {
+    name: 'applyEveryMonth',
+    path: '/applyEveryMonth',
+    meta: {
+      title: '申请类'
+    },
+    component: () => import('@/views/transactionClass/motorVehicles/applyClass/applyEveryMonth')
+  },
+  {
+    name: 'repairDrivingLicense',
+    path: '/repairDrivingLicense',
+    meta: {
+      title: '补领行驶证'
+    },
+    component: () => import('@/views/transactionClass/motorVehicles/repairDrivingLicense/repairDrivingLicense')
   }
 ]
