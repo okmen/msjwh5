@@ -64,3 +64,5 @@ export const bindCar = `${commonUrl}user/search/getBndTheVehicles.html` // 个�
 export const unbindTheOtherDriverUseMyCar = `${commonUrl}user/unbindTheOtherDriverUseMyCar.html` // 车主解绑其他车辆使用人
 
 export const unbindVehicle = `${commonUrl}user/unbindVehicle.html` // 车主解绑车辆
+
+export const complementTheMotorVehicleDrivingLicense = `${commonUrl}handleservice/complementTheMotorVehicleDrivingLicense.html` // 补领行驶证
