@@ -14,10 +14,17 @@ import './utils/M-wx'
 import './utils/axios'
 import './utils/WX.config'
 
+import {GButton, GInput, Group, GSelect, GSelectOne, GUpload} from 'form'
 import {Toast, Indicator, MessageBox, Swipe, SwipeItem} from 'mint-ui'
 Vue.use(vueWechatTitle)
 Vue.component(Swipe.name, Swipe)
 Vue.component(SwipeItem.name, SwipeItem)
+Vue.component('g-button', GButton)
+Vue.component('g-input', GInput)
+Vue.component('group', Group)
+Vue.component('g-select', GSelect)
+Vue.component('g-select-one', GSelectOne)
+Vue.component('g-upload', GUpload)
 Vue.prototype.$toast = Toast
 Vue.prototype.$MessageBox = MessageBox
 
