@@ -56,6 +56,7 @@ export default {
       this.$axios.post(login, reqData).then(data => {
         if (data.code === '0000') {
           this.$store.dispatch('updataUserG', data.data)
+          console.log(this.$route.query.url)
           this.$router.replace(this.$route.query.url)
         } else if (data.code === '0002') {
           Toast({
