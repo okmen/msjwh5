@@ -13,7 +13,7 @@ export default {
   name: 'GDatePicker',
   data () {
     return {
-      pickerVisible: ''
+      pickerVisible: new Date()
     }
   },
   props: {
@@ -23,9 +23,9 @@ export default {
   components: {
     'mt-datetime-picker': DatetimePicker
   },
-  created () {
+  mounted () {
     this.currentDate = this.value
-    this.pickerVisible = new Date(this.value)
+    // this.pickerVisible = this.value
   },
   computed: {
     currentDate: {
@@ -40,6 +40,7 @@ export default {
   methods: {
     openPick () {
       this.$refs.picker.open()
+      this.pickerVisible = this.value
     },
     handleConfirm (value) {
       this.currentDate = this.formatDate(value)

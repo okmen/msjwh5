@@ -74,3 +74,5 @@ export const complementTheMotorVehicleDrivingLicense = `${commonUrl}handleservic
 export const intoCard = `${commonUrl}handleservice/driverLicenseInto.html` // 驾驶证转入
 
 export const getFileNumber = `${commonUrl}user/search/getMyDriverLicense.html` // 查询档案号
+
+export const iocomotiveCarReplace = `${commonUrl}handleservice/iocomotiveCarReplace.html`  // 换领行驶证
