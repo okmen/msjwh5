@@ -8,7 +8,7 @@
     <g-input title="车架号" v-model="vehicleIdentifyNoLast" placeholder="请输入车架号后四位"></g-input>
     <g-input title="车主姓名" v-model="name" placeholder="请按行驶证填写"></g-input>
     <g-input title="手机号码" v-model="mobilephone" placeholder="请填写手机号码"></g-input>
-    <g-date-picker title="申请日期" v-model="effectiveDate"></g-date-picker>
+    <g-time-picker title="申请日期" v-model="effectiveDate"></g-time-picker>
     <g-button text="确认信息" @click.native="confirmInfo"></g-button>
     <div class="hint">
       <h4>温馨提示：</h4>
@@ -20,7 +20,8 @@
 </template>
 
 <script>
-import {GInput, GSelect, GButton, GSelectOne, GRadio, Group, GUpload, GDatePicker} from 'form'
+import moment from 'moment'
+import {GInput, GSelect, GButton, Group, GUpload, GTimePicker} from 'form'
 export default {
 
   name: 'applyEveryMonth',
@@ -46,25 +47,29 @@ export default {
       vehicleIdentifyNoLast: '',
       name: '',
       mobilephone: '',
-      effectiveDate: this.formatDate(new Date())
+      effectiveDate: this.formatDate(new Date(moment().add(1, 'days').format('YYYY-MM-DD')))
     }
   },
   components: {
     GInput,
     GSelect,
-    GSelectOne,
     GButton,
-    GRadio,
     Group,
     GUpload,
-    GDatePicker
+    GTimePicker
   },
   computed: {
     licenseSelectData () {
       return this.$store.state.cartype
     }
   },
+  mounted: function () {
+    console.log(this.mtDateTimeMsg = moment().add(1, 'days').format('YYYY-MM-DD'), '6666')
+  },
   methods: {
+    confirmInfo () {
+      console.log(this.effectiveDate)
+    },
     // 日期格式化
     formatDate: (date, addYear) => {
       var y = !addYear ? date.getFullYear() : date.getFullYear() + addYear
@@ -72,6 +77,7 @@ export default {
       m = m < 10 ? '0' + m : m
       var d = date.getDate()
       d = d < 10 ? ('0' + d) : d
+      console.log(y + '-' + m + '-' + d, '88888')
       return y + '-' + m + '-' + d
     }
   }
