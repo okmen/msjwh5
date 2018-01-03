@@ -1,20 +1,19 @@
-<!--驾驶证降级-->
 <template>
-<div class="degrade-card">
+<div class="into-card">
   <g-input title="证件名称" value="居民身份证" readonly></g-input>
-  <g-input title="证件号码" readonly :value="loginUser"></g-input>
-  <g-input title="申请人证件号" readonly :value="IDcard"></g-input>
-  <g-input title="申请人驾驶证号"readonly :value="driverLicense"></g-input>
-  <g-input title="申请人姓名" readonly :value="name"></g-input>
-  <g-select title="户籍所在地" :data="censusRegister" v-model="censusRegisterOne"></g-select>
+  <g-input title="证件号码" :value="IDcard" readonly></g-input>
+  <g-input title="姓名" :value="name" readonly></g-input>
+  <g-input title="驾驶证号" :value="driverLicense" readonly></g-input>
+  <g-input title="档案编号" v-model="fileNumber" readonly></g-input>
+  <g-select title="发证机关" :data="placeSelectData" placeholder="请选择发证机关" v-model="placeSelectMassage" ref="placeSelectStr"></g-select>
   <g-input title="照片回执码" v-model="photoReturnNumberString" placeholder="请输入照片回执码">
     <div slot="right" class="degrade-btn" v-if="$route.query.source === 'M'">
       <g-button text="扫一扫" noMargin="true"  @click.native="scanCode"></g-button>
     </div>
   </g-input>
   <span class="changeCard-examine" @click.stop="example=true">查看示例</span>
-  <g-input title="收件人姓名" v-model="receiverName"></g-input>
-  <g-input title="收件人号码" v-model="receiverNumber"></g-input>
+  <g-input title="收件人姓名" v-model="receiverName" readonly></g-input>
+  <g-input title="收件人号码" v-model="receiverNumber" readonly></g-input>
   <g-select-one type="邮寄地址" title="深圳市" :data="cityArea" v-model="cityAreaOne" ref="cityAreaOneStr"></g-select-one>
   <g-input title="" v-model="mailingAddress" placeholder="请输入详细地址"></g-input>
   <group title="请按示例图上传以下证件照片">
@@ -22,6 +21,7 @@
       <g-upload id="file1" text="身份证（正面）" :bg="require('../../../assets/images/IDcard-front.png')" v-model="cardFront"></g-upload>
       <g-upload id="file2" text="身份证（反面）" :bg="require('../../../assets/images/IDcard-back.png')" v-model="cardBack"></g-upload>
       <g-upload id="file3" text="驾驶证照片" :bg="require('../../../assets/images/drivinglicense.png')" v-model="drivinglicenseImg"></g-upload>
+      <g-upload id="file4" text="身体条件申请表" :bg="require('../../../assets/images/body-table.png')" v-model="bodyTable"></g-upload>
     </div>
   </group>
   <g-button text="确认信息" @click.native="confirmInfo"></g-button>
@@ -36,34 +36,32 @@
 </template>
 
 <script>
-  import GInput from '../../../components/form/GInput'
-  import wx from 'weixin-js-sdk'
   import beforeSubmit from '@/mixins/beforeSubmit'
-  import { degradeCard } from '@/config/baseURL'
+  import wx from 'weixin-js-sdk'
+  import { intoCard, getIssuing, getFileNumber } from '@/config/baseURL'
   export default {
-    components: {GInput},
-    name: 'degrade-card',
+    name: 'into-card',
     data () {
       return {
-        censusRegisterOne: '1',
-        receiverName: '',
-        receiverNumber: '',
-        cityAreaOne: '01',
         photoReturnNumberString: '',
+        example: false,
+        fileNumber: '',
+        receiverNumber: '',
+        receiverName: '',
         cardFront: '',
         cardBack: '',
         drivinglicenseImg: '',
-        example: false,
-        mailingAddress: ''
+        bodyTable: '',
+        placeSelectData: [],
+        cityAreaOne: '01',
+        mailingAddress: '',
+        placeSelectMassage: ''
       }
     },
     mixins: [beforeSubmit],
     computed: {
       user () {
         return this.$store.state.user
-      },
-      loginUser () {
-        return this.user.identityCard
       },
       IDcard () {
         return this.user.identityCard
@@ -84,7 +82,18 @@
     created () {
       if (this.user.bindDriverLicence !== '1') {
         this.$MessageBox('温馨提示', '您还没绑定驾驶证,请到星级用户中心绑定！')
+        return
       }
+      this.$axios.post(getFileNumber, {identityCard: this.IDcard}).then(json => {
+        if (json.code === '0000') {
+          this.fileNumber = json.data.fileNumber
+        }
+      })
+      this.$axios.get(getIssuing).then(data => {
+        data.data.map(item => {
+          this.placeSelectData.push({name: item.longName, value: item.shortName})
+        })
+      })
       this.receiverNumber = this.user.mobilePhone
       this.receiverName = this.name
     },
@@ -106,39 +115,39 @@
       confirmInfo () {
         let obj = {
           photoReturnNumberString: '请输入照片回执码',
-          receiverName: '请输入收件人姓名',
-          receiverNumber: '请输入收件人手机号码',
           mailingAddress: '请输入详细地址',
           cardFront: '请上传身份证（正面）',
           cardBack: '请上传身份证（反面）',
-          drivinglicenseImg: '请上传驾驶证照片'
+          drivinglicenseImg: '请上传驾驶证照片',
+          bodyTable: '请上传身体条件申请表'
         }
         if (this.$_myMinxin_beforeSubmit(obj)) return
-        if (this.$verification.isPhone(this.receiverNumber)) return
         if (this.$verification.isPhotoNum(this.photoReturnNumberString)) return
         let reqData = {
-          type: '驾驶证自愿降级',
-          url: degradeCard,
+          type: '驾驶证转入',
+          url: intoCard,
           textObj: {
-            identificationNO: 'A',
-            identityCard: this.IDcard,
-            proposerIdentityCard: this.IDcard,
-            driverLicense: this.driverLicense,
             userName: this.name,
-            placeOfDomicile: this.censusRegisterOne,
+            driverLicense: this.driverLicense,
+            fileNumber: this.fileNumber,
+            identityCard: this.IDcard,
+            issuingLicenceAuthorityMsg: this.$refs.placeSelectStr.currentName,             // 发证机关传给后端的字段
             photoReturnNumberString: this.photoReturnNumberString,
             receiverName: this.receiverName,
             receiverNumber: this.receiverNumber,
             receiverAddress: '深圳市' + this.$refs.cityAreaOneStr.currentName + this.mailingAddress
           },
           imgObj: {
-            PHOTO9: this.cardFront,
-            PHOTO10: this.cardBack,
-            JSZZP: this.drivinglicenseImg
+            PHOTO9: this.cardFront || '',
+            PHOTO10: this.cardBack || '',
+            JSZZP: this.drivinglicenseImg || '',
+            STTJSQB: this.bodyTable || ''
           },
           invisibleObj: {
-            loginUser: this.loginUser,
-            userSource: this.$route.query.source
+            issuingLicenceAuthority: this.placeSelectMassage,             // 发证机关传给后端的字段
+            loginUser: this.IDcard,
+            userSource: this.$route.query.source,
+            identificationNO: 'A'
           }
         }
         console.log(reqData)
@@ -150,13 +159,8 @@
 </script>
 
 <style scoped lang="less">
-.degrade-card{
+.into-card{
   padding: 20px 0 40px;
-  .upload-group{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
   .degrade-btn{
     width: 200px;
     .g-button{

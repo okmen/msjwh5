@@ -50,5 +50,14 @@ export default [
       loginStatus: true
     },
     component: () => import('@/views/transactionClass/drivingLicence/changeConnect')
+  },
+  {
+    path: '/intoCard',
+    name: 'intoCard',
+    meta: {
+      title: '驾驶证转入',
+      loginStatus: true
+    },
+    component: () => import('@/views/transactionClass/drivingLicence/intoCard')
   }
 ]
