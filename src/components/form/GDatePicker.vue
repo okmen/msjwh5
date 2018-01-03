@@ -1,7 +1,7 @@
 <template>
   <div class="g-date-picker">
     <div class="g-date-picker-title" v-if="title">{{title}}</div>
-    <input class="g-date-picker-value" readonly @click.stop="openPick" v-model="currentValue">
+    <input class="g-date-picker-value" readonly @click.stop="openPick" v-model="currentDate">
     <mt-datetime-picker ref="picker" v-model="pickerVisible" type="date" year-format="{value} 年" month-format="{value} 月" date-format="{value} 日" @confirm="handleConfirm">
     </mt-datetime-picker>
   </div>
@@ -13,8 +13,7 @@ export default {
   name: 'GDatePicker',
   data () {
     return {
-      pickerVisible: '',
-      currentValue: null
+      pickerVisible: new Date()
     }
   },
   props: {
@@ -24,31 +23,27 @@ export default {
   components: {
     'mt-datetime-picker': DatetimePicker
   },
-  created () {
-    this.currentValue = this.value
-    // this.currentDate = this.value
-    this.pickerVisible = this.value
-    console.log(this.pickerVisible + '===========')
+  mounted () {
+    this.currentDate = this.value
+    // this.pickerVisible = this.value
   },
-  watch: {
-    // currentDate: {
-    //   get: function () {
-    //     return this.value
-    //   },
-    //   set: function (val) {
-    //     this.$emit('input', val)
-    //   }
-    // },
-    value (val) {
-      this.currentValue = val
+  computed: {
+    currentDate: {
+      get: function () {
+        return this.value
+      },
+      set: function (val) {
+        this.$emit('input', val)
+      }
     }
   },
   methods: {
     openPick () {
       this.$refs.picker.open()
+      this.pickerVisible = this.value
     },
     handleConfirm (value) {
-      this.currentValue = this.formatDate(value)
+      this.currentDate = this.formatDate(value)
     },
     // 日期格式化
     formatDate: (date) => {
