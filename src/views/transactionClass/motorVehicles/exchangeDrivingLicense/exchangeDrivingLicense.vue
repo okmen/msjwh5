@@ -1,7 +1,7 @@
 <template>
-  <div class="repairDrivingLicense">
+  <div class="exchangeDrivingLicense">
     <div class="changeCard-top">
-      <g-input class="changeCard-type" title="业务类型" value="补领行驶证" readonly></g-input>
+      <g-input class="changeCard-type" title="业务类型" value="换领行驶证" readonly></g-input>
     </div>
     <g-input title="车主姓名" v-model="name" readonly></g-input>
     <g-input title="证件号码" v-model="certificateNumber" readonly></g-input>
@@ -16,7 +16,6 @@
       <div class="upload-group">
         <g-upload text="身份证(正面)" id="file1" :bg="require('@/assets/images/IDcard-front.png')" v-model="IDCardFront"></g-upload>
         <g-upload text="身份证(反面)" id="file2" :bg="require('@/assets/images/IDcard-back.png')" v-model="IDCardBack"></g-upload>
-        <g-upload text="车辆45度照片" id="file7" :bg="require('@/assets/images/45-degree.png')" v-model="degree"></g-upload>
         <g-upload text="机动车登记证书" id="file3" :bg="require('@/assets/images/register-credential.png')" v-model="registerCredential"></g-upload>
         <g-upload text="居住证正面" id="file4" :bg="require('@/assets/images/residence-permit-f.png')" v-model="residencePermitF" v-show="censusIndex === 1"></g-upload>
         <g-upload text="居住证反面" id="file5" :bg="require('@/assets/images/residence-permit-b.png')" v-model="residencePermitB" v-show="censusIndex === 1"></g-upload>
@@ -31,9 +30,9 @@
 <script>
 import {GInput, GSelect, GButton, GSelectOne, GRadio, Group, GUpload} from 'form'
 import beforeSubmit from '@/mixins/beforeSubmit'
-import { complementTheMotorVehicleDrivingLicense } from '@/config/baseURL'
+import { iocomotiveCarReplace } from '@/config/baseURL'
 export default {
-  name: 'repairDrivingLicense',
+  name: 'exchangeDrivingLicense',
   data () {
     return {
       name: '',
@@ -55,7 +54,6 @@ export default {
       IDCardBack: '',
       registerCredential: '',
       residencePermitF: '',
-      degree: '',
       residencePermitB: '',
       board: '',
       censusIndex: 0
@@ -93,7 +91,6 @@ export default {
         recipientAddressDetail: '请输入详细地址',
         IDCardFront: '请上传身份证（正面）',
         IDCardBack: '请上传身份证（反面）',
-        degree: '请上传车辆45度照片',
         registerCredential: '请上传机动车登记证书'
       }
       if (this.$_myMinxin_beforeSubmit(obj)) return
@@ -113,8 +110,8 @@ export default {
       let plateNumberName = this.$refs.plateNumberName.currentName // 获取 name 值
       let dataList = {
         type: '补领行驶证',
-        url: complementTheMotorVehicleDrivingLicense,
-        title: 'complementTheMotorVehicleDrivingLicense',
+        url: iocomotiveCarReplace,
+        title: 'iocomotiveCarReplace',
         textObj: {
           'name': this.name,                            // 车主姓名
           'identificationNum': this.certificateNumber,  // 身份证号码
@@ -130,7 +127,6 @@ export default {
         imgObj: {
           'PHOTO9': this.IDCardFront || '',
           'PHOTO10': this.IDCardBack || '',
-          'XSZZP': this.degree || '',
           'DJZSFYJ': this.registerCredential || '',
           'PHOTO31': this.board || '',
           'JZZA': this.residencePermitF || '',
@@ -164,7 +160,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .repairDrivingLicense{
+  .exchangeDrivingLicense{
     padding-bottom: 40px;
     .upload-group{
       display: flex;

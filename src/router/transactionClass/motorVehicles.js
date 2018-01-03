@@ -85,5 +85,13 @@ export default [
       title: '补领行驶证'
     },
     component: () => import('@/views/transactionClass/motorVehicles/repairDrivingLicense/repairDrivingLicense')
+  },
+  {
+    name: 'exchangeDrivingLicense',
+    path: '/exchangeDrivingLicense',
+    meta: {
+      title: '换领行驶证'
+    },
+    component: () => import('@/views/transactionClass/motorVehicles/exchangeDrivingLicense/exchangeDrivingLicense')
   }
 ]

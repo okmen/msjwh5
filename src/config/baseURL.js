@@ -66,3 +66,5 @@ export const unbindTheOtherDriverUseMyCar = `${commonUrl}user/unbindTheOtherDriv
 export const unbindVehicle = `${commonUrl}user/unbindVehicle.html` // 车主解绑车辆
 
 export const complementTheMotorVehicleDrivingLicense = `${commonUrl}handleservice/complementTheMotorVehicleDrivingLicense.html` // 补领行驶证
+
+export const iocomotiveCarReplace = `${commonUrl}handleservice/iocomotiveCarReplace.html`  // 换领行驶证
