@@ -6,6 +6,7 @@ import Group from './Group'
 import GSelectOne from './GSelectOne'
 import GRadio from './GRadio'
 import GDatePicker from './GDatePicker'
+import GTimePicker from './GTimePicker'
 export {
   GInput,
   GSelect,
@@ -14,5 +15,6 @@ export {
   Group,
   GSelectOne,
   GRadio,
-  GDatePicker
+  GDatePicker,
+  GTimePicker
 }
