@@ -68,3 +68,5 @@ export const unbindVehicle = `${commonUrl}user/unbindVehicle.html` // 车主解�
 export const degradeCard = `${commonUrl}handleservice/driverLicenseVoluntaryDemotion.html` // 驾驶证自愿降级
 
 export const changeConnect = `${commonUrl}handleservice/driverChangeContact.html` // 驾驶人联系方式变更
+
+export const complementTheMotorVehicleDrivingLicense = `${commonUrl}handleservice/complementTheMotorVehicleDrivingLicense.html` // 补领行驶证
