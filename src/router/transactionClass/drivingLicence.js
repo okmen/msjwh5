@@ -59,5 +59,14 @@ export default [
       loginStatus: true
     },
     component: () => import('@/views/transactionClass/drivingLicence/intoCard')
+  },
+  {
+    path: '/postponeChangeCard',
+    name: 'postponeChangeCard',
+    meta: {
+      title: '驾驶证延期换证',
+      loginStatus: true
+    },
+    component: () => import('@/views/transactionClass/drivingLicence/postponeChangeCard')
   }
 ]
