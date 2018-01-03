@@ -159,7 +159,57 @@ const state = {
     '20': '临时入境车',
     '51': '临时行驶车',
     '52': '新能源小型车'
-  }
+  },
+  cardSelectData: [
+    {
+      'value': 'A',
+      'name': '居民身份证'
+    },
+    {
+      'value': 'B',
+      'name': '组织机构代码书'
+    },
+    {
+      'value': 'C',
+      'name': '军官证'
+    },
+    {
+      'value': 'E',
+      'name': '军官离退休证'
+    },
+    {
+      'value': 'D',
+      'name': '士兵证'
+    },
+    {
+      'value': 'F',
+      'name': '境外人员身份证明'
+    },
+    {
+      'value': 'G',
+      'name': '外交人员身份证明'
+    },
+    {
+      'value': 'H',
+      'name': '居民户口簿'
+    },
+    {
+      'value': 'J',
+      'name': '单位注销证明'
+    },
+    {
+      'value': 'K',
+      'name': '居住暂住证明'
+    },
+    {
+      'value': 'L',
+      'name': '驻华机构证明'
+    },
+    {
+      'value': 'M',
+      'name': '临时居民身份证'
+    }
+  ]
 }
 
 const actions = {}

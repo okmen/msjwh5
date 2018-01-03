@@ -111,7 +111,7 @@
           mailingAddress: '请输入详细地址',
           cardFront: '请上传身份证（正面）',
           cardBack: '请上传身份证（反面）',
-          drivinglicenseImg: '请上传驾驶证号照片'
+          drivinglicenseImg: '请上传驾驶证照片'
         }
         if (this.$_myMinxin_beforeSubmit(obj)) return
         if (this.$verification.isPhone(this.receiverNumber)) return

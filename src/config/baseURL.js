@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === 'development') {
     commonUrl = 'http://gzh.stc.gov.cn/api/' // 正式环境
   }
 }
-
+// commonUrl = 'http://testjava.chudaokeji.com/' // 测试环境
 export const getUserM = `${commonUrl}msjw/getMSJWinfo.html` // 民生警务获取用户信息
 
 export const userAgreement = `${commonUrl}user/getDocumentationORMByNoticeKey.html` // 用户须知接口
@@ -64,6 +64,10 @@ export const bindCar = `${commonUrl}user/search/getBndTheVehicles.html` // 个�
 export const unbindTheOtherDriverUseMyCar = `${commonUrl}user/unbindTheOtherDriverUseMyCar.html` // 车主解绑其他车辆使用人
 
 export const unbindVehicle = `${commonUrl}user/unbindVehicle.html` // 车主解绑车辆
+
+export const degradeCard = `${commonUrl}handleservice/driverLicenseVoluntaryDemotion.html` // 驾驶证自愿降级
+
+export const changeConnect = `${commonUrl}handleservice/driverChangeContact.html` // 驾驶人联系方式变更
 
 export const complementTheMotorVehicleDrivingLicense = `${commonUrl}handleservice/complementTheMotorVehicleDrivingLicense.html` // 补领行驶证
 
