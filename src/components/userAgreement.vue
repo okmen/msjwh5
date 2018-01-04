@@ -145,7 +145,7 @@ export default {
             this.$router.push('/replaceCredentials/exchangeDrivingLicense')
             break
           case 'szjj_hander_iccc':  // 机动车变更联系方式
-            this.$router.push('/motorAlteration')
+            this.$router.push({ path: '/motorAlteration', query: this.queryURL })
             break
           case 'jszbzhz':  // 驾驶证补证换证
             let urlId

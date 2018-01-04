@@ -93,5 +93,13 @@ export default [
       title: '换领行驶证'
     },
     component: () => import('@/views/transactionClass/motorVehicles/exchangeDrivingLicense/exchangeDrivingLicense')
+  },
+  {
+    name: 'motorAlteration',
+    path: '/motorAlteration',
+    meta: {
+      title: '机动车联系方式变更'
+    },
+    component: () => import('@/views/transactionClass/motorVehicles/motorAlteration')
   }
 ]

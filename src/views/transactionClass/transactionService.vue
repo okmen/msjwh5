@@ -18,6 +18,9 @@
     <div class="query-link" v-if="source === 'G'">
       <router-link :to="{ path: '/userAgreement/jszns', query: queryURL }">机动车驾驶证年度审验</router-link>
     </div>
+    <div class="query-link">
+      <router-link :to="{ path: '/userAgreement/szjj_hander_iccc', query: queryURL }">机动车联系方式变更</router-link>
+    </div>
   </div>
 </template>
 
