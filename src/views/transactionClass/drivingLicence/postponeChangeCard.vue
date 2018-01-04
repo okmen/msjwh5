@@ -28,13 +28,12 @@
 
 <script>
   import beforeSubmit from '@/mixins/beforeSubmit'
-  import { changeDelay, getFileNumber } from '@/config/baseURL'
+  import { changeDelay } from '@/config/baseURL'
   export default {
     name: 'postpone-change-card',
     data () {
       return {
         mailingAddress: '',
-        fileNumber: '',
         reasonSelectData: [
           {
             'value': '01',
@@ -80,6 +79,9 @@
       },
       cityArea () {
         return this.$store.state.cityArea
+      },
+      fileNumber () {
+        return this.user.fileNumber
       }
     },
     created () {
@@ -87,11 +89,6 @@
         this.$MessageBox('温馨提示', '您还没绑定驾驶证,请到星级用户中心绑定！')
         return
       }
-      this.$axios.post(getFileNumber, {identityCard: this.IDcard}).then(json => {
-        if (json.code === '0000') {
-          this.fileNumber = json.data.fileNumber
-        }
-      })
       this.receiverNumber = this.user.mobilePhone
       this.receiverName = this.name
     },
