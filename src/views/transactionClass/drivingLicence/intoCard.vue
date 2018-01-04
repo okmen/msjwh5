@@ -4,7 +4,7 @@
   <g-input title="证件号码" :value="IDcard" readonly></g-input>
   <g-input title="姓名" :value="name" readonly></g-input>
   <g-input title="驾驶证号" :value="driverLicense" readonly></g-input>
-  <g-input title="档案编号" v-model="fileNumber" readonly></g-input>
+  <g-input title="档案编号" :value="fileNumber" readonly></g-input>
   <g-select title="发证机关" :data="placeSelectData" placeholder="请选择发证机关" v-model="placeSelectMassage" ref="placeSelectStr"></g-select>
   <g-input title="照片回执码" v-model="photoReturnNumberString" placeholder="请输入照片回执码">
     <div slot="right" class="degrade-btn" v-if="$route.query.source === 'M'">
@@ -38,14 +38,13 @@
 <script>
   import beforeSubmit from '@/mixins/beforeSubmit'
   import wx from 'weixin-js-sdk'
-  import { intoCard, getIssuing, getFileNumber } from '@/config/baseURL'
+  import { intoCard, getIssuing } from '@/config/baseURL'
   export default {
     name: 'into-card',
     data () {
       return {
         photoReturnNumberString: '',
         example: false,
-        fileNumber: '',
         receiverNumber: '',
         receiverName: '',
         cardFront: '',
@@ -77,6 +76,9 @@
       },
       cityArea () {
         return this.$store.state.cityArea
+      },
+      fileNumber () {
+        return this.user.fileNumber
       }
     },
     created () {
@@ -84,11 +86,6 @@
         this.$MessageBox('温馨提示', '您还没绑定驾驶证,请到星级用户中心绑定！')
         return
       }
-      this.$axios.post(getFileNumber, {identityCard: this.IDcard}).then(json => {
-        if (json.code === '0000') {
-          this.fileNumber = json.data.fileNumber
-        }
-      })
       this.$axios.get(getIssuing).then(data => {
         data.data.map(item => {
           this.placeSelectData.push({name: item.longName, value: item.shortName})
