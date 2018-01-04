@@ -26,7 +26,7 @@ export default {
     'mt-datetime-picker': DatetimePicker
   },
   mounted () {
-    this.currentDate = this.value
+    this.currentDate = this.formatDate(this.value)
   },
   computed: {
     currentDate: {

@@ -50,7 +50,7 @@ export default {
       name: '',
       mobilephone: '',
       plateNumber: '',
-      effectiveDate: this.formatDate(new Date(moment().add(1, 'days')))
+      effectiveDate: new Date(moment().add(1, 'days'))
     }
   },
   components: {
@@ -106,16 +106,6 @@ export default {
       console.log(dataList)
       this.$store.commit('savePassByValue', dataList)
       this.$router.push({path: '/affirmInfo', query: this.queryURL})
-    },
-    // 日期格式化
-    formatDate: (date, addYear) => {
-      var y = !addYear ? date.getFullYear() : date.getFullYear() + addYear
-      var m = date.getMonth() + 1
-      m = m < 10 ? '0' + m : m
-      var d = date.getDate()
-      d = d < 10 ? ('0' + d) : d
-      console.log(y + '-' + m + '-' + d, '88888')
-      return y + '-' + m + '-' + d
     }
   }
 }
