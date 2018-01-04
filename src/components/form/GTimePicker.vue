@@ -14,8 +14,8 @@ export default {
   name: 'GTimePicker',
   data () {
     return {
-      startDate: new Date(moment().add(1, 'days').format('YYYY-MM-DD')),   // 开始时间
-      endDate: new Date(moment().add(1, 'months').endOf('month').format('YYYY-MM-DD'))
+      startDate: new Date(moment().add(1, 'days')),   // 开始时间
+      endDate: new Date(moment().add(1, 'months').endOf('month'))
     }
   },
   props: {
@@ -26,7 +26,7 @@ export default {
     'mt-datetime-picker': DatetimePicker
   },
   mounted () {
-    this.currentDate = this.value
+    this.currentDate = this.formatDate(this.value)
   },
   computed: {
     currentDate: {
