@@ -21,6 +21,12 @@
     <div class="query-link">
       <router-link :to="{ path: '/userAgreement/szjj_hander_iccc', query: queryURL }">机动车联系方式变更</router-link>
     </div>
+    <div class="query-link">
+      <router-link :to="{ path: '/freeForFirst', query: queryURL }">首违免罚查询</router-link>
+    </div>
+    <div class="query-link">
+      <router-link :to="{ path: '/moveCar', query: queryURL }">一键挪车</router-link>
+    </div>
   </div>
 </template>
 

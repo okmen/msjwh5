@@ -101,5 +101,21 @@ export default [
       title: '机动车联系方式变更'
     },
     component: () => import('@/views/transactionClass/motorVehicles/motorAlteration')
+  },
+  {
+    name: 'freeForFirst',
+    path: '/freeForFirst',
+    meta: {
+      title: '首违免罚查询'
+    },
+    component: () => import('@/views/transactionClass/motorVehicles/freeForFirst/freeForFirst')
+  },
+  {
+    name: 'moveCar',
+    path: '/moveCar',
+    meta: {
+      title: '一键挪车'
+    },
+    component: () => import('@/views/transactionClass/motorVehicles/moveCar')
   }
 ]
