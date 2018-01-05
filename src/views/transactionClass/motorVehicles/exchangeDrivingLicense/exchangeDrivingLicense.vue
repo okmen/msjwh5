@@ -128,9 +128,9 @@ export default {
           'PHOTO9': this.IDCardFront || '',
           'PHOTO10': this.IDCardBack || '',
           'DJZSFYJ': this.registerCredential || '',
-          'PHOTO31': this.board || '',
-          'JZZA': this.residencePermitF || '',
-          'JZZB': this.residencePermitB || ''
+          'PHOTO31': this.censusIndex === 2 ? this.board : '',
+          'JZZA': this.censusIndex === 1 ? this.residencePermitF : '',
+          'JZZB': this.censusIndex === 1 ? this.residencePermitB : ''
         }
       }
       console.log(dataList)
