@@ -30,7 +30,8 @@ function wxConfig() {
         jsApiList: [
           'scanQRCode',
           'onMenuShareTimeline',
-          'onMenuShareAppMessage'
+          'onMenuShareAppMessage',
+          'getLocation'
         ]
       });
     } else {
