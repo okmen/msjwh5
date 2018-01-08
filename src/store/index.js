@@ -160,6 +160,112 @@ const state = {
     '51': '临时行驶车',
     '52': '新能源小型车'
   },
+  moveCarData: [
+    {
+      name: '大型汽车',
+      value: '01'
+    },
+    {
+      name: '小型汽车',
+      value: '02'
+    },
+    {
+      name: '使馆汽车',
+      value: '03'
+    },
+    {
+      name: '领馆汽车',
+      value: '04'
+    },
+    {
+      name: '境外汽车',
+      value: '05'
+    },
+    {
+      name: '外籍汽车',
+      value: '06'
+    },
+    {
+      name: '两、三轮摩托车',
+      value: '07'
+    },
+    {
+      name: '轻便摩托车',
+      value: '08'
+    },
+    {
+      name: '使馆摩托车',
+      value: '09'
+    },
+    {
+      name: '领馆摩托车',
+      value: '10'
+    },
+    {
+      name: '境外摩托车',
+      value: '11'
+    },
+    {
+      name: '外籍摩托车',
+      value: '12'
+    },
+    {
+      name: '农用运输车',
+      value: '13'
+    },
+    {
+      name: '拖拉机',
+      value: '14'
+    },
+    {
+      name: '挂车',
+      value: '15'
+    },
+    {
+      name: '教练汽车',
+      value: '16'
+    },
+    {
+      name: '教练摩托车',
+      value: '17'
+    },
+    {
+      name: '试验汽车',
+      value: '18'
+    },
+    {
+      name: '试验摩托车',
+      value: '19'
+    },
+    {
+      name: '临时入境汽车',
+      value: '20'
+    },
+    {
+      name: '试验摩托车',
+      value: '21'
+    },
+    {
+      name: '临时行驶车',
+      value: '22'
+    },
+    {
+      name: '警用汽车',
+      value: '23'
+    },
+    {
+      name: '警用摩托',
+      value: '24'
+    },
+    {
+      value: '51',
+      name: '新能源大型车'
+    },
+    {
+      value: '52',
+      name: '新能源小型车'
+    }
+  ],
   cardSelectData: [
     {
       'value': 'A',

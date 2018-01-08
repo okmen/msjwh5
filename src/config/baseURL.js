@@ -84,3 +84,7 @@ export const iocomotiveCarReplace = `${commonUrl}handleservice/iocomotiveCarRepl
 export const applyGatePass = `${commonUrl}handleservice/applyGatePass.html` // 申请通行证
 
 export const changeDelay = `${commonUrl}handleservice/renewalDriverLicense.html` // 驾驶证延期换证
+
+export const getLocation = 'http://navi1.careland.com.cn/cgi/pub_getpositioninfo_j.ums' // 通过经纬度获取附近的路接口
+
+export const moveCar = `${commonUrl}convenience/oneKeyDodgen.html` // 一键挪车接口
