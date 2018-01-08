@@ -111,6 +111,14 @@ export default [
     component: () => import('@/views/transactionClass/motorVehicles/freeForFirst/freeForFirst')
   },
   {
+    name: 'freeAbstract',
+    path: '/freeAbstract',
+    meta: {
+      title: '首违免罚介绍'
+    },
+    component: () => import('@/views/transactionClass/motorVehicles/freeForFirst/freeAbstract')
+  },
+  {
     name: 'moveCar',
     path: '/moveCar',
     meta: {

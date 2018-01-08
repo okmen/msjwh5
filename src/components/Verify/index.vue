@@ -150,6 +150,7 @@ export default {
     checkCode () {
       if (this.instance.checkCode) {
         this.instance.checkCode()
+        return this.instance.checkCode()
       }
     },
     /**

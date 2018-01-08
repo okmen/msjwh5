@@ -1,5 +1,10 @@
 <template>
     <div class="cerify-code-panel">
+        <div class="verify-code-area" :style="{'width': width}">
+            <div class="verify-input-area">
+                <input type="text" v-model="currentValue" class="letify-input-code"/>
+            </div>
+        </div>
         <div class="verify-code"
              @click="setCode"
              :style="{
@@ -14,12 +19,6 @@
             <span :style="code.style" v-for="(code, index) in codeShow" :key="index">
                 {{code.char || code}}
             </span>
-        </div>
-        <div class="verify-code-area" :style="{'width': width}">
-            <div class="verify-input-area">
-                <input type="text" v-model="currentValue" class="letify-input-code"/>
-            </div>
-            <!-- <div class="verify-change-area" @click="setCode"><a class="verify-change-code">换一张</a></div> -->
         </div>
     </div>
 </template>
@@ -106,7 +105,6 @@ export default {
                 : 'font-weight:bolder'
             tmpStyle +=
               Math.floor(Math.random() * 2) === 1 ? 'font-weight:bolder' : ''
-
             this.codeChose += codeChars[charNum]
             this.codeShow.push({
               style: tmpStyle,
@@ -163,22 +161,26 @@ export default {
         codeChose = this.codeChose
       }
 
-      console.log(inputValue)
-      console.log(codeChose)
-      console.log(inputValue === codeChose)
+      if (!inputValue) {
+        this.$toast({message: '请输入验证码', position: 'middle', duration: 3000})
+        return false
+      }
 
       if (inputValue === codeChose) {
         // this.isEnd = true
-        this.$parent.$emit('success', this)
+        // this.$parent.$emit('success', this)
+        return true
       } else {
-        this.$parent.$emit('error', this)
         this.setCode()
+        this.$toast({message: '请输入正确的验证码', position: 'middle', duration: 3000})
+        return false
+        // this.$parent.$emit('error', this)
       }
     },
     /**
-             * refresh
-             * @description 刷新
-             * */
+    * refresh
+    * @description 刷新
+    * */
     refresh () {
     //   this.isEnd = false
       this.currentValue = ''
@@ -223,32 +225,19 @@ export default {
 .verify-code {
   font-size: 20px;
   text-align: center;
-  cursor: pointer;
-  margin-bottom: 5px;
   border: 1px solid #ddd;
+  margin-left: 0;
 }
 .cerify-code-panel {
-  height: 100%;
-  overflow: hidden;
-  >div {
-      display: inline-block;
-  }
-}
-.verify-code-area {
-  float: left;
+  display: flex;
+  align-items:center;
 }
 .verify-input-area {
-  float: left;
-  width: 60%;
-  padding-right: 10px;
+  padding-left: 10px;
+  width: 90%;
 }
 .letify-input-code {
   display: inline-block;
   width: 100%;
-  height: 25px;
-}
-.verify-change-code {
-  color: #337ab7;
-  cursor: pointer;
 }
 </style>

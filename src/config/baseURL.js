@@ -15,6 +15,8 @@ export const userAgreement = `${commonUrl}user/getDocumentationORMByNoticeKey.ht
 
 export const applyCarTemporaryLicence = `${commonUrl}handleservice/applyCarTemporaryLicence.html` // 申请机动车临牌
 
+export const getResultOfFirstIllegalImpunity = `${commonUrl}handleservice/getResultOfFirstIllegalImpunity.html` // 首违免罚
+
 export const replaceMotorVehicleLicensePlate = `${commonUrl}handleservice/replaceMotorVehicleLicensePlate.html`  // 补换机动车号牌
 
 export const login = `${commonUrl}user/gdLogin.html` // 登录接口
