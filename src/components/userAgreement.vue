@@ -158,20 +158,20 @@ export default {
             this.$router.push({ path: `/changeCard/${urlId}`, query: this.queryURL })
             break
           case 'jszyqhz':  // 驾驶证延期换证
-            this.$router.push('/changeCard/id/2')
+            this.$router.push({ path: '/postponeChangeCard', query: this.queryURL })
             break
           case 'jszns':  // 驾驶证年审
             // this.$router.push('/annualExaminations')
             this.$router.push({ path: '/annualExaminations', query: this.queryURL })
             break
           case 'jszzr':  // 驾驶证转入
-            this.$router.push('/intoCard')
+            this.$router.push({ path: '/intoCard', query: this.queryURL })
             break
           case 'jszzyjj':  // 驾驶证自愿降级
-            this.$router.push('/degradeCard')
+            this.$router.push({ path: '/degradeCard', query: this.queryURL })
             break
           case 'jsrlxfsbg':  // 驾驶人联系方式变更
-            this.$router.push('/changeConnect')
+            this.$router.push({ path: '/changeConnect', query: this.queryURL })
             break
         }
       } else {
