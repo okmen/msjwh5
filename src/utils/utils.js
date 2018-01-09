@@ -107,6 +107,34 @@ export function getUserAgreement (name) {
           七、如由于您个人原因导致邮政部门无法成功投递驾驶证邮件的，邮政部门将会把此类邮件退回给深圳交警车管所，由您自行到车管所领取；<br>
         `
       }
+    case 'jszyqhz':
+      return {
+        title: '1',
+        text: `
+        驾驶证延期换证
+        `
+      }
+    case 'jszzr':
+      return {
+        title: '2',
+        text: `
+        驾驶证转入
+        `
+      }
+    case 'jsrlxfsbg':
+      return {
+        title: '3',
+        text: `
+        驾驶人联系方式变更
+        `
+      }
+    case 'jszzyjj':
+      return {
+        title: '4',
+        text: `
+        驾驶证自愿降级
+        `
+      }
     case 'szjj_hander_cvi':
       return {
         title: '核发机动车检验合格标志（6年免检）用户须知',
