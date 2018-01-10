@@ -146,5 +146,12 @@ export function getUserAgreement (name) {
           五、车主在线申请办理免检车核发检验标志，可以通过本系统查询办理情况；<br>
         `
       }
+    case 'szjj_hander_iccc':
+      return {
+        title: '5',
+        text: `
+          机动车联系方式变更
+        `
+      }
   }
 }
