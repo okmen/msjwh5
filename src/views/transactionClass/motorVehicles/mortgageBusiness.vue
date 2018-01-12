@@ -14,7 +14,7 @@
         <g-input title="登记证书编号" v-model="registrationNO" placeholder=" 请输入登记证书编号"></g-input>
         <g-input title="车主联系电话" v-model="ownerPhone" placeholder="请输 入车主联系电话"></g-input>
         <g-select title="车辆所有人" :data="ownerVehicle" v-model="selectOwnerVehicle"></g-select>
-        <plate-number-full v-model="plateNumber" disabled center></plate-number-full>
+        <plate-number-full v-model="plateNumber" type="mortgageBusiness" disabled center></plate-number-full>
         <g-select title="车牌类型" :data="licenseSelectData" v-model="plateSelect"></g-select>
         <g-input title="车辆识别号" v-model="carCode" placeholder="请输入车辆识别号"></g-input>
         <g-input title="抵押权人姓名" v-model="mortgageeName" readonly></g-input>
@@ -107,15 +107,15 @@ export default {
         }
       ],
       mortgagedSexList: [
-        {name: '男', choose: false, value: '男'},
+        {name: '男', choose: true, value: '男'},
         {name: '女', choose: false, value: '女'}
       ],
       mortgagorSexList: [
-        {name: '男', choose: false, value: '男'},
+        {name: '男', choose: true, value: '男'},
         {name: '女', choose: false, value: '女'}
       ],
-      mortgagedSex: '',
-      mortgagorSex: '',
+      mortgagedSex: '男',
+      mortgagorSex: '男',
       IDNumber: '',
       resultList: {},
       resultListShow: false,
@@ -173,7 +173,9 @@ export default {
   methods: {
     submitInfo: function () {
       let obj = {
+        registrationNO: '请输入登记证书编号',
         ownerPhone: '请输入车主联系电话',
+        plateNumber: '请输入车牌号码',
         carCode: '请输入车辆识别号',
         mortgageeAddr: '请输入抵押权人联系地址',
         mortgagerIDcard: '请输入身份证号或组织机构代码',
@@ -198,7 +200,7 @@ export default {
         'sqlx': '31',
         'mainContractNo': this.mainContractNo || '',
         'mortgageContactNo': this.mortgageContactNo || '',
-        'carNumber': this.plateNumber.substr(1),
+        'carNumber': 'B' + this.plateNumber.substr(1),
         'numberPlate': this.plateSelect,
         'carCode': this.carCode,
         'registrationNO': this.registrationNO,
