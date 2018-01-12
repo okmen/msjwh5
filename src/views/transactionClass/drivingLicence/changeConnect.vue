@@ -27,7 +27,7 @@
     data () {
       return {
         sexList: [
-          {name: '男', choose: false, value: '1'},
+          {name: '男', choose: true, value: '1'},
           {name: '女', choose: false, value: '2'}
         ],
         cityAreaOne: '01',
@@ -36,7 +36,7 @@
         cardBack: '',
         drivinglicenseImg: '',
         cur_card_id: 'A',
-        sex: '',
+        sex: '男',
         IDcard: ''
       }
     },
