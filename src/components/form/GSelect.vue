@@ -8,7 +8,7 @@
   <div class="g-select" :class="{ disabled: disabled, 'filled': classType === 'filled' }">
     <!--<div class="g-select-type" v-if="type">{{type}}</div>-->
     <div class="g-select-title" v-if="title">{{title}}</div>
-    <div class="g-select-value" @click.stop="showSelectUl()">
+    <div class="g-select-value" :class="{'center': center}" @click.stop="showSelectUl()">
       <span :class="{'placeholder': !currentName}">{{currentName || placeholder}}</span>
       <ul class="g-select-list" v-show="showUl">
         <li class="list-item" v-for="(item, index) in data" :key="index" @click.stop="selectedValue(item, index)">{{item instanceof Object ? item.name : item}}</li>
@@ -39,7 +39,8 @@
       type: String,
       placeholder: String,
       disabled: Boolean,
-      classType: String
+      classType: String,
+      center: Boolean
     },
     created () {
       this.init()
@@ -156,6 +157,10 @@
   .g-select.disabled {
     .g-select-value {
       background: #efeff4;
+    }
+    .center {
+      text-align: center;
+      padding-left: 0;
     }
   }
   .filled {

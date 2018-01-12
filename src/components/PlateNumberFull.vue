@@ -2,7 +2,7 @@
   <div class="plate-number-full">
     <g-input title="车牌号码" v-model="plateNumber" placeholder="请输入车牌号码">
       <template slot="left">
-        <g-select v-model="province" :data="provinceCodeAll" id="province"></g-select>
+        <g-select :disabled="disabled" :center="center" v-model="province" :data="provinceCodeAll" id="province"></g-select>
       </template>
     </g-input>
   </div>
@@ -18,7 +18,11 @@
         province: '粤'
       }
     },
-    props: ['value'],
+    props: {
+      'value': [String, Boolean],
+      'disabled': Boolean,
+      'center': Boolean
+    },
     components: {
       GSelect, GInput
     },

@@ -39,6 +39,9 @@
     <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
       <router-link :to="{ path: '/moveCar', query: queryURL }">一键挪车</router-link>
     </div>
+    <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
+      <router-link :to="{ path: '/userAgreement/jdcgrdyjydj', query: queryURL }">机动车个人抵押解押登记</router-link>
+    </div>
   </div>
 </template>
 

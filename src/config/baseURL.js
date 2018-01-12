@@ -88,3 +88,7 @@ export const changeDelay = `${commonUrl}handleservice/renewalDriverLicense.html`
 export const getLocation = 'http://navi1.careland.com.cn/cgi/pub_getpositioninfo_j.ums' // 通过经纬度获取附近的路接口
 
 export const moveCar = `${commonUrl}convenience/oneKeyDodgen.html` // 一键挪车接口
+
+export const applyOrCancleCarMortgage = `${commonUrl}handleservice/applyOrCancleCarMortgage.html` // 机动车抵押登记
+
+export const queryCarMortgage = `${commonUrl}handleservice/queryCarMortgage.html` // 机动车抵押登记查询

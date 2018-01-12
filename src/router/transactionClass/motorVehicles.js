@@ -125,5 +125,13 @@ export default [
       title: '一键挪车'
     },
     component: () => import('@/views/transactionClass/motorVehicles/moveCar')
+  },
+  {
+    name: 'mortgageBusiness',
+    path: '/mortgageBusiness',
+    meta: {
+      title: '机动车个人抵押解押登记'
+    },
+    component: () => import('@/views/transactionClass/motorVehicles/mortgageBusiness')
   }
 ]
