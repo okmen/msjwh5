@@ -228,7 +228,6 @@ export default {
           console.log(json.msg)
           let waterNumber = json.msg.split('：')[1]
           let sendData = {
-            title: this.$store.state.passByValue.title,
             type: 1,
             waterNumber: waterNumber
           }
