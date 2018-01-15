@@ -233,7 +233,8 @@ export default {
             waterNumber: waterNumber
           }
           this.$store.commit('saveSuccessInfo', sendData)
-          this.$router.push({path: '/submitSuccess', query: this.$store.getters.queryURL})
+          let source = this.$route.query.source
+          this.$router.push({path: '/submitSuccess', query: {source: source}})
         } else {
           this.$MessageBox('提示', json.msg).then(action => {})
         }
