@@ -9,30 +9,35 @@
         <div class="changeCard-top">
           <g-select class="changeCard-type" title="业务类型" :data="businessTypeData" v-model="businessType"></g-select>
         </div>
-        <g-input title="主合同号" v-model="mainContractNo" :placeholder=mainContractNoTip></g-input>
-        <g-input title="抵押合同号" v-model="mortgageContactNo" :placeholder=mortgageContactNoTip></g-input>
+        <div class="caption">基础信息</div>
+        <g-input title="主合同号" v-if="contractShow" v-model="mainContractNo" placeholder="请输入主合同号"></g-input>
+        <g-input title="抵押合同号" v-if="contractShow" v-model="mortgageContactNo" placeholder="请输入抵押合同号"></g-input>
         <g-input title="登记证书编号" v-model="registrationNO" placeholder=" 请输入登记证书编号"></g-input>
-        <g-input title="车主联系电话" v-model="ownerPhone" placeholder="请输 入车主联系电话"></g-input>
-        <g-select title="车辆所有人" :data="ownerVehicle" v-model="selectOwnerVehicle"></g-select>
         <plate-number-full v-model="plateNumber" type="mortgageBusiness" disabled center></plate-number-full>
-        <g-select title="车牌类型" :data="licenseSelectData" v-model="plateSelect"></g-select>
+        <g-select title="号牌种类" :data="plateTypeData" v-model="plateSelect"></g-select>
         <g-input title="车辆识别号" v-model="carCode" placeholder="请输入车辆识别号"></g-input>
-        <g-input title="抵押权人姓名" v-model="mortgageeName" readonly></g-input>
-        <g-input title="抵押权人身份证号" v-model="mortgageeIDcard" readonly></g-input>
-        <g-radio title="抵押权人性别" :data="mortgagedSexList" v-model="mortgagedSex"></g-radio>
-        <g-input title="抵押权人地址" v-model="mortgageeAddr" placeholder="请输入抵押权人联系地址"></g-input>
-        <g-input title="抵押证件号码" v-model="mortgagerIDcard" placeholder="请输入身份证号或组织机构代码"></g-input>
-        <g-input title="抵押人/单位" v-model="mortgagerName" placeholder="请输入抵押人姓名/单位名称"></g-input>
-        <g-radio title="抵押人性别" v-show="this.selectOwnerVehicle==='0'" :data="mortgagorSexList" v-model="mortgagorSex"></g-radio>
-        <g-input title="抵押人地址" v-model="mortgagerAddr" placeholder="请输入抵押人联系地址"></g-input>
-        <g-input title="取件人姓名" v-model="recipientName" placeholder="请输入取件人姓名"></g-input>
-        <g-input title="取件人电话" v-model="recipientPhone" placeholder="请输入取件人电话"></g-input>
-        <g-input title="取件地址" v-model="recipientAddr" placeholder="请输入取件地址"></g-input>
+        <g-input title="车主联系电话" v-model="ownerPhone" placeholder="请输 入车主联系电话"></g-input>
+        <div class="caption">抵押权人信息</div>
+        <g-input title="姓名" v-model="mortgageeName" readonly></g-input>
+        <g-radio title="性别" :data="mortgagedSexList" v-model="mortgagedSex"></g-radio>
+        <g-input title="身份证号" v-model="mortgageeIDcard" readonly></g-input>
+        <g-input title="联系地址" v-model="mortgageeAddr" placeholder="请输入抵押权人联系地址"></g-input>
+        <div class="caption">抵押权信息</div>
+        <g-select title="车辆所有人" :data="ownerVehicle" v-model="selectOwnerVehicle"></g-select>
+        <g-input title="姓名/单位名称" v-model="mortgagerName" placeholder="请输入抵押人姓名/单位名称"></g-input>
+        <g-input title="身份证号/组织机构代码" v-model="mortgagerIDcard" placeholder="请输入身份证号或组织机构代码"></g-input>
+        <g-radio title="性别" v-show="this.selectOwnerVehicle==='0'" :data="mortgagorSexList" v-model="mortgagorSex"></g-radio>
+        <g-input title="联系地址" v-model="mortgagerAddr" placeholder="请输入抵押人联系地址"></g-input>
+        <div class="caption">取件人信息</div>
+        <g-input title="姓名" v-model="recipientName" placeholder="请输入取件人姓名"></g-input>
+        <g-input title="电话" v-model="recipientPhone" placeholder="请输入取件人电话"></g-input>
         <g-input title="邮政编码" v-model="recipientCode" placeholder="请输入取件邮政编码"></g-input>
-        <g-input title="收件人姓名" v-model="receiverName" placeholder="请输入收件人姓名"></g-input>
-        <g-input title="收件人电话" v-model="receiverPhone" placeholder="请输入收件人电话"></g-input>
-        <g-input title="收件地址" v-model="receiverAddr" placeholder="请输入收件地址"></g-input>
-        <g-input title="收件邮政编码" v-model="receiverCode" placeholder="请输入收件邮政编码"></g-input>
+        <g-input title="联系地址" v-model="recipientAddr" placeholder="请输入取件地址"></g-input>
+        <div class="caption">邮寄收件人信息</div>
+        <g-input title="姓名" v-model="receiverName" placeholder="请输入收件人姓名"></g-input>
+        <g-input title="电话" v-model="receiverPhone" placeholder="请输入收件人电话"></g-input>
+        <g-input title="邮政编码" v-model="receiverCode" placeholder="请输入收件邮政编码"></g-input>
+        <g-input title="联系地址" v-model="receiverAddr" placeholder="请输入收件地址"></g-input>
         <g-button text="提交" @click.native="submitInfo"></g-button>
       </mt-tab-container-item>
       <mt-tab-container-item class="pt-20" id="2">
@@ -72,8 +77,7 @@ export default {
           value: 'B'
         }
       ],
-      mainContractNoTip: '请输入主合同号',
-      mortgageContactNoTip: '请输入抵押合同号',
+      contractShow: true, // 是否显示主合同号和抵押合同号
       mainContractNo: '', // 主合同号
       mortgageContactNo: '', // 抵押合同号
       carCode: '', // 车辆识别代号
@@ -94,7 +98,7 @@ export default {
       receiverAddr: '', // 收件人地址
       receiverCode: '', // 收件人邮政编码
       plateNumber: '', // 车牌号码
-      plateSelect: '02', // 车辆类型
+      plateSelect: '02', // 号牌种类
       selectOwnerVehicle: '1', // 车辆所有人
       ownerVehicle: [
         {
@@ -132,11 +136,6 @@ export default {
         'state': '状态',
         'sourceOfCertification': '录入来源',
         'applyTime': '申办时间'
-      },
-      plateType: {
-        '02': '蓝牌',
-        '06': '黑牌',
-        '01': '黄牌'
       }
     }
   },
@@ -154,8 +153,11 @@ export default {
   },
   mixins: [beforeSubmit],
   computed: {
-    licenseSelectData () {
-      return this.$store.state.plateType
+    plateTypeData () {
+      return this.$store.state.moveCarData
+    },
+    plateType () {
+      return this.$store.state.carSelectData
     },
     user () {
       return Object.assign({}, this.$store.state.user)
@@ -166,8 +168,7 @@ export default {
   },
   watch: {
     businessType (val) {
-      this.mainContractNoTip = (val === 'A') ? '请输入主合同号' : '此项可为空'
-      this.mortgageContactNoTip = (val === 'A') ? '请输入抵押合同号' : '此项可为空'
+      this.contractShow = !this.contractShow
     }
   },
   methods: {
@@ -265,6 +266,14 @@ export default {
 <style lang="less">
 .mortgageBusiness {
   padding-bottom: 40px;
+  .changeCard-top {
+    border-bottom: 0;
+  }
+  .caption {
+    padding: 10px 40px;
+    background-color: #f1f1f1;
+    color: #333;
+  }
   .mint-tab-item-label {
     font-size: 26px;
   }

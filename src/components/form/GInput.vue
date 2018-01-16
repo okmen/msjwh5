@@ -48,7 +48,7 @@
 <style scoped lang="less">
 .g-input{
   display: flex;
-  padding:10px 40px;
+  padding: 10px 40px;
   box-sizing: border-box;
   align-items: center;
   .g-input-title{
