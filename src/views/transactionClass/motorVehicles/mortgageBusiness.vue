@@ -272,7 +272,8 @@ export default {
   .caption {
     padding: 10px 40px;
     background-color: #f1f1f1;
-    color: #333;
+    color: #666;
+    font-size: 26px;
   }
   .mint-tab-item-label {
     font-size: 26px;
