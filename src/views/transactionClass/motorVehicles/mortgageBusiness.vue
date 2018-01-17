@@ -22,7 +22,7 @@
         <g-radio title="性别" :data="mortgagedSexList" v-model="mortgagedSex"></g-radio>
         <g-input title="身份证号" v-model="mortgageeIDcard" readonly></g-input>
         <g-input title="联系地址" v-model="mortgageeAddr" placeholder="请输入抵押权人联系地址"></g-input>
-        <div class="caption">抵押权信息</div>
+        <div class="caption">抵押人信息</div>
         <g-select title="车辆所有人" :data="ownerVehicle" v-model="selectOwnerVehicle"></g-select>
         <g-input title="姓名/单位名称" v-model="mortgagerName" placeholder="请输入抵押人姓名/单位名称"></g-input>
         <g-input title="身份证号/组织机构代码" v-model="mortgagerIDcard" placeholder="请输入身份证号或组织机构代码"></g-input>
@@ -304,8 +304,9 @@ export default {
         flex: 1;
       }
       .liDiv-text{
-        flex:2;
         padding-right: 20px;
+        width: 65%;
+        word-wrap: break-word;
       }
     }
     .freeByCarLi:last-of-type{
