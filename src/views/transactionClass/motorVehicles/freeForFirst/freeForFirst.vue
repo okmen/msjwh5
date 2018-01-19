@@ -6,7 +6,7 @@
     </mt-navbar>
     <mt-tab-container v-model="selected">
       <mt-tab-container-item id="1">
-        <plate-number-full v-model="plateNumber" ref="plateSelectType"></plate-number-full>
+        <plate-number-full v-model="plateNumber"></plate-number-full>
         <g-select title="车牌类型" :data="licenseSelectData" v-model="plateSelect" ref="plateSelectName"></g-select>
         <Verify :type="1" title="验证码" v-model="verifyCode" ref="callVerify"></Verify>
         <g-button text="查询" @click.native="vehicleSearch"></g-button>
@@ -20,10 +20,10 @@
     <div class="tp-look-tips">
       <router-link :to="{path: '/freeAbstract'}">首违免罚介绍</router-link>
     </div>
-    <ul class="freeByCarUl" v-if="freeUlShow">
-      <li class="freeByCarLi" v-for="(item, key) in freeData" :key="key">
+    <ul class="freeByCarUl" v-if="freeUlShow" v-for="(freeDataList, index) in freeData" :key="index">
+      <li class="freeByCarLi" v-for="(item, key) in freeDataList" :key="key">
         <div class="liDiv-title">{{keyListObj[key]}}</div>
-        <div class="liDiv-text">{{key === 'plateType' ? licenseSelectData[item] : item}}</div>
+        <div class="liDiv-text">{{key === 'plateType' ? plateType[item] : item}}</div>
       </li>
     </ul>
   </div>
@@ -40,13 +40,12 @@ import beforeSubmit from '@/mixins/beforeSubmit'
 export default {
   data () {
     return {
-      freeUlShow: false,
+      freeUlShow: false, // 车牌列表 显示-true 隐藏-false
       selected: '1',
-      plateNumber: '',
-      licenseSelect: 'K31',
+      plateNumber: '', // 车牌号码
       trafficNumber: '',
-      verifyCode: '',
-      plateSelect: '02',
+      verifyCode: '', // 验证码
+      plateSelect: '02', // 车牌类型
       freeData: {},
       keyListObj: {
         'id': '记录ID',
@@ -66,6 +65,11 @@ export default {
         'illegalNumber': '违法序号',
         'productiveTime': '运算时间',
         'updateTime': '更新时间'
+      },
+      plateType: {
+        '02': '蓝牌',
+        '06': '黑牌',
+        '01': '黄牌'
       },
       reqData: {}
     }
@@ -100,11 +104,10 @@ export default {
         return
       }
       if (this.$_myMinxin_beforeSubmit({plateNumber: '请输入车牌号码'})) return
-      let plateTypeName = this.$refs.plateSelectType.plateNumberFull
       this.reqData = {
         queryType: '1',
         illegalNumber: '',
-        'numberPlate': `${plateTypeName}`,   // 车牌号码
+        'numberPlate': this.plateNumber,   // 车牌号码
         'plateType': this.plateSelect      // 车牌种类
       }
       this.subData()
@@ -125,7 +128,7 @@ export default {
     subData () {
       axios.post(getResultOfFirstIllegalImpunity, this.reqData).then(json => {
         if (json.code === '0000') {
-          this.freeData = json.data[0]
+          this.freeData = json.data
           this.freeUlShow = true
         } else {
           this.$toast({message: json.msg, position: 'middle', duration: 3000})
@@ -138,8 +141,6 @@ export default {
     selected: function (val) {
       this.refresh()
     }
-  },
-  mounted () {
   }
 }
 </script>
