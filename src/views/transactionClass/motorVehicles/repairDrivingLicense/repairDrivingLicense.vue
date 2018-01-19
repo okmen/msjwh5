@@ -40,7 +40,7 @@ export default {
       myNumberPlate: '',
       name: '',
       certificateNumber: '',
-      plateNumberData: '',
+      plateNumberData: [],
       plateNumber: '',
       plateSelect: '02',
       getCensusRegisterData: [
