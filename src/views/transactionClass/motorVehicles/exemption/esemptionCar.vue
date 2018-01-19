@@ -19,8 +19,8 @@
     <g-input title="预约人身份证号" v-model="bookerIdentityCard" placeholder="请输入预约人身份证号" classType='filled'></g-input>
     <g-input title="预约方式" value="本人" classType='filled' readonly></g-input> -->
     <!-- <span class="form-annotation">注:只能申请本人名下车辆</span> -->
-    <g-button text="确认信息" @click.native="confirmInfo" v-if="plateNumber.length"></g-button>
-    <g-button text="确认信息" v-if="!plateNumber.length" type="gray"></g-button>
+    <g-button text="确认信息" @click.native="confirmInfo" v-if="myNumberPlate"></g-button>
+    <g-button text="确认信息" v-if="!myNumberPlate" type="gray"></g-button>
   </div>
 </template>
 
@@ -35,6 +35,7 @@ export default {
   data () {
     return {
       name: '补换检验合格标志',
+      myNumberPlate: '',
       plateNumberOne: '0',               // 车牌号码
       ownersName: '',                    // 车主姓名
       allOwnersName: {},
@@ -96,7 +97,7 @@ export default {
         option: []
       }
       let cars = this.$store.state.user.cars
-      if (!cars.length) return plateInfo.option
+      if (!cars) return plateInfo.option
       cars.map((item, index) => {
         if (+item.isMySelf === 0) {
           plateInfo.option.push({'name': item.myNumberPlate, 'value': index + ''})
@@ -221,8 +222,9 @@ export default {
     }
   },
   mounted () {
-    let cars = this.$store.state.user.cars
-    if (cars.length) {
+    // let cars = this.$store.state.user.cars
+    this.myNumberPlate = this.$store.state.user.myNumberPlate
+    if (this.myNumberPlate) {
       this.ownersName = this.allOwnersName[this.plateNumberOne]
       this.receiverName = this.$store.state.user.userName
       this.recipientPhone = this.$store.state.user.mobilePhone

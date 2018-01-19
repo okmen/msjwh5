@@ -13,8 +13,8 @@
     <g-input title="邮政编码" v-model="postalcode" placeholder="请输入邮政编码"></g-input>
     <g-select-one class="changeCard-set" title="深圳市" type="邮寄地址" :data="areaSelectData" v-model="areaSelect"></g-select-one>
     <g-input title="" v-model="mailingAddress" placeholder="请输入详细地址"></g-input>
-    <g-button text="确认信息" @click.native="confirmInfo" v-if="cars.length"></g-button>
-    <g-button text="确认信息" v-if="!cars.length" type="gray"></g-button>
+    <g-button text="确认信息" @click.native="confirmInfo" v-if="myNumberPlate"></g-button>
+    <g-button text="确认信息" v-if="!myNumberPlate" type="gray"></g-button>
   </div>
 </template>
 
@@ -30,6 +30,7 @@ export default {
 
   data () {
     return {
+      myNumberPlate: '',
       vehicleData: [],
       vehicle: '',
       plateType: '',
@@ -91,8 +92,8 @@ export default {
   created () {
     let val = this.$store.state.user
     this.cars = val.cars
-    console.log(this.cars, '77777777777777')
-    if (this.cars.length) {
+    this.myNumberPlate = val.myNumberPlate
+    if (this.myNumberPlate) {
       let PlateData = []
       this.cars.map(item => {
         if (+item.isMySelf === 0) {

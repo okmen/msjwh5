@@ -22,8 +22,8 @@
         <g-upload text="境外人员临住表" id="file6" :bg="require('@/assets/images/out-board.png')" v-model="board" v-show="censusIndex === 2"></g-upload>
       </div>
     </group>
-    <g-button text="确认信息" @click.native="confirmInfo" v-if="cars.length"></g-button>
-    <g-button text="确认信息" v-if="!cars.length" type="gray"></g-button>
+    <g-button text="确认信息" @click.native="confirmInfo" v-if="myNumberPlate"></g-button>
+    <g-button text="确认信息" v-if="!myNumberPlate" type="gray"></g-button>
   </div>
 </template>
 
@@ -35,7 +35,9 @@ export default {
   name: 'exchangeDrivingLicense',
   data () {
     return {
+      cars: '',
       name: '',
+      myNumberPlate: '',
       certificateNumber: '',
       plateNumberData: '',
       plateNumber: '',
@@ -140,8 +142,9 @@ export default {
   },
   created () {
     let val = this.$store.state.user
+    this.myNumberPlate = val.myNumberPlate
     this.cars = val.cars
-    if (this.cars.length) {
+    if (this.myNumberPlate) {
       let PlateData = []
       this.cars.map(item => {
         if (+item.isMySelf === 0) {
