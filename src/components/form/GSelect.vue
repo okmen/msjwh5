@@ -104,7 +104,7 @@
   }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
   .g-select{
     display: flex;
     padding:10px 40px;

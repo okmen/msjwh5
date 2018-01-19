@@ -2,8 +2,8 @@
   <div class="plate-number-full">
     <g-input title="车牌号码" v-model="plateNumber" placeholder="请输入车牌号码">
       <template slot="left">
-        <g-select class="province" :class="{'width-80': type === 'mortgageBusiness'}" :disabled="disabled" :center="center" v-model="province" :data="provinceCodeAll"></g-select>
-        <g-select class="letter" v-if="type === 'mortgageBusiness'" :disabled="disabled" :center="center" v-model="letter" :data="letterGroup"></g-select>
+        <g-select :class="{'width-80': type === 'mortgageBusiness'}" :disabled="disabled" :center="center" v-model="province" :data="provinceCodeAll"></g-select>
+        <g-select class="width-80" v-if="type === 'mortgageBusiness'" :disabled="disabled" :center="center" v-model="letter" :data="letterGroup"></g-select>
       </template>
     </g-input>
   </div>
@@ -47,11 +47,11 @@
 </script>
 
 <style scoped lang="less">
-.province, .letter {
+.g-select, .letter {
   width: 140px;
   padding: 0;
 }
-.width-80, .letter {
+.width-80 {
   width: 80px;
 }
 </style>
