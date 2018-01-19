@@ -109,30 +109,30 @@ export function getUserAgreement (name) {
       }
     case 'jszyqhz':
       return {
-        title: '1',
+        title: '驾驶证延期换证',
         text: `
-        驾驶证延期换证
+        暂无
         `
       }
     case 'jszzr':
       return {
-        title: '2',
+        title: '驾驶证转入',
         text: `
-        驾驶证转入
+        暂无
         `
       }
     case 'jsrlxfsbg':
       return {
-        title: '3',
+        title: '驾驶人联系方式变更',
         text: `
-        驾驶人联系方式变更
+        暂无
         `
       }
     case 'jszzyjj':
       return {
-        title: '4',
+        title: '驾驶证自愿降级',
         text: `
-        驾驶证自愿降级
+        暂无
         `
       }
     case 'jdcgrdyjydj':
@@ -160,9 +160,9 @@ export function getUserAgreement (name) {
       }
     case 'szjj_hander_iccc':
       return {
-        title: '5',
+        title: '机动车联系方式变更',
         text: `
-          机动车联系方式变更
+          暂无
         `
       }
   }
