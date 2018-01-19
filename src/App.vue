@@ -5,7 +5,7 @@
       <div class="m-noLoadingPage">{{ msg }}</div>
     </template>
     <!-- <div @click="handleLogout" style="position: fixed; bottom: 0px; right: 0;">民生警务退出登录</div> -->
-    <div @click="handleLogoutG" style="position: fixed; bottom: 0px; left: 0;">高德退出</div>
+    <!-- <div @click="handleLogoutG" style="position: fixed; bottom: 0px; left: 0;">高德退出</div> -->
   </div>
 </template>
 
