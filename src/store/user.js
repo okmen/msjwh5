@@ -60,7 +60,9 @@ export default {
           localStorage.setItem('plateType', state.plateType)
         }
       })
-      state.fileNumber = value.driverLicenceInfoList[0].fileNumber
+      if (value.driverLicenceInfoList) {
+        state.fileNumber = value.driverLicenceInfoList[0].fileNumber
+      }
       state.identityCard = value.authenticationBasicInformation.identityCard
       state.mobilePhone = value.authenticationBasicInformation.mobilephone
       state.userName = value.authenticationBasicInformation.trueName

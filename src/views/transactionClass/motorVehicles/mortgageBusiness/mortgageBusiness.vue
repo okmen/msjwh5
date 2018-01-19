@@ -43,12 +43,7 @@
       <mt-tab-container-item class="pt-20" id="2">
         <g-input title="身份证号码" v-model="IDNumber" placeholder="请输入身份证号码"></g-input>
         <g-button text="查询" @click.native="search"></g-button>
-        <ul class="freeByCarUl" v-if="resultListShow" v-for="(results, index) in resultList" :key="index">
-          <li class="freeByCarLi" v-for="(item, key) in results" :key="key">
-            <div class="liDiv-title">{{keyListObj[key]}}</div>
-            <div class="liDiv-text">{{key === 'numberPlate' ? plateType[item] : item}}</div>
-          </li>
-        </ul>
+        <info-list :result-list="dataList" :result-list-show="isShow"></info-list>
       </mt-tab-container-item>
     </mt-tab-container>
   </div>
@@ -56,6 +51,7 @@
 
 <script>
 import {GInput, GSelect, GButton, GSelectOne, GRadio} from 'form'
+import infoList from '@/components/infoList'
 import { Navbar, TabItem, TabContainer, TabContainerItem } from 'mint-ui'
 import PlateNumberFull from '@/components/PlateNumberFull'
 import axios from '@/utils/axios'
@@ -121,22 +117,8 @@ export default {
       mortgagedSex: '男',
       mortgagorSex: '男',
       IDNumber: '',
-      resultList: {},
-      resultListShow: false,
-      keyListObj: {
-        'serialNumber': '流水号',
-        'carNumber': '车牌号码',
-        'numberPlate': '车牌类型',
-        'businessType': '业务类型',
-        'carCode': '车辆识别代号',
-        'ownerIDcard': '车主身份证号',
-        'ownerName': '车主姓名',
-        'mainContractNo': '主合同号',
-        'mortgageContactNo': '抵押合同号',
-        'state': '状态',
-        'sourceOfCertification': '录入来源',
-        'applyTime': '申办时间'
-      }
+      dataList: {},
+      isShow: false
     }
   },
   components: {
@@ -146,6 +128,7 @@ export default {
     GSelectOne,
     GRadio,
     PlateNumberFull,
+    infoList,
     mtNavbar: Navbar,
     mtTabItem: TabItem,
     mtTabContainer: TabContainer,
@@ -155,9 +138,6 @@ export default {
   computed: {
     plateTypeData () {
       return this.$store.state.moveCarData
-    },
-    plateType () {
-      return this.$store.state.carSelectData
     },
     user () {
       return Object.assign({}, this.$store.state.user)
@@ -248,8 +228,8 @@ export default {
       }
       axios.post(queryCarMortgage, reqData).then(json => {
         if (json.code === '0000') {
-          this.resultList = json.data
-          this.resultListShow = true
+          this.dataList = json.data
+          this.isShow = true
         } else {
           this.$toast({message: json.msg, position: 'middle', duration: 3000})
         }
@@ -286,32 +266,6 @@ export default {
   }
   .pt-20 {
     padding-top: 20px;
-  }
-  .freeByCarUl{
-    display: block;
-    width: 90%;
-    margin: 30px auto;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    .freeByCarLi{
-      display: flex;
-      line-height: 60px;
-      justify-content: left;
-      border-bottom: 1px solid #ccc;
-      vertical-align: middle;
-      .liDiv-title{
-        text-indent: 20px;
-        flex: 1;
-      }
-      .liDiv-text{
-        padding-right: 20px;
-        width: 65%;
-        word-wrap: break-word;
-      }
-    }
-    .freeByCarLi:last-of-type{
-      border-bottom: none;
-    }
   }
 }
 </style>

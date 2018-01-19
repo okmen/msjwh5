@@ -132,6 +132,14 @@ export default [
     meta: {
       title: '机动车个人抵押解押登记'
     },
-    component: () => import('@/views/transactionClass/motorVehicles/mortgageBusiness')
+    component: () => import('@/views/transactionClass/motorVehicles/mortgageBusiness/mortgageBusiness')
+  },
+  {
+    name: 'mortgageBusinessDetail',
+    path: '/mortgageBusinessDetail',
+    meta: {
+      title: '进度查询'
+    },
+    component: () => import('@/views/transactionClass/motorVehicles/mortgageBusiness/mortgageBusinessDetail')
   }
 ]
