@@ -17,8 +17,8 @@
         <g-upload text="机动车行驶证" id="file3" :bg="imgOne3" v-model="registerCredential"></g-upload>
       </div>
     </group>
-    <g-button text="确认信息" @click.native="confirmInfo" v-if="plateNumber.length"></g-button>
-    <g-button text="确认信息" v-if="!plateNumber.length" type="gray"></g-button>
+    <g-button text="确认信息" @click.native="confirmInfo" v-if="myNumberPlate"></g-button>
+    <g-button text="确认信息" v-if="!myNumberPlate" type="gray"></g-button>
   </div>
 </template>
 
@@ -30,6 +30,7 @@
     data () {
       return {
         showIndex: '0',
+        myNumberPlate: '',
         imgOne1: require('@/assets/images/IDcard-front.png'),
         imgOne2: require('@/assets/images/IDcard-back.png'),
         imgOne3: require('@/assets/images/drivinglicense.png'),
@@ -67,7 +68,7 @@
           option: []
         }
         let cars = this.$store.state.user.cars
-        if (!cars.length) return plateInfo.option
+        if (!cars) return plateInfo.option
         cars.map((item, index) => {
           if (+item.isMySelf === 0) {
             plateInfo.option.push({'name': item.myNumberPlate, 'value': index + ''})
@@ -142,7 +143,8 @@
       this.plateType = this.$store.state.user.plateType
       this.carType = this.carSelectData[this.plateType]
       this.behindTheFrame4Digits = this.$store.state.user.behindTheFrame4Digits
-      if (!this.$store.state.user.cars.length) {
+      this.myNumberPlate = this.$store.state.user.myNumberPlate
+      if (!this.myNumberPlate) {
         this.$MessageBox('温馨提示', '暂无车辆，您的车辆未绑定或者审核中')
       }
     }

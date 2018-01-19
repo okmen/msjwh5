@@ -24,8 +24,8 @@
         <g-upload text="居住证反面" v-show="showIndex == '1'" id="file6" :bg="imgOne6" v-model="residencePermitB"></g-upload>
       </div>
     </group>
-    <g-button text="确认信息" @click.native="confirmInfo" v-if="plateNumber.length"></g-button>
-    <g-button text="确认信息" v-if="!plateNumber.length" type="gray"></g-button>
+    <g-button text="确认信息" @click.native="confirmInfo" v-if="myNumberPlate"></g-button>
+    <g-button text="确认信息" v-if="!myNumberPlate" type="gray"></g-button>
   </div>
 </template>
 
@@ -36,6 +36,7 @@
   export default {
     data () {
       return {
+        myNumberPlate: '',
         serviceType: '办理补证、换领机动车号牌',
         showIndex: 0,
         imgOne1: require('@/assets/images/IDcard-front.png'),
@@ -83,7 +84,7 @@
           option: []
         }
         let cars = this.$store.state.user.cars
-        if (!cars.length) return plateInfo.option
+        if (!cars) return plateInfo.option
         cars.map((item, index) => {
           if (+item.isMySelf === 0) {
             plateInfo.option.push({'name': item.myNumberPlate, 'value': index + ''})
@@ -177,7 +178,8 @@
       this.ownersName = this.allOwnersName[this.plateNumberOne]
       this.certificateNumber = this.$store.state.user.identityCard
       this.plateNumberName = this.$refs.plateNumberName.currentName
-      if (!this.$store.state.user.cars.length) {
+      this.myNumberPlate = this.$store.state.user.myNumberPlate
+      if (!this.myNumberPlate) {
         this.$MessageBox('温馨提示', '暂无车辆，您的车辆未绑定或者审核中')
       }
     }
