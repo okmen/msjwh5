@@ -193,6 +193,9 @@ export default {
   computed: {
     dataList: function () {
       return this.$store.state.passByValue
+    },
+    queryURL () {
+      return this.$store.getters.queryURL
     }
   },
   created () {

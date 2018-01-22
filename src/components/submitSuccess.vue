@@ -246,7 +246,7 @@ export default {
           createDriveInfo_ZJ16: '临时机动车驾驶许可申领',
           createTemporaryLicenseVehicleInfo: '核发临牌',
           createVehicleInfo_JD27: '核发校车标牌',
-          createVehicleInfo_JD37: '机动车抵押/解除抵押登记',
+          createVehicleInfo_JD37: '机动车抵押／解除抵押登记',
           createVehicleInfo_JD38: '机动车委托异地年审现场办理',
           createVehicleInfo_JD41: '转出、注销恢复',
           createDriveInfo_ZJ10: '满分学习考试',
