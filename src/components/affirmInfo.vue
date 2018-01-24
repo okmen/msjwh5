@@ -215,10 +215,14 @@ export default {
       let reqData = Object.assign({}, this.dataList.textObj, this.dataList.imgObj, this.dataList.invisibleObj)
       axios.post(this.dataList.url, reqData).then(json => {
         if (json.code === '0000') {
-          let sendData = {
-            title: this.$store.state.passByValue.title,
-            type: 1,
-            waterNumber: json.data.waterNumber || json.data
+          // let sendData = {
+          //   title: this.$store.state.passByValue.title,
+          //   type: 1,
+          //   waterNumber: json.data.waterNumber || json.data
+          // }
+          let sendData = json.data
+          if (this.dataList.noTip) {
+            sendData.noTip = true
           }
           this.$store.commit('saveSuccessInfo', sendData)
           this.$router.push({path: '/submitSuccess', query: this.$store.getters.queryURL})

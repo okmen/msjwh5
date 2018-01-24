@@ -51,7 +51,7 @@
     <!-- 预约成功的内容 -->
     <section class="appoint-box" v-if="JsonDataInfo.type == 2">
       <h3>预约结果</h3>
-      <p>{{ tip }}</p>
+      <!-- <p>{{ tip }}</p> -->
       <ul class="submitSuccess-ul">
         <li v-for="(value, key) in JsonDataInfo" :key="key" class="submitSuccess-item"  v-if="keyListObj[key]">
           <span class="submitSuccess-item-key">{{ keyListObj[key] }}</span>
