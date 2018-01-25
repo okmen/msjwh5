@@ -36,7 +36,7 @@
         cardBack: '',
         drivinglicenseImg: '',
         cur_card_id: 'A',
-        sex: '男',
+        sex: '1',
         IDcard: ''
       }
     },
@@ -100,7 +100,6 @@
             userSource: this.$route.query.source
           }
         }
-        console.log(reqData)
         this.$store.commit('savePassByValue', reqData)
         this.$router.push('/affirmInfo')
       }

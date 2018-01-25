@@ -31,7 +31,8 @@ export default {
   name: 'userAgreement',
   computed: {
     getUserAgreementCon: function () {
-      return this.userAgreementCon.replace(/href=".*?"/gi, '')
+      // return this.userAgreementCon.replace(/href=".*?"/gi, '')
+      return this.HTMLDecode(this.userAgreementCon)
     }
   },
   data () {
@@ -57,6 +58,9 @@ export default {
     this.$nextTick(function () {
       this.positionBottom = document.getElementById('app').offsetHeight >= document.getElementById('takePhotoTipsCom').offsetHeight
     })
+    // let str = this.$refs.getText.innerHTML.replace(/<\/?[^>]*>/g, '')
+    // this.$refs.getText.innerHTML = str
+    // console.log(this.$refs.getText.innerHTML)
   },
   methods: {
     getData: function (type) {
@@ -76,6 +80,7 @@ export default {
         for (let i = 0; i < cars.length; i++) {
           if (cars[i].code === code) {
             this.menuJson = cars[i]
+            console.log(this.menuJson.description)
             this.userAgreementCon = this.menuJson.description
             this.getNoticeTitle = this.menuJson.name
             return this.getNoticeTitle
@@ -221,6 +226,13 @@ export default {
           duration: 1500
         })
       }
+    },
+    HTMLDecode: function (text) {
+      let temp = document.createElement('div')
+      temp.innerHTML = text
+      let output = temp.innerText || temp.textContent
+      temp = null
+      return output
     }
   }
 }

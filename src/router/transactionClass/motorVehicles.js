@@ -130,7 +130,7 @@ export default [
     name: 'mortgageBusiness',
     path: '/mortgageBusiness',
     meta: {
-      title: '机动车个人抵押解押登记'
+      title: '机动车抵押／解除抵押登记'
     },
     component: () => import('@/views/transactionClass/motorVehicles/mortgageBusiness/mortgageBusiness')
   },
