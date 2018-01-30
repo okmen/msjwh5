@@ -3,9 +3,9 @@
     <div class="changeCard-top">
       <g-input class="changeCard-type" title="业务类型" v-model="name" readonly></g-input>
     </div>
-    <g-input title="姓名" v-model="userName"></g-input>
-    <g-input title="身份证号码" maxlength="18" v-model="IDCard"></g-input>
-    <g-input title="手机号码" maxlength="11" v-model="mobilePhone" type="tel"></g-input>
+    <g-input title="姓名" readonly v-model="userName"></g-input>
+    <g-input title="身份证号码" readonly maxlength="18" v-model="IDCard"></g-input>
+    <g-input title="手机号码" readonly maxlength="11" v-model="mobilePhone" type="tel"></g-input>
     <g-select title="名下车辆" ref="officeName" :data="myNumberPlateData" v-model="myNumberPlate"></g-select>
     <g-input title="车牌类型" v-model="carSelectData[myNumberPlate]" readonly></g-input>
     <g-select title="户籍所在地" @getSelected = "getIndex" :data="censusRegisterList" v-model="censusRegisterOne"></g-select>

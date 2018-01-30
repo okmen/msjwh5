@@ -1,8 +1,9 @@
 <template>
   <div class="motorAlteration">
-    <g-input title="车主姓名" v-model="ownersName"></g-input>
-    <g-select title="证件种类" :data="cardSelectData" v-model="cur_card_id"></g-select>
-    <g-input title="证件号码" v-model="certificateNumber" placeholder="请输入证件号码"></g-input>
+    <g-input title="车主姓名" readonly v-model="ownersName"></g-input>
+    <!-- <g-select title="证件种类" :data="cardSelectData" v-model="cur_card_id"></g-select> -->
+    <g-input title="证件种类" readonly v-model="identitCard"></g-input>
+    <g-input title="证件号码" readonly v-model="certificateNumber" placeholder="请输入证件号码"></g-input>
     <g-select title="车牌号码" :data="plateNumber" v-model="plateNumberOne" @getSelected="getPlateNumber" ref="plateNumberName"></g-select>
     <g-input title="车牌类型" v-model="carType" readonly></g-input>
     <g-select title="户籍所在地" :data="selectCensusRegister" v-model="censusRegisterOne" @getSelected="getCensusRegisterIndex"></g-select>
@@ -48,6 +49,7 @@
         allOwnersName: {},
         ownersName: '',
         cur_card_id: 'A',
+        identitCard: '居民身份证',
         plateType: '',
         carType: ''
       }

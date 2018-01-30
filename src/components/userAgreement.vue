@@ -60,6 +60,9 @@ export default {
     }
     // 如果是民生警务平台，则使用本地须知
     if (this.$store.state.core.source === 'M') {
+      if (this.entryHash === 'xszbz' || this.entryHash === 'xszhz') {
+        this.entryHash = 'xszbzhz'
+      }
       let agreenentData = getUserAgreement(this.entryHash)
       this.getNoticeTitle = agreenentData.title
       this.userAgreementCon = agreenentData.text
@@ -69,6 +72,9 @@ export default {
     } else {
       if (this.entryHash === 'jszbz' || this.entryHash === 'jszhz') {
         this.entryHash = 'jszbzhz'
+      }
+      if (this.entryHash === 'xszbz' || this.entryHash === 'xszhz') {
+        this.entryHash = 'xszbzhz'
       }
       let userAgreementData = {
         noticeKey: this.entryHash
@@ -123,9 +129,6 @@ export default {
           case 'jdcxxd':  // 机动车信息单
             this.$router.push('/motorVehicle')
             break
-          case 'szjj_hander_ctmvdl':  // 补领行驶证
-            this.$router.push('/replaceCredentials/repairDrivingLicense')
-            break
           case 'szjj_hander_cvi':  // 六年免检预约
             this.$router.push({ path: '/esemptionCar', query: this.queryURL })
             break
@@ -141,8 +144,13 @@ export default {
             // this.$router.push('/replaceCredentials/replaceLicencePlate')
             this.$router.push({ path: '/replaceLicencePlate', query: this.queryURL })
             break
-          case 'szjj_hander_icr':  // 换领机动车行驶证
-            this.$router.push('/replaceCredentials/exchangeDrivingLicense')
+          case 'xszbzhz':  // 行驶证补证换证
+            if (this.$route.params.id === 'xszbz') {
+              this.$router.push({ path: '/repairDrivingLicense', query: this.queryURL })
+            }
+            if (this.$route.params.id === 'xszhz') {
+              this.$router.push({ path: '/exchangeDrivingLicense', query: this.queryURL })
+            }
             break
           case 'szjj_hander_iccc':  // 机动车变更联系方式
             this.$router.push({ path: '/motorAlteration', query: this.queryURL })

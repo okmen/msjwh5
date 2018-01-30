@@ -22,13 +22,16 @@
       <router-link :to="{ path: '/userAgreement/jszns', query: queryURL }">机动车驾驶证年度审验</router-link>
     </div>
     <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
-      <router-link :to="{ path: '/repairDrivingLicense', query: queryURL }">补领行驶证</router-link>
+      <router-link :to="{ path: '/userAgreement/xszbz',  query: queryURL }">补领行驶证</router-link>
+      <!-- <router-link :to="{ path: '/repairDrivingLicense', query: queryURL }">补领行驶证</router-link> -->
     </div>
     <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
-      <router-link :to="{ path: '/exchangeDrivingLicense', query: queryURL }">换领行驶证</router-link>
+      <router-link :to="{ path: '/userAgreement/xszhz', query: queryURL }">换领行驶证</router-link>
+      <!-- <router-link :to="{ path: '/exchangeDrivingLicense', query: queryURL }">换领行驶证</router-link> -->
     </div>
     <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
-      <router-link :to="{ path: '/replaceQualifiedMark', query: queryURL }">补换检验合格标志</router-link>
+      <router-link :to="{ path: '/userAgreement/szjj_hander_rim', query: queryURL }">补换检验合格标志</router-link>
+      <!-- <router-link :to="{ path: '/replaceQualifiedMark', query: queryURL }">补换检验合格标志</router-link> -->
     </div>
     <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
       <router-link :to="{ path: '/userAgreement/szjj_hander_iccc', query: queryURL }">机动车联系方式变更</router-link>
