@@ -3,9 +3,9 @@
 -->
 <template>
   <div class="carService-outer">
-    <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
+    <!-- <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
       <router-link :to="{ path: '/applyEveryMonth', query: queryURL }">申请通行证(外地车)</router-link>
-    </div>
+    </div> -->
     <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
       <router-link :to="{ path: '/applyInterimCard', query: queryURL }">办理临时行驶车号牌</router-link>
     </div>
@@ -39,9 +39,9 @@
     <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
       <router-link :to="{ path: '/freeForFirst', query: queryURL }">首违免罚查询</router-link>
     </div>
-    <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
+    <!-- <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
       <router-link :to="{ path: '/moveCar', query: queryURL }">一键挪车</router-link>
-    </div>
+    </div> -->
     <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
       <router-link :to="{ path: '/userAgreement/jdcgrdyjydj', query: queryURL }">机动车抵押/解除抵押登记（在线办理）</router-link>
     </div>
