@@ -271,7 +271,8 @@ export default {
           createVehicleInfo_JD28: '机动车打刻原车发动机号码变更备案',
           createVehicleInfo_JD33: '档案更正',
           createVehicleInfo_JD48: '网约车使用性质变更',
-          createVehicleInfo_JD30: '补换检验合格标志'
+          createVehicleInfo_JD30: '补换检验合格标志',
+          applyOrCancleCarMortgage: '机动车个人抵押解押登记'
         },
         approveFlag: {
           '1': '同意',
