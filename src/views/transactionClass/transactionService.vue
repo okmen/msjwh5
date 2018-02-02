@@ -21,7 +21,7 @@
     <div class="query-link" v-if="source === 'G'">
       <router-link :to="{ path: '/userAgreement/jszns', query: queryURL }">机动车驾驶证年度审验</router-link>
     </div>
-    <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
+    <div class="query-link" :class="{ 'subscribeService': source === 'M'}" v-if="source === 'M'">
       <router-link :to="{ path: '/userAgreement/xszbz',  query: queryURL }">补领行驶证</router-link>
       <!-- <router-link :to="{ path: '/repairDrivingLicense', query: queryURL }">补领行驶证</router-link> -->
     </div>
@@ -29,20 +29,20 @@
       <router-link :to="{ path: '/userAgreement/xszhz', query: queryURL }">换领行驶证</router-link>
       <!-- <router-link :to="{ path: '/exchangeDrivingLicense', query: queryURL }">换领行驶证</router-link> -->
     </div>
-    <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
+    <div class="query-link" :class="{ 'subscribeService': source === 'M'}" v-if="source === 'M'">
       <router-link :to="{ path: '/userAgreement/szjj_hander_rim', query: queryURL }">补换检验合格标志</router-link>
       <!-- <router-link :to="{ path: '/replaceQualifiedMark', query: queryURL }">补换检验合格标志</router-link> -->
     </div>
-    <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
+    <div class="query-link" :class="{ 'subscribeService': source === 'M'}" v-if="source === 'M'">
       <router-link :to="{ path: '/userAgreement/szjj_hander_iccc', query: queryURL }">机动车联系方式变更</router-link>
     </div>
-    <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
+    <div class="query-link" :class="{ 'subscribeService': source === 'M'}" v-if="source === 'M'">
       <router-link :to="{ path: '/freeForFirst', query: queryURL }">首违免罚查询</router-link>
     </div>
     <!-- <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
       <router-link :to="{ path: '/moveCar', query: queryURL }">一键挪车</router-link>
     </div> -->
-    <div class="query-link" :class="{ 'subscribeService': source === 'M'}">
+    <div class="query-link" :class="{ 'subscribeService': source === 'M'}" v-if="source === 'M'">
       <router-link :to="{ path: '/userAgreement/jdcgrdyjydj', query: queryURL }">机动车抵押/解除抵押登记（在线办理）</router-link>
     </div>
   </div>
