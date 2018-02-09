@@ -31,6 +31,8 @@ export default {
     }
   },
   created () {
+    // 添加弹窗
+    this.init()
     let { source } = this.$store.state.core
     let localStorage = window.localStorage
     console.log('当前来源:', source)
@@ -91,6 +93,44 @@ export default {
     }
   },
   methods: {
+    // 弹窗用原生样式，每天弹3次
+    init () {
+      let oTimer = window.localStorage.getItem('voteTime')
+      if (oTimer) {
+        oTimer = new Date(oTimer)
+        let nTimer = new Date()
+        if (nTimer.getFullYear() > oTimer.getFullYear() || nTimer.getMonth() > oTimer.getMonth() || nTimer.getDate() > oTimer.getDate()) {
+          window.localStorage.removeItem('voteTime')
+          window.localStorage.removeItem('vote')
+          this.instart()
+        } else {
+          if (window.localStorage.getItem('vote') === 'NaN' || window.localStorage.getItem('vote') === 'undefined') {
+            this.localVote = 0
+            this.instart()
+          } else {
+            if (window.localStorage.getItem('vote') < 3) {
+              this.localVote = window.localStorage.getItem('vote')
+              this.instart()
+            }
+          }
+        }
+      } else {
+        this.instart()
+      }
+    },
+    instart: function () {
+      let _this = this
+      this.$MessageBox({
+        title: '温馨提示',
+        confirmButtonText: '好的',
+        message: '根据2018年春节法定节假期的安排，网上交警、微信等渠道受理的车管业务于2018年2月15日-2月21起后台暂停处理，于2月22日起恢复正常。请广大车主、驾驶人合理安排申办业务时间，如急需办理业务的，请提前于2月15日前到各车管窗口办理业务，以免对假期出行造成影响。不便之处，敬请谅解，祝佳节愉快！'
+      }).then(action => {
+        console.log(_this.localVote)
+        _this.localVote = +_this.localVote + 1
+        window.localStorage.setItem('vote', _this.localVote)
+        window.localStorage.setItem('voteTime', new Date())
+      })
+    },
     handleLogout () {
       let nAxios = this.$axios.create({
         headers: {
