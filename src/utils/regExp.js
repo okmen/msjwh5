@@ -9,7 +9,8 @@ import Vue from 'vue'
 const verification = {
   // 检测手机号码
   isPhone (str, message) {
-    var reg = /^(0|86|17951)?(13[0-9]|15[012356789]|18[0-9]|14[57]|17[678])[0-9]{8}$/
+    // var reg = /^(0|86|17951)?(13[0-9]|15[012356789]|18[0-9]|14[57]|17[678])[0-9]{8}$/
+    var reg = /^(0|86|17951)?1\d{10}$/
     if (!reg.test(str)) {
       window.VM.$toast({
         message: message || '手机号码格式不正确',
