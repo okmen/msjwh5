@@ -118,16 +118,16 @@ export default {
             this.$router.push('/registerChoose')
             break
           case 'aqsgxyb':  // 驾驶人安全事故信用表须知
-            this.$router.push('/driverCredit')
+            this.$router.push({ path: '/driverCredit', query: this.queryURL })
             break
           case 'wczm':  // 无车证明须知
-            this.$router.push('/carFree')
+            this.$router.push({ path: '/carFree', query: this.queryURL })
             break
           case 'jsrxxd':  // 驾驶人信息单
-            this.$router.push('/driversInformation')
+            this.$router.push({ path: '/driversInformation', query: this.queryURL })
             break
           case 'jdcxxd':  // 机动车信息单
-            this.$router.push('/motorVehicle')
+            this.$router.push({ path: '/vehicleSheet', query: this.queryURL })
             break
           case 'szjj_hander_cvi':  // 六年免检预约
             this.$router.push({ path: '/esemptionCar', query: this.queryURL })

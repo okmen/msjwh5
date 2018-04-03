@@ -5,6 +5,7 @@ import tDrivingLicence from './transactionClass/drivingLicence' // 办理类驾�
 import aMotorVehicles from './appointmentClass/motorVehicles' // 预约类机动车业务
 import motorVehicles from './transactionClass/motorVehicles.js'
 import personCenter from './personCenter' // 个人中心
+import credit from './credit' // 信息单据证明
 import { getQueryString, wxShare } from '@/utils/utils'
 import qs from 'qs'
 
@@ -55,11 +56,20 @@ let router = new Router({
       },
       component: () => import('@/components/submitSuccess')
     },
+    {
+      name: 'appointSuccess',
+      path: '/appointSuccess',
+      meta: {
+        title: '预约申办成功'
+      },
+      component: () => import('@/components/appointSuccess')
+    },
     ...publicRouter,
     ...tDrivingLicence,
     ...aMotorVehicles,
     ...motorVehicles,
-    ...personCenter
+    ...personCenter,
+    ...credit
   ]
 })
 
