@@ -6,10 +6,10 @@
       </div>
       <span class="motorstudy-name">{{listData.userName}}</span>
     </div>
-    <mt-cell title="驾驶证号" :value=listData.identityCard></mt-cell>
-    <mt-cell title="记分周期(始)" :value=listData.scoreStartDate v-if="listData.scoreStartDate"></mt-cell>
-    <mt-cell title="记分周期(末)" :value=listData.scoreEndDate v-if="listData.scoreEndDate"></mt-cell>
-    <mt-cell title="学习积分数" :value=listData.integral v-if="listData.integral"></mt-cell>
+    <mt-cell title="驾驶证号" :value="listData.identityCard"></mt-cell>
+    <mt-cell title="记分周期(始)" :value="listData.scoreStartDate" v-if="listData.scoreStartDate"></mt-cell>
+    <mt-cell title="记分周期(末)" :value="listData.scoreEndDate" v-if="listData.scoreEndDate"></mt-cell>
+    <mt-cell title="学习积分数" :value="listData.integral" v-if="listData.integral"></mt-cell>
     <mt-cell @click.native= "learningRecord" v-if="itemData" title="学习记录"></mt-cell>
     <div class="motorstudy-footer" v-if = "show">
       <div class="motorstudy-box">

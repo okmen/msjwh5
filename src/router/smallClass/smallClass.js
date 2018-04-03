@@ -1,6 +1,6 @@
 let smallClass = [
   {
-    naem: 'smallClass',
+    name: 'smallClass',
     path: '/smallClass',
     meta: {
       title: '微课堂学习'
