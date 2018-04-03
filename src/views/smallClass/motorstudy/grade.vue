@@ -26,10 +26,11 @@
         <em class="grade-footer-right">{{answererror}}</em>
       </li>
     </ul>
-    <router-link class="grade-footer-bottom" :to="{ path: '/smallClass', query: this.queryURL}">好的</router-link>
+    <g-button text="好的" @click.native="gradeClick"></g-button>
   </div>
 </template>
 <script>
+import { GButton } from 'form'
 export default {
   name: 'grade',
   data () {
@@ -41,13 +42,19 @@ export default {
       batchResult: ''   // 合格判断
     }
   },
+  componets: {
+    GButton
+  },
   computed: {
     queryURL () {
       return this.$store.getters.queryURL
     }
   },
   methods: {
-    gradeclick () {
+    gradeClick () {
+      this.$router.push({path: '/smallClass', query: this.queryURL})
+    },
+    init () {
       this.answererror = window.sessionStorage.getItem('answererror')    // 答错题数
       this.ganswerTime = window.sessionStorage.getItem('chronoScope')   // 答题用时
       this.batchResult = window.sessionStorage.getItem('batchResult')    // 合格判断
@@ -56,7 +63,7 @@ export default {
     }
   },
   mounted () {
-    this.gradeclick()
+    this.init()
   }
 }
 </script>
@@ -93,16 +100,6 @@ export default {
   .grade-footer-right {
     float: right;
     font-style: normal;
-  }
-  .grade-footer-bottom {
-    display: block;
-    width: 350px;
-    margin: 170px auto;
-    line-height: 68px;
-    background: #e6e6e6;
-    border-radius: 8px;
-    box-shadow: 4px 4px 4px 4px #7a7a7a;
-    text-align: center;
   }
 }
 </style>

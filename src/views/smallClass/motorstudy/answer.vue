@@ -43,14 +43,15 @@
         </li>
       </ul>
       <span id="swer" class="answer-ansr">{{judgeTrue}}</span>
-      <div class="answer-option" @click="answerClick()" v-if="questionsShow">答题</div>
-      <div id="NofItems" class="answer-option" v-if="nextQuestion" @click.stop="countClick()">{{Question}}</div>
+      <g-button text="答题" @click.native="answerClick" v-if="questionsShow"></g-button>
+      <g-button :text=Question @click.native="countClick" v-if="nextQuestion"></g-button>
     </div>
   </div>
 </template>
 
 <script>
 import { answer, answers } from '@/config/baseURL'
+import { GButton } from 'form'
 export default {
   name: 'answer',
   data () {
@@ -91,6 +92,9 @@ export default {
     queryURL () {
       return this.$store.getters.queryURL
     }
+  },
+  components: {
+    GButton
   },
   methods: {
     // 答题
@@ -287,6 +291,7 @@ export default {
 
 <style lang="less" scoped>
   .answer {
+    padding-bottom: 40px;
     .answer-head {
       width: 100%;
       height: 116px;
@@ -399,16 +404,6 @@ export default {
         display: block;
         width: 80%;
         margin: 20px auto;
-      }
-      .answer-option{
-        width: 80%;
-        line-height: 80px;
-        margin: 54px auto;
-        background: #4c9ff4;
-        border-radius: 8px;
-        color: #fff;
-        font-size: 28px;
-        text-align: center;
       }
     }
   }

@@ -15,10 +15,11 @@
         <dd class="result-center-colo">答错次数</dd>
       </dl>
     </div>
-    <router-link class="result-bottom" :to="{ path: '/smallClass', query: this.queryURL}">返回</router-link>
+    <g-button text="返回" @click.native="resultClick"></g-button>
   </div>
 </template>
 <script>
+import { GButton } from 'form'
 import { xstudy } from '@/config/baseURL'
 export default {
   name: 'result',
@@ -39,7 +40,13 @@ export default {
       val: ''
     }
   },
+  componets: {
+    GButton
+  },
   methods: {
+    resultClick () {
+      this.$router.push({path: '/smallClass', query: this.queryURL})
+    },
     resultclick: function () {
       this.surplusAnswe = window.sessionStorage.getItem('surplusAnswe')   // 答题数
       this.answererror = window.sessionStorage.getItem('answererror')     // 答错题数
@@ -107,9 +114,6 @@ export default {
       float: left;
       width: 49%;
       text-align: center;
-      .result-xian {
-        float: left;
-      }
       .result-center-colo {
         font-size: 30px;
         line-height: 60px;
@@ -123,18 +127,9 @@ export default {
         color: #4ebfe9;
       }
     }
-  }
-  .result-bottom {
-    display: block;
-    width: 644px;
-    margin: 60px auto;
-    text-align: center;
-    line-height: 80px;
-    font-size: 30px;
-    color: #fff;
-    background: #2696dd;
-    border-radius: 10px;
+    .result-xian {
+      float: left;
+    }
   }
 }
-
 </style>
