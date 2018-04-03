@@ -71,7 +71,6 @@ let router = new Router({
     ...aMotorVehicles,
     ...motorVehicles,
     ...personCenter,
-    ...smallClass,
     ...handyService,
     ...credit,
     ...smallClass
