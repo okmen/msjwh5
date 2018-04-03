@@ -7,6 +7,7 @@ import motorVehicles from './transactionClass/motorVehicles.js'
 import personCenter from './personCenter' // 个人中心
 import credit from './credit' // 信息单据证明
 import { getQueryString, wxShare } from '@/utils/utils'
+import smallClass from './smallClass/smallClass.js'
 import qs from 'qs'
 
 Vue.use(Router)
@@ -69,7 +70,8 @@ let router = new Router({
     ...aMotorVehicles,
     ...motorVehicles,
     ...personCenter,
-    ...credit
+    ...credit,
+    ...smallClass
   ]
 })
 

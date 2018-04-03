@@ -97,19 +97,23 @@ export default {
             this.$router.push('/takePicturesInform')
             break
           case 'xfNotice': // 消分学习须知
-            this.$router.push('/motorstudy#1')
+            this.$router.push({ path: '/motorstudy', query: {source: this.$route.query.source, id: 1} })
             break
           case 'mfNotice': // 满分学习须知
-            this.$router.push('/motorstudy#2')
+            // this.$router.push('/motorstudy#2')
+            this.$router.push({ path: '/motorstudy', query: {source: this.$route.query.source, id: 2} })
             break
           case 'abNotice': // ab类学习须知
-            this.$router.push('/motorstudy#3')
+            // this.$router.push('/motorstudy#3')
+            this.$router.push({ path: '/motorstudy', query: {source: this.$route.query.source, id: 3} })
             break
           case 'ddcNotice': // 电动车学习须知
-            this.$router.push('/motorstudy#4')
+            // this.$router.push('/motorstudy#4')
+            this.$router.push({ path: '/motorstudy', query: {source: this.$route.query.source, id: 4} })
             break
           case 'xrNotice': // 行人学习须知
-            this.$router.push('/motorstudy#5')
+            // this.$router.push('/motorstudy#5')
+            this.$router.push({ path: '/motorstudy', query: {source: this.$route.query.source, id: 5} })
             break
           case 'xjyhrz': // 星级用户认证须知
 //            this.showPopUpG = true

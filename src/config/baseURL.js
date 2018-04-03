@@ -103,3 +103,15 @@ export const addNoneCarCertification = `${commonUrl}user/addNoneCarCertification
 export const submitApplicationForMotorVehicleInformation = `${commonUrl}user/proofOfInformationDocuments/submitApplicationForMotorVehicleInformation.html` // 机动车信息单
 
 export const toQueryElectronicReceiptPage = `${commonUrl}illegalHanding/toQueryElectronicReceiptPage.html` // 电子回单
+
+/* --------------微课堂--------------- */
+
+export const xstudy = `${commonUrl}Classroom/StudyHomepages.html` // 学习页面接口
+
+export const wschool = `${commonUrl}Classroom/homepages.html` // 列表接口
+
+export const answer = `${commonUrl}Classroom/Studys.html` // 取题接口
+
+export const grade = `${commonUrl}Classroom/anserEnds.html` // 成绩接口
+
+export const answers = `${commonUrl}Classroom/Answers.html` // 答题接口
