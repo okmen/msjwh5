@@ -315,7 +315,11 @@ const state = {
       'value': 'M',
       'name': '临时居民身份证'
     }
-  ]
+  ],
+  appoinSuccess: {
+    appoinNum: '',
+    appoinType: ''
+  }
 }
 
 const actions = {}
@@ -329,7 +333,11 @@ const mutations = {
   }
 }
 
-const getters = {}
+const getters = {
+  showAppoin (state) {
+    return state.appoinSuccess
+  }
+}
 
 export default new Vuex.Store({
   state,

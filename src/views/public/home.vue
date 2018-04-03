@@ -87,7 +87,8 @@
           </router-link>
         </dl>
         <dl>
-          <router-link :to="!isLogin ? '/login' : '/credit'">
+          <router-link :to="{ path: '/credit', query: { source: this.$route.query.source, idcard: this.$route.query.idcard, openid: this.$route.query.openid }}">
+          <!-- <router-link :to="!isLogin ? '/login' : '/credit'"> -->
             <dt><img class="top7" src="./../../assets/images/nav7.png" alt=""></dt>
             <dd>信息单据证明</dd>
           </router-link>

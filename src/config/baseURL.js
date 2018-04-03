@@ -93,7 +93,18 @@ export const applyOrCancleCarMortgage = `${commonUrl}handleservice/applyOrCancle
 
 export const queryCarMortgage = `${commonUrl}handleservice/queryCarMortgage.html` // 机动车抵押登记查询
 
-/* ------------------------------------------------微课堂---------------------------------------------------- */
+/* --------------信息单据证明--------------- */
+export const addSafeAccidentCredit = `${commonUrl}user/addSafeAccidentCredit.html` // 驾驶人安全事故信用表
+
+export const submitApplicationForDriverInformation = `${commonUrl}user/proofOfInformationDocuments/submitApplicationForDriverInformation.html` // 驾驶人信用单
+
+export const addNoneCarCertification = `${commonUrl}user/addNoneCarCertification.html` // 驾驶人安全事故信用表
+
+export const submitApplicationForMotorVehicleInformation = `${commonUrl}user/proofOfInformationDocuments/submitApplicationForMotorVehicleInformation.html` // 机动车信息单
+
+export const toQueryElectronicReceiptPage = `${commonUrl}illegalHanding/toQueryElectronicReceiptPage.html` // 电子回单
+
+/* --------------微课堂--------------- */
 
 export const xstudy = `${commonUrl}Classroom/StudyHomepages.html` // 学习页面接口
 

@@ -255,5 +255,33 @@ export function getUserAgreement (name) {
         四、邮寄收件地址仅限深圳市<br>
         `
       }
+    case 'aqsgxyb':
+      return {
+        title: '驾驶人安全事故信用表须知',
+        text: `
+        暂无
+        `
+      }
+    case 'wczm':
+      return {
+        title: '无车证明须知',
+        text: `
+        暂无
+        `
+      }
+    case 'jsrxxd':
+      return {
+        title: '驾驶人信息单',
+        text: `
+        暂无
+        `
+      }
+    case 'jdcxxd':
+      return {
+        title: '机动车信息单',
+        text: `
+        暂无
+        `
+      }
   }
 }
