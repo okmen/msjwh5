@@ -6,9 +6,10 @@ import aMotorVehicles from './appointmentClass/motorVehicles' // 预约类机动
 import motorVehicles from './transactionClass/motorVehicles.js'
 import personCenter from './personCenter' // 个人中心
 import credit from './credit' // 信息单据证明
+import smallClass from './smallClass/smallClass'        // 微课堂
+import electricCar from './electricCar/electricCar'     // 电动车管理
+import handyService from './handyService/handyService'  // 便民服务
 import { getQueryString, wxShare } from '@/utils/utils'
-import smallClass from './smallClass/smallClass'
-import handyService from './handyService/handyService'
 import qs from 'qs'
 
 Vue.use(Router)
@@ -73,7 +74,8 @@ let router = new Router({
     ...personCenter,
     ...handyService,
     ...credit,
-    ...smallClass
+    ...smallClass,
+    ...electricCar
   ]
 })
 

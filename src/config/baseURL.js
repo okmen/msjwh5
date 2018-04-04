@@ -115,3 +115,7 @@ export const answer = `${commonUrl}Classroom/Studys.html` // 取题接口
 export const grade = `${commonUrl}Classroom/anserEnds.html` // 成绩接口
 
 export const answers = `${commonUrl}Classroom/Answers.html` // 答题接口
+
+/* -------------  电动车扫码 ------------- */
+
+export const electrocarFileScancode = `${commonUrl}convenience/getEbikeInfoByFileNo.html` // 获取扫码数据
