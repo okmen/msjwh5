@@ -176,6 +176,7 @@ export default {
       if (this.$_myMinxin_beforeSubmit(obj)) return
       if (this.$verification.isPhone(this.mobilePhone)) return
       if (this.$verification.isPhotoNum(this.photoReturnNumberString)) return
+      if (this.$verification.isPhone(this.receiverMobilePhone)) return
       if (this.censusRegisterOne === '3' && !this.board) {
         this.$toast({message: '请上传境外人员临住表', position: 'middle', duration: 3000})
       } else {
