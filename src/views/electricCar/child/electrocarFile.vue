@@ -69,7 +69,7 @@ export default {
       }
     }
   },
-  filter: {
+  filters: {
     footDevice (value) {
       if (value === '0') {
         return '有'
@@ -90,8 +90,9 @@ export default {
       this.currentColor = item
     },
     init () {
-      this.$axios.post(electrocarFileScancode, {fileNo: this.$route.query.billNo}).then(json => {
-        if (json === '0000') {
+      this.$axios.post(electrocarFileScancode, {fileNo: '440300000001'}).then(json => {
+        console.log(json)
+        if (json.code === '0000') {
           this.ebikeInfo = json.data.ebikeInfo
           this.userInfoList = json.data.userInfoList
         } else {
