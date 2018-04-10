@@ -2,14 +2,15 @@
   <div class="motorstudy">
     <div class="motorstudy-head">
       <div class="motorstudy-itop">
-        <img class="motorstudy-img" src="">
+        <!-- <img class="motorstudy-img" src=""> -->
+        <!-- <img class="motorstudy-img" src="../../../assets/images/login-logo.png" alt=""> -->
       </div>
       <span class="motorstudy-name">{{listData.userName}}</span>
     </div>
-    <mt-cell title="驾驶证号" :value=listData.identityCard></mt-cell>
-    <mt-cell title="记分周期(始)" :value=listData.scoreStartDate v-if="listData.scoreStartDate"></mt-cell>
-    <mt-cell title="记分周期(末)" :value=listData.scoreEndDate v-if="listData.scoreEndDate"></mt-cell>
-    <mt-cell title="学习积分数" :value=listData.integral v-if="listData.integral"></mt-cell>
+    <mt-cell title="驾驶证号" :value="listData.identityCard"></mt-cell>
+    <mt-cell title="记分周期(始)" :value="listData.scoreStartDate" v-if="listData.scoreStartDate"></mt-cell>
+    <mt-cell title="记分周期(末)" :value="listData.scoreEndDate" v-if="listData.scoreEndDate"></mt-cell>
+    <mt-cell title="学习积分数" :value="listData.integral" v-if="listData.integral"></mt-cell>
     <mt-cell @click.native= "learningRecord" v-if="itemData" title="学习记录"></mt-cell>
     <div class="motorstudy-footer" v-if = "show">
       <div class="motorstudy-box">
@@ -104,10 +105,13 @@ export default {
       position: relative;
     }
     .motorstudy-itop {
+      /*width: 204px;*/
       width: 194px;
       height: 194px;
-      background-color: #fff;
-      border-radius: 50%;
+      /*background-color: #fff;*/
+      background: url('../../../assets/images/logo.png');
+      /*border-radius: 50%;*/
+      background-size: cover;
       position: absolute;
       left: 50%;
       top: 50%;

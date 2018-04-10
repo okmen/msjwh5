@@ -30,5 +30,13 @@ export default [
       title: '绑定车辆'
     },
     component: () => import('@/views/personCenter/myCar')
+  },
+  {
+    name: 'personalCenter',
+    path: '/personalCenter',
+    meta: {
+      title: '个人中心'
+    },
+    component: () => import('@/views/personCenter/personalCenter')
   }
 ]

@@ -122,3 +122,6 @@ export const getGreenApply = `${commonUrl}greentravel/applyDownDateReport.html` 
 export const postGreenApply = `${commonUrl}greentravel/downDatedeclareReport.html` // 申请申报日期数据
 
 export const getGreenDays = `${commonUrl}greentravel/applyrunningQuery.html` // 获取日期操作人数据
+
+/* -------------  电动车扫码 ------------- */
+export const electrocarFileScancode = `${commonUrl}convenience/getEbikeInfoByFileNo.html` // 获取扫码数据
