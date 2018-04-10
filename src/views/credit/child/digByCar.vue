@@ -25,7 +25,7 @@
       }
     },
     mounted () {
-      this.cars = JSON.parse(window.localStorage.getItem('cars'))
+      this.cars = this.$store.state.user.cars
       // 判断是否登录和绑定车辆！没有登录直接跳转登录,没有绑定车辆直接跳转绑定车辆
       if (this.cars.length === 0) {
         this.$MessageBox({
