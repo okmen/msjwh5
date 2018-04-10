@@ -6,6 +6,7 @@ import aMotorVehicles from './appointmentClass/motorVehicles' // 预约类机动
 import motorVehicles from './transactionClass/motorVehicles.js'
 import personCenter from './personCenter' // 个人中心
 import credit from './credit' // 信息单据证明
+import greenTravel from './greenTravel' // 绿色出行
 import { getQueryString, wxShare } from '@/utils/utils'
 import smallClass from './smallClass/smallClass.js'
 import qs from 'qs'
@@ -71,6 +72,7 @@ let router = new Router({
     ...motorVehicles,
     ...personCenter,
     ...credit,
+    ...greenTravel,
     ...smallClass
   ]
 })

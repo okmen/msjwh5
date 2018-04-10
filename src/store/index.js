@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import core from './core'
 import user from './user'
 import motorVehicleAppointment from './modules/motorVehicleAppointment'
+import pageRecord from './modules/pageRecord'
 
 Vue.use(Vuex)
 
@@ -347,6 +348,7 @@ export default new Vuex.Store({
   modules: {
     core,
     user,
-    motorVehicleAppointment
+    motorVehicleAppointment,
+    pageRecord
   }
 })

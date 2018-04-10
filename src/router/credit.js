@@ -12,7 +12,8 @@ let creditRouter = [
     name: 'vehicleSheet',
     path: '/vehicleSheet',
     meta: {
-      title: '机动车信息单'
+      title: '机动车信息单',
+      loginStatus: true
     },
     component: () => import('@/views/credit/child/vehicleSheet')
   },
@@ -29,7 +30,8 @@ let creditRouter = [
     name: 'carFree',
     path: '/carFree',
     meta: {
-      title: '无车证明'
+      title: '无车证明',
+      loginStatus: true
     },
     component: () => import('@/views/credit/child/driverCredit')
   },
@@ -37,7 +39,8 @@ let creditRouter = [
     name: 'driversInformation',
     path: '/driversInformation',
     meta: {
-      title: '驾驶人信用单'
+      title: '驾驶人信用单',
+      loginStatus: true
     },
     component: () => import('@/views/credit/child/driverCredit')
   },
@@ -45,7 +48,8 @@ let creditRouter = [
     name: 'digByCar',
     path: '/digByCar',
     meta: {
-      title: '电子回单'
+      title: '电子回单',
+      loginStatus: true
     },
     component: () => import('@/views/credit/child/digByCar')
   },
@@ -53,9 +57,10 @@ let creditRouter = [
     name: 'digitalReceipt',
     path: '/digitalReceipt',
     meta: {
-      title: '电子回单'
+      title: '电子回单',
+      loginStatus: true
     },
-    component: require('../views/credit/child/digitalReceipt')
+    component: () => import('@/views/credit/child/digitalReceipt')
   }
 ]
 

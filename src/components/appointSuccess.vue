@@ -14,7 +14,7 @@
       <p class="appoint-margin" v-if="showAppoin.appoinType">业务类型：<span>{{showAppoin.appoinType}}</span></p>
       <p v-if="showAppoin.appoinNum">流水号码：<span class="running-number">{{showAppoin.appoinNum}}</span></p>
     </section>
-    <div class="btn-appoint-backword" @click="btnBackword">返回</div>
+    <!-- <div class="btn-appoint-backword" @click="btnBackword">返回</div> -->
   </div>
 </template>
 

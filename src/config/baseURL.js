@@ -115,3 +115,10 @@ export const answer = `${commonUrl}Classroom/Studys.html` // 取题接口
 export const grade = `${commonUrl}Classroom/anserEnds.html` // 成绩接口
 
 export const answers = `${commonUrl}Classroom/Answers.html` // 答题接口
+
+/* -------------- 绿色出行 --------------- */
+export const getGreenApply = `${commonUrl}greentravel/applyDownDateReport.html` // 获取申报日期数据
+
+export const postGreenApply = `${commonUrl}greentravel/downDatedeclareReport.html` // 申请申报日期数据
+
+export const getGreenDays = `${commonUrl}greentravel/applyrunningQuery.html` // 获取日期操作人数据

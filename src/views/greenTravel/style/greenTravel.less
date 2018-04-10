@@ -1,0 +1,194 @@
+/************************************************************
+  描述：绿色出行样式表
+  时间：2017-07-20
+  作者：猪不乐意
+  联系：914230482
+************************************************************/
+.m-apply{
+  padding: 1rem; background: #fff; font-size: 28px;
+  >.title{
+    font-size: 40px; line-height: 1.2; margin-bottom: 1rem;
+    color: #00be00;
+  }
+  .footer{
+    .info{
+      font-size: 22px;; margin-bottom: 1rem; margin-top: 1rem;
+      label{ margin-right: .5rem; }
+    }
+    .el-button{
+      display: block; width: 100%;
+      span{ color: #fff; }
+    }
+    .el-button.is-disabled{
+      background: #ccc;
+    }
+  }
+}
+.m-format{
+  font-size: 28px; line-height: 1.6; color: #666;
+  h1, h2, h3, h4, h5, h6{
+    margin-bottom: .5rem; color: #333; font-size: 28px;
+  }
+  ul, ol, p{
+    color: #666; margin-bottom: .5rem;
+  }
+  li{ color: #666; }
+}
+
+// 奖励样式
+.greenApply-prize{
+  margin: 40px 20px 0 0;
+  float: right;
+  width: 100px;
+  height: 100px;
+  img{
+    width: 100%;
+    height: 100%;
+  }
+  p{
+    font-size: 22px;
+    color: #1ab922;
+    text-align: center;
+  }
+}
+
+// 星级
+.m-starLevel{
+  height: 100%; position: relative;
+  background: url(../../../assets/images/starLever-bg.jpg); background-size: 100% 100%;
+  .logo{
+    position: absolute;
+    right: 1rem; top: 1rem;
+    width: 116px;
+    img{ width: 100%; }
+  }
+  .info{
+    position: absolute; text-align: center;
+    bottom: 0; width: 100%; padding: 2rem 1rem;
+    .item{ margin-top: 1rem; }
+    .el-button{
+      display: block; width: 100%;
+      span{
+        color: #fff;
+      }
+    }
+    .link{
+      text-align: right; line-height: 2rem;
+      a{
+        text-decoration: underline; color: #666;
+      }
+    }
+    p{
+      text-shadow: 2px 2px 8px #fff;;
+    }
+  }
+}
+
+// 申请表单
+.m-greenApply{
+  .header{
+    width: 100%; padding-bottom: 55%;
+    background: url(../../../assets/images/greenAppayHeader.jpg);
+    background-size: 100% 100%; 
+  }
+  .footer{
+    padding: 0 1rem;
+    .info{
+      margin-bottom: 1rem; font-size: 26px;
+    }
+    .el-button{
+      width: 100%;
+      span{
+        color: #fff;
+      }
+    }
+    .is-disabled.el-button{
+      background: #888;
+    }
+    a{ color: #2595dd; }
+  }
+}
+
+// 申报行驶日期
+.m-greenApplyDate{
+  padding: 1rem; background: #eee; min-height: 100%; font-size: 26px;
+  .list{
+    margin-bottom: 1rem; margin-top: 1rem;
+    li{
+      line-height: 50px; color: #666; white-space: nowrap; margin-bottom: 10px;
+      span{
+        display: inline-block; width: 100px; height: 50px; margin-right: 10px; vertical-align: middle;
+      }
+      span.white{ background: #fff; }
+      span.green{ background: green; }
+      span.gray{ background: #aaa; }
+      span.yellow{ background: yellow; }
+      span.red{ background: #900; }
+    }
+  }
+  .info{ margin-bottom: 1rem; }
+  .info p{
+    color: #666; line-height: 1.6;
+  }
+  .el-button{
+    width: 100%;
+    span{ color: #fff; }
+  }
+}
+
+.m-greenItem{
+  padding: 1rem;
+  .item{
+    border: 1px solid #a7d9f9; border-radius: 5px;
+    .title{
+      line-height: 1; color: #00be00; padding: 1rem; font-size: 32px; border-bottom: 1px solid #a7d9d9;
+    }
+    .box{
+      padding: 1rem;
+      ul{ margin-bottom: 1rem; }
+      li{
+        margin-bottom: .5rem;
+      }
+      .r{
+        margin-right: 5rem;
+      }
+      .r{
+        color: #666;
+      }
+      .el-button span{
+        color: #fff;
+      }
+    }
+  }
+}
+
+// 确认弹框
+.m-confirm.open{
+  opacity: 1;
+  visibility: visible;
+}
+.m-confirm{
+  background: rgba(0, 0, 0, .8); opacity: 0; visibility: hidden; transition: opacity .3s ease;
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 1; display: flex; justify-content: center; align-items: center;
+  .box{
+    width: 60%; background: #fff; padding: .5rem 1rem 1rem 1rem; border-radius: .5rem;
+    .title{
+      text-align: center; font-size: 34px; color: #2595dd; font-weight: bold; margin-bottom: .5rem;
+    }
+    .text{
+      text-align: center; color: #666; margin-bottom: 1rem;
+    }
+    .footer{
+      display: flex; justify-content: space-between;
+      .ok,.cancel{
+        width: 45%; line-height: 2.5rem; text-align: center; border-radius: .5rem; font-size: 30px;
+      }
+      .ok{
+        background: #09ba07; color: #fff;
+      }
+      .cancel{
+        border: 1px solid #09ba07; color: #09ba07; box-sizing: border-box;
+      }
+    }
+  }
+}
