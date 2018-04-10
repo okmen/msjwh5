@@ -30,7 +30,7 @@
       if (this.cars.length === 0) {
         this.$MessageBox({
           title: '温馨提示',
-          message: '暂无车辆,你可以通过深圳交警微信号的“个人中心”绑定车辆'
+          message: '暂无车辆,你可以通过“个人中心”绑定车辆'
         }).then(action => {
           this.$router.push({path: '/credit', query: this.queryURL})
         })
