@@ -30,6 +30,11 @@
         mailingAddress: ''
       }
     },
+    computed: {
+      queryURL () {
+        return this.$store.getters.queryURL
+      }
+    },
     mixins: [beforeSubmit],
     components: {
       GInput, GUpload, Group, GButton
@@ -55,7 +60,9 @@
         }
         this.$axios.post(updateUser, reqData).then(data => {
           if (data.code === '0000') {
-            this.$MessageBox('提示', '修改成功')
+            this.$MessageBox('提示', '修改成功').then(() => {
+              this.$router.push({path: '/personalCenter', query: this.queryURL})
+            })
           } else {
             this.$MessageBox('提示', data.msg)
           }

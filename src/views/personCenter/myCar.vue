@@ -276,7 +276,7 @@
           Indicator.close()
           console.log(json)
           if (json.code === '0000') {
-            if (json.data.length !== 0) {
+            if (json.data[0].code !== '0001') {
               this.show = true
               this.carMsg = json.data
               this.others = json.data[0].list
