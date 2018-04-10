@@ -1,7 +1,9 @@
 <template>
   <div class="personalCenter">
     <div class="userInfo-banner">
-      <div class="userInfo-avatar"><img :src="avatar"></div>
+      <div class="userInfo-avatar">
+        <!-- <img :src="avatar"> -->
+      </div>
       <p class="userInfo-name">{{val.userName}}</p>
       <div class="userInfo-mobile">
         <i class="mobile"></i>
@@ -33,6 +35,18 @@ export default {
         {
           title: '电动车管理',
           link: '/electricCar'
+        },
+        {
+          title: '补全或修改资料',
+          link: '/updateUser'
+        },
+        {
+          title: '绑定车辆',
+          link: '/myCar'
+        },
+        {
+          title: '信息单据证明',
+          link: '/credit'
         }
       ]
     }
@@ -67,8 +81,10 @@ export default {
         width: 140px;
         height: 140px;
         margin-top: 36px;
-        border-radius: 50%;
-        background: #fff;
+        /*border-radius: 50%;*/
+        /*background: #fff;*/
+        background: url('../../assets/images/logo.png');
+        background-size: cover;
         overflow: hidden;
         img{
           width: 100%;

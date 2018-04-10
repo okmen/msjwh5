@@ -2,7 +2,8 @@
   <div class="motorstudy">
     <div class="motorstudy-head">
       <div class="motorstudy-itop">
-        <img class="motorstudy-img" src="">
+        <!-- <img class="motorstudy-img" src=""> -->
+        <!-- <img class="motorstudy-img" src="../../../assets/images/login-logo.png" alt=""> -->
       </div>
       <span class="motorstudy-name">{{listData.userName}}</span>
     </div>
@@ -104,10 +105,13 @@ export default {
       position: relative;
     }
     .motorstudy-itop {
+      /*width: 204px;*/
       width: 194px;
       height: 194px;
-      background-color: #fff;
-      border-radius: 50%;
+      /*background-color: #fff;*/
+      background: url('../../../assets/images/logo.png');
+      /*border-radius: 50%;*/
+      background-size: cover;
       position: absolute;
       left: 50%;
       top: 50%;
