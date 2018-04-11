@@ -11,12 +11,13 @@
       </div>
     </div>
     <mt-cell v-for="(item, index) in personalData" :title="item.title" :to="{ path: item.link, query: queryURL }" key="index" is-link></mt-cell>
-    <mt-cell @click.native="handleLogout" title="退出登录" is-link></mt-cell>
+    <g-button text="退出登录" @click.native="handleLogout"></g-button>
   </div>
 </template>
 
 <script>
 import { Cell } from 'mint-ui'
+import { GButton } from 'form'
 import { token, msjwURL } from '@/config/msjw.config'
 export default {
   name: 'personalCenter',
@@ -60,7 +61,7 @@ export default {
     }
   },
   components: {
-    Cell
+    Cell, GButton
   },
   methods: {
     // 退出登录
@@ -76,6 +77,8 @@ export default {
           token: this.token
         }).then(data => {
           if (data.data.code === '200') {
+            window.sessionStorage.clear()
+            window.localStorage.clear()
             window.location.reload()
           }
         })
