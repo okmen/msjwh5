@@ -37,7 +37,6 @@ export default {
     // 如果来源参数正常，则显示页面。否则显示为来源错误。
     if (source === 'M') {
       this.$axios.post(getUserM, {
-      // this.$axios.post('http://192.168.1.99:8080/web/msjw/getMSJWinfo.html', {
         openId: this.openid
       }).then(data => {
         if (data.code === '0000') {
@@ -85,7 +84,7 @@ export default {
       this.msg = '正在获取授权，请稍候 ...'
     }
     // 如果存在 username 则跳转路径
-    if (getQueryString('username')) {
+    if (getQueryString('username') || getQueryString('version')) {
       this.msg = '授权成功，正在跳转 ...'
       window.location.href = window.localStorage.getItem('entranceURL')
     }
