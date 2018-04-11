@@ -10,19 +10,22 @@
         {{val.mobilePhone}}
       </div>
     </div>
-     <mt-cell v-for="(item, index) in personalData" :title="item.title" :to="{ path: item.link, query: queryURL }" key="index" is-link>
-</mt-cell>
+    <mt-cell v-for="(item, index) in personalData" :title="item.title" :to="{ path: item.link, query: queryURL }" key="index" is-link></mt-cell>
+    <mt-cell @click.native="handleLogout" title="退出登录" is-link></mt-cell>
   </div>
 </template>
 
 <script>
 import { Cell } from 'mint-ui'
+import { token, msjwURL } from '@/config/msjw.config'
 export default {
   name: 'personalCenter',
   data () {
     return {
       val: '',
       avatar: '',
+      token: token,
+      openid: window.localStorage.getItem('openid'),
       personalData: [
         {
           title: '微课堂学习',
@@ -58,6 +61,26 @@ export default {
   },
   components: {
     Cell
+  },
+  methods: {
+    // 退出登录
+    handleLogout () {
+      this.$MessageBox.confirm('确定退出登录吗?').then(action => {
+        let nAxios = this.$axios.create({
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        nAxios.post(`${msjwURL}/govnetUserAuthProvider/services/userCenter/logout`, {
+          openid: this.openid,
+          token: this.token
+        }).then(data => {
+          if (data.data.code === '200') {
+            window.location.reload()
+          }
+        })
+      }).catch(() => {})
+    }
   },
   mounted () {
     this.val = this.$store.state.user
