@@ -6,6 +6,7 @@ import aMotorVehicles from './appointmentClass/motorVehicles' // 预约类机动
 import motorVehicles from './transactionClass/motorVehicles.js'
 import personCenter from './personCenter' // 个人中心
 import credit from './credit' // 信息单据证明
+import greenTravel from './greenTravel' // 绿色出行
 import smallClass from './smallClass/smallClass'        // 微课堂
 import electricCar from './electricCar/electricCar'     // 电动车管理
 import handyService from './handyService/handyService'  // 便民服务
@@ -74,6 +75,7 @@ let router = new Router({
     ...personCenter,
     ...handyService,
     ...credit,
+    ...greenTravel,
     ...smallClass,
     ...electricCar
   ]

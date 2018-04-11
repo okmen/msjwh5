@@ -4,9 +4,13 @@
     <g-input title="姓名" v-model="userName" readonly></g-input>
     <g-input title="身份证号" v-model="identityCard" readonly></g-input>
     <g-input title="联系电话" v-model="mobilePhone" readonly></g-input>
-    <g-select title="车牌号码" :data="plateNumberData" v-model="plateNumber" ref="plateNumberName"></g-select>
-    <g-select title="车牌类型" :data="plateSelectData" v-model="plateSelect" ref="plateSelectName"></g-select>
+    <g-select title="车牌号码" :data="plateNumberData" v-model="plateNumber" ref="plateNumberName" placeholder="无"></g-select>
+    <g-select title="车牌类型" :data="plateSelectData" v-model="plateSelect" ref="plateSelectName" placeholder="请选择车牌类型"></g-select>
     <g-button text="提交" @click.native="confirmInfo"></g-button>
+    <div class="warm-prompt">
+      <div class="warm-prompt-title">温馨提示：</div>
+      <div class="warm-prompt-content">进度查询请前往“个人中心”的“我的业务”</div>
+    </div>
   </div>
 </template>
 
@@ -20,8 +24,8 @@
         identityCard: '',
         mobilePhone: '',
         // plateNumberData: [],
-        plateNumber: '0',
-        plateSelect: '02'
+        plateNumber: '',
+        plateSelect: ''
       }
     },
     computed: {
@@ -54,9 +58,33 @@
       this.userName = this.user.userName
       this.identityCard = this.user.identityCard
       this.mobilePhone = this.user.mobilePhone
+      if (this.plateNumberData.length) {
+        this.plateNumber = '0'
+      }
     },
     methods: {
       confirmInfo () {
+        if (!this.plateNumberData.length) {
+          this.$toast({
+            message: '你还没绑定本人车辆，请先绑定',
+            duration: 2000
+          })
+          return
+        }
+        if (!this.plateNumber) {
+          this.$toast({
+            message: '请选择车牌号码',
+            duration: 2000
+          })
+          return
+        }
+        if (!this.plateSelect) {
+          this.$toast({
+            message: '请选择车牌类型',
+            duration: 2000
+          })
+          return
+        }
         let obj = {
           applyType: '1',
           applyName: this.userName,

@@ -13,7 +13,7 @@
 </template>
 
 <script>
-  import { addSafeAccidentCredit, submitApplicationForDriverInformation, addNoneCarCertification } from '@/config/baseURL.js'
+  import { addSafeAccidentCredit, submitApplicationForDriverInformation, addNoneCarCertification } from '@/config/baseURL'
   export default {
     data () {
       return {
@@ -26,6 +26,9 @@
     computed: {
       user () {
         return Object.assign({}, this.$store.state.user)
+      },
+      queryURL () {
+        return this.$store.getters.queryURL
       }
     },
     created () {

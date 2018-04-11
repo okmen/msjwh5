@@ -118,7 +118,8 @@
           </a>
         </dl>
         <dl class="new">
-          <router-link :to="!isLogin ? '/login' : '/greenTravel/greenApply'">
+          <router-link :to="{ path: '/greenTravel/greenApply', query: { source: this.$route.query.source, idcard: this.$route.query.idcard, openid: this.$route.query.openid }}">
+          <!-- <router-link :to="!isLogin ? '/login' : '/greenTravel/greenApply'"> -->
             <dt><img class="top11" src="./../../assets/images/green-logo.png" alt=""></dt>
             <dd>绿色出行</dd>
           </router-link>

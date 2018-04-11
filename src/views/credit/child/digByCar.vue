@@ -25,17 +25,14 @@
       }
     },
     mounted () {
-      this.cars = JSON.parse(window.localStorage.getItem('cars'))
-      this.isLogin = window.localStorage.getItem('isLogin')
+      this.cars = this.$store.state.user.cars
       // 判断是否登录和绑定车辆！没有登录直接跳转登录,没有绑定车辆直接跳转绑定车辆
-      if (!this.isLogin) {
-        this.$router.push('/login')
-      } else if (this.cars.length === 0) {
+      if (this.cars.length === 0) {
         this.$MessageBox({
           title: '温馨提示',
-          message: '暂无车辆,你可以通过深圳交警微信号的“个人中心”绑定车辆'
+          message: '暂无车辆,你可以通过“个人中心”绑定车辆'
         }).then(action => {
-          this.$router.push('/')
+          this.$router.push({path: '/credit', query: this.queryURL})
         })
       }
     },
