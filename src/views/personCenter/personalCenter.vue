@@ -51,11 +51,11 @@ export default {
         {
           title: '信息单据证明',
           link: '/credit'
+        },
+        {
+          title: '违法处理业务',
+          link: '/newqueryLawless'
         }
-        // {
-        //   title: '违法处理业务',
-        //   link: '/newqueryLawless'
-        // }
       ]
     }
   },
@@ -83,7 +83,10 @@ export default {
           if (data.data.code === '200') {
             window.sessionStorage.clear()
             window.localStorage.clear()
-            window.location.reload()
+            // window.location.reload()
+          let entranceURL = window.location.href
+          let URL = `${msjwURL}/yhtx/html/login.html?resbind=ssjj&openid=${this.openid}&token=${this.token}&redirect=${entranceURL}`
+          window.location.href = URL
           }
         })
       }).catch(() => {})
