@@ -125,3 +125,9 @@ export const getGreenDays = `${commonUrl}greentravel/applyrunningQuery.html` // 
 
 /* -------------  电动车扫码 ------------- */
 export const electrocarFileScancode = `${commonUrl}convenience/getEbikeInfoByFileNo.html` // 获取扫码数据
+
+/* -------------违法处理------------- */
+
+export const queryLawlessByCar = `${commonUrl}illegalHanding/queryInfoByLicensePlateNo.html` // 违法查询（车牌号）
+
+export const queryLawlessByCard = `${commonUrl}illegalHanding/queryInfoByDrivingLicenceNo.html` // 违法查询（驾驶证）

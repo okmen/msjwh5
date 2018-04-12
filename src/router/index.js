@@ -9,6 +9,7 @@ import credit from './credit' // 信息单据证明
 import greenTravel from './greenTravel' // 绿色出行
 import smallClass from './smallClass/smallClass'        // 微课堂
 import electricCar from './electricCar/electricCar'     // 电动车管理
+import newqueryLawless from './newqueryLawless/newqueryLawless'  // 违法处理业务
 import handyService from './handyService/handyService'  // 便民服务
 import { getQueryString, wxShare } from '@/utils/utils'
 import qs from 'qs'
@@ -77,7 +78,8 @@ let router = new Router({
     ...credit,
     ...greenTravel,
     ...smallClass,
-    ...electricCar
+    ...electricCar,
+    ...newqueryLawless
   ]
 })
 
