@@ -10,6 +10,7 @@ import greenTravel from './greenTravel' // 绿色出行
 import smallClass from './smallClass/smallClass'        // 微课堂
 import electricCar from './electricCar/electricCar'     // 电动车管理
 import handyService from './handyService/handyService'  // 便民服务
+import dieselEngineTrucks from './dieselEngineTrucks' // 柴油轻型自卸货车
 import { getQueryString, wxShare } from '@/utils/utils'
 import qs from 'qs'
 
@@ -77,7 +78,8 @@ let router = new Router({
     ...credit,
     ...greenTravel,
     ...smallClass,
-    ...electricCar
+    ...electricCar,
+    ...dieselEngineTrucks
   ]
 })
 

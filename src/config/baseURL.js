@@ -125,3 +125,14 @@ export const getGreenDays = `${commonUrl}greentravel/applyrunningQuery.html` // 
 
 /* -------------  电动车扫码 ------------- */
 export const electrocarFileScancode = `${commonUrl}convenience/getEbikeInfoByFileNo.html` // 获取扫码数据
+
+/* -------------- 柴油轻型自卸货车电子通行证业务接口 --------------- */
+export const informationCollection = `${commonUrl}user/informationCollection.html` // 提交接口
+
+export const informationCollection2 = `${commonUrl}user/informationCollection2.html` // 提交接口二期
+
+export const queryInformationCollection = `${commonUrl}user/queryInformationCollection.html` // 查询接口
+
+export const queryInformationCollection2 = `${commonUrl}user/queryInformationCollection2.html` // 查询接口二期
+
+export const szTrafficPoliceElecBillQry = `${commonUrl}illegalHanding/szTrafficPoliceElecBillQry.html` // 电子回单图片

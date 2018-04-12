@@ -112,7 +112,10 @@ export default {
         month: month
       }
       this.$axios.get(`${getGreenApply}?hphm=${requestData.hphm}&hpzl=${requestData.hpzl}&sfzmhm=${requestData.sfzmhm}&month=${requestData.month}`).then(data => {
-        this.loadDateArr.push(...data.date.ret)
+        console.log(data.date)
+        if (data.date) {
+          this.loadDateArr.push(...data.date.ret)
+        }
         this.loadDateMonthArr.push(month)
         this.zts = +data.zts
         this.showCalendar = true
