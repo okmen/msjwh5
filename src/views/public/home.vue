@@ -125,7 +125,7 @@
           </router-link>
         </dl>
         <dl class="new">
-          <router-link :to="!isLogin ? '/login' : '/dieselEngineTrucksTab'">
+          <router-link :to="{ path: '/dieselEngineTrucksTab', query: { source: this.$route.query.source, idcard: this.$route.query.idcard, openid: this.$route.query.openid }}">
             <dt style="width: 33%;"><img style="width: 100%; height: 100%;" class="top5" src="./../../assets/images/nav15.png" alt=""></dt>
             <dd>柴油轻型<br/>自卸货车</dd>
           </router-link>

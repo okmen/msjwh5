@@ -131,3 +131,14 @@ export const electrocarFileScancode = `${commonUrl}convenience/getEbikeInfoByFil
 export const queryLawlessByCar = `${commonUrl}illegalHanding/queryInfoByLicensePlateNo.html` // 违法查询（车牌号）
 
 export const queryLawlessByCard = `${commonUrl}illegalHanding/queryInfoByDrivingLicenceNo.html` // 违法查询（驾驶证）
+
+/* -------------- 柴油轻型自卸货车电子通行证业务接口 --------------- */
+export const informationCollection = `${commonUrl}user/informationCollection.html` // 提交接口
+
+export const informationCollection2 = `${commonUrl}user/informationCollection2.html` // 提交接口二期
+
+export const queryInformationCollection = `${commonUrl}user/queryInformationCollection.html` // 查询接口
+
+export const queryInformationCollection2 = `${commonUrl}user/queryInformationCollection2.html` // 查询接口二期
+
+export const szTrafficPoliceElecBillQry = `${commonUrl}illegalHanding/szTrafficPoliceElecBillQry.html` // 电子回单图片

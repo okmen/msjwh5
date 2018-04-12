@@ -136,7 +136,7 @@ export default {
     // 没有车辆跳转
     let cars = JSON.parse(window.localStorage.cars) || []
     if (cars.length === 0) {
-      this.$MessageBox('提示', '暂无车辆,你可以通过深圳交警微信号的“个人中心”绑定车辆')
+      this.$MessageBox('提示', '暂无车辆,你可以通过“个人中心”绑定车辆')
     }
     // 名下没有车辆，但是车库里有车
     if (this.form.car === null && cars.length > 0) {

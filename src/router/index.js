@@ -11,6 +11,7 @@ import smallClass from './smallClass/smallClass'        // 微课堂
 import electricCar from './electricCar/electricCar'     // 电动车管理
 import newqueryLawless from './newqueryLawless/newqueryLawless'  // 违法处理业务
 import handyService from './handyService/handyService'  // 便民服务
+import dieselEngineTrucks from './dieselEngineTrucks' // 柴油轻型自卸货车
 import { getQueryString, wxShare } from '@/utils/utils'
 import qs from 'qs'
 
@@ -79,7 +80,8 @@ let router = new Router({
     ...greenTravel,
     ...smallClass,
     ...electricCar,
-    ...newqueryLawless
+    ...newqueryLawless,
+    ...dieselEngineTrucks
   ]
 })
 
