@@ -83,7 +83,8 @@ export default {
           if (data.data.code === '200') {
             window.sessionStorage.clear()
             window.localStorage.clear()
-            window.location.reload()
+            // window.location.reload()
+            window.history.go(0)
           }
         })
       }).catch(() => {})
