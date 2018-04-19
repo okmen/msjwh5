@@ -132,6 +132,12 @@ export const queryLawlessByCar = `${commonUrl}illegalHanding/queryInfoByLicenseP
 
 export const queryLawlessByCard = `${commonUrl}illegalHanding/queryInfoByDrivingLicenceNo.html` // 违法查询（驾驶证）
 
+export const queryPay = `${commonUrl}illegalHanding/toQueryPunishmentPage.html` // 违法缴款
+
+export const claimConfirm = `${commonUrl}illegalHanding/trafficIllegalClaim.html` // 打单确认
+
+export const queryIllegalNoByClaimBefore = `${commonUrl}illegalHanding/queryIllegalNoByClaimBefore.html` // 获取违法编号
+
 /* -------------- 柴油轻型自卸货车电子通行证业务接口 --------------- */
 export const informationCollection = `${commonUrl}user/informationCollection.html` // 提交接口
 

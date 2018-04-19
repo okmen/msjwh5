@@ -69,7 +69,8 @@ export default {
           }
           if (type === 'click') {
             this.$store.commit('saveNewLawlessQuery', lawlessData)
-            this.$router.push('/newLawlessMsg')
+            // this.$router.push('/newLawlessMsg')
+            this.$router.push({path: '/newLawlessMsg', query: this.queryURL})
           }
         } else {
           if (type === 'click') {

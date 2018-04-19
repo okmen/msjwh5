@@ -62,12 +62,13 @@ export default {
             this.$toast(json.msg)
             return false
           }
-          // let lawlessData = {
-          //   info: {},
-          //   data: json.data
-          // }
-          // this.$store.commit('saveNewLawlessQuery', lawlessData)
+          let lawlessData = {
+            info: {},
+            data: json.data
+          }
+          this.$store.commit('saveNewLawlessQuery', lawlessData)
           // this.$router.push('newLawlessMsg')
+          this.$router.push({path: '/newLawlessMsg', query: this.queryURL})
         } else {
           this.$toast(json.msg)
         }

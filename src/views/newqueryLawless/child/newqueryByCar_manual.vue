@@ -135,25 +135,27 @@ export default {
       if (this.$_myMinxin_beforeSubmit(obj)) return
       if (this.$verification.plateVerification(this.plateNumber)) return
       if (!this.$refs.callVerifyByCode.checkCode()) return
-      let newqueryByCard = {
+      let newqueryByCardData = {
         car_number: this.plateNumber.substring(1).toLocaleUpperCase(),
         licensePlateNo: this.plateNumber.toLocaleUpperCase(),
         licensePlateType: this.vehicleTypeOne,
         vehicleIdentifyNoLast4: this.vehicleIdentifyNoLast4
       }
-      this.$axios.post(queryLawlessByCar, newqueryByCard).then(json => {
+      this.$axios.post(queryLawlessByCar, newqueryByCardData).then(json => {
         if (json.code === '0000') {
-          // let lawlessData = {
-          //   info: {
-          //     behindTheFrame4Digits: reqData.vehicleIdentifyNoLast4,
-          //     plateType: reqData.licensePlateType,
-          //     myNumberPlate: reqData.licensePlateNo
-          //   },
-          //   data: json.data
-          // }
-          // this.$store.commit('saveNewLawlessQuery', lawlessData)
-          // let login = this.$route.query.type === 'nologin'
+          let lawlessData = {
+            info: {
+              behindTheFrame4Digits: newqueryByCardData.vehicleIdentifyNoLast4,
+              plateType: newqueryByCardData.licensePlateType,
+              myNumberPlate: newqueryByCardData.licensePlateNo
+            },
+            data: json.data
+          }
+          this.$store.commit('saveNewLawlessQuery', lawlessData)
+          let login = this.$route.query.type === 'nologin'
           // this.$router.push(`newLawlessMsg?type=query&login=${login}`)
+          let source = this.$route.query.source
+          this.$router.push({path: '/newLawlessMsg', query: {source: source, type: 'query', login: login}})
         } else {
           this.$toast(json.msg)
         }

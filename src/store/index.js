@@ -9,6 +9,8 @@ Vue.use(Vuex)
 
 const state = {
   passByValue: '',
+  newLawlessQuery: {},  // 违法处理 车牌号查询结果
+  newLawlessDeal: {},   // 违法处理 当前选中违法信息和个人信息
   censusRegisterList: [
     {
       'value': '1',
@@ -331,6 +333,12 @@ const mutations = {
   },
   saveSuccessInfo (state, value) {
     state.successInfo = value
+  },
+  saveNewLawlessQuery (state, value) {
+    state.newLawlessQuery = value
+  },
+  saveNewLawlessDeal (state, value) {
+    state.newLawlessDeal = value
   }
 }
 

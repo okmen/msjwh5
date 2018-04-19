@@ -10,7 +10,7 @@
         {{val.mobilePhone}}
       </div>
     </div>
-    <mt-cell v-for="(item, index) in personalData" :title="item.title" :to="{ path: item.link, query: queryURL }" key="index" is-link></mt-cell>
+    <mt-cell v-for="(item, index) in personalData" :title="item.title" :to="{ path: item.link, query: queryURL }" :key="index" is-link></mt-cell>
     <g-button text="退出登录" @click.native="handleLogout"></g-button>
   </div>
 </template>
@@ -84,7 +84,8 @@ export default {
             window.sessionStorage.clear()
             window.localStorage.clear()
             // window.location.reload()
-            window.history.go(0)
+            // window.history.go(0)
+            window.location.href = 'https://msjw.szga.gov.cn/wxsite/weixin/cms/commonPage?template=msjw&path=/msjw_index'
           }
         })
       }).catch(() => {})
