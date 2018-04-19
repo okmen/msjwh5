@@ -343,7 +343,6 @@
 <script>
 import { informationCollection, informationCollection2 } from '@/config/baseURL'
 // import UploadFile from '../../service/uploadFile'
-import VDistpicker from 'v-distpicker'
 import { mapActions } from 'vuex'
 export default {
 
@@ -637,9 +636,6 @@ export default {
       ownerSite: '',                // 车主联系地址
       plateNumberOne: '0'
     }
-  },
-  components: {
-    VDistpicker
   },
   computed: {
     plateNumber () {
