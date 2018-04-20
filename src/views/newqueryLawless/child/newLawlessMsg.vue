@@ -74,6 +74,9 @@ export default {
     },
     cars () {
       return this.$store.state.user.cars
+    },
+    queryURL () {
+      return this.$store.getters.queryURL
     }
   },
   mounted () {
@@ -105,7 +108,8 @@ export default {
           this.$axios.post(claimConfirm, reqData).then(json => {
             if (json.code === '0000') {
               this.$MessageBox.alert('该宗违法已处罚完毕，按规定给予警告，免予罚款处罚。').then(action => {
-                this.$router.push('/personalCenter')  // 跳转个人中心
+                // this.$router.push('/personalCenter')  // 跳转个人中心
+                this.$router.push({path: '/personalCenter', query: this.queryURL})
               })
             }
           })
@@ -119,7 +123,8 @@ export default {
         info: JSON.stringify(this.lawlessDeal.info) === '{}' ? this.lawlessData.info : this.lawlessDeal.info
       }
       this.$store.commit('saveNewLawlessDeal', lawlessDeal)
-      this.$router.push('/newqueryAppeal')
+      // this.$router.push('/newqueryAppeal')
+      this.$router.push({path: '/newqueryAppeal', query: this.queryURL})
     },
     // 查看违法图片
     illegalImgBtn: function (imgCode) {
@@ -127,7 +132,9 @@ export default {
         this.$toast('暂无违法图片')
         return false
       }
-      this.$router.push(`/illegalImage?imgQueryCode=${imgCode}`)
+      // this.$router.push(`/illegalImage?imgQueryCode=${imgCode}`)
+      let source = this.$route.query.source
+      this.$router.push({path: '/illegalImage', query: {source: source, imgQueryCode: imgCode}})
     },
     // 判断首违免罚
     clickFun (item) {
