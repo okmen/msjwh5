@@ -74,6 +74,9 @@ export default {
     },
     cars () {
       return this.$store.state.user.cars
+    },
+    queryURL () {
+      return this.$store.getters.queryURL
     }
   },
   mounted () {
@@ -105,7 +108,8 @@ export default {
           this.$axios.post(claimConfirm, reqData).then(json => {
             if (json.code === '0000') {
               this.$MessageBox.alert('该宗违法已处罚完毕，按规定给予警告，免予罚款处罚。').then(action => {
-                this.$router.push('/personalCenter')  // 跳转个人中心
+                // this.$router.push('/personalCenter')  // 跳转个人中心
+                this.$router.push({path: '/personalCenter', query: this.queryURL})
               })
             }
           })
@@ -119,7 +123,8 @@ export default {
         info: JSON.stringify(this.lawlessDeal.info) === '{}' ? this.lawlessData.info : this.lawlessDeal.info
       }
       this.$store.commit('saveNewLawlessDeal', lawlessDeal)
-      this.$router.push('/newqueryAppeal')
+      // this.$router.push('/newqueryAppeal')
+      this.$router.push({path: '/newqueryAppeal', query: this.queryURL})
     },
     // 查看违法图片
     illegalImgBtn: function (imgCode) {
@@ -127,7 +132,9 @@ export default {
         this.$toast('暂无违法图片')
         return false
       }
-      this.$router.push(`/illegalImage?imgQueryCode=${imgCode}`)
+      // this.$router.push(`/illegalImage?imgQueryCode=${imgCode}`)
+      let source = this.$route.query.source
+      this.$router.push({path: '/illegalImage', query: {source: source, imgQueryCode: imgCode}})
     },
     // 判断首违免罚
     clickFun (item) {
@@ -159,7 +166,7 @@ export default {
         this.$axios.post(queryIllegalNoByClaimBefore, {
           licensePlateNo: item.licensePlateNo,
           licensePlateType: item.licensePlateType,
-          mobilephone: window.localStorage.getItem('mobilePhone'),
+          mobilephone: this.$store.state.user.mobilePhone,
           illegalTime: item.illegalTime,
           illegalAddr: item.illegalAddr,
           illegalDesc: item.illegalDesc,
@@ -198,11 +205,11 @@ export default {
           }
         })
       } else if (item.isNeedClaim === '2') { // 需要前往窗口办理，跳转预约
-        if (JSON.parse(window.localStorage.cars).length === 0) {
+        if (JSON.parse(this.$store.state.user.cars).length === 0) {
           this.$MessageBox('提示', '此功能只能预约本人绑定车辆')
           return false
         } else {
-          let ifBind = JSON.parse(window.localStorage.cars).some(arr => {
+          let ifBind = JSON.parse(this.$store.state.user.cars).some(arr => {
             return arr.myNumberPlate === item.licensePlateNo
           })
           if (!ifBind) {
@@ -216,7 +223,7 @@ export default {
         }
         this.$store.commit('saveNewLawlessDeal', lawlessDeal)
         // this.$router.push(/_WeChat/g.test(this.$route.name) ? '/newTimeSelect_WeChat' : '/newTimeSelect')
-        this.$router.push('/newTimeSelect')
+        this.$router.push({path: '/newTimeSelect', query: this.queryURL})
       } else if (item.isNeedClaim === '3') {
         return false
       } else if (item.isNeedClaim === '4') {

@@ -325,9 +325,16 @@ const state = {
   }
 }
 
-const actions = {}
+const actions = {
+  postAppoin ({ commit }, appoinSuccess) {
+    commit('saveAppoin', appoinSuccess)
+  }
+}
 
 const mutations = {
+  saveAppoin (state, appoinSuccess) {
+    state.appoinSuccess = appoinSuccess
+  },
   savePassByValue (state, value) {
     state.passByValue = value
   },

@@ -38,6 +38,30 @@ let newqueryLawless = [
       title: '交通违法查询结果'
     },
     component: () => import('@/views/newqueryLawless/child/newLawlessMsg')
+  },
+  {
+    name: 'newqueryAppeal',
+    path: '/newqueryAppeal',
+    meta: {
+      title: '交通违法申述'
+    },
+    component: () => import('@/views/newqueryLawless/child/appealForm')
+  },
+  {
+    name: 'illegalImage',
+    path: '/illegalImage',
+    meat: {
+      title: '违法图片'
+    },
+    component: () => import('@/views/newqueryLawless/child/illegalImage')
+  },
+  {
+    name: 'newTimeSelect',
+    path: '/newTimeSelect',
+    meta: {
+      title: '交通违法预约'
+    },
+    component: () => import('@/views/newqueryLawless/child/illegalTimeSelect')
   }
 ]
 
