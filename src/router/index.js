@@ -63,6 +63,14 @@ let router = new Router({
       component: () => import('@/components/submitSuccess')
     },
     {
+      path: '/submitSuccessCommon',
+      name: 'submitSuccessCommon',
+      meta: {
+        title: '提交成功'
+      },
+      component: () => import('@/components/submitSuccessCommon')
+    },
+    {
       name: 'appointSuccess',
       path: '/appointSuccess',
       meta: {
