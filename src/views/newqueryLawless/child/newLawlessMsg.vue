@@ -166,7 +166,7 @@ export default {
         this.$axios.post(queryIllegalNoByClaimBefore, {
           licensePlateNo: item.licensePlateNo,
           licensePlateType: item.licensePlateType,
-          mobilephone: window.localStorage.getItem('mobilePhone'),
+          mobilephone: this.$store.state.user.mobilePhone,
           illegalTime: item.illegalTime,
           illegalAddr: item.illegalAddr,
           illegalDesc: item.illegalDesc,
@@ -205,11 +205,11 @@ export default {
           }
         })
       } else if (item.isNeedClaim === '2') { // 需要前往窗口办理，跳转预约
-        if (JSON.parse(window.localStorage.cars).length === 0) {
+        if (JSON.parse(this.$store.state.user.cars).length === 0) {
           this.$MessageBox('提示', '此功能只能预约本人绑定车辆')
           return false
         } else {
-          let ifBind = JSON.parse(window.localStorage.cars).some(arr => {
+          let ifBind = JSON.parse(this.$store.state.user.cars).some(arr => {
             return arr.myNumberPlate === item.licensePlateNo
           })
           if (!ifBind) {
@@ -223,7 +223,7 @@ export default {
         }
         this.$store.commit('saveNewLawlessDeal', lawlessDeal)
         // this.$router.push(/_WeChat/g.test(this.$route.name) ? '/newTimeSelect_WeChat' : '/newTimeSelect')
-        this.$router.push('/newTimeSelect')
+        this.$router.push({path: '/newTimeSelect', query: this.queryURL})
       } else if (item.isNeedClaim === '3') {
         return false
       } else if (item.isNeedClaim === '4') {

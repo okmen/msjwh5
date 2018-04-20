@@ -143,6 +143,12 @@ export const illegalAppeal = `${commonUrl}illegalHanding/trafficIllegalAppeal.ht
 
 export const illegalPictureQuery = `${commonUrl}illegalHanding/illegalPictureQuery.html` // 违法图片查询接口
 
+export const processingPoint = `${commonUrl}illegalHanding/getIllegalProcessingPoint.html` // 违法预约时间选择处理点接口
+
+export const subscribeSorts = `${commonUrl}illegalHanding/toGetSubscribeSorts.html` // 违法预约时间选择列表接口
+
+export const changeSubscribe = `${commonUrl}illegalHanding/toChangeSubscribe.html` // 违法预约时间选择接口
+
 /* -------------- 柴油轻型自卸货车电子通行证业务接口 --------------- */
 export const informationCollection = `${commonUrl}user/informationCollection.html` // 提交接口
 
