@@ -50,7 +50,7 @@ let newqueryLawless = [
   {
     name: 'illegalImage',
     path: '/illegalImage',
-    meat: {
+    meta: {
       title: '违法图片'
     },
     component: () => import('@/views/newqueryLawless/child/illegalImage')
@@ -62,6 +62,14 @@ let newqueryLawless = [
       title: '交通违法预约'
     },
     component: () => import('@/views/newqueryLawless/child/illegalTimeSelect')
+  },
+  {
+    name: 'newPayLawless',
+    path: '/newPayLawless',
+    meta: {
+      title: '违法处理类业务'
+    },
+    component: () => import('@/views/newqueryLawless/child/newPayLawless')
   }
 ]
 

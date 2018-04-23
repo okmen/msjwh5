@@ -1,6 +1,6 @@
 <template>
   <div class="newqueryLawless">
-    <mt-cell v-for="(item, index) in personalData" :title="item.title" :to="{ path: item.link, query: queryURL }" key="index" is-link></mt-cell>
+    <mt-cell v-for="(item, index) in personalData" :title="item.title" :to="{ path: item.link, query: queryURL }" :key="index" is-link></mt-cell>
   </div>
 </template>
 
@@ -14,6 +14,10 @@ export default {
         {
           title: '交通违法查询',
           link: '/newqueryByCar'
+        },
+        {
+          title: '交通违法',
+          link: '/newPayLawless'
         }
       ]
     }
