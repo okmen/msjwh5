@@ -15,15 +15,20 @@ export default {
     return {
     }
   },
+  computed: {
+    queryURL () {
+      return this.$store.getters.queryURL
+    }
+  },
   methods: {
     subFnOne: function () {
-      this.$router.push({path: 'dieseDemand', query: { subFnOne: '1' }})
+      this.$router.push({path: 'dieseDemand', query: { subFnOne: '1', ...this.queryURL }})
     },
     subFnTwo: function () {
-      this.$router.push({path: 'dieseDemand', query: { subFnOne: '2' }})
+      this.$router.push({path: 'dieseDemand', query: { subFnOne: '2', ...this.queryURL }})
     },
     subFnThree: function () {
-      this.$router.push({path: 'dieseDemandMyCar'})
+      this.$router.push({path: 'dieseDemandMyCar', query: this.queryURL})
     }
   }
 }

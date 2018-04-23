@@ -16,7 +16,6 @@
 <script>
 import { queryInformationCollection2 } from '@/config/baseURL'
 import numberType from '../../../src/config/numberType'
-import { Toast } from 'mint-ui'
 export default {
   data () {
     return {
@@ -40,7 +39,7 @@ export default {
           this.isShowMsg = true
         }
       } else {
-        Toast({message: json.msg, position: 'bottom', className: 'white'})
+        this.$toast({message: json.msg, position: 'bottom', className: 'white'})
       }
     })
   }
