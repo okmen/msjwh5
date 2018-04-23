@@ -70,6 +70,14 @@ let newqueryLawless = [
       title: '违法处理类业务'
     },
     component: () => import('@/views/newqueryLawless/child/newPayLawless')
+  },
+  {
+    name: 'confirmLawless',
+    path: '/confirmLawless',
+    meta: {
+      title: '违法处理类业务'
+    },
+    component: () => import('@/views/newqueryLawless/child/confirmLawless')
   }
 ]
 

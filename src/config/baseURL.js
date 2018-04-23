@@ -149,6 +149,8 @@ export const subscribeSorts = `${commonUrl}illegalHanding/toGetSubscribeSorts.ht
 
 export const changeSubscribe = `${commonUrl}illegalHanding/toChangeSubscribe.html` // 违法预约时间选择接口
 
+export const getClaimConfirm = `${commonUrl}illegalHanding/illegalOnlineConfirm.html` // 在线确认-获取违章列表
+
 /* -------------- 柴油轻型自卸货车电子通行证业务接口 --------------- */
 export const informationCollection = `${commonUrl}user/informationCollection.html` // 提交接口
 
