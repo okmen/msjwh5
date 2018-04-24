@@ -78,6 +78,14 @@ let newqueryLawless = [
       title: '违法处理类业务'
     },
     component: () => import('@/views/newqueryLawless/child/confirmLawless')
+  },
+  {
+    name: 'appealEntry',
+    path: '/appealEntry',
+    meta: {
+      title: '违法申诉入口'
+    },
+    component: () => import('@/views/newqueryLawless/child/appealQuery')
   }
 ]
 
