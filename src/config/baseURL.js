@@ -151,6 +151,10 @@ export const changeSubscribe = `${commonUrl}illegalHanding/toChangeSubscribe.htm
 
 export const getClaimConfirm = `${commonUrl}illegalHanding/illegalOnlineConfirm.html` // 在线确认-获取违章列表
 
+export const earlyQuery = `${commonUrl}illegalHanding/toQuerySubscribe.html` // 违法预约查询接口
+
+export const earlyCancel = `${commonUrl}illegalHanding/toCancelSubscribe.html ` // 违法预约取消接口
+
 /* -------------- 柴油轻型自卸货车电子通行证业务接口 --------------- */
 export const informationCollection = `${commonUrl}user/informationCollection.html` // 提交接口
 
