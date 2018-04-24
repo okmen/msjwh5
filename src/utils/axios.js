@@ -9,7 +9,7 @@ axios.interceptors.request.use(
     Indicator.open()
     config.data = config.data || {}
     config.data.version = '0.0.0'
-    config.data.sourceOfCertification = window.VM.$store.state.core.source
+    config.data.sourceOfCertification = config.data.sourceOfCertification || window.VM.$store.state.core.source
     config.data.openId = window.VM.$store.state.core.openId || ''
     config.data = qs.stringify(config.data)
     return config

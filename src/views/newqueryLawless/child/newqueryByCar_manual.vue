@@ -139,7 +139,8 @@ export default {
         car_number: this.plateNumber.substring(1).toLocaleUpperCase(),
         licensePlateNo: this.plateNumber.toLocaleUpperCase(),
         licensePlateType: this.vehicleTypeOne,
-        vehicleIdentifyNoLast4: this.vehicleIdentifyNoLast4
+        vehicleIdentifyNoLast4: this.vehicleIdentifyNoLast4,
+        sourceOfCertification: 'C'
       }
       this.$axios.post(queryLawlessByCar, newqueryByCardData).then(json => {
         if (json.code === '0000') {
