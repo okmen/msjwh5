@@ -86,6 +86,14 @@ let newqueryLawless = [
       title: '违法申诉入口'
     },
     component: () => import('@/views/newqueryLawless/child/appealQuery')
+  },
+  {
+    name: 'newEarly',
+    path: '/newEarly',
+    meta: {
+      title: '交通违法预约'
+    },
+    component: () => import('@/views/newqueryLawless/child/newEarly')
   }
 ]
 

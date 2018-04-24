@@ -51,10 +51,6 @@ export default {
         {
           title: '信息单据证明',
           link: '/credit'
-        },
-        {
-          title: '违法处理业务',
-          link: '/newqueryLawless'
         }
       ]
     }
