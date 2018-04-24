@@ -56,10 +56,6 @@ export default {
           title: '十分钟违停免罚',
           link: '/illegalParking'
         }
-        // {
-        //   title: '违法处理业务',
-        //   link: '/newqueryLawless'
-        // }
       ]
     }
   },
