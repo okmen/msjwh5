@@ -1,6 +1,6 @@
 <template lang="html">
    <mymap v-if="showMap" @submit="submitMap"></mymap>
-   <div v-else class="illegalParking-outer">
+   <div v-else class="illegalParking-outer"  @click.stop="licenseNoSelectShow = false, licensePlateTypeSelectShow = false">
       <ul class="illegalParking-from">
          <li class="illegalParking-item">
           <div class="illegalParking-hbs-name">
@@ -44,14 +44,18 @@
       </ul>
       <div class="tp-read illegalParking-read">
         <button class="btn" @click="queryList">查询违停免罚记录，请点击这里</button>
-        <div class="tp-read-checkbox illegalParking-read-checkbox">
-          <input type="checkbox" id="illegalParkingChecked" v-model="checked">
-          <label for="illegalParkingChecked"></label>
-        </div>
-        <span class="read-and-agree">
-          我已认真阅读并同意<router-link :to="{path: '/userAgreement/wtmf?type=nohandle'}" class="illegalParking-notice">《十分钟违停免罚须知》</router-link>
-        </span>
       </div>
+      <div class="illegalParkingRead">
+        <div class="tp-read-checkbox illegalParking-read-checkbox">
+        <input type="checkbox" id="illegalParkingChecked" v-model="checked">
+        <label for="illegalParkingChecked"></label>
+      </div>
+      <div class="read-and-agree">
+        <span>我已认真阅读并同意</span>
+        <router-link :to="{path: '/userAgreement/wtmf?type=nohandle'}" class="illegalParking-notice">《十分钟违停免罚须知》</router-link>
+      </div>
+      </div>
+      
       <div class="tp-btn-sure">
         <button class="btn" @click="nextStep">下一步</button>
       </div>
@@ -84,9 +88,12 @@
        licensePlateNo: '', // 选中的车牌
        licenseNoSelectShow: false, // 车牌号码下拉框显示
        parkingAddr: '', // 停车地点
-       checked: false // 勾选已阅读须知
+       checked: false, // 勾选已阅读须知
+       licenseNos: [], // 所有车牌
+       ticketNo: '' // 违停告知书号
      }
    },
+   // 判断是否是从下级或者协议页面返回并使用历史数据
    beforeRouteEnter (to, from, next) {
      next(vm => {
        if (from.name === 'userAgreement' || from.name === 'queryIllegalParking' || from.name === 'illegalParking_takePhoto') {
@@ -104,8 +111,29 @@
      }
    },
    methods: {
+     savePageRecord () {
+       this.$store.commit('savePageRecord', {
+         reading: this.checked,
+         parkingAddr: this.parkingAddr
+       })
+     },
      getLocation: function () { // 显示地图
        this.showMap = true
+     },
+     licenseNoSelectClick: function (obj) { // 选择车牌号码
+       if (obj) {
+         this.licensePlateNo = obj.myNumberPlate
+         this.licensePlateType = obj.plateType
+       }
+       this.licenseNoSelectShow = !this.licenseNoSelectShow
+       this.licensePlateTypeSelectShow = false
+     },
+     licensePlateTypeSelectClick: function (obj) { // 选择车牌类型
+       if (obj) {
+         this.licensePlateType = obj.type
+       }
+       this.licensePlateTypeSelectShow = !this.licensePlateTypeSelectShow
+       this.licenseNoSelectShow = false
      },
      queryList () {
        if (!this.licensePlateNo) {
@@ -182,10 +210,53 @@
          ticketNo: this.ticketNo // 违停告知书号
        })
        this.$router.push('/illegalParking_takePhoto')
+     },
+     submitMap: function (obj) { // 确定选择地点
+       this.showMap = false
+       this.parkingAddr = obj.showAdd
+     },
+     getFormatTime: function () { // 获取格式化时间
+      /* eslint-disable */
+      let date = new Date()
+      this.entryTime = date.getTime()
+      /* eslint-enable */
+       let formatMonth = (date.getMonth() + 1) < 10 ? `0${date.getMonth() + 1}` : `${date.getMonth() + 1}`
+       let formatDate = date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`
+       let formatHour = date.getHours() < 10 ? `0${date.getHours()}` : `${date.getHours()}`
+       let formatMinute = date.getMinutes() < 10 ? `0${date.getMinutes()}` : `${date.getMinutes()}`
+       let formatSecond = date.getSeconds() < 10 ? `0${date.getSeconds()}` : `${date.getSeconds()}`
+       let formatTime = `${date.getFullYear()}-${formatMonth}-${formatDate} ${formatHour}:${formatMinute}:${formatSecond}`
+       this.formatDate = formatTime
+       return formatTime
+     },
+     getUserInfo: function () {
+       let cars = JSON.parse(window.localStorage.getItem('cars')) || []
+       if (cars.length) {
+         cars.map(item => {
+           this.licenseNos.push({myNumberPlate: item.myNumberPlate, plateType: item.plateType})
+         })
+         this.licensePlateNo = this.licenseNos[0].myNumberPlate
+         this.licensePlateType = this.licenseNos[0].plateType
+       } else {
+         MessageBox('温馨提示', '暂无车辆,你可以通过深圳交警微信号的“个人中心”绑定车辆')
+       }
+       this.licensePlateTypes = this.$store.state.licenseSelectData
      }
    },
-   mounted () {}
- }
+   mounted () {
+     let isLogin = window.localStorage.getItem('isLogin')
+     if (isLogin !== 'true') { // 没有登陆的话需要跳转至登录页面
+       this.$router.push('/login')
+       return false
+     }
+     this.driver = window.localStorage.getItem('userName')
+     this.getFormatTime()
+     this.getUserInfo()
+   },
+   components: {
+     'mymap': require('@/components/map/map.vue')
+   }
+}
 </script>
 
 <style lang="less">
@@ -194,9 +265,9 @@
   outline: none; margin-bottom: 2rem;
 }
 .illegalParking-outer{
-  background: #fff;
-  font-size: 30px;
-  padding: 28px 50px 0;
+    background: #fff;
+    font-size: 30px;
+    padding: 28px 50px 0;
   input{
     font-size: 30px;
   }
@@ -237,11 +308,68 @@
   }
   .tp-btn-sure button{
     margin-left: 0;
-    margin-top: 140px;
+    margin-top: 20px;
   }
   .illegalParking-notice{
     text-decoration: underline;
     color: #2e8ffd;
+  }
+  .illegalParkingRead{
+    width: 100%;
+    margin-top: 30px;
+    .read-and-agree{
+      font-size: 26px;
+    }
+     .tp-read-checkbox{
+    float:left;
+    position:relative;
+    margin:4px 20px 0 0;
+    width:26px;
+    height:26px;
+    input[type=checkbox]{
+      visibility: hidden;
+    }
+    label{
+      position:absolute;
+      width:26px;
+      height:26px;
+      top:0;
+      left:0;
+      background:#FFF;
+      border:1px dotted #6a6a6a;
+      -webkit-border-radius:6px;
+      -moz-border-radius:6px;
+      border-radius:6px;
+      cursor:pointer;
+    }
+    label:after{
+      opacity:0.2;
+      content:'';
+      position:absolute;
+      width:24px;
+      height:8px;
+      background:transparent;
+      top:0;
+      left:3px;
+      border:4px solid #333;
+      border-top:none;
+      border-right:none;
+      -webkit-transform: rotate(-45deg);
+      -moz-transform: rotate(-45deg);
+      -o-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+    }
+    label:hover::after{
+      opacity:0.5;
+    }
+    input[type=checkbox]:checked + label:after{
+      opacity:1;
+    }
+  }
+   .illegalParking-read-checkbox{
+    width: 20px;
+   }
   }
   .text-input{
     background: #fff;
@@ -249,5 +377,15 @@
   input[readonly]{
     background: #efeff4;
   }
-}
+  .tp-read{
+    // padding:28px 50px 0;
+    width:100%;
+    height:106px;
+  }
+  span{
+    display:block;
+    float:left;
+    font-size:22px;
+  }
+ }
 </style>
