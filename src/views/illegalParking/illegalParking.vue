@@ -59,14 +59,132 @@
     </div> 
 </template>
 <script>
-//  import { MessageBox, Toast } from 'mint-ui'
+ import { MessageBox, Toast } from 'mint-ui'
  export default {
+   computed: {
+     licensePlateTypeStr: function () {
+       let licensePlateTypeStr = ''
+       switch (this.licensePlateType) {
+         case '01':
+           licensePlateTypeStr = '黄牌'
+           break
+         case '06':
+           licensePlateTypeStr = '黑牌'
+           break
+         default:
+           licensePlateTypeStr = '蓝牌'
+       }
+       return licensePlateTypeStr
+     }
+   },
    data () {
-
+     return {
+       showMap: false, // 显示地图
+       driver: '', // 驾驶人姓名
+       licensePlateNo: '', // 选中的车牌
+       licenseNoSelectShow: false, // 车牌号码下拉框显示
+       parkingAddr: '', // 停车地点
+       checked: false // 勾选已阅读须知
+     }
+   },
+   beforeRouteEnter (to, from, next) {
+     next(vm => {
+       if (from.name === 'userAgreement' || from.name === 'queryIllegalParking' || from.name === 'illegalParking_takePhoto') {
+         vm.checked = vm.$store.state.pageRecord.data.reading || false
+         vm.parkingAddr = vm.$store.state.pageRecord.data.parkingAddr
+       }
+     })
+   },
+   watch: {
+     checked () {
+       return this.savePageRecord()
+     },
+     parkingAddr () {
+       return this.savePageRecord()
+     }
    },
    methods: {
-     nextStep () {}
-   }
+     getLocation: function () { // 显示地图
+       this.showMap = true
+     },
+     queryList () {
+       if (!this.licensePlateNo) {
+         Toast({
+           message: '请选择车牌号码',
+           duration: 2000
+         })
+         return false
+       }
+
+       if (!this.licensePlateType) {
+         Toast({
+           message: '请选择车牌类型',
+           duration: 2000
+         })
+         return false
+       }
+       this.$router.push(`/queryIllegalParking?number=${this.licensePlateNo}&type=${this.licensePlateType}`)
+     },
+     nextStep () { // 点击下一步
+       let deltaT = Date.now() - this.entryTime
+       if (deltaT >= 10 * 60 * 1000) { // 超过十分钟
+         MessageBox('提示', '你已经超时操作').then(action => {
+           this.$router.push('/')
+         })
+         return false
+       }
+       if (!this.licensePlateNo) {
+         Toast({
+           message: '请选择车牌号码',
+           duration: 2000
+         })
+         return false
+       }
+
+       if (!this.licensePlateType) {
+         Toast({
+           message: '请选择车牌类型',
+           duration: 2000
+         })
+         return false
+       }
+
+       if (!this.parkingAddr) {
+         Toast({
+           message: '请选择停车地点',
+           duration: 2000
+         })
+         return false
+       }
+
+       if (!this.driver) {
+         Toast({
+           message: '请输入驾驶人姓名',
+           duration: 2000
+         })
+         return false
+       }
+
+       if (!this.checked) {
+         Toast({
+           message: '请确认阅读并同意违停免罚须知',
+           duration: 2000
+         })
+         return false
+       }
+       this.$store.commit('saveIllegalPark', {
+         entryTime: this.entryTime, // 进入该页面时的时间戳
+         formatDate: this.formatDate, // 时间
+         licensePlateNo: this.licensePlateNo, // 车牌
+         licensePlateType: this.licensePlateType, // 车牌类型
+         parkingAddr: this.parkingAddr, // 停车地点
+         driver: this.driver, // 驾驶人
+         ticketNo: this.ticketNo // 违停告知书号
+       })
+       this.$router.push('/illegalParking_takePhoto')
+     }
+   },
+   mounted () {}
  }
 </script>
 
