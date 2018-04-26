@@ -23,7 +23,7 @@
             <p class="newLawlessMsg-item-content-textNO" v-if="$route.query.login"><span>处理方式：</span><span :class="{isBtn: (item.isNeedClaim == 0 || item.isNeedClaim == 1 || item.isNeedClaim == 2) && !isHave(item.description), isQuery: $route.query.type === 'query', isLink: item.isNeedClaim == 0 && !isHave(item.description)}"  @click="clickFun(item)">{{ handleMethodFun(item) }}</span></p>
             <div class="newLawlessMsg-item-btn" v-if="!$route.query.login">
               <!-- <button v-if="item.description && isBoolean2(item.description)" @click="punishFreeDesc(item)">申请首违免罚</button> -->
-              <button class="reviewImages" v-if="item.imgQueryCode" @click="illegalImgBtn(item.imgQueryCode)">查看违法图片</button>
+              <button class="reviewImages" v-if="item.imgQueryCode && isLogin(item.licensePlateNo)" @click="illegalImgBtn(item.imgQueryCode)">查看违法图片</button>
               <div></div>
               <button v-if="isBoolean(item.licensePlateNo, item.illegalUnit)" @click="hrefFn(item)">违法申诉</button>
             </div>
