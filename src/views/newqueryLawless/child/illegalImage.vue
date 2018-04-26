@@ -11,11 +11,11 @@ import Viewer from 'viewerjs'
 export default {
   data () {
     return {
-      imgBase: ''
+      imgBase: '',
+      viewer: ''
     }
   },
   mounted () {
-    // let imgQueryCode = '1A84ED1DECF55BA75C137669273087D6'
     let imgQueryCode = this.$route.query.imgQueryCode
     console.log('imgQueryCode', imgQueryCode)
     this.$axios.post(illegalPictureQuery, {imgQueryCode, sourceOfCertification: 'C'}).then(json => {
