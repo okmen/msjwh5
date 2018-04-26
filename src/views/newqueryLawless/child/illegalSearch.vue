@@ -141,6 +141,7 @@
 <style lang="less" scoped>
   .illegalSearch {
     padding: 30px 30px 0;
+    background-color: #F5F5F5;
     .illegalSearch-nav {
       li {
         height: 104px;
