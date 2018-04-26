@@ -51,6 +51,10 @@ export default {
         {
           title: '信息单据证明',
           link: '/credit'
+        },
+        {
+          title: '十分钟违停免罚',
+          link: '/illegalParking'
         }
       ]
     }

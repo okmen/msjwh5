@@ -131,7 +131,8 @@
           </router-link>
         </dl>
         <dl class="new">
-          <router-link :to="!isLogin ? '/login' : '/illegalParking'">
+          <!-- <router-link :to="!isLogin ? '/login' : '/illegalParking'"> -->
+           <router-link :to="'/illegalParking'">
             <dt><img class="top5" src="./../../assets/images/nav14.png" alt=""></dt>
             <dd>十分钟<br>违停免罚</dd>
           </router-link>
