@@ -54,6 +54,7 @@ export default {
     },
     newqueryByCar (item, type) {
       let reqData = {
+        sourceOfCertification: 'C',
         licensePlateNo: item.myNumberPlate,
         licensePlateType: item.plateType,
         vehicleIdentifyNoLast4: item.behindTheFrame4Digits,

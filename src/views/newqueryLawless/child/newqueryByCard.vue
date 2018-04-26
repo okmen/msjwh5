@@ -50,10 +50,10 @@ export default {
       if (this.$verification.isPhone(this.mobilePhone)) return
       if (!this.$refs.callVerifyByCode.checkCode()) return
       let newqueryByCardData = {
+        sourceOfCertification: 'C',
         drivingLicenceNo: this.drivingLicenceNo,
         recordNo: this.fileNumber,
         identityCard: this.drivingLicenceNo,
-        sourceOfCertification: 'M',
         mobilephone: this.mobilePhone
       }
       this.$axios.post(queryLawlessByCard, newqueryByCardData).then(json => {

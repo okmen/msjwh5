@@ -97,6 +97,7 @@ export default {
           this.plateNumber = '无'
         }
         let reqData = {
+          sourceOfCertification: 'C',
           billNo: this.billNo,
           licensePlateNo: this.plateNumber.toLocaleUpperCase()
         }

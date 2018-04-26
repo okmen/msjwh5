@@ -75,6 +75,7 @@ export default {
     },
     confirmInfo () {
       let reqData = {
+        sourceOfCertification: 'C',
         licensePlateNo: this.licensePlateNo,         // 车牌号码
         licensePlateType: this.plateType,            // 车牌类型
         vehicleIdentifyNoLast4: this.behindTheFrame4Digits,  // 车架号

@@ -152,6 +152,7 @@ export default {
             },
             data: json.data
           }
+          console.log(lawlessData)
           this.$store.commit('saveNewLawlessQuery', lawlessData)
           let login = this.$route.query.type === 'nologin'
           // this.$router.push(`newLawlessMsg?type=query&login=${login}`)

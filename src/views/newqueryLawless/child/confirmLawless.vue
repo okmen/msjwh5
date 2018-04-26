@@ -53,11 +53,11 @@ export default {
     },
     getLawlessData (item, type) {
       let reqData = {
+        sourceOfCertification: 'C',
         licensePlateNo: item.myNumberPlate,
         licensePlateType: item.plateType,
         vehicleIdentifyNoLast4: item.behindTheFrame4Digits,
         identityCard: item.identityCard,
-        sourceOfCertification: 'M',
         mobilephone: this.$store.state.user.mobilePhone
       }
       console.log(reqData)

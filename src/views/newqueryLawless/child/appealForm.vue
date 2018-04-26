@@ -58,6 +58,7 @@ export default {
       if (this.$_myMinxin_beforeSubmit(obj)) return
       if (this.$verification.isPhone(this.mobilephone)) return
       let reqData = {
+        sourceOfCertification: 'C',
         billNo: this.lawlessData.data.billNo, // 违法书单编号
         illegalTime: this.lawlessData.data.illegalTime, // 违法时间
         illegalAddress: this.lawlessData.data.illegalAddr, // 违法地点

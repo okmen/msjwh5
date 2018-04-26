@@ -23,7 +23,7 @@
             <p class="newLawlessMsg-item-content-textNO" v-if="$route.query.login"><span>处理方式：</span><span :class="{isBtn: (item.isNeedClaim == 0 || item.isNeedClaim == 1 || item.isNeedClaim == 2) && !isHave(item.description), isQuery: $route.query.type === 'query', isLink: item.isNeedClaim == 0 && !isHave(item.description)}"  @click="clickFun(item)">{{ handleMethodFun(item) }}</span></p>
             <div class="newLawlessMsg-item-btn" v-if="!$route.query.login">
               <!-- <button v-if="item.description && isBoolean2(item.description)" @click="punishFreeDesc(item)">申请首违免罚</button> -->
-              <button class="reviewImages" v-if="item.imgQueryCode && isLogin(item.licensePlateNo)" @click="illegalImgBtn(item.imgQueryCode)">查看违法图片</button>
+              <button class="reviewImages" v-if="item.imgQueryCode" @click="illegalImgBtn(item.imgQueryCode)">查看违法图片</button>
               <div></div>
               <button v-if="isBoolean(item.licensePlateNo, item.illegalUnit)" @click="hrefFn(item)">违法申诉</button>
             </div>
@@ -91,6 +91,11 @@ export default {
         return true
       }
     },
+    isLogin (itemNum) {
+      this.cars.some(item => {
+        return item.myNumberPlate === itemNum
+      })
+    },
     isBoolean (itemNum, add) {
       if (add.indexOf('深圳') < 0) {
         return false
@@ -103,7 +108,8 @@ export default {
       this.$MessageBox.confirm('尊敬的用户您好，该宗违法符合深圳交警首违免罚范围，是否申请免除一次道路交通安全违法行为的罚款？').then(action => {
         this.$MessageBox.confirm('确定打单吗?').then(action => {
           let reqData = {
-            illegalNo: item.billNo
+            illegalNo: item.billNo,
+            sourceOfCertification: 'C'
           }
           this.$axios.post(claimConfirm, reqData).then(json => {
             if (json.code === '0000') {
@@ -148,6 +154,7 @@ export default {
       console.log(item)
       if (item.isNeedClaim === '0') { // 直接缴款
         let reqData = {
+          sourceOfCertification: 'C',
           billNo: item.billNo,
           licensePlateNo: item.licensePlateNo
         }
@@ -164,6 +171,7 @@ export default {
           return false
         }
         this.$axios.post(queryIllegalNoByClaimBefore, {
+          sourceOfCertification: 'C',
           licensePlateNo: item.licensePlateNo,
           licensePlateType: item.licensePlateType,
           mobilephone: this.$store.state.user.mobilePhone,

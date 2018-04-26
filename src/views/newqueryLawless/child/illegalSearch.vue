@@ -85,6 +85,7 @@
           this.currentItem = item
         }
         this.$axios.post(earlyQuery, {
+          sourceOfCertification: 'C',
           car_number: this.currentItem.myNumberPlate.substr(1),
           licensePlateNo: this.currentItem.myNumberPlate,
           licensePlateType: this.currentItem.plateType,
@@ -117,6 +118,7 @@
         let ccsjd = data.yydate_sjd // 预约时间段
         let cldbmmc = data.cldbmmc // 预约处理点
         let reqData = {
+          sourceOfCertification: 'C',
           subscribeNo: subscribeNo, // 预约编号
           businessName: '违法处理预约', // 业务名称
           yydate, // 预约日期
