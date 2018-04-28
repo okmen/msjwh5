@@ -132,7 +132,7 @@ export default {
           json.data.map(item => {
             this.processingPointData.push({name: item.cldbmmc, value: item.cldbmid, cldaddress: item.cldaddress, cldlxdh: item.cldlxdh})
           })
-          this.cldbmmc = this.processingPointData[0].cldbmmc
+          this.cldbmmc = this.processingPointData[0].name
           this.cldbmid = this.processingPointData[0].value
           this.cldlxdh = this.processingPointData[0].cldlxdh
           this.cldaddress = this.processingPointData[0].cldaddress
@@ -233,6 +233,7 @@ export default {
         cldaddress: this.cldaddress, // 服务点地址
         cldlxdh: this.cldlxdh // 服务点电话
       }
+      console.log(reqData)
       for (let key in reqData) {
         if (!reqData[key]) {
           this.$toast('信息填写不完整')
