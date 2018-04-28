@@ -59,7 +59,8 @@
                 data: json.data
               }
               this.$store.commit('saveNewLawlessQuery', lawlessData)
-              this.$router.push('/illegalAppointmentMs')
+              // this.$router.push('/illegalAppointmentMs', query: this.queryURL)
+              this.$router.push({path: '/illegalAppointmentMs', query: this.queryURL})
             }
           } else {
             if (type === 'click') {
