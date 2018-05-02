@@ -9,6 +9,7 @@ Vue.use(Vuex)
 
 const state = {
   passByValue: '',
+  illegalPark: {}, // 违停免罚信息
   newLawlessQuery: {},  // 违法处理 车牌号查询结果
   newLawlessDeal: {},   // 违法处理 当前选中违法信息和个人信息
   censusRegisterList: [
@@ -346,6 +347,9 @@ const mutations = {
   },
   saveNewLawlessDeal (state, value) {
     state.newLawlessDeal = value
+  },
+  saveIllegalPark (state, value) {
+    state.illegalPark = value
   }
 }
 

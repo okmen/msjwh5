@@ -130,7 +130,7 @@
   </div>
 </template>
 <script>
-  import {reportingNoParking} from '../../config/baseUrl'
+  import {reportingNoParking} from '../../config/baseURL'
   import {resultPost} from '../../service/getData'
   import UploadFile from '../../service/uploadFile'
   import {Toast, Popup, MessageBox} from 'mint-ui'

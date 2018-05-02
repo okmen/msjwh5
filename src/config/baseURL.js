@@ -165,3 +165,7 @@ export const queryInformationCollection = `${commonUrl}user/queryInformationColl
 export const queryInformationCollection2 = `${commonUrl}user/queryInformationCollection2.html` // 查询接口二期
 
 export const szTrafficPoliceElecBillQry = `${commonUrl}illegalHanding/szTrafficPoliceElecBillQry.html` // 电子回单图片
+
+export const queryReportingNoParking = `${commonUrl}illegalHanding/recordOfReportingNoParking.html` // 查询违停免罚列表
+
+export const reportingNoParking = `${commonUrl}illegalHanding/reportingNoParking.html` // 违停免罚接口
