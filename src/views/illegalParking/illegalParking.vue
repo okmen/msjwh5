@@ -1,5 +1,6 @@
 <template lang="html">
-   <mymap v-if="showMap" @submit="submitMap"></mymap>
+  <div>
+    <mymap v-if="showMap" @submit="submitMap"></mymap>
    <div v-else class="illegalParking-outer"  @click.stop="licenseNoSelectShow = false, licensePlateTypeSelectShow = false">
       <ul class="illegalParking-from">
          <li class="illegalParking-item">
@@ -61,9 +62,12 @@
       </div>
       <div v-wechat-title="$route.meta.title"></div>
     </div> 
+
+  </div>
 </template>
 <script>
  import { MessageBox, Toast } from 'mint-ui'
+//  import mymap from '@/components/map/map.vue'
  export default {
    computed: {
      licensePlateTypeStr: function () {
@@ -96,7 +100,7 @@
    // 判断是否是从下级或者协议页面返回并使用历史数据
    beforeRouteEnter (to, from, next) {
      next(vm => {
-       if (from.name === 'userAgreement' || from.name === 'queryIllegalParking' || from.name === 'illegalParking_takePhoto') {
+       if (from.name === 'userAgreement' || from.name === 'queryIllegalParking' || from.name === 'takePhoto') {
          vm.checked = vm.$store.state.pageRecord.data.reading || false
          vm.parkingAddr = vm.$store.state.pageRecord.data.parkingAddr
        }
@@ -209,7 +213,7 @@
          driver: this.driver, // 驾驶人
          ticketNo: this.ticketNo // 违停告知书号
        })
-       this.$router.push('/illegalParking_takePhoto')
+       this.$router.push('/takePhoto')
      },
      submitMap: function (obj) { // 确定选择地点
        this.showMap = false
@@ -254,7 +258,7 @@
      this.getUserInfo()
    },
    components: {
-     'mymap': require('@/components/map/map.vue')
+     mymap: () => import('@/components/map/map.vue')
    }
 }
 </script>

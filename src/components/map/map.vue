@@ -1,23 +1,23 @@
 <template>
-<div class="getLocation-outer">
-  <div class="getLocation-search">
-    <input id="keywordId" class="text-input" type="text" placeholder="输入地点名称搜索" v-model:value="keywords">
-    <div class="search-btn" @click.stop="search()"></div>
+  <div class="getLocation-outer">
+    <div class="getLocation-search">
+      <input id="keywordId" class="text-input" type="text" placeholder="输入地点名称搜索" v-model:value="keywords">
+      <div class="search-btn" @click.stop="search()"></div>
+    </div>
+    <div id="mymap"></div>
+    <div class="getLocation-result">
+      <p>查询结果</p>
+      <div class="submit-btn" @click.stop="submit()" v-if="roads">提交</div>
+      <div class="submit-btn" v-else="roads">查询中</div>
+    </div>
+    <div class="getLocation-options">
+      <ul  v-if="roads">
+        <li v-for="(item, index) in roads" :class="{active: index===selectIndex}" @click.stop="selectOption(index)">{{item.text}}</li>
+      </ul>
+      <p v-else="roads">附近没有道路，请移动地图中心点到道路附近</p>
+    </div>
+    <div v-wechat-title="$route.meta.title"></div>
   </div>
-  <div id="mymap"></div>
-  <div class="getLocation-result">
-    <p>查询结果</p>
-    <div class="submit-btn" @click.stop="submit()" v-if="roads">提交</div>
-    <div class="submit-btn" v-else="roads">查询中</div>
-  </div>
-  <div class="getLocation-options">
-    <ul  v-if="roads">
-      <li v-for="(item, index) in roads" :class="{active: index===selectIndex}" @click.stop="selectOption(index)">{{item.text}}</li>
-    </ul>
-    <p v-else="roads">附近没有道路，请移动地图中心点到道路附近</p>
-  </div>
-  <div v-wechat-title="$route.meta.title"></div>
-</div>
 </template>
 <script>
 import { getLocation } from '@/config/baseURL'
@@ -26,7 +26,6 @@ import { Toast } from 'mint-ui'
 import { flagGreen, geopoint } from './base64'
 // import { wgs84togcj02 } from './wgs84togcj02'
 export default{
-  name: 'getLocation',
   data () {
     return {
       keywords: '',

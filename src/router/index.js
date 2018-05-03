@@ -13,6 +13,8 @@ import newqueryLawless from './newqueryLawless/newqueryLawless'  // 违法处理
 import handyService from './handyService/handyService'  // 便民服务
 import dieselEngineTrucks from './dieselEngineTrucks' // 柴油轻型自卸货车
 import illegalParking from './illegalParking'  // 十分钟违停
+import queryIllegalParking from './queryIllegalParking'  // 查询违停免罚
+import takePhoto from './takePhoto'  // 十分钟违停
 import { getQueryString, wxShare } from '@/utils/utils'
 import qs from 'qs'
 
@@ -88,6 +90,8 @@ let router = new Router({
     ...credit,
     ...greenTravel,
     ...illegalParking,
+    ...queryIllegalParking,
+    ...takePhoto,
     ...smallClass,
     ...electricCar,
     ...newqueryLawless,

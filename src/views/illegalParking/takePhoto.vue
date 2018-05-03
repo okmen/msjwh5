@@ -41,10 +41,13 @@
 
 <script>
 import { MessageBox, Popup, Toast } from 'mint-ui'
-import UploadFile from '../../service/uploadFile'
-import { resultPost } from '../../service/getData'
-import { reportingNoParking } from '../../config/baseUrl'
+import UploadFile from '../../utils/uploadFile'
+// import { resultPost } from '../../service/getData'
+import { reportingNoParking } from '../../config/baseURL'
 export default {
+  created () {
+    // this.licensePlateNo = window.localStorage.getItem('myNumberPlate') // 车牌号码
+  },
   computed: {
     illegalData: function () {
       return this.$store.state.illegalPark
@@ -114,6 +117,7 @@ export default {
       }
       let reqData = {
         numberPlateNumber: this.illegalData.licensePlateNo, // 车牌号码
+        entryTime: this.illegalData.entryTime, // 进入该页面时的时间戳
         plateType: this.illegalData.licensePlateType, // 车牌种类
         IDcard: window.localStorage.getItem('identityCard') || '', // 星级用户身份证
         parkingSpot: this.illegalData.parkingAddr, // 停车地点
@@ -168,7 +172,8 @@ export default {
     },
     // 确认提交
     confirmSubmit () {
-      resultPost(reportingNoParking, this.reqData).then(obj => {
+      this.$axios.post(reportingNoParking, this.reqData)
+      .then(obj => {
         if (obj.code === '0000') {
           let dataInfo = {
             type: 1,
@@ -181,6 +186,19 @@ export default {
           MessageBox('提示', obj.msg)
         }
       })
+      // resultPost(reportingNoParking, this.reqData).then(obj => {
+      //   if (obj.code === '0000') {
+      //     let dataInfo = {
+      //       type: 1,
+      //       businessType: '违停免罚',
+      //       subscribeNo: obj.data
+      //     }
+      //     this.$store.commit('saveSuccessInfo', dataInfo)
+      //     this.$router.push('/submitSuccess')
+      //   } else {
+      //     MessageBox('提示', obj.msg)
+      //   }
+      // })
     },
     popupTicket: function (src) { // 显示弹窗大图
       this.popupImg = src
