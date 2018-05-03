@@ -127,7 +127,7 @@ export default {
   },
   methods: {
     init () {
-      this.$axios.get(`${processingPoint}?sourceOfCertification=C`).then(json => {
+      this.$axios.get(`${processingPoint}?sourceOfCertification=M`).then(json => {
         if (json.code === '0000') {
           json.data.map(item => {
             this.processingPointData.push({name: item.cldbmmc, value: item.cldbmid, cldaddress: item.cldaddress, cldlxdh: item.cldlxdh})
@@ -152,7 +152,7 @@ export default {
       this.getDetailData()
     },
     getDetailData: function () {
-      this.$axios.get(`${subscribeSorts}?cldbmid=${this.cldbmid}&sourceOfCertification=C`).then(json => {
+      this.$axios.get(`${subscribeSorts}?cldbmid=${this.cldbmid}&sourceOfCertification=M`).then(json => {
         console.log(json)
         if (json.code === '0000') {
           this.timeData = json.data.data
@@ -220,7 +220,7 @@ export default {
         snm: this.snm,
         cldbmid: this.cldbmid,
         cczb_id: this.cczb_id,
-        sourceOfCertification: 'C', // 来源
+        // sourceOfCertification: 'C', // 来源
         custName: this.custName, // 用户姓名
         certificateNo: this.certificateNo, // 身份证号码
         drivingLicenceNo: this.certificateNo, // 驾驶证号码
