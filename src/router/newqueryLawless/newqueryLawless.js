@@ -102,6 +102,14 @@ let newqueryLawless = [
       title: '交通违法预约'
     },
     component: () => import('@/views/newqueryLawless/child/illegalAppointmentMs')
+  },
+  {
+    name: 'feePayment',
+    path: '/feePayment',
+    meta: {
+      title: '车管规费缴纳'
+    },
+    component: () => import('@/views/feePayment')
   }
 ]
 

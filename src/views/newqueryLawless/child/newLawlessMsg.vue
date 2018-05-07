@@ -8,7 +8,7 @@
         <li v-for="item in lawlessData.data">
           <div class="newLawlessMsg-item-title">
             <p>违法信息</p>
-            <!-- <span @click.stop="clickJump(item)">{{ claimList[item.isNeedClaim] }}</span> -->
+            <span @click.stop="clickJump(item)">{{ claimList[item.isNeedClaim] }}</span>
           </div>
           <div class="newLawlessMsg-item-content">
             <p class="newLawlessMsg-item-content-No" v-if="item.billNo">{{ item.isNeedClaim === '0' ? '缴款编号' : '违法编号' }}：<span>{{ item.billNo }}</span></p>
@@ -213,18 +213,18 @@ export default {
           }
         })
       } else if (item.isNeedClaim === '2') { // 需要前往窗口办理，跳转预约
-        if (JSON.parse(this.$store.state.user.cars).length === 0) {
-          this.$MessageBox('提示', '此功能只能预约本人绑定车辆')
-          return false
-        } else {
-          let ifBind = JSON.parse(this.$store.state.user.cars).some(arr => {
-            return arr.myNumberPlate === item.licensePlateNo
-          })
-          if (!ifBind) {
-            this.$MessageBox('提示', '此功能只能预约本人绑定车辆')
-            return false
-          }
-        }
+        // if (JSON.parse(this.$store.state.user.cars).length === 0) {
+        //   this.$MessageBox('提示', '此功能只能预约本人绑定车辆')
+        //   return false
+        // } else {
+        //   let ifBind = JSON.parse(this.$store.state.user.cars).some(arr => {
+        //     return arr.myNumberPlate === item.licensePlateNo
+        //   })
+        //   if (!ifBind) {
+        //     this.$MessageBox('提示', '此功能只能预约本人绑定车辆')
+        //     return false
+        //   }
+        // }
         let lawlessDeal = {
           data: item,
           info: this.lawlessData.info
