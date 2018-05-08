@@ -26,21 +26,21 @@
       <img :src="popupImg">
     </popup>
     <div v-wechat-title="$route.meta.title"></div>
-    <div class="m-confirm" :class="{ open: confirmStatus }">
-      <div class="box">
-        <div class="title">温馨提示</div>
-        <div class="text">如您同意提交，即表示您违停车辆已驶离，并承诺遵守相关交通法规。</div>
-        <div class="footer">
-          <div class="cancel" @click="confirmCancel">取消</div>
-          <div class="ok" @click="confirmSubmit">确定</div>
-        </div>
+      <!-- <div class="m-confirm" :class="{ open: confirmStatus }">
+        <div class="box">
+          <div class="title">温馨提示</div>
+          <div class="text">如您同意提交，即表示您违停车辆已驶离，并承诺遵守相关交通法规。</div>
+          <div class="footer">
+            <div class="cancel" @click="confirmCancel">取消</div>
+            <div class="ok" @click="confirmSubmit">确定</div>
+          </div>
+        </div> -->
       </div>
-    </div>
   </div>
 </template>
 
 <script>
-import { MessageBox, Popup, Toast } from 'mint-ui'
+import { MessageBox, Popup } from 'mint-ui'
 import UploadFile from '../../utils/uploadFile'
 // import { resultPost } from '../../service/getData'
 import { reportingNoParking } from '../../config/baseURL'
@@ -109,61 +109,66 @@ export default {
       })
     },
     submit: function () { // 点击提交按钮
-      if ((Date.now() - this.illegalData.entryTime) >= 10 * 60 * 1000) { // 超过十分钟
-        MessageBox('提示', '你已经超时操作').then(action => {
-          this.$router.push('/')
-        })
-        return false
-      }
-      let reqData = {
-        numberPlateNumber: this.illegalData.licensePlateNo, // 车牌号码
-        entryTime: this.illegalData.entryTime, // 进入该页面时的时间戳
-        plateType: this.illegalData.licensePlateType, // 车牌种类
-        IDcard: window.localStorage.getItem('identityCard') || '', // 星级用户身份证
-        parkingSpot: this.illegalData.parkingAddr, // 停车地点
-        scenePhoto: this.imgs.split(',')[1] // 驾离后照片
-      }
-      for (let key in reqData) {
-        if (!reqData[key] && key !== 'parkingReason' && key !== 'scenePhoto3') {
-          console.log(key)
-          switch (key) {
-            case 'numberPlateNumber':
-              Toast({
-                message: '车牌号码不能为空',
-                duration: 2000
-              })
-              break
-            case 'plateType':
-              Toast({
-                message: '车牌类型不能为空',
-                duration: 2000
-              })
-              break
-            case 'IDcard':
-              Toast({
-                message: '身份证号码不能为空',
-                duration: 2000
-              })
-              break
-            case 'parkingSpot':
-              Toast({
-                message: '停车地点不能为空',
-                duration: 2000
-              })
-              break
-            case 'scenePhoto':
-              Toast({
-                message: '驾离后照片不能为空',
-                duration: 2000
-              })
-              break
-          }
-          return false
-        }
-      }
-      this.confirmStatus = true
-      this.reqData = reqData
-      console.log('提交数据', this.reqData, this.confirmStatus)
+      MessageBox({
+        title: '提示',
+        message: '确定执行此操作?',
+        showCancelButton: true
+      })
+      // if ((Date.now() - this.illegalData.entryTime) >= 10 * 60 * 1000) { // 超过十分钟
+      //   MessageBox('提示', '你已经超时操作').then(action => {
+      //     this.$router.push('/')
+      //   })
+      //   return false
+      // }
+      // let reqData = {
+      //   numberPlateNumber: this.illegalData.licensePlateNo, // 车牌号码
+      //   entryTime: this.illegalData.entryTime, // 进入该页面时的时间戳
+      //   plateType: this.illegalData.licensePlateType, // 车牌种类
+      //   IDcard: window.localStorage.getItem('identityCard') || '', // 星级用户身份证
+      //   parkingSpot: this.illegalData.parkingAddr, // 停车地点
+      //   scenePhoto: this.imgs.split(',')[1] // 驾离后照片
+      // }
+      // for (let key in reqData) {
+      //   if (!reqData[key] && key !== 'parkingReason' && key !== 'scenePhoto3') {
+      //     console.log(key)
+      //     switch (key) {
+      //       case 'numberPlateNumber':
+      //         Toast({
+      //           message: '车牌号码不能为空',
+      //           duration: 2000
+      //         })
+      //         break
+      //       case 'plateType':
+      //         Toast({
+      //           message: '车牌类型不能为空',
+      //           duration: 2000
+      //         })
+      //         break
+      //       case 'IDcard':
+      //         Toast({
+      //           message: '身份证号码不能为空',
+      //           duration: 2000
+      //         })
+      //         break
+      //       case 'parkingSpot':
+      //         Toast({
+      //           message: '停车地点不能为空',
+      //           duration: 2000
+      //         })
+      //         break
+      //       case 'scenePhoto':
+      //         Toast({
+      //           message: '驾离后照片不能为空',
+      //           duration: 2000
+      //         })
+      //         break
+      //     }
+      //     return false
+      //   }
+      // }
+      // this.confirmStatus = true
+      // this.reqData = reqData
+      // console.log('提交数据', this.reqData, this.confirmStatus)
     },
     // 确认取消
     confirmCancel () {
