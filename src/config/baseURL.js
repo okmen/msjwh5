@@ -172,3 +172,9 @@ export const szTrafficPoliceElecBillQry = `${commonUrl}illegalHanding/szTrafficP
 export const queryReportingNoParking = `${commonUrl}illegalHanding/recordOfReportingNoParking.html` // 查询违停免罚列表
 
 export const reportingNoParking = `${commonUrl}illegalHanding/reportingNoParking.html` // 违停免罚接口
+
+/* -------------- 随手拍 --------------- */
+
+export const getRoad = `${commonUrl}user/getPositioningAddress.html` // 获取路段地址 随手拍举报接口
+
+export const takePictures = `${commonUrl}user/readilyShoot.html` // 随手拍举报接口

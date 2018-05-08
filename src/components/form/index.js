@@ -8,6 +8,7 @@ import GRadio from './GRadio'
 import GDatePicker from './GDatePicker'
 import GTimePicker from './GTimePicker'
 import GTextarea from './GTextarea'
+import GUploads from './GUploads'
 export {
   GInput,
   GSelect,
@@ -18,5 +19,6 @@ export {
   GRadio,
   GDatePicker,
   GTimePicker,
-  GTextarea
+  GTextarea,
+  GUploads
 }
