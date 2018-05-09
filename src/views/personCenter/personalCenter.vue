@@ -31,6 +31,10 @@ export default {
         {
           title: '补全或修改资料',
           link: '/updateUser'
+        },
+        {
+          title: '绑定车辆',
+          link: '/myCar'
         }
         // {
         //   title: '微课堂学习',
@@ -43,10 +47,6 @@ export default {
         // {
         //   title: '电动车管理',
         //   link: '/electricCar'
-        // },
-        // {
-        //   title: '绑定车辆',
-        //   link: '/myCar'
         // },
         // {
         //   title: '信息单据证明',
