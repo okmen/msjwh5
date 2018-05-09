@@ -29,33 +29,33 @@ export default {
       openid: window.localStorage.getItem('openid'),
       personalData: [
         {
-          title: '微课堂学习',
-          link: '/smallClass'
-        },
-        {
-          title: '便民服务',
-          link: '/handyService'
-        },
-        {
-          title: '电动车管理',
-          link: '/electricCar'
-        },
-        {
           title: '补全或修改资料',
           link: '/updateUser'
-        },
-        {
-          title: '绑定车辆',
-          link: '/myCar'
-        },
-        {
-          title: '信息单据证明',
-          link: '/credit'
-        },
-        {
-          title: '十分钟违停免罚',
-          link: '/illegalParking'
         }
+        // {
+        //   title: '微课堂学习',
+        //   link: '/smallClass'
+        // },
+        // {
+        //   title: '便民服务',
+        //   link: '/handyService'
+        // },
+        // {
+        //   title: '电动车管理',
+        //   link: '/electricCar'
+        // },
+        // {
+        //   title: '绑定车辆',
+        //   link: '/myCar'
+        // },
+        // {
+        //   title: '信息单据证明',
+        //   link: '/credit'
+        // },
+        // {
+        //   title: '十分钟违停免罚',
+        //   link: '/illegalParking'
+        // }
       ]
     }
   },
