@@ -14,6 +14,22 @@ let takePicturesTipsRouter = [
       title: '随手拍举报'
     },
     component: () => import('@/views/takePictures/takePicturesInform')
+  },
+  {
+    name: 'takePicturesSuccess',
+    path: '/takePicturesSuccess',
+    meta: {
+      title: '随手拍举报'
+    },
+    component: () => import('@/views/takePictures/takePicturesSuccess')
+  },
+  {
+    name: 'takePicturesQuery',
+    path: '/takePicturesQuery',
+    meta: {
+      title: '随手拍举报'
+    },
+    component: () => import('@/views/takePictures/takePicturesQuery')
   }
 ]
 

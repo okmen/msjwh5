@@ -35,6 +35,11 @@ export default {
       userAgreementCon: ''
     }
   },
+  computed: {
+    queryURL () {
+      return this.$store.getters.queryURL
+    }
+  },
   mounted: function () {
     let userAgreementData = {
       noticeKey: 'sspjbzysx'
@@ -48,7 +53,7 @@ export default {
   methods: {
     btnAgreeRequest: function () {
       if (this.checked === true) {
-        this.$router.push('/takePicturesInform')
+        this.$router.push({path: '/takePicturesInform', query: this.queryURL})
       } else {
         this.$toast({
           message: '请勾选已阅读温馨提示',

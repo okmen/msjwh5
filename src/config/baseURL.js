@@ -178,3 +178,5 @@ export const reportingNoParking = `${commonUrl}illegalHanding/reportingNoParking
 export const getRoad = `${commonUrl}user/getPositioningAddress.html` // 获取路段地址 随手拍举报接口
 
 export const takePictures = `${commonUrl}user/readilyShoot.html` // 随手拍举报接口
+
+export const takePicturesQuery = `${commonUrl}user/search/queryResultOfReadilyShoot.html` // 随手拍举报查询接口

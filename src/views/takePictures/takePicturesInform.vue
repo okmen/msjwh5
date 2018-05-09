@@ -3,17 +3,29 @@
     <g-input title="违法时间" v-model="mtDateTimeMsg" @click.native="datetimePick" placeholder="请输入违法时间" readonly></g-input>
     <g-input title="违法路段" v-model="informRoad" v-on:input="btnGetRoad" placeholder="请输入违法路段(例如深南大道)"></g-input>
      <ul class="take-ul" v-if="showSelectRoad">
-      <li v-for="(roadSelect, index) in roadSelectLists" @click="roadLiClick(index)">{{roadSelect.wfdd}}</li>
+      <li v-for="(roadSelect, index) in roadSelectLists" @click="roadLiClick(index)" :key="index">{{roadSelect.wfdd}}</li>
     </ul>
     <plate-number-full v-model="plateNumber"></plate-number-full>
     <g-select title="车牌类型" :data="plateTypeData" v-model="plateType" ref="vehicleType"></g-select>
-    <group title="上传图片">
-      <div class="upload-group">
-        <g-uploads text="身份证(正面)" id="file1" :bg="imgOne1" v-model="imgOne"></g-uploads>
-        <g-uploads text="身份证(反面)" id="file2" :bg="imgOne2" v-model="imgTwo"></g-uploads>
-        <g-uploads text="机动车行驶证" id="file3" :bg="imgOne3" v-model="imgThree"></g-uploads>
+    <div>
+      <div class="tp-photo-box">
+        <div class="tp-photo-left">上传照片</div>
+        <div class="tp-photo-right">
+          <label class="tp-photo-1" for="file1">
+            <input id="file1" type="file" accept="image/*" >
+            <img :src="imgOne">
+          </label>
+          <label class="tp-photo-1" for="file2">
+            <input id="file2" type="file" accept="image/*">
+            <img :src="imgTwo">
+          </label>
+          <label class="tp-photo-1" for="file3">
+            <input id="file3" type="file" accept="image/*">
+            <img :src="imgThree">
+          </label>
+        </div>
       </div>
-    </group>
+    </div>
     <g-textarea title="违法行为" v-model="informIntroWhy" placeholder="请认真填写被举报车辆的违法项目"></g-textarea>
     <g-input title="举报人" v-model="informName" readonly></g-input>
     <g-input title="身份证号" v-model="informIdNumber" readonly></g-input>
@@ -34,6 +46,7 @@
 
 <script>
 import { GTextarea, GUploads } from 'form'
+import UploadFile from '@/utils/uploadFile'
 import { getRoad, takePictures } from '@/config/baseURL.js'
 import PlateNumberFull from '@/components/PlateNumberFull'
 import wx from 'weixin-js-sdk'
@@ -42,12 +55,12 @@ export default {
   data () {
     return {
       informTime: this.currentTime(),                                 // 违法时间
-      imgOne1: require('@/assets/images/tpInformAngle.png'),
-      imgOne2: require('@/assets/images/tpInformAngle.png'),
-      imgOne3: require('@/assets/images/tpInformAngle.png'),
-      imgOne: '',    // 第一张
-      imgTwo: '',    // 第二张
-      imgThree: '',  // 第三张
+      imgOne: '',                                                     // 上传照片
+      imgOneTime: '',
+      imgTwo: '',
+      imgTwoTime: '',
+      imgThree: '',
+      imgThreeTime: '',
       mtDateTimeMsg: '',
       informRoad: '',
       showSelectRoad: false,
@@ -61,6 +74,12 @@ export default {
       informIdNumber: '',
       gpsx: '',                                                        // 经度
       gpsy: '',                                                        // 纬度
+      imgOneGPSLatitude: '',                                           // 第一张图片纬度
+      imgOneGPSLongitude: '',                                          // 第一张图片经度
+      imgTwoGPSLatitude: '',                                           // 第二张图片纬度
+      imgTwoGPSLongitude: '',                                          // 第二张图片经度
+      imgThreeGPSLatitude: '',                                         // 第三张图片纬度
+      imgThreeGPSLongitude: '',                                        // 第三张图片经度
       WxGPSLatitude: '',                                               // 微信定位纬度
       WxGPSLongitude: ''                                              // 微信定位经度
     }
@@ -73,7 +92,10 @@ export default {
   components: {
     GTextarea, PlateNumberFull, GUploads
   },
-  mounted () {
+  created () {
+  },
+  mounted: function () {
+    this.init()
     let val = this.$store.state.user
     this.informName = val.userName
     this.informIdNumber = val.identityCard
@@ -85,15 +107,10 @@ export default {
   methods: {
     // 确认提交
     drivingLicenseEnquiry () {
-      console.log(this.imgOne)
-      console.log(this.imgTwo)
-      console.log(this.imgThree)
       let imgArr = [this.imgOne, this.imgTwo, this.imgThree].filter(x => x !== '')
-      console.log(imgArr)
       if (!this.informRoad) {
         this.$toast('请输入违法路段')
       } else if (this.$verification.plateVerification(this.plateNumber)) {
-        // this.$toast({message: this.$plateerification(this.plateNumber)})
         this.$toast('请输入正确的车牌号码')
       } else if (imgArr.length < 2) {
         this.$toast('举报图片不得少于两张')
@@ -103,22 +120,22 @@ export default {
         this.gpsx = this.WxGPSLongitude           // 经度
         this.gpsy = this.WxGPSLatitude            // 纬度
         this.subFn()
-        return true
-      } else if (this.imgOne.GPSLatitude && this.imgOne.GPSLongitude) {
-        this.gpsx = this.imgOne.GPSLongitude           // 经度
-        this.gpsy = this.imgOne.GPSLatitude            // 纬度
+        return false
+      } else if (this.imgOneGPSLatitude && this.imgOneGPSLongitude) {
+        this.gpsx = this.imgOneGPSLongitude           // 经度
+        this.gpsy = this.imgOneGPSLatitude            // 纬度
         this.subFn()
-        return true
-      } else if (this.imgTwo.GPSLatitude && this.imgTwo.GPSLongitude) {
-        this.gpsx = this.imgTwo.GPSLongitude           // 经度
-        this.gpsy = this.imgTwo.GPSLatitude            // 纬度
+        return false
+      } else if (this.imgTwoGPSLatitude && this.imgTwoGPSLatitude) {
+        this.gpsx = this.imgTwoGPSLongitude           // 经度
+        this.gpsy = this.imgTwoGPSLatitude            // 纬度
         this.subFn()
-        return true
-      } else if (this.imgThree.GPSLatitude && this.imgThree.GPSLongitude) {
-        this.gpsx = this.imgThree.GPSLongitude           // 经度
-        this.gpsy = this.imgThree.GPSLatitude            // 纬度
+        return false
+      } else if (this.imgThreeGPSLatitude && this.imgThreeGPSLongitude) {
+        this.gpsx = this.imgThreeGPSLongitude         // 经度
+        this.gpsy = this.imgThreeGPSLatitude          // 纬度
         this.subFn()
-        return true
+        return false
       } else {
         this.$MessageBox({
           title: '温馨提示',
@@ -135,27 +152,25 @@ export default {
         gpsy: this.gpsy,                              // 纬度
         illegalTime: this.mtDateTimeMsg,                        // 违法时间
         illegalSections: this.informItem,                       // 违法路段
-        reportImgOne: !this.imgOne.imgUrl ? '' : this.imgOne.imgUrl.split(',')[1],                // 上传照片
-        reportImgOneT1: this.imgOne.dateTime || '',
-        reportImgTwo: !this.imgTwo.imgUrl ? '' : this.imgTwo.imgUrl.split(',')[1],
-        reportImgOneT2: this.imgTwo.dateTime || '',
-        reportImgThree: !this.imgThree.imgUrl ? '' : this.imgThree.imgUrl.split(',')[1],
-        reportImgOneT3: this.imgThree.dateTime || '',
+        reportImgOne: !this.imgOne.split(',')[1] ? '' : this.imgOne.split(',')[1],                // 上传照片
+        reportImgOneT1: this.imgOneTime || '',
+        reportImgTwo: !this.imgTwo.split(',')[1] ? '' : this.imgTwo.split(',')[1],
+        reportImgOneT2: this.imgTwoTime || '',
+        reportImgThree: !this.imgThree.split(',')[1] ? '' : this.imgThree.split(',')[1],
+        reportImgOneT3: this.imgThreeTime || '',
         licensePlateType: this.plateType,               // 车牌类型
         licensePlateNumber: this.plateNumber,
         illegalActivitieOne: this.informIntroWhy,               // 违法行为
+        userSource: 'C',
         inputManName: this.informName,                          // 举报人
         identityCard: this.informIdNumber,                      // 身份证号
         inputManPhone: this.informTel                          // 电话号码
       }
       console.log(informData)
-      this.$axios.post(takePictures, {}).then(json => { // 调取随手拍举报接口
+      this.$axios.post(takePictures, informData).then(json => { // 调取随手拍举报接口
         if (json.code === '0000') {
-          this.postInform({
-            takePicturesRecord: json.data.recordNumber,
-            takePicturesPassword: json.data.queryPassword
-          })
-          this.isWeChat ? this.$router.push('/takePicturesSuccess_Wechat') : this.$router.push('/takePicturesSuccess')
+          let source = this.$route.query.source
+          this.$router.push({path: '/takePicturesSuccess', query: {source: source, takePicturesRecord: JSON.stringify(json.data.recordNumber), takePicturesPassword: JSON.stringify(json.data.queryPassword)}})
         } else {
           this.$toast(json.msg)
         }
@@ -175,12 +190,6 @@ export default {
         },
         fail: function () {
           console.log('定位失败')
-          // MessageBox({
-          //   title: '温馨提示',
-          //   message: '为了保证信息的可靠性，请开启GPRS定位'
-          // }).then(action => {
-          //   console.log('123')
-          // })
         }
       })
     },
@@ -222,6 +231,38 @@ export default {
     datetimePick: function (picker) {
       console.log(this.$refs.picker.open())
       this.$refs.picker.open()
+    },
+    init: function () {  // 上传图片
+      UploadFile.upload({
+        id: 'file1',
+        callback: (res) => {
+          console.log(res)
+          this.imgOne = res.imgUrl
+          this.imgOneTime = res.dateTime
+          this.imgOneGPSLatitude = res.GPSLatitude     // 纬度
+          this.imgOneGPSLongitude = res.GPSLongitude   // 经度
+        }
+      })
+      UploadFile.upload({
+        id: 'file2',
+        callback: (res) => {
+          console.log(res)
+          this.imgTwo = res.imgUrl
+          this.imgTwoTime = res.dateTime
+          this.imgTwoGPSLatitude = res.GPSLatitude     // 纬度
+          this.imgTwoGPSLongitude = res.GPSLongitude   // 经度
+        }
+      })
+      UploadFile.upload({
+        id: 'file3',
+        callback: (res) => {
+          console.log(res)
+          this.imgThree = res.imgUrl
+          this.imgThreeTime = res.dateTime
+          this.imgThreeGPSLatitude = res.GPSLatitude     // 纬度
+          this.imgThreeGPSLongitude = res.GPSLongitude   // 经度
+        }
+      })
     },
     roadLiClick: function (index) { // Li的点击事件
       this.informRoad = this.roadSelectLists[index].wfdd
@@ -310,7 +351,7 @@ export default {
       li{
         width:100%;
         height:50px;
-        background:#999;
+        background:#d0d0d0;
         border-bottom:1px solid #efeff4;
         font-size:26px;
         line-height:50px;
@@ -319,6 +360,57 @@ export default {
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+      }
+    }
+    .tp-photo-box{
+      overflow: hidden;
+      margin:30px 40px;
+      height:174px;
+      .tp-photo-left{
+        float:left;
+        width:130px;
+        height:100%;
+        font-size:32px;
+        color:#000;
+        margin-right: 20px;
+      }
+      .tp-photo-right{
+        float:left;
+        width:520px;
+        .tp-photo-1{
+          position:relative;
+          float:left;
+          
+          margin-right:8px;
+          width:163px;
+          height:163px;
+          background:#FFF url("../../assets/images/tpInformAngle.png") center no-repeat;
+          background-size:80%;
+          border:1px solid #dddde1;
+          -webkit-border-radius:8px;
+          -moz-border-radius:8px;
+          border-radius:8px;
+          img{
+            width:163px;
+            height:163px;
+            -webkit-border-radius:8px;
+            -moz-border-radius:8px;
+            border-radius:8px;
+          }
+          input{
+            position:absolute;
+            width:100%;
+            height:100%;
+            visibility:hidden;
+            top:0;
+            left:0;
+            z-index:998;
+          }
+        }
+        .tp-photo-1:last-child{
+          margin-right:0;
+          float:right;
+        }
       }
     }
   }
