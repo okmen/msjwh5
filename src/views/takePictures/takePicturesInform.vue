@@ -161,7 +161,7 @@ export default {
         licensePlateType: this.plateType,               // 车牌类型
         licensePlateNumber: this.plateNumber,
         illegalActivitieOne: this.informIntroWhy,               // 违法行为
-        userSource: 'C',
+        userSource: 'M',
         inputManName: this.informName,                          // 举报人
         identityCard: this.informIdNumber,                      // 身份证号
         inputManPhone: this.informTel                          // 电话号码

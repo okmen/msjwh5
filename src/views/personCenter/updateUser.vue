@@ -60,7 +60,7 @@
         }
         this.$axios.post(updateUser, reqData).then(data => {
           if (data.code === '0000') {
-            this.$MessageBox('提示', '修改成功').then(() => {
+            this.$MessageBox('提示', '审核结果会以短信通知').then(() => {
               this.$router.push({path: '/personalCenter', query: this.queryURL})
             })
           } else {
