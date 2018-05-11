@@ -43,6 +43,7 @@
           drivingLicenceNo: obj.identityCard || '',
           licensePlateNo: obj.myNumberPlate,
           billNo: '',
+          sourceOfCertification: 'C',
           licenseType: obj.plateType
         }
         this.$axios.post(toQueryElectronicReceiptPage, digitalReceiptData).then(json => {
