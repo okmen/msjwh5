@@ -49,7 +49,13 @@
         this.$axios.post(toQueryElectronicReceiptPage, digitalReceiptData).then(json => {
           if (json.code === '0000') {
             this.digitData = json.data
-            this.$router.push({path: 'digitalReceiptRecord', query: {answererror: JSON.stringify(this.digitData)}})
+            let source = this.$route.query.source
+            this.$router.push({path: 'digitalReceiptRecord', query: {source: source, answererror: JSON.stringify(this.digitData)}})
+          } else if (json.code === '0002') {
+            this.$MessageBox({
+              title: '提示',
+              message: '未查询到相关数据'
+            })
           } else {
             this.$MessageBox({
               title: '提示',
