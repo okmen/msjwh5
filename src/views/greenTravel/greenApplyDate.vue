@@ -67,10 +67,15 @@ export default {
       showCalendar: false
     }
   },
+  computed: {
+    queryURL () {
+      return this.$store.getters.queryURL
+    }
+  },
   created () {
     if (!this.$store.state.greenApply) {
       console.log('没有接收到数据，回到信息输入页面')
-      this.$router.push({ name: 'greenApply' })
+      this.$router.push({ name: 'greenApply', query: this.queryURL })
     } else {
       console.log('接收VUEX传递过来的数据')
       console.log(this.$store.state.greenApply)
@@ -163,7 +168,7 @@ export default {
             reserveNumber: data.date.reserveNumber,
             cryearNo: data.cryearNo
           })
-          this.$router.push('/submitSuccess')
+          this.$router.push({path: '/submitSuccess', query: this.queryURL})
         } else {
           this.$toast({
             message: data.msg,

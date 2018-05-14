@@ -59,14 +59,10 @@ export default {
     toComplaint () {
       // 未登录状态跳转
       if (!this.isLogin) {
-        this.$router.push({
-          name: 'starLevel'
-        })
+        this.$router.push({name: 'starLevel', query: this.queryURL})
       // 已登录跳转
       } else {
-        this.$router.push({
-          name: 'greenComplaint'
-        })
+        this.$router.push({name: 'greenComplaint', query: this.queryURL})
       }
     },
     // 接受建议
@@ -83,6 +79,11 @@ export default {
           name: 'greenApply'
         })
       }
+    }
+  },
+  computed: {
+    queryURL () {
+      return this.$store.getters.queryURL
     }
   },
   created () {

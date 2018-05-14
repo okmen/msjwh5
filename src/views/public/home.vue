@@ -45,7 +45,7 @@
     <div id="nav-outer">
       <div class="home-nav-top">
         <dl>
-          <router-link :to="!isLogin ? '/login' : '/trafficCivilization'">
+          <router-link :to="{ path: '/trafficCivilization', query: { source: this.$route.query.source, idcard: this.$route.query.idcard, openid: this.$route.query.openid }}">
             <dt><img class="top1" src="./../../assets/images/nav1.png" alt=""></dt>
             <dd>交通文明我做主</dd>
           </router-link>
@@ -152,7 +152,6 @@
         </a>
       </mt-swipe-item>
     </mt-swipe>
-    <div v-wechat-title="$route.meta.title"></div>
   </div>
 </template>
 <script>

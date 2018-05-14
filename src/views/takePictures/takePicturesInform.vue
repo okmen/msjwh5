@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { GTextarea, GUploads } from 'form'
+import { GTextarea } from 'form'
 import UploadFile from '@/utils/uploadFile'
 import { getRoad, takePictures } from '@/config/baseURL.js'
 import PlateNumberFull from '@/components/PlateNumberFull'
@@ -90,7 +90,7 @@ export default {
     }
   },
   components: {
-    GTextarea, PlateNumberFull, GUploads
+    GTextarea, PlateNumberFull
   },
   created () {
   },

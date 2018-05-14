@@ -42,6 +42,11 @@ export default {
       }
     }
   },
+  computed: {
+    queryURL () {
+      return this.$store.getters.queryURL
+    }
+  },
   methods: {
     submit () {
       for (let key in this.form) {
@@ -67,9 +72,7 @@ export default {
         })
         return false
       }
-      this.$router.push({
-        name: 'greenItem'
-      })
+      this.$router.push({name: 'greenItem', query: this.queryURL})
     }
   }
 }

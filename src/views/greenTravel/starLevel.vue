@@ -10,10 +10,10 @@
     <div class="info">
       <p>您想申报绿色出行吗？请点击</p>
       <div class="item">
-        <el-button type="success" @click.native="$router.push({ name: 'login' })">我是星级用户</el-button>
+        <el-button type="success" @click.native="$router.push({ name: 'login', query: this.queryURL })">我是星级用户</el-button>
       </div>
       <div class="item">
-        <el-button type="primary" @click.native="$router.push({ name: 'greenApplyNoLogin' })">我不是星级用户</el-button>
+        <el-button type="primary" @click.native="$router.push({ name: 'greenApplyNoLogin', query: this.queryURL })">我不是星级用户</el-button>
       </div>
       <div class="link">
         <router-link to="/userAgreement/xjyhrz">注册</router-link>
@@ -27,6 +27,11 @@ import { Button } from 'element-ui'
 export default {
   components: {
     'el-button': Button
+  },
+  computed: {
+    queryURL () {
+      return this.$store.getters.queryURL
+    }
   }
 }
 </script>

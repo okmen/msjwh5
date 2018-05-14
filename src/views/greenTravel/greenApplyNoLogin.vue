@@ -103,6 +103,11 @@ export default {
       }
     }
   },
+  computed: {
+    queryURL () {
+      return this.$store.getters.queryURL
+    }
+  },
   methods: {
     // 动态注册 VUEX 状态模块
     registerModule () {
@@ -148,7 +153,7 @@ export default {
       }
       // 验证完成，提交状态并跳转路由
       this.registerModule()
-      this.$router.push({ name: 'greenApplyDate' })
+      this.$router.push({name: 'greenApplyDate', query: this.queryURL})
     }
   },
   mounted () {

@@ -180,3 +180,15 @@ export const getRoad = `${commonUrl}user/getPositioningAddress.html` // 获取�
 export const takePictures = `${commonUrl}user/readilyShoot.html` // 随手拍举报接口
 
 export const takePicturesQuery = `${commonUrl}user/search/queryResultOfReadilyShoot.html` // 随手拍举报查询接口
+
+/* -------------- 交通文明我做主 --------------- */
+
+export const secure = `${commonUrl}convenience/safeHiddenDanger.html` // 安全隐患通报接口
+
+export const getDOC = `${commonUrl}convenience/getAllResourcesAbsoluteUrl.html` // 获取民意云doc文档信息
+
+export const order = `${commonUrl}convenience/sequenceChaos.html` // 秩序混乱通报接口
+
+export const jam = `${commonUrl}convenience/trafficCongestion.html` // 交通拥堵通报接口
+
+export const facility = `${commonUrl}convenience/equipmentDamageReport.html` // 设备损坏通报接口
