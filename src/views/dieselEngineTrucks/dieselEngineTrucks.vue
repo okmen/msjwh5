@@ -114,6 +114,9 @@ export default {
   },
   mixins: [beforeSubmit],
   computed: {
+    user () {
+      return Object.assign({}, this.$store.state.user)
+    },
     areaSelectData () {
       return this.$store.state.cityAreaS
     },
@@ -172,8 +175,8 @@ export default {
         licenseNumber: this.plateNumber.toUpperCase(),
         numberPlate: '02',
         rfId: this.rfidVal,
-        loginUser: window.localStorage.getItem('identityCard'),
-        mobilePhone: window.localStorage.getItem('mobilePhone'),
+        loginUser: this.user.identityCard,
+        mobilePhone: this.user.mobilePhone,
         cjh4: this.vehicleIdentificationNumber,
         carType: 'H37'
       }
@@ -206,10 +209,10 @@ export default {
           legalEntityName: this.monadPersonName,   // 车主姓名
           vehicleIdentificationNumber: this.vehicleIdentificationNumber, // 车架号
           ownerIdentityCard: this.monadPersonIdentityCard, // 单位法人身份证号或车主身份证号码
-          ownerMobilephone: window.localStorage.getItem('mobilePhone'), // 单位申请人联系电话或者车主联系电话
+          ownerMobilephone: this.user.mobilePhone, // 单位申请人联系电话或者车主联系电话
           ownerAddress: `深圳市${this.areaSelect}${this.distpSite}`, // 车主地址
           identityCard: this.monadPersonIdentityCard, // 身份证
-          mobilephone: window.localStorage.getItem('mobilePhone'), // 联系电话
+          mobilephone: this.user.mobilePhone, // 联系电话
           address: `深圳市${this.areaSelect}${this.distpSite}`, // 地址
           copyOfOwnerIdentityCard: this.applicantIDCardFront, // 车辆所有人身份证复印件
           copyOfDriverLicense: this.applicantDriverLicense, // 车辆驾驶人驾驶证复印件
@@ -217,8 +220,8 @@ export default {
           copyOfLegalEntityA: this.legalIDCardFront, // 单位法人复印件正面
           copyOfLegalEntity: this.legalIDCardBack, // 单位法人复印件反面
           copyOfApplicant: this.codeCertificate, // 申请人手持身份证+组织代码证复印件
-          loginUser: window.localStorage.getItem('identityCard'), // 申请星级用户身份证明号码
-          userMobilepbone: window.localStorage.getItem('mobilePhone') // 申请星级用户手机号码
+          loginUser: this.user.identityCard, // 申请星级用户身份证明号码
+          userMobilepbone: this.user.mobilePhone // 申请星级用户手机号码
         }
       } else if (this.ownerid === '1') {
         dieselData = {
@@ -242,8 +245,8 @@ export default {
           copyOfLegalEntity: '', // 单位法人复印件
           copyOfLegalEntityA: '',
           copyOfApplicant: this.handid === '0' ? '' : this.codeCertificate, // 申请人手持身份证+组织代码证复印件
-          loginUser: window.localStorage.getItem('identityCard'), // 申请星级用户身份证明号码
-          userMobilepbone: window.localStorage.getItem('mobilePhone') // 申请星级用户手机号码
+          loginUser: this.user.identityCard, // 申请星级用户身份证明号码
+          userMobilepbone: this.user.mobilePhone // 申请星级用户手机号码
         }
       }
       console.log(dieselData)
