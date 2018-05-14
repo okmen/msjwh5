@@ -61,6 +61,15 @@ let creditRouter = [
       loginStatus: true
     },
     component: () => import('@/views/credit/child/digitalReceipt')
+  },
+  {
+    name: 'digitalReceiptRecord',
+    path: '/digitalReceiptRecord',
+    meta: {
+      title: '电子回单',
+      loginStatus: true
+    },
+    component: () => import('@/views/credit/child/digitalReceiptRecord')
   }
 ]
 
