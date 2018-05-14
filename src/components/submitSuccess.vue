@@ -85,6 +85,7 @@
     </section>
     <!-- <div class="btn-appoint-backword" @click="btnBackword" v-if="!urlJsonData && JsonDataInfo.type == 1">返回</div> -->
     <div class="btn-appoint-backword mt-60" @click="btnBackword"  v-if="!urlJsonData && JsonDataInfo.type != 1">好的</div>
+    <div class="btn-appoint-backword mt-60" @click="btnBackword"  v-if="JsonDataInfo.type === 3">好的</div>
   </div>
 </template>
 <script>

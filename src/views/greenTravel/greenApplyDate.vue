@@ -75,7 +75,7 @@ export default {
   created () {
     if (!this.$store.state.greenApply) {
       console.log('没有接收到数据，回到信息输入页面')
-      this.$router.push({ name: 'greenApply', query: this.queryURL })
+      this.$router.push({ path: 'greenApply', query: this.queryURL })
     } else {
       console.log('接收VUEX传递过来的数据')
       console.log(this.$store.state.greenApply)
