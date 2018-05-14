@@ -83,8 +83,8 @@
       <h3>申办结果</h3>
       <p>您的信息已成功提交，我们将会在3个工作日内告知您的审核结果，您还可以凭身份证信息在个人中心查询审核。</p>
     </section>
-<!--     <div class="btn-appoint-backword" @click="btnBackword" v-if="!urlJsonData && JsonDataInfo.type == 1">返回</div>
-    <div class="btn-appoint-backword mt-60" @click="btnBackword"  v-if="!urlJsonData && JsonDataInfo.type != 1">好的</div> -->
+    <!-- <div class="btn-appoint-backword" @click="btnBackword" v-if="!urlJsonData && JsonDataInfo.type == 1">返回</div> -->
+    <div class="btn-appoint-backword mt-60" @click="btnBackword"  v-if="!urlJsonData && JsonDataInfo.type != 1">好的</div>
   </div>
 </template>
 <script>

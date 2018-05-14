@@ -43,6 +43,9 @@
       },
       lawlessDeal: function () {
         return this.$store.state.newLawlessDeal
+      },
+      queryURL () {
+        return this.$store.getters.queryURL
       }
     },
     created () {
@@ -55,7 +58,8 @@
           info: this.lawlessData.info
         }
         this.$store.commit('saveNewLawlessDeal', lawlessDeal)
-        this.$router.push('/newTimeSelect')
+        // this.$router.push('/newTimeSelect')
+        this.$router.push({path: '/newTimeSelect', query: this.queryURL})
       }
     }
   }

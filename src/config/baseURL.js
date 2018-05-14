@@ -155,6 +155,9 @@ export const earlyQuery = `${commonUrl}illegalHanding/toQuerySubscribe.html` // 
 
 export const earlyCancel = `${commonUrl}illegalHanding/toCancelSubscribe.html ` // 违法预约取消接口
 
+/* -------------- 规费缴纳 --------------- */
+export const toQueryFeePage = `${commonUrl}illegalHanding/toQueryFeePage.html` // 规费缴纳
+
 /* -------------- 柴油轻型自卸货车电子通行证业务接口 --------------- */
 export const informationCollection = `${commonUrl}user/informationCollection.html` // 提交接口
 
@@ -165,3 +168,15 @@ export const queryInformationCollection = `${commonUrl}user/queryInformationColl
 export const queryInformationCollection2 = `${commonUrl}user/queryInformationCollection2.html` // 查询接口二期
 
 export const szTrafficPoliceElecBillQry = `${commonUrl}illegalHanding/szTrafficPoliceElecBillQry.html` // 电子回单图片
+
+export const queryReportingNoParking = `${commonUrl}illegalHanding/recordOfReportingNoParking.html` // 查询违停免罚列表
+
+export const reportingNoParking = `${commonUrl}illegalHanding/reportingNoParking.html` // 违停免罚接口
+
+/* -------------- 随手拍 --------------- */
+
+export const getRoad = `${commonUrl}user/getPositioningAddress.html` // 获取路段地址 随手拍举报接口
+
+export const takePictures = `${commonUrl}user/readilyShoot.html` // 随手拍举报接口
+
+export const takePicturesQuery = `${commonUrl}user/search/queryResultOfReadilyShoot.html` // 随手拍举报查询接口

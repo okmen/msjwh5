@@ -1,7 +1,7 @@
 <template>
   <div class="myCar-outer">
     <mt-swipe :continuous="false" id="car-swipe-box" :auto="0" :speed="300" v-if="show" :style="{height: 235+ sumHeight+'px'}">
-      <mt-swipe-item v-for="(car, index) in carMsg" key="index">
+      <mt-swipe-item v-for="(car, index) in carMsg" :key="index">
         <div class="car-box">
           <div class="car-number">
             <i class="car-icon"></i>

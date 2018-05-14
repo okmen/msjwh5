@@ -1,6 +1,6 @@
 <template>
   <div>
-    <dl class="wtmf-item" v-for="item in listData" v-if="listData.length > 0">
+   <dl class="wtmf-item" v-for="item in listData" v-if="listData.length > 0">
       <dt>十分钟违停免罚申请</dt>
       <dd>姓名：{{ username }}</dd>
       <dd>车辆号码：{{ item.numberPlateNumber }}</dd>
@@ -14,8 +14,7 @@
 </template>
 
 <script>
-import { queryReportingNoParking } from 'src/config/baseUrl'
-import { resultPost } from 'src/service/getData'
+import { queryReportingNoParking } from '@/config/baseURL'
 export default {
   data () {
     return {
@@ -29,7 +28,7 @@ export default {
     }
   },
   created () {
-    resultPost(queryReportingNoParking, {
+    this.$axios.post(queryReportingNoParking, {
       numberPlateNumber: this.$route.query.number,
       plateType: this.$route.query.type,
       sourceOfCertification: 'C'

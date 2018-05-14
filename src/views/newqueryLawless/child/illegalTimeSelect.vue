@@ -127,12 +127,12 @@ export default {
   },
   methods: {
     init () {
-      this.$axios.get(`${processingPoint}?sourceOfCertification=C`).then(json => {
+      this.$axios.get(`${processingPoint}?sourceOfCertification=M`).then(json => {
         if (json.code === '0000') {
           json.data.map(item => {
             this.processingPointData.push({name: item.cldbmmc, value: item.cldbmid, cldaddress: item.cldaddress, cldlxdh: item.cldlxdh})
           })
-          this.cldbmmc = this.processingPointData[0].cldbmmc
+          this.cldbmmc = this.processingPointData[0].name
           this.cldbmid = this.processingPointData[0].value
           this.cldlxdh = this.processingPointData[0].cldlxdh
           this.cldaddress = this.processingPointData[0].cldaddress
@@ -152,7 +152,7 @@ export default {
       this.getDetailData()
     },
     getDetailData: function () {
-      this.$axios.get(`${subscribeSorts}?cldbmid=${this.cldbmid}&sourceOfCertification=C`).then(json => {
+      this.$axios.get(`${subscribeSorts}?cldbmid=${this.cldbmid}&sourceOfCertification=M`).then(json => {
         console.log(json)
         if (json.code === '0000') {
           this.timeData = json.data.data
@@ -220,7 +220,7 @@ export default {
         snm: this.snm,
         cldbmid: this.cldbmid,
         cczb_id: this.cczb_id,
-        sourceOfCertification: 'C', // 来源
+        // sourceOfCertification: 'C', // 来源
         custName: this.custName, // 用户姓名
         certificateNo: this.certificateNo, // 身份证号码
         drivingLicenceNo: this.certificateNo, // 驾驶证号码
@@ -233,6 +233,7 @@ export default {
         cldaddress: this.cldaddress, // 服务点地址
         cldlxdh: this.cldlxdh // 服务点电话
       }
+      console.log(reqData)
       for (let key in reqData) {
         if (!reqData[key]) {
           this.$toast('信息填写不完整')
