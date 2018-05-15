@@ -9,7 +9,7 @@
     <g-button text="提交" @click.native="confirmInfo"></g-button>
     <div class="warm-prompt">
       <div class="warm-prompt-title">温馨提示：</div>
-      <div class="warm-prompt-content">进度查询请前往“个人中心”的“我的业务”</div>
+      <div class="warm-prompt-content">进度查询请前往“星级用户中心”的“我的业务”</div>
     </div>
   </div>
 </template>

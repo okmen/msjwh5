@@ -242,7 +242,7 @@
          this.licensePlateNo = this.licenseNos[0].myNumberPlate
          this.licensePlateType = this.licenseNos[0].plateType
        } else {
-         MessageBox('温馨提示', '暂无车辆,你可以通过深圳交警微信号的“个人中心”绑定车辆')
+         MessageBox('温馨提示', '暂无车辆,你可以通过“星级用户中心”绑定车辆')
        }
        this.licensePlateTypes = this.$store.state.licenseSelectData
      }
