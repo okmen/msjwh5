@@ -23,6 +23,7 @@
     <div class="info">
       <p>温馨提示：</p>
       <p>可自主选择当日起2天后的日期为停驶日，天数不限。遇特殊情况需要恢复出行，需要提前1天选择已申报绿色出行日期，申报提交恢复出行。</p>
+      <p>各位车主：绿色出行保险延期奖励暂时暂停（我绿联办正与有关单位进行协商）如有不便请各位车主谅解，谢谢您的参与！</p>
     </div>
     <g-button text="提交" noMargin="true" @click.native="handleConfirm"></g-button>
     <div class="m-confirm" :class="{ open: confirmState }">
