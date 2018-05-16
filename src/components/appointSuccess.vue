@@ -9,7 +9,7 @@
     <section class="appoint-box">
       <h3>预约成功</h3>
       <p>
-        您的信息已提交成功，您可以凭身份证信息在个人中心查询审核。
+        您的信息已提交成功，您可以凭身份证信息在星级用户中心查询审核。
       </p>
       <p class="appoint-margin" v-if="showAppoin.appoinType">业务类型：<span>{{showAppoin.appoinType}}</span></p>
       <p v-if="showAppoin.appoinNum">流水号码：<span class="running-number">{{showAppoin.appoinNum}}</span></p>

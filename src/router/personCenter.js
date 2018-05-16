@@ -35,7 +35,7 @@ export default [
     name: 'personalCenter',
     path: '/personalCenter',
     meta: {
-      title: '个人中心'
+      title: '星级用户中心'
     },
     component: () => import('@/views/personCenter/personalCenter')
   }
