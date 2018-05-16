@@ -16,7 +16,8 @@
     </div>
     <slot name="left"></slot>
     <div class="g-input-content">
-      <input type="text" v-model="currentValue" :maxlength="maxlength" :placeholder="placeholder" :disabled="disabled" :readonly="readonly">
+      <input class="input" type="text" v-model="currentValue" :maxlength="maxlength" :placeholder="placeholder" :disabled="disabled" :readonly="readonly">
+      <slot name="mark"></slot>
     </div>
     <slot name="right"></slot>
   </div>
@@ -56,7 +57,7 @@
   }
   .g-input-content{
     flex:1;
-    input{
+    .input{
       width: 100%;
     }
   }

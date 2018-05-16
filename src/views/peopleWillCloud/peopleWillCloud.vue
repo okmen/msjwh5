@@ -17,10 +17,6 @@
         </div>
       </div>
       <div class="peopleWillCloud-form pad-side-50">
-        <!-- <facility v-if="curTab === 'facility'" @submit="submit()"></facility>
-        <secure v-else-if="curTab === 'secure'" @submit="submit()"></secure>
-        <jam v-else-if="curTab === 'jam'" @submit="submit()"></jam>
-        <order v-else @submit="submit()"></order> -->
         <router-view @showMap="showMap" :mapObj="mapObj" @submitSuccess="submitSuccess()"></router-view>
       </div>
     </div>

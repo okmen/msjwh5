@@ -1,111 +1,111 @@
 <template>
 <div class="secure-outer">
-<div v-wechat-title="$route.meta.title"></div>
-  <common :typeData='typeData' :reportingMatters="reportingMatters" @submit="submit" @showMap="showMap" :mapObj="mapObj"></common>
+  <common :typeData='typeData' :subTypeData='subTypeData' :reportingMatters="reportingMatters" @submit="submit" @showMap="showMap" :mapObj="mapObj"></common>
 </div>
 </template>
 <script>
 import common from './common'
-import { MessageBox, Indicator, Toast } from 'mint-ui'
+import { Indicator } from 'mint-ui'
 import { secure } from '@/config/baseURL'
 export default {
-  name: 'facility',
   data () {
     return {
       typeData: [
         {
-          'str': '设施',
-          'id': 1001,
-          'subTypeData': [
-            {
-              'str': '没有安装隔离护栏，或隔离护栏设置不完善、不合理',
-              'id': 101
-            },
-            {
-              'str': '没有交通标志标线，或交通标志标线设置不完善、不合理',
-              'id': 102
-            },
-            {
-              'str': '没有减速设施',
-              'id': 103
-            },
-            {
-              'str': '路口渠化不合理',
-              'id': 104
-            },
-            {
-              'str': '没有行人通过设施',
-              'id': 105
-            },
-            {
-              'str': '临崖、临水、急弯、陡坡、视距不良的路段没有完全防护设施，或安全防护设施不完善',
-              'id': 106
-            },
-            {
-              'str': '高速公路路肩宽度不符合国家标准且未按规定设置港湾式紧急停车带',
-              'id': 107
-            },
-            {
-              'str': '高速公路中央隔离栏、两侧防护网设置不完善',
-              'id': 108
-            }
-          ]
+          name: '设施',
+          value: 1001
         },
         {
-          'str': '路灯照明',
-          'id': 1002,
-          'subTypeData': [
-            {
-              'str': '没有照明设施、不合理',
-              'id': 101
-            },
-            {
-              'str': '照明设施不能正常工作，或照明功率太低',
-              'id': 102
-            }
-          ]
+          name: '路灯照明',
+          value: 1002
         },
         {
-          'str': '绿化遮挡交通标志，或遮挡行车视线',
-          'id': 1003,
-          'subTypeData': [
-            {
-              'str': '绿化遮挡交通标志，或遮挡行车视线',
-              'id': 101
-            }
-          ]
+          name: '绿化遮挡交通标志，或遮挡行车视线',
+          value: 1003
         },
         {
-          'str': '占道施工存在安全隐患',
-          'id': 1004,
-          'subTypeData': [
-            {
-              'str': '占道施工存在安全隐患',
-              'id': 101
-            }
-          ]
+          name: '占道施工存在安全隐患',
+          value: 1004
         },
         {
-          'str': '容易发生水浸',
-          'id': 1005,
-          'subTypeData': [
-            {
-              'str': '容易发生水浸',
-              'id': 101
-            }
-          ]
+          name: '容易发生水浸',
+          value: 1005
         },
         {
-          'str': '居民、人群较为密集，交通秩序混乱',
-          'id': 1006,
-          'subTypeData': [
-            {
-              'str': '居民、人群较为密集，交通秩序混乱',
-              'id': 101
-            }
-          ]
+          name: '居民、人群较为密集，交通秩序混乱',
+          value: 1006
         }
-      ]
+      ],
+      subTypeData: {
+        1001: [
+          {
+            name: '没有安装隔离护栏，或隔离护栏设置不完善、不合理',
+            value: 101
+          },
+          {
+            name: '没有交通标志标线，或交通标志标线设置不完善、不合理',
+            value: 102
+          },
+          {
+            name: '没有减速设施',
+            value: 103
+          },
+          {
+            name: '路口渠化不合理',
+            value: 104
+          },
+          {
+            name: '没有行人通过设施',
+            value: 105
+          },
+          {
+            name: '临崖、临水、急弯、陡坡、视距不良的路段没有完全防护设施，或安全防护设施不完善',
+            value: 106
+          },
+          {
+            name: '高速公路路肩宽度不符合国家标准且未按规定设置港湾式紧急停车带',
+            value: 107
+          },
+          {
+            name: '高速公路中央隔离栏、两侧防护网设置不完善',
+            value: 108
+          }
+        ],
+        1002: [
+          {
+            name: '没有照明设施、不合理',
+            value: 101
+          },
+          {
+            name: '照明设施不能正常工作，或照明功率太低',
+            value: 102
+          }
+        ],
+        1003: [
+          {
+            name: '绿化遮挡交通标志，或遮挡行车视线',
+            value: 101
+          }
+        ],
+        1004: [
+          {
+            name: '占道施工存在安全隐患',
+            value: 101
+          }
+        ],
+        1005: [
+          {
+            name: '容易发生水浸',
+            value: 101
+          }
+        ],
+        1006: [
+          {
+            name: '居民、人群较为密集，交通秩序混乱',
+            value: 101
+          }
+        ]
+      }
     }
   },
   props: ['mapObj'],
@@ -122,13 +122,13 @@ export default {
       this.$axios.post(secure, reqData).then(json => {
         Indicator.close()
         if (json.code !== '0000') {
-          Toast({
+          this.$toast({
             message: json.msg,
             position: 'bottom',
             duration: 2000
           })
         } else {
-          MessageBox({
+          this.$MessageBox({
             title: '温馨提示',
             message: '感谢您参与举报，我们会依次不断改进'
           }).then(action => {

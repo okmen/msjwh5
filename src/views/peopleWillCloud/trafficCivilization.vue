@@ -187,7 +187,7 @@ export default {
     background: #fff;
     border-radius: 5px;
     ul{
-      padding: 0 34px;
+      // padding: 0 34px;
       li{
         border-bottom: 2px solid #eaeaea;
         &:last-child{
