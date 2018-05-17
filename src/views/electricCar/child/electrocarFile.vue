@@ -90,7 +90,8 @@ export default {
       this.currentColor = item
     },
     init () {
-      this.$axios.post(electrocarFileScancode, {fileNo: '440300000001'}).then(json => {
+      // 440300000001
+      this.$axios.post(electrocarFileScancode, {fileNo: this.$route.query.billNo}).then(json => {
         console.log(json)
         if (json.code === '0000') {
           this.ebikeInfo = json.data.ebikeInfo
