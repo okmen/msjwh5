@@ -25,7 +25,7 @@ export default {
           path: 'userAgreement/abNotice'
         },
         {
-          title: 'A/电动车学习',
+          title: '电动车学习',
           path: 'userAgreement/ddcNotice'
         },
         {
