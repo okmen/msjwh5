@@ -8,7 +8,7 @@
     name: 'serviceTab',
     data () {
       return {
-        show: false,
+        show: true,
         userNumberPlate: '',
         userName: '',
         userIdentityCard: '',
@@ -17,7 +17,7 @@
         plateType: ''
       }
     },
-    created () {
+    mounted () {
       this.init()
     },
     methods: {
@@ -30,6 +30,7 @@
         this.mobilePhone = val.mobilePhone
         this.plateType = val.plateType
         if (!this.userNumberPlate) {
+          this.show = false
           this.$MessageBox({
             title: '温馨提示',
             message: '暂无车辆,请去星级用户中心绑定车辆。'
@@ -39,7 +40,6 @@
             this.$router.push({path: '/personalCenter', query: {source: source}})
           })
         } else {
-          this.show = true
           window.location.href = `https://icp-tara.pingan.com.cn:10443/icp-tara/do/page/changePage?cername=${this.userName}&certno=${this.userIdentityCard}&carMark=${this.userNumberPlate}&openid=${this.openId}&mobile=${this.mobilePhone}&userType=1&carType=${this.plateType}`
         }
       }
