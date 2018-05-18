@@ -2,22 +2,20 @@
 <!-- 设施损坏、安全隐患通报公用组件 -->
 <div class="common-outer">
   <div class="common-form">
-    <ul class="common-form-list padding-right-43">
-      <g-input class="address" title="详细地址" v-model="showAdd" placeholder="点击右侧按钮选择地址" readonly>
-        <div slot="mark" class="common-list-location right" @click.stop='getLocation()'></div>
-      </g-input>
-      <g-input title="发现人姓名" v-model="userName" readonly></g-input>
-      <g-input title="发现人手机" v-model="mobilephone" readonly></g-input>
-      <g-radio title="紧急程度" :data="emergencyGroup" v-model="emergency"></g-radio>
-      <g-select title="类型选择" :data="typeData" v-model="typeDataOne" ref="typeDataStr"></g-select>
-      <g-select title="子类型选择" :data="subTypeDataSelect" v-model="subTypeDataOne" ref="subTypeDataStr"></g-select>
-      <g-textarea title="现场描述" v-model="description" :maxlength="100" placeholder="简要对现场进行描述"></g-textarea>
-      <group title="请上传现场照片">
-        <div class="upload-group">
-          <g-upload id="file" :bg="require('@/assets/images/upload.png')" v-model="sceneImg"></g-upload>
-        </div>
-      </group>
-    </ul>
+    <g-input class="address" title="详细地址" v-model="showAdd" placeholder="点击右侧按钮选择地址" readonly>
+      <div slot="mark" class="common-list-location" @click.stop='getLocation()'></div>
+    </g-input>
+    <g-input title="发现人姓名" v-model="userName" readonly></g-input>
+    <g-input title="发现人手机" v-model="mobilephone" readonly></g-input>
+    <g-radio title="紧急程度" :data="emergencyGroup" v-model="emergency"></g-radio>
+    <g-select title="类型选择" :data="typeData" v-model="typeDataOne" ref="typeDataStr"></g-select>
+    <g-select title="子类型选择" :data="subTypeDataSelect" v-model="subTypeDataOne" ref="subTypeDataStr"></g-select>
+    <g-textarea title="现场描述" v-model="description" :maxlength="100" placeholder="简要对现场进行描述"></g-textarea>
+    <group title="请上传现场照片">
+      <div class="upload-group">
+        <g-upload id="file" :bg="require('@/assets/images/upload.png')" v-model="sceneImg"></g-upload>
+      </div>
+    </group>
     <g-button text="提交" @click.native="submit"></g-button>
   </div>
 </div>
