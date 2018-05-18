@@ -17,6 +17,7 @@ import illegalParking from './illegalParking'  // 十分钟违停
 import queryIllegalParking from './queryIllegalParking'  // 查询违停免罚
 import takePhoto from './takePhoto'  // 十分钟违停
 import takePicturesTipsRouter from './takePictures'    // 随手拍
+import longRangeControl from './longRangeControl'     // 轻微事故远程处理中心
 import { getQueryString, wxShare } from '@/utils/utils'
 import qs from 'qs'
 
@@ -99,7 +100,8 @@ let router = new Router({
     ...electricCar,
     ...newqueryLawless,
     ...dieselEngineTrucks,
-    ...takePicturesTipsRouter
+    ...takePicturesTipsRouter,
+    ...longRangeControl
   ]
 })
 
