@@ -38,7 +38,7 @@
       </ul>
     </div>
     <ul class="civilization-pagination">
-      <li v-for="(i, index) in newsLength" :key="index" :class="{active: i==index}" @click.stop="changeIndex(i)" v-if="i == index || i == index+1 || i == index-1">{{i}}</li>
+      <li v-for="(i, index) in newsLength" :key="index" :class="{active: i===indexSelect}" @click.stop="changeIndex(i)" v-if="i == indexSelect || i == indexSelect+1 || i == indexSelect-1">{{i}}</li>
       <li v-if="(length > 3)" class="more">···</li>
     </ul>
   </div>
@@ -88,18 +88,18 @@ export default {
           'filePath': 'http://gzh.stc.gov.cn/szjjpro/assets/doc/20161202-20161208.docx'
         }
       ],
-      index: 1,
+      indexSelect: 1,
       length: 0
     }
   },
   methods: {
     changeIndex: function (index) {
-      this.index = index
+      this.indexSelect = index
     }
   },
   computed: {
     sliceNews: function () {
-      return this.news.slice((this.index - 1) * 5, this.index * 5)
+      return this.news.slice((this.indexSelect - 1) * 5, this.indexSelect * 5)
     },
     newsLength: function () {
       this.length = Math.ceil(this.news.length / 5)
@@ -119,8 +119,11 @@ export default {
 </script>
 
 <style lang="less">
+.pad-side-50 {
+  padding: 0 50px;
+}
 .civilization-outer{
-  padding-top: 47px;
+  background-color: #F5F5F5;
   .margin-center{
     margin: 0 auto;
   }
@@ -187,7 +190,7 @@ export default {
     background: #fff;
     border-radius: 5px;
     ul{
-      // padding: 0 34px;
+      padding: 0 34px;
       li{
         border-bottom: 2px solid #eaeaea;
         &:last-child{

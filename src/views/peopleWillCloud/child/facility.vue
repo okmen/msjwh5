@@ -17,7 +17,7 @@ export default {
         }
       ],
       subTypeData: {
-        type_1: [
+        1001: [
           {
             name: '手控坏',
             value: 101

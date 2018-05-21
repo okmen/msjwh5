@@ -12,7 +12,8 @@ let peopleWillCloudRouter = [
     name: 'peopleWillCloud',
     path: '/peopleWillCloud',
     meta: {
-      title: '交通文明我做主'
+      title: '交通文明我做主',
+      loginStatus: true
     },
     component: () => import('@/views/peopleWillCloud/peopleWillCloud'),
     redirect: '/peopleWillCloud/facility',

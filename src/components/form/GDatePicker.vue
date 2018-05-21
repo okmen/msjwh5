@@ -1,8 +1,9 @@
 <template>
-  <div class="g-date-picker">
+  <div class="g-date-picker" :class="{timeSelect: pickerType}">
     <div class="g-date-picker-title" v-if="title">{{title}}</div>
     <input class="g-date-picker-value" readonly @click.stop="openPick" v-model="currentDate">
-    <mt-datetime-picker ref="picker" v-model="pickerVisible" type="date" year-format="{value} 年" month-format="{value} 月" date-format="{value} 日" @confirm="handleConfirm">
+    <mt-datetime-picker v-if="pickerType" ref="picker" v-model="timePickerVisible" type="time" @confirm="timeHandleConfirm"></mt-datetime-picker>
+    <mt-datetime-picker v-if="!pickerType" ref="picker" v-model="pickerVisible" type="date" year-format="{value} 年" month-format="{value} 月" date-format="{value} 日" @confirm="handleConfirm">
     </mt-datetime-picker>
   </div>
 </template>
@@ -13,15 +14,23 @@ export default {
   name: 'GDatePicker',
   data () {
     return {
-      pickerVisible: new Date()
+      pickerVisible: new Date(),
+      timePickerVisible: '',
+      pickerType: false
     }
   },
   props: {
     title: String,
-    value: String
+    value: [String, Number],
+    timeSelect: Boolean
   },
   components: {
     'mt-datetime-picker': DatetimePicker
+  },
+  created () {
+    if (this.timeSelect) {
+      this.pickerType = true
+    }
   },
   mounted () {
     this.currentDate = this.value
@@ -40,10 +49,17 @@ export default {
   methods: {
     openPick () {
       this.$refs.picker.open()
-      this.pickerVisible = this.value
+      if (this.timeSelect) {
+        this.timePickerVisible = this.value
+      } else {
+        this.pickerVisible = this.value
+      }
     },
     handleConfirm (value) {
       this.currentDate = this.formatDate(value)
+    },
+    timeHandleConfirm (value) {
+      this.currentDate = value
     },
     // 日期格式化
     formatDate: (date) => {
@@ -86,6 +102,14 @@ export default {
         overflow: hidden;
         text-overflow: ellipsis;
       }
+    }
+  }
+  .timeSelect {
+    .g-date-picker-title {
+      width: 30%;
+    }
+    .g-date-picker-value {
+      flex: 1;
     }
   }
 </style>

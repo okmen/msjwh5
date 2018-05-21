@@ -1,22 +1,12 @@
 <template>
   <div class="peopleWillCloud-wrap">
-  <div v-wechat-title="$route.meta.title"></div>
     <mymap v-if="mapShow" @submit="submitMap" @hide="hideMap()"></mymap>
-    <div class="peopleWillCloud-outer"  v-else="mapShow">
-      <div class="peopleWillCloud-select pad-side-50">
+    <div class="peopleWillCloud-outer"  v-else>
+      <div class="peopleWillCloud-select">
         <p>请选择需要举报的事项</p>
-        <div class="div-select">
-          <span id="btnSelect" class="btn-select" @click.stop="typeSelectClick()">{{ typeSelectMassage.str }}</span>
-          <div class="div-select-ul" v-if='typeSelectShow'>
-            <ul>
-              <li v-for="(item, index) in typeSelectData" @click.stop="typeSelectClick(index+1)">
-                <span class="link">{{item.str}}</span>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <g-select classType='filled' :data="typeSelectData" v-model="typeSelectDataOne"></g-select>
       </div>
-      <div class="peopleWillCloud-form pad-side-50">
+      <div class="peopleWillCloud-form">
         <router-view @showMap="showMap" :mapObj="mapObj" @submitSuccess="submitSuccess()"></router-view>
       </div>
     </div>
@@ -32,26 +22,26 @@ export default {
     return {
       mapShow: false,
       mapObj: '',
-      typeSelectShow: false,
+      typeSelectDataOne: 'facility',
       typeSelectData: [
         {
-          'name': 'facility',
-          'str': '这里设施坏了',
+          value: 'facility',
+          name: '这里设施坏了',
           'path': '/peopleWillCloud/facility'
         },
         {
-          'name': 'secure',
-          'str': '这有安全隐患',
+          value: 'secure',
+          name: '这有安全隐患',
           'path': '/peopleWillCloud/secure'
         },
         {
-          'name': 'jam',
-          'str': '这里经常拥堵',
+          value: 'jam',
+          name: '这里经常拥堵',
           'path': '/peopleWillCloud/jam'
         },
         {
-          'name': 'order',
-          'str': '这里秩序混乱',
+          value: 'order',
+          name: '这里秩序混乱',
           'path': '/peopleWillCloud/order'
         }
       ]
@@ -60,11 +50,17 @@ export default {
   components: {
     mymap
   },
+  watch: {
+    typeSelectDataOne: function (val) {
+      this.mapObj = ''
+      window.location.replace(`#/peopleWillCloud/${val}?source=${this.$route.query.source}`)
+    }
+  },
   methods: {
     submitMap: function (obj) {
       this.mapShow = false
       this.mapObj = obj
-      console.log(this.mapObj)
+      // console.log(this.mapObj)
     },
     showMap: function () {
       this.mapShow = true
@@ -72,46 +68,26 @@ export default {
     hideMap: function () {
       this.mapShow = false
     },
-    typeSelectClick: function (index) {
-      if (index) {
-        index--
-        this.typeSelectMassage = this.typeSelectData[index]
-        this.mapObj = ''
-        // 二级路由a标签跳转问题
-        window.location.replace(`#${this.typeSelectMassage.path}`)
-      }
-      this.typeSelectShow = !this.typeSelectShow
-    },
-    select: function () {
-      this.typeSelectShow = false
-    },
     submitSuccess: function () {
       Indicator.close()
       console.log('举报成功')
-      window.location.replace('#/trafficCivilization')
+      window.location.replace(`#/trafficCivilization?source=${this.$route.query.source}`)
     }
   },
   created () {
-    let isLogin = window.localStorage.getItem('isLogin')
-    if (isLogin !== 'true') {
-      window.location.replace('#/login')
-    }
-    document.addEventListener('click', (e) => {
-      this.typeSelectShow = false
-    })
     let str = window.location.hash.split('?')[0]
     switch (str) {
       case '#/peopleWillCloud/facility':
-        this.typeSelectMassage = this.typeSelectData[0]
+        this.typeSelectDataOne = 'facility'
         break
       case '#/peopleWillCloud/secure':
-        this.typeSelectMassage = this.typeSelectData[1]
+        this.typeSelectDataOne = 'secure'
         break
       case '#/peopleWillCloud/jam':
-        this.typeSelectMassage = this.typeSelectData[2]
+        this.typeSelectDataOne = 'jam'
         break
       case '#/peopleWillCloud/order':
-        this.typeSelectMassage = this.typeSelectData[3]
+        this.typeSelectDataOne = 'order'
         break
     }
   }
@@ -119,34 +95,30 @@ export default {
 </script>
 
 <style lang="less" >
-.peopleWillCloud-wrap{
-  width: 100%;
-  height: 100%;
-  .peopleWillCloud-outer{
-    font-size: 26px;
-    color: #000;
+.peopleWillCloud-wrap {
+  .peopleWillCloud-select {
     position: relative;
-    .peopleWillCloud-select{
-      background-color: #fff;
-      padding-bottom: 24px;
-      position: relative;
-      p {
-        color: #666;
-        line-height: 68px;
-      }
-      .peopleWillCloud-type{
-        display: block;
-      }
-      .link{
-        display: block;
-        width: 100%;
-        height: 100%;
-      }
+    padding-bottom: 24px;
+    .g-select {
+      padding: 0 40px;
     }
-    .peopleWillCloud-form{
-      margin-top: 10px;
-      background: #fff;
+    p {
+      padding: 0 40px;
+      font-size: 26px;
+      color: #666;
+      line-height: 68px;
     }
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 10px;
+      background-color: #F5F5F5;
+    }
+  }
+  .peopleWillCloud-form {
+    margin-top: 10px;
   }
 }
 </style>
