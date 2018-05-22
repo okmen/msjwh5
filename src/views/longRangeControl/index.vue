@@ -33,7 +33,7 @@
           this.show = false
           this.$MessageBox({
             title: '温馨提示',
-            message: '暂无车辆,请去星级用户中心绑定车辆。'
+            message: '暂无车辆,请去民生警务个人中心绑定车辆。'
           }).then(action => {
             console.log(111)
             let source = this.$route.query.source

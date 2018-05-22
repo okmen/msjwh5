@@ -13,8 +13,8 @@
     <g-input v-model="recipientAddressDetail" placeholder="请输入详细地址"></g-input>
     <group title="请按示例图上传以下证件照片">
       <div class="upload-group">
-        <g-upload text="身份证(正面)" id="file1" :bg="imgOne1" v-model="IDcardFront"></g-upload>
-        <g-upload text="身份证(反面)" id="file2" :bg="imgOne2" v-model="IDcarfBack"></g-upload>
+        <g-upload text="身份证(人像面)" id="file1" :bg="imgOne1" v-model="IDcardFront"></g-upload>
+        <g-upload text="身份证(国徽面)" id="file2" :bg="imgOne2" v-model="IDcarfBack"></g-upload>
         <g-upload text="机动车行驶证" id="file3" :bg="imgOne3" v-model="registerCredential"></g-upload>
       </div>
     </group>
@@ -107,8 +107,8 @@
         let obj = {
           certificateNumber: '请输入身份证',
           recipientAddressDetail: '请输入收件人详细地址',
-          IDcardFront: '请上传身份证正面',
-          IDcarfBack: '请上传身份证反面',
+          IDcardFront: '请上传身份证人像面',
+          IDcarfBack: '请上传身份证国徽面',
           registerCredential: '请上传机动车行驶证'
         }
         if (this.$_myMinxin_beforeSubmit(obj)) return
