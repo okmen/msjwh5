@@ -98,6 +98,7 @@ export default {
       if (this.$verification.isPhone(this.mobilephone)) return
       if (!this.$refs.callVerifyByCode.checkCode()) return
       let reqData = {
+        sourceOfCertification: 'C',
         billNo: this.feetype + this.billNo,
         mobilephone: this.mobilephone
       }
