@@ -83,7 +83,7 @@
     },
     created () {
       if (this.user.bindDriverLicence !== '1') {
-        this.$MessageBox('温馨提示', '您还没绑定驾驶证,请到星级用户中心绑定！')
+        this.$MessageBox('温馨提示', '您还没绑定驾驶证,请到民生警务个人中心绑定！')
       }
       this.receiverNumber = this.user.mobilePhone
       this.receiverName = this.name
