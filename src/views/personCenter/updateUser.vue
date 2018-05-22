@@ -5,8 +5,8 @@
   <g-input title="通讯地址" placeholder="请输入通讯地址" v-model="mailingAddress"></g-input>
   <group title="请按提示上传以下证件照片">
     <div class="upload-group">
-      <g-upload text="身份证(正面)" id="file1" :bg="require('@/assets/images/IDcard-front.png')" v-model="IDCardFront"></g-upload>
-      <g-upload text="身份证(反面)" id="file2" :bg="require('@/assets/images/IDcard-back.png')" v-model="IDCardBack"></g-upload>
+      <g-upload text="身份证(人像面)" id="file1" :bg="require('@/assets/images/IDcard-front.png')" v-model="IDCardFront"></g-upload>
+      <g-upload text="身份证(国徽面)" id="file2" :bg="require('@/assets/images/IDcard-back.png')" v-model="IDCardBack"></g-upload>
       <g-upload text="手持身份证" id="file3" :bg="require('@/assets/images/ID-hand.png')" v-model="IDHand"></g-upload>
     </div>
   </group>
@@ -45,8 +45,8 @@
           userName: '请输入你的姓名',
           identityCard: '请输入身份证号码',
           mailingAddress: '请输入通讯地址',
-          IDCardFront: '请上传身份证(正面)',
-          IDCardBack: '请上传身份证(反面)',
+          IDCardFront: '请上传身份证(人像面)',
+          IDCardBack: '请上传身份证(国徽面)',
           IDHand: '请上传手持身份证'
         }
         if (this.$_myMinxin_beforeSubmit(verifyObj)) return

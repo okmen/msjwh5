@@ -16,8 +16,8 @@
     <g-input title="住所地址" v-model="homeAddress" placeholder="请输入住所地址"></g-input>
     <group title="请按示例图上传以下证件照片">
       <div class="upload-group">
-        <g-upload text="身份证(正面)" id="file1" :bg="imgOne1" v-model="IDcardFront"></g-upload>
-        <g-upload text="身份证(反面)" id="file2" :bg="imgOne2" v-model="IDcarfBack"></g-upload>
+        <g-upload text="身份证(人像面)" id="file1" :bg="imgOne1" v-model="IDcardFront"></g-upload>
+        <g-upload text="身份证(国徽面)" id="file2" :bg="imgOne2" v-model="IDcarfBack"></g-upload>
         <g-upload text="机动车登记证书" id="file3" :bg="imgOne3" v-model="registerCredential"></g-upload>
         <g-upload text="境外人员临住表" v-show="showIndex == '2'" id="file4" :bg="imgOne4" v-model="outBoard"></g-upload>
         <g-upload text="居住证正面" v-show="showIndex == '1'" id="file5" :bg="imgOne5" v-model="residencePermitF"></g-upload>
@@ -124,8 +124,8 @@
           recipientName: '请输入收件人姓名',
           recipientPhone: '收件人手机号码格式不正确',
           recipientAddressDetail: '请输入收件人详细地址',
-          IDcardFront: '请上传身份证正面',
-          IDcarfBack: '请上传身份证反面',
+          IDcardFront: '请上传身份证人像面',
+          IDcarfBack: '请上传身份证国徽面',
           registerCredential: '请上传机动车登记证书'
         }
         if (this.$_myMinxin_beforeSubmit(obj)) return

@@ -18,8 +18,8 @@
     <g-input title="" v-model="mailingAddress" placeholder="请输入详细地址"></g-input>
     <group title="请按示例图上传以下证件照片">
       <div class="upload-group">
-        <g-upload text="身份证(正面)" id="file1" :bg="require('../../../assets/images/IDcard-front.png')" v-model="IDCardFront"></g-upload>
-        <g-upload text="身份证(反面)" id="file2" :bg="require('../../../assets/images/IDcard-back.png')" v-model="IDCardBack"></g-upload>
+        <g-upload text="身份证(人像面)" id="file1" :bg="require('../../../assets/images/IDcard-front.png')" v-model="IDCardFront"></g-upload>
+        <g-upload text="身份证(国徽面)" id="file2" :bg="require('../../../assets/images/IDcard-back.png')" v-model="IDCardBack"></g-upload>
         <g-upload v-if = "censusRegisterOne === '3'" text="境外人员临住表" id="file3" :bg="require('../../../assets/images/out-board.png')" v-model="board"></g-upload>
       </div>
     </group>
@@ -170,8 +170,8 @@ export default {
         receiverName: '请输入收件人姓名',
         receiverMobilePhone: '请输入收件人手机号码',
         mailingAddress: '请输入详细地址',
-        IDCardFront: '请上传身份证（正面）',
-        IDCardBack: '请上传身份证（反面）'
+        IDCardFront: '请上传身份证（人像面）',
+        IDCardBack: '请上传身份证（国徽面）'
       }
       if (this.$_myMinxin_beforeSubmit(obj)) return
       if (this.$verification.isPhone(this.mobilePhone)) return

@@ -16,8 +16,8 @@
     <g-input title="" v-model="mailingAddress" placeholder="请输入详细地址"></g-input>
     <group title="请按示例图上传以下证件照片">
       <div class="upload-group">
-        <g-upload id="file1" text="身份证（正面）" :bg="require('../../../assets/images/IDcard-front.png')" v-model="cardFront"></g-upload>
-        <g-upload id="file2" text="身份证（反面）" :bg="require('../../../assets/images/IDcard-back.png')" v-model="cardBack"></g-upload>
+        <g-upload id="file1" text="身份证（人像面）" :bg="require('../../../assets/images/IDcard-front.png')" v-model="cardFront"></g-upload>
+        <g-upload id="file2" text="身份证（国徽面）" :bg="require('../../../assets/images/IDcard-back.png')" v-model="cardBack"></g-upload>
         <g-upload id="file3" text="驾驶证照片" :bg="require('../../../assets/images/drivinglicense.png')" v-model="drivinglicenseImg"></g-upload>
         <g-upload id="file4" text="延期说明照片" :bg="require('../../../assets/images/newDelayIntro.png')" v-model="newDelayIntro"></g-upload>
       </div>
@@ -104,8 +104,8 @@
       confirmInfo () {
         let obj = {
           mailingAddress: '请输入详细地址',
-          cardFront: '请上传身份证（正面）',
-          cardBack: '请上传身份证（反面）',
+          cardFront: '请上传身份证（人像面）',
+          cardBack: '请上传身份证（国徽面）',
           drivinglicenseImg: '请上传驾驶证照片',
           newDelayIntro: '请上传延期说明照片'
         }

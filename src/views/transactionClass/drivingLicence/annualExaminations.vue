@@ -10,8 +10,8 @@
   <g-input placeholder="请输入详细地址" v-model="addressMs"></g-input>
   <group title="请按示例图上传以下证件照片">
     <div class="upload-group">
-      <g-upload text="身份证(正面)" id="file1" :bg="require('@/assets/images/IDcard-front.png')" v-model="IDCardFront"></g-upload>
-      <g-upload text="身份证(反面)" id="file2" :bg="require('@/assets/images/IDcard-back.png')" v-model="IDCardBack"></g-upload>
+      <g-upload text="身份证(人像面)" id="file1" :bg="require('@/assets/images/IDcard-front.png')" v-model="IDCardFront"></g-upload>
+      <g-upload text="身份证(国徽面)" id="file2" :bg="require('@/assets/images/IDcard-back.png')" v-model="IDCardBack"></g-upload>
       <g-upload text="审验教育结业凭证" id="file4" :bg="require('@/assets/images/edu-limited.png')" v-model="eduTable"></g-upload>
       <g-upload text="境外人员临住表" id="file5" :bg="require('@/assets/images/out-board.png')" v-model="outTable" v-show="showIndex == '2'"></g-upload>
     </div>
@@ -88,8 +88,8 @@
           recipientsName: '请输入收件人姓名',
           recipientsPhone: '请输入收件人手机号码',
           addressMs: '请输入详细地址',
-          IDCardFront: '请上传身份证（正面）',
-          IDCardBack: '请上传身份证（反面）',
+          IDCardFront: '请上传身份证（人像面）',
+          IDCardBack: '请上传身份证（国徽面）',
           eduTable: '请上传审验教育结业凭证'
         }
         if (this.$_myMinxin_beforeSubmit(obj)) return
