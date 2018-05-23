@@ -30,7 +30,7 @@
       if (this.cars.length === 0) {
         this.$MessageBox({
           title: '温馨提示',
-          message: '暂无车辆,你可以通过“星级用户中心”绑定车辆'
+          message: '暂无车辆,你可以通过“民生警务个人中心”绑定车辆'
         }).then(action => {
           this.$router.push({path: '/credit', query: this.queryURL})
         })

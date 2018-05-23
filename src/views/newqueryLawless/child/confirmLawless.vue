@@ -46,7 +46,7 @@ export default {
           this.getLawlessData(item, 'init')
         })
       } else {
-        this.$MessageBox.confirm('暂无车辆,你可以通过“星级用户中心”绑定车辆').then(action => {
+        this.$MessageBox.confirm('暂无车辆,你可以通过“民生警务个人中心”绑定车辆').then(action => {
           this.$router.push({path: '/personalCenter', query: this.queryURL})
         })
       }

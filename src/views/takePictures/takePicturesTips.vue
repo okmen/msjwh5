@@ -9,8 +9,8 @@
    </div>
    <div class="tp-red-packet">
      <div class="tp-inform-box">
-       <router-link to="/userAgreement/wfsspjbzy">有奖举报范围及奖励金额</router-link>
-       <router-link to="/userAgreement/sspjbgz">奖金领取须知</router-link>
+       <router-link :to="{ path: '/userAgreement/wfsspjbzy', query: queryURL }">有奖举报范围及奖励金额</router-link>
+       <router-link :to="{ path: '/userAgreement/sspjbgz', query: queryURL }">奖金领取须知</router-link>
      </div>
    </div>
    <div class="tp-read">

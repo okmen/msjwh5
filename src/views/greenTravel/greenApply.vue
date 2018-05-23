@@ -101,7 +101,7 @@ export default {
       let cars = JSON.parse(window.localStorage.cars) || []
       if (cars.length === 0) {
         this.$toast({
-          message: '暂无车辆,你可以通过“星级用户中心”绑定车辆',
+          message: '暂无车辆,你可以通过“民生警务个人中心”绑定车辆',
           position: 'bottom'
         })
         return false
@@ -136,7 +136,7 @@ export default {
     // 没有车辆跳转
     let cars = JSON.parse(window.localStorage.cars) || []
     if (cars.length === 0) {
-      this.$MessageBox('提示', '暂无车辆,你可以通过“星级用户中心”绑定车辆')
+      this.$MessageBox('提示', '暂无车辆,你可以通过“民生警务个人中心”绑定车辆')
     }
     // 名下没有车辆，但是车库里有车
     if (this.form.car === null && cars.length > 0) {

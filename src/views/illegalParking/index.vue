@@ -265,7 +265,7 @@
           })
           this.currentPlate = this.myNumberPlate[0]
         } else {
-          MessageBox('温馨提示', '暂无车辆,你可以通过“星级用户中心”绑定车辆')
+          MessageBox('温馨提示', '暂无车辆,你可以通过“民生警务个人中心”绑定车辆')
         }
         this.plateTypes = this.$store.state.licenseSelectData
         this.IDcard = this.numberPlateToCard[this.currentPlate]

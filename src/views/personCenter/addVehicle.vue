@@ -12,8 +12,8 @@
     <g-input class="addVehicle-input" title="身份证号" v-model="othersIdCard" placeholder='(车主身份证)外籍人士请在证件号前加F' v-if="typeData === '0'"></g-input>
     <group title="请按示例图上传以下证件照片" v-if="typeData === '0'">
       <div class="upload-group">
-        <g-upload text="身份证(正面)" id="file" :bg="require('../../assets/images/IDcard-front.png')" v-model="IDCardFront"></g-upload>
-        <g-upload text="身份证(反面)" id="file2" :bg="require('../../assets/images/IDcard-back.png')" v-model="IDCardBack"></g-upload>
+        <g-upload text="身份证(人像面)" id="file" :bg="require('../../assets/images/IDcard-front.png')" v-model="IDCardFront"></g-upload>
+        <g-upload text="身份证(国徽面)" id="file2" :bg="require('../../assets/images/IDcard-back.png')" v-model="IDCardBack"></g-upload>
         <g-upload text="车主手持身份证" id="file3" :bg="require('../../assets/images/ID-hand.png')" v-model="handheldID"></g-upload>
       </div>
     </group>
@@ -84,8 +84,8 @@ export default {
           frameNumber: '请输入车架号后4位',
           othersAddVehicleName: '请输入车主名字',
           othersIdCard: '(车主身份证)外籍人士请在证件号前加F',
-          IDCardFront: '请选择身份证(正面)',
-          IDCardBack: '请选择身份证(反面)',
+          IDCardFront: '请选择身份证(人像面)',
+          IDCardBack: '请选择身份证(国徽面)',
           handheldID: '请选择手持身份证'
         }
         console.log(this.othersIdCard)

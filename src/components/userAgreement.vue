@@ -55,7 +55,7 @@ export default {
   },
   mounted: function () {
     this.entryHash = this.$route.params.id
-    if (this.entryHash === 'wfsspjbzy' || this.entryHash === 'sspjbzysx' || this.entryHash === 'wtmf') {
+    if (this.entryHash === 'wfsspjbzy' || this.entryHash === 'sspjbzysx' || this.entryHash === 'wtmf' || this.entryHash === 'sspjbgz') {
       this.isShow = false
     }
     // 如果是民生警务平台，则使用本地须知
