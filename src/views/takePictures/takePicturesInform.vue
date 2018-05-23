@@ -365,25 +365,27 @@ export default {
     .tp-photo-box{
       overflow: hidden;
       margin:30px 40px;
-      height:174px;
+      // height:174px;
       .tp-photo-left{
         float:left;
-        width:130px;
+        // width:130px;
+        width: 30%;
         height:100%;
         font-size:32px;
         color:#000;
-        margin-right: 20px;
+        // margin-right: 20px;
       }
       .tp-photo-right{
         float:left;
-        width:520px;
+        // width:520px;
         .tp-photo-1{
           position:relative;
           float:left;
-          
           margin-right:8px;
-          width:163px;
-          height:163px;
+          // width:163px;
+          // height:163px;
+          width: 142px;
+          height: 142px;
           background:#FFF url("../../assets/images/tpInformAngle.png") center no-repeat;
           background-size:80%;
           border:1px solid #dddde1;
@@ -391,8 +393,10 @@ export default {
           -moz-border-radius:8px;
           border-radius:8px;
           img{
-            width:163px;
-            height:163px;
+            // width:163px;
+            // height:163px;
+            width: 142px;
+            height: 142px;
             -webkit-border-radius:8px;
             -moz-border-radius:8px;
             border-radius:8px;
