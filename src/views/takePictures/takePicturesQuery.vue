@@ -99,6 +99,7 @@
 </script>
 <style lang="less">
   .takePicturesQuery-outer {
+    padding-top: 20px;
     position: relative;
     background-color: white;
     .takePicturesQuery-from {
