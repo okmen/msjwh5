@@ -13,7 +13,7 @@ let takePicturesTipsRouter = [
     meta: {
       title: '随手拍举报'
     },
-    component: () => import('@/views/takePictures/takePicturesInform')
+    component: () => import('@/views/takePictures/takePicturesTab')
   },
   {
     name: 'takePicturesSuccess',
