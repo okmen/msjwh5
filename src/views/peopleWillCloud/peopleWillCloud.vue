@@ -96,6 +96,7 @@ export default {
 
 <style lang="less" >
 .peopleWillCloud-wrap {
+  padding-bottom: 40px;
   .peopleWillCloud-select {
     position: relative;
     padding-bottom: 24px;

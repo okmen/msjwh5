@@ -123,6 +123,7 @@ export default {
   padding: 0 50px;
 }
 .civilization-outer{
+  height: 100%;
   background-color: #F5F5F5;
   .margin-center{
     margin: 0 auto;
