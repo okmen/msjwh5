@@ -19,7 +19,7 @@ export default {
           link: '/newqueryByCar'
         },
         {
-          title: '交通违法',
+          title: '交通违法缴款',
           link: '/newPayLawless'
         }
       ],
