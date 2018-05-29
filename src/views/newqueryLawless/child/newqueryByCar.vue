@@ -23,8 +23,7 @@ export default {
   name: 'newqueryByCar',
   data () {
     return {
-      carArr: [],
-      mobilePhone: ''
+      carArr: []
     }
   },
   components: {
@@ -41,7 +40,6 @@ export default {
   methods: {
     init () {
       // 初始化车辆信息
-      this.mobilePhone = this.$store.state.user.mobilePhone
       let cars = this.$store.state.user.cars === undefined ? [] : this.$store.state.user.cars
       // 判断没有绑定车辆跳转车辆查询
       if (cars.length !== 0 && cars[0].myNumberPlate) {
@@ -59,7 +57,7 @@ export default {
         licensePlateType: item.plateType,
         vehicleIdentifyNoLast4: item.behindTheFrame4Digits,
         identityCard: item.identityCard,
-        mobilephone: this.mobilePhone
+        mobilephone: this.$store.state.user.mobilePhone
       }
       this.$axios.post(queryLawlessByCar, reqData).then(json => {
         if (json.code === '0000') {

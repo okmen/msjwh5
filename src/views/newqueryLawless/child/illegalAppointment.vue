@@ -21,8 +21,7 @@
     name: 'illegalAppointment',
     data () {
       return {
-        carArr: [],
-        mobilePhone: ''
+        carArr: []
       }
     },
     computed: {
@@ -41,7 +40,7 @@
           licensePlateType: item.plateType,
           vehicleIdentifyNoLast4: item.behindTheFrame4Digits,
           identityCard: item.identityCard,
-          mobilephone: this.mobilePhone
+          mobilephone: this.$store.state.user.mobilePhone
         }
         console.log(reqData)
         this.$axios.post(queryLawlessByCar, reqData).then(json => {
@@ -74,7 +73,7 @@
       },
       init () {
         // 初始化车辆信息
-        this.mobilePhone = this.$store.state.user.mobilePhone
+        // this.mobilePhone = this.$store.state.user.mobilePhone
         let cars = this.$store.state.user.cars || []
         // 判断没有绑定车辆跳转车辆查询
         if (cars.length !== 0 && cars[0].myNumberPlate) {

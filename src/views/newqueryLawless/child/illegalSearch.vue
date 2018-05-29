@@ -62,8 +62,7 @@
       return {
         carArr: [],
         reserveList: [],
-        currentItem: '',
-        mobilePhone: ''
+        currentItem: ''
       }
     },
     mounted () {
@@ -77,7 +76,6 @@
       //   zt: '正常'
       // }]
       this.carArr = this.$store.state.user.cars || []
-      this.mobilePhone = this.$store.state.user.mobilePhone
     },
     methods: {
       getLawlessData (item) {
@@ -89,7 +87,7 @@
           car_number: this.currentItem.myNumberPlate.substr(1),
           licensePlateNo: this.currentItem.myNumberPlate,
           licensePlateType: this.currentItem.plateType,
-          mobilephone: this.mobilePhone
+          mobilephone: this.$store.state.user.mobilePhone
         }).then(json => {
           console.log(json)
           if (json.code === '0000') {
