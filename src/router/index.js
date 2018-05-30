@@ -84,6 +84,14 @@ let router = new Router({
       },
       component: () => import('@/components/appointSuccess')
     },
+    {
+      path: '/userKnowledge', // 违停须知
+      name: 'userKnowledge',
+      meta: {
+        title: '违停须知'
+      },
+      component: () => import('@/components/userKnowledge')
+    },
     ...publicRouter,
     ...tDrivingLicence,
     ...aMotorVehicles,
