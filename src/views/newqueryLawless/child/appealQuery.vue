@@ -2,9 +2,9 @@
   <div class="appealQuery">
     <g-input title="姓名" v-model="userName" readonly></g-input>
     <g-input title="联系方式" v-model="mobilePhone" readonly></g-input>
-    <g-input title="身份证号" v-model="identityCard" readonly></g-input>
+    <g-input title="身份号码" v-model="identityCard" readonly></g-input>
     <g-select title="名下车辆" :data="cars" v-model="myNumberPlate" @getSelected="getCensusRegisterIndex"></g-select>
-    <g-input title="车牌类型" v-model="plateTypeList[plateType]" readonly></g-input>
+    <g-input title="号牌种类" v-model="plateTypeList[plateType]" readonly></g-input>
     <g-input title="车架号" v-model="behindTheFrame4Digits" readonly></g-input>
     <g-button text="查询" @click.native="confirmInfo"></g-button>
     <div class="hint">

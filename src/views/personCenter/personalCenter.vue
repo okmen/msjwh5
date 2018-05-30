@@ -29,7 +29,7 @@ export default {
       openid: window.localStorage.getItem('openid'),
       personalData: [
         {
-          title: '补全或修改资料',
+          title: '补全或者修改交管业务资料',
           link: '/updateUser'
         },
         {
