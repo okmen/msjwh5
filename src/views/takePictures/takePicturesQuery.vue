@@ -1,11 +1,11 @@
 <template>
   <div class="takePicturesQuery-outer">
-    <div v-if="!$route.query.reportSerialNumber">
+    <div v-if="!show">
       <g-input title="举报查询" v-model="reportSerialNumber"  placeholder="请输入您的记录号"></g-input>
       <g-input title="查询密码" v-model="password" type="password" placeholder="请输入您的查询密码"></g-input>
       <g-button text="查询" @click.native="takePicturesQuery"></g-button>
     </div>
-    <div class="takePicturesQueryResult" v-if="$route.query.reportSerialNumber">
+    <div class="takePicturesQueryResult" v-if="show">
       <div class="result-item">
         <div class="item item-left">违法时间:</div>
         <div class="item item-right">{{ item.illegalTime }}</div>
@@ -54,7 +54,8 @@
         item: '',
         img1_show: false,
         img2_show: false,
-        img3_show: false
+        img3_show: false,
+        show: false
       }
     },
     methods: {
@@ -91,6 +92,7 @@
                         // this.$router.push({query: { 'reportSerialNumber': this.reportSerialNumber }})
             this.$router.push({query: {source: source, reportSerialNumber: this.reportSerialNumber}})
             this.item = json.data
+            this.show = true
           }
         })
       }
