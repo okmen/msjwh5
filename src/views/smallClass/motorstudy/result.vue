@@ -59,17 +59,17 @@ export default {
         identityCard: this.val.identityCard, // 身份证
         mobilephone: this.val.mobilePhone,   // 手机号码
         userName: this.val.userName,         // 名字
-        userSource: 'C'    // 用户来源
+        userSource: 'M'    // 用户来源
       }
       this.$axios.post(xstudy, resData).then(json => {
         this.resultData = json.data[0]
         this.integral = json.data[0].integral
+        this.resultclick()
       })
     }
   },
   mounted () {
     this.val = this.$store.state.user
-    this.resultclick()
     this.init()
   }
 }
