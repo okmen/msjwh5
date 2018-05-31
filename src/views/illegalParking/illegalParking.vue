@@ -53,7 +53,7 @@
       </div>
       <div class="read-and-agree">
         <span>我已认真阅读并同意</span>
-        <router-link :to="{path: '/userAgreement/wtmf?type=nohandle'}" class="illegalParking-notice">《十分钟违停免罚须知》</router-link>
+        <router-link :to="{path: '/userKnowledge'}" class="illegalParking-notice">《十分钟违停免罚须知》</router-link>
       </div>
       </div>
       
