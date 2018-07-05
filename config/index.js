@@ -55,7 +55,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: process.env.type === '"test"' ? '/' : '/msjw/', // 正式环境
+    assetsPublicPath: process.env.type === '"test"' ? '/' : '/msjw_h5/', // 正式环境
     // assetsPublicPath: '/', // 测试环境
 
     /**
