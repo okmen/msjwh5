@@ -3,16 +3,16 @@
     <section class="appoint-img">
       <dl>
         <dd></dd>
-        <dt>申办成功</dt>
+        <dt>申请成功</dt>
       </dl>
     </section>
     <section class="appoint-box">
       <h3>预约成功</h3>
       <p>
-        您的信息已提交成功，您可以凭身份证信息在民生警务个人中心查询审核。
+        您的信息已提交成功，您可以在民生警务个人中心查询打印。
       </p>
       <p class="appoint-margin" v-if="showAppoin.appoinType">业务类型：<span>{{showAppoin.appoinType}}</span></p>
-      <p v-if="showAppoin.appoinNum">流水号码：<span class="running-number">{{showAppoin.appoinNum}}</span></p>
+      <p v-if="showAppoin.appoinNum" class="none">流水号码：<span class="running-number">{{showAppoin.appoinNum}}</span></p>
     </section>
     <!-- <div class="btn-appoint-backword" @click="btnBackword">返回</div> -->
   </div>
@@ -35,6 +35,9 @@ export default {
 </script>
 
 <style lang="less">
+.none{
+  display:none;
+}
 #appointSuccess{
   position: absolute;
   height:100%;

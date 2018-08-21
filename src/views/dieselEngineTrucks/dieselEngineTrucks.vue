@@ -4,7 +4,7 @@
       <g-select title="业务类型" :data="typeData" v-model="typeId"></g-select>
       <div v-if="this.typeId === '2'">
         <plate-number-full v-model="plateNumber"></plate-number-full>
-        <g-input title="rfid号码" v-model="rfidVal" placeholder="请输入rfid车号"></g-input>
+        <g-input title="RFID号码" v-model="rfidVal" placeholder="请输入RFID车号"></g-input>
         <g-input title="车架号" v-model="vehicleIdentificationNumber" maxlength="4" placeholder="请输入车架号后4位"></g-input>
       </div>
       <div v-else>
@@ -62,7 +62,7 @@ export default {
           value: '1', name: '柴油轻型自卸货车(新申请)'
         },
         {
-          value: '2', name: '已装rfid车辆绑定'
+          value: '2', name: '已装RFID车辆绑定'
         }
       ],
       ownerid: '2', // 申请类型

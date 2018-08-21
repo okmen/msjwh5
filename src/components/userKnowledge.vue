@@ -13,13 +13,13 @@
             <span>3.</span>已施划路边收费停车泊位的路段，此类路段已委托交委道交中心管理，因不同业务系统间数据传输的时限影响，此类道路暂未开放“违停免罚”的申请。<span></span> 
         </p>
         <p class="MsoNormal">
-            <span>4.</span>交警开具违停告知单后，驾驶人应当在<span>10</span>分钟内完成挪车及使用星级用户平台拍照、上传的流程。<span></span> 
+            <span>4.</span>交警开具违停告知单后，驾驶人应当在<span>10</span>分钟内完成挪车及使用实名用户平台拍照、上传的流程。<span></span> 
         </p>
         <p class="MsoNormal">
-            <span>5.</span>每名星级用户每季度限申请“<span>10</span>分钟违停免罚”<span>1</span>次，申请次数不予累积。<span></span> 
+            <span>5.</span>每名实名用户每季度限申请“<span>10</span>分钟违停免罚”<span>1</span>次，申请次数不予累积。<span></span> 
         </p>
         <p class="MsoNormal">
-            <span>6.</span>每名星级用户仅可对本账户所绑定车辆进行申请。<span></span> 
+            <span>6.</span>每名实名用户仅可对本账户所绑定车辆进行申请。<span></span> 
         </p>
         <p>
             <br>
