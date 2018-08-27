@@ -19,7 +19,7 @@ let smallClass = [
     name: 'answer/:id',
     path: '/answer',
     meta: {
-      title: '答题' 
+      title: '答题'
     },
     component: () => import('@/views/smallClass/motorstudy/answer')
   },
