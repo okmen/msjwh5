@@ -64,7 +64,7 @@ let router = new Router({
       path: '/submitSuccess',
       name: 'submitSuccess',
       meta: {
-        title: '提交成功'
+        title: '办理结果反馈'
       },
       component: () => import('@/components/submitSuccess')
     },
@@ -80,7 +80,7 @@ let router = new Router({
       name: 'appointSuccess',
       path: '/appointSuccess',
       meta: {
-        title: '预约申办成功'
+        title: '办理结果'
       },
       component: () => import('@/components/appointSuccess')
     },

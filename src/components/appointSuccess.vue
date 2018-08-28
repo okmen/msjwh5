@@ -3,11 +3,11 @@
     <section class="appoint-img">
       <dl>
         <dd></dd>
-        <dt>申请成功</dt>
+        <!--<dt>申请成功</dt>-->
       </dl>
     </section>
     <section class="appoint-box">
-      <h3>预约成功</h3>
+      <h3>办理成功</h3>
       <p>
         您的信息已提交成功，您可以在民生警务个人中心查询打印。
       </p>

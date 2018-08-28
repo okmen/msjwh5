@@ -39,7 +39,7 @@
     </section>
     <!-- 申办成功的内容  -->
     <section class="bid-box appoint-box" v-if="JsonDataInfo.type == 1">
-      <h3>申办结果</h3>
+      <h3>办理结果</h3>
       <p v-if="!JsonDataInfo.noTip">{{ tip }}</p>
       <ul class="bid-ul appoint-margin">
         <li class="bid-item" v-for="(value, key) in JsonDataInfo" :key="key" v-if="keyListObj[key] && value">
@@ -100,9 +100,9 @@ export default {
     return {
       JsonDataInfo: '',
       urlJsonData: this.urlToJson(window.location.href),
-      tip: '您的信息已成功提交，我们将会在3个工作日内告知您的审核结果。',
+      tip: '您的业务已办理成功！',
       typeTitle: {
-        '1': '申办',
+        '1': '办理',
         '2': '预约',
         '3': '申报'
       },
@@ -273,7 +273,10 @@ export default {
           createVehicleInfo_JD33: '档案更正',
           createVehicleInfo_JD48: '网约车使用性质变更',
           createVehicleInfo_JD30: '补换检验合格标志',
-          applyOrCancleCarMortgage: '机动车个人抵押解押登记'
+          applyOrCancleCarMortgage: '机动车个人抵押解押登记',
+          printDriverInformation: '驾驶人信息单申请',
+          printVehicleInformation: '机动车信息单打印申请',
+          printDriverSavecreditInformation: '驾驶人安全事故信用表申请'
         },
         approveFlag: {
           '1': '同意',

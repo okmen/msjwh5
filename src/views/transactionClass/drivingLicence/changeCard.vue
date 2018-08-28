@@ -104,7 +104,7 @@ export default {
   },
   mounted () {
     if (this.bindDriverLicence !== '1') {
-      this.$MessageBox('温馨提示', '您还没有绑定驾驶证或者正在审核中')
+      this.$MessageBox('温馨提示', '您驾驶证档案尚未审核或绑定，请您先前往深圳交警微信公众号绑定驾驶证后申请')
     }
     document.addEventListener('click', (e) => {
       if (this.example === true) {
