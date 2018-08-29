@@ -10,6 +10,8 @@ if (process.env.NODE_ENV === 'development') {
   }
 }
 // commonUrl = 'http://testjava.chudaokeji.com/' // 测试环境
+export const getPrintInfo = `${commonUrl}user/search/getPrintInfo.html` // 信息单据查询
+
 export const getUserM = `${commonUrl}msjw/getMSJWinfo.html` // 民生警务获取用户信息
 
 export const userAgreement = `${commonUrl}user/getDocumentationORMByNoticeKey.html` // 用户须知接口

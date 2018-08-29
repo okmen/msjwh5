@@ -34,7 +34,7 @@
     <section class="appoint-img">
       <dl>
         <dd></dd>
-        <dt>{{typeTitle[JsonDataInfo.type]}}成功</dt>
+        <!--<dt>{{typeTitle[JsonDataInfo.type]}}成功</dt>-->
       </dl>
     </section>
     <!-- 申办成功的内容  -->
@@ -46,7 +46,12 @@
           <span class="bid-item-key">{{ keyListObj[key] }}</span>
           ：<span :class="{red: key === 'subscribeNo' || key === 'waterNumber'}">{{ valListObj[key] ? valListObj[key][value] : value }}</span>
         </li>
+        <li class="bid-item">
+          <span class="bid-item-key">查看单据</span>
+          ：<a v-if="showBtn" href="javascript: void(0);" style="color: #0000EE" @click="popupImgShow = true">点击查看</a><span v-else>审核中</span>
+        </li>
       </ul>
+      <popup-img v-if="popupImgShow" :data="imgBase" @cancel="popupImgShow = false"></popup-img>
     </section>
     <!-- 预约成功的内容 -->
     <section class="appoint-box" v-if="JsonDataInfo.type == 2">
@@ -90,7 +95,12 @@
 </template>
 <script>
 // import { mapGetters } from 'vuex'
+import { getPrintInfo } from '@/config/baseURL'
+import PopupImg from '@/components/popupImg'
 export default {
+  components: {
+    PopupImg
+  },
   computed: {
     dataInfo: function () {
       return this.$store.state.successInfo
@@ -99,6 +109,9 @@ export default {
   data () {
     return {
       JsonDataInfo: '',
+      popupImgShow: false,
+      imgBase: '',
+      showBtn: false,
       urlJsonData: this.urlToJson(window.location.href),
       tip: '您的业务已办理成功！',
       typeTitle: {
@@ -227,7 +240,7 @@ export default {
           starUserAuth: '星级用户认证',
           addVehicle: '添加车辆',
           applyGatePass: '申请通行证',
-          applyCarTemporaryLicence: '办理临时行驶车号牌',
+          // applyCarTemporaryLicence: '办理临时行驶车号牌',
           complementTheMotorVehicleDrivingLicense: '补领机动车行驶证',
           // createVehicleInspection: '六年免检预约',
           createVehicleInspection: '核发机动车检验合格标志',
@@ -304,6 +317,18 @@ export default {
   mounted () {
     if (this.$route.query.title) {
       this.JsonDataInfo = this.urlJsonData
+      // 查看单据信息
+      this.$axios.post(getPrintInfo, {
+        businessType: this.JsonDataInfo.type,
+        identityCard: localStorage.getItem('identityCard') || '',
+        sourceOfCertification: this.JsonDataInfo.source || 'M'
+      }).then(result => {
+        if (result && result.code === '0000' &&
+          result.data && result.data.statusCode === '2') {
+          this.showBtn = true
+          this.imgBase = result.data.photo
+        }
+      })
     } else {
       this.JsonDataInfo = this.dataInfo
     }
